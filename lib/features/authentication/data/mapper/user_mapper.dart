@@ -3,7 +3,7 @@ import '/features/authentication/_authentication.dart'
 
 class UserMapper {
   // Mapping user entity to user model
-  UserEntity toEntity(UserModel userModel) {
+  static UserEntity toEntity(UserModel userModel) {
     return UserEntity(
       username: userModel.username,
       email: userModel.email,
@@ -15,7 +15,7 @@ class UserMapper {
   }
 
   // Mapping user model to user entity
-  UserModel toModel(UserEntity userEntity) {
+  static UserModel toModel(UserEntity userEntity) {
     return UserModel(
       username: userEntity.username,
       email: userEntity.email,

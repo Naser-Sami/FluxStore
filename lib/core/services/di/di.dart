@@ -1,7 +1,8 @@
 import 'package:get_it/get_it.dart';
 
-import '/core/_core.dart';
 import '/config/_config.dart';
+import '/core/_core.dart';
+import '/features/_features.dart';
 
 // Global Variable
 // Initialize GetIt
@@ -36,11 +37,25 @@ class DI {
     sl.registerLazySingleton<ISendEmailOtpService>(SendEmailOtpServiceImpl.new);
   }
 
-  Future<void> initDataSources() async {}
+  Future<void> initDataSources() async {
+    sl.registerLazySingleton<IAuthenticationRemoteDataSource>(
+      AuthenticationRemoteDataSource.new,
+    );
+  }
 
-  Future<void> initRepositories() async {}
+  Future<void> initRepositories() async {
+    sl.registerLazySingleton<ILoginRepository>(
+      () => LoginRepositoryImplementation(
+        authenticationRemoteDataSource: sl<IAuthenticationRemoteDataSource>(),
+      ),
+    );
+  }
 
-  Future<void> initUseCases() async {}
+  Future<void> initUseCases() async {
+    sl.registerLazySingleton<LoginUseCase>(
+      () => LoginUseCase(loginRepository: sl<ILoginRepository>()),
+    );
+  }
 
   Future<void> initControllers() async {
     sl.registerLazySingleton<ThemeCubit>(ThemeCubit.new);

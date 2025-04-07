@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -11,7 +12,7 @@ class DioService {
       baseUrl: ApiEndpoints.baseUrl,
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 5),
-      headers: {'Content-Type': 'application/json'},
+      headers: {'content-type': 'application/json; charset=utf-8'},
     ),
   );
 
@@ -20,6 +21,8 @@ class DioService {
     dio.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
       ),
     );
   }
@@ -158,7 +161,9 @@ class DioService {
         log('Receive timeout: ${error.message}');
         throw Exception('Receive timeout: ${error.message}');
       case DioExceptionType.badResponse:
-        log('Bad response: ${error.response?.statusCode} ${error.response?.data}');
+        log(
+          'Bad response: ${error.response?.statusCode} ${error.response?.data}',
+        );
         throw Exception(error.response?.data['message']);
       default:
         log('Unexpected error: ${error.message}');

@@ -20,7 +20,7 @@ class AuthenticationWithSocialWidget extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(
                   width: 2.0,
-                  color: context.theme.colorScheme.onSecondary.withValues(
+                  color: context.theme.colorScheme.secondary.withValues(
                     alpha: 0.20,
                   ),
                 ),
@@ -40,12 +40,12 @@ class AuthenticationWithSocialWidget extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(
                   width: 2.0,
-                  color: context.theme.colorScheme.onSecondary.withValues(
+                  color: context.theme.colorScheme.secondary.withValues(
                     alpha: 0.20,
                   ),
                 ),
               ),
-              child: IconWidget(name: ImagesPath.google),
+              child: const IconWidget(name: ImagesPath.google),
             ),
           ),
           const SizedBox(width: TSize.s20),
@@ -57,12 +57,12 @@ class AuthenticationWithSocialWidget extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(
                   width: 2.0,
-                  color: context.theme.colorScheme.onSecondary.withValues(
+                  color: context.theme.colorScheme.secondary.withValues(
                     alpha: 0.20,
                   ),
                 ),
               ),
-              child: IconWidget(name: ImagesPath.facebook),
+              child: const IconWidget(name: ImagesPath.facebook),
             ),
           ),
         ],

@@ -63,7 +63,7 @@ class TDeviceUtils {
 
   static void vibrate(Duration duration) {
     HapticFeedback.vibrate();
-    Future.delayed(duration, () => HapticFeedback.vibrate());
+    Future.delayed(duration, HapticFeedback.vibrate);
   }
 
   static Future<void> setPreferredOrientations(

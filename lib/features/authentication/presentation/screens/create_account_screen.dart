@@ -15,26 +15,25 @@ class CreateAccountScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: TPadding.p53,
-            horizontal: TPadding.p36,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: TPadding.p36),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: TSize.s20),
                 TextWidget(
                   LocaleKeys.Authentication_create,
-                  style: context.textTheme.headlineLarge?.copyWith(height: 2.0),
+                  style: context.textTheme.headlineLarge?.copyWith(height: 1.7),
                 ),
                 TextWidget(
                   LocaleKeys.Authentication_yourAccount,
-                  style: context.textTheme.headlineLarge?.copyWith(height: 2.0),
+                  style: context.textTheme.headlineLarge?.copyWith(height: 1.7),
                 ),
                 const SizedBox(height: TSize.s20),
                 TextFormFieldComponent(
                   labelText: LocaleKeys.Authentication_enterYourName,
+                  keyboardType: TextInputType.text,
                   validator:
                       (value) => TValidator.validateEmptyText(
                         LocaleKeys.Authentication_enterYourName,
@@ -44,6 +43,7 @@ class CreateAccountScreen extends StatelessWidget {
                 const SizedBox(height: TSize.s20),
                 TextFormFieldComponent(
                   labelText: LocaleKeys.Authentication_emailAddress,
+                  keyboardType: TextInputType.emailAddress,
                   validator:
                       (value) => TValidator.validateEmail(
                         LocaleKeys.Authentication_emailAddress,
@@ -52,6 +52,7 @@ class CreateAccountScreen extends StatelessWidget {
                 const SizedBox(height: TSize.s20),
                 TextFormFieldComponent(
                   labelText: LocaleKeys.Authentication_password,
+                  keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                   validator:
                       (value) => TValidator.validateEmail(
@@ -61,6 +62,7 @@ class CreateAccountScreen extends StatelessWidget {
                 const SizedBox(height: TSize.s20),
                 TextFormFieldComponent(
                   labelText: LocaleKeys.Authentication_confirmPassword,
+                  keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                   validator:
                       (value) => TValidator.validateEmail(
@@ -90,6 +92,7 @@ class CreateAccountScreen extends StatelessWidget {
                   text2: LocaleKeys.Authentication_login,
                   onTap: () => context.pushReplacement(LoginScreen.routeName),
                 ),
+                const SizedBox(height: TSize.s24),
               ],
             ),
           ),

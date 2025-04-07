@@ -59,5 +59,24 @@ final router = GoRouter(
           (context, state) =>
               scaleDownTransitionPage(context, state, const LoginScreen()),
     ),
+
+    /// - Forgot Password
+    GoRoute(
+      path: ForgotPasswordScreen.routeName,
+      name: ForgotPasswordScreen.name,
+      pageBuilder:
+          (context, state) => scaleDownTransitionPage(
+            context,
+            state,
+            const ForgotPasswordScreen(),
+          ),
+    ),
+
+    /// - Verification Code
+    /// - Create New Password
+
+    ///
+    /// End Authentication
+    ///
   ],
 );

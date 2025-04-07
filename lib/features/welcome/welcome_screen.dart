@@ -18,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
           SizedBox(
             width: context.screenWidth,
             height: context.screenHeight,
-            child: Image(
+            child: const Image(
               image: AssetImage(ImagesPath.welcomeBackground),
               fit: BoxFit.cover,
             ),

@@ -21,6 +21,7 @@ class TextFormFieldComponent extends StatelessWidget {
     this.obscureText = false,
     this.onChanged,
     this.onTap,
+    this.onFieldSubmitted,
     this.focusNode,
     this.autofocus = false,
     this.keyboardType,
@@ -53,6 +54,7 @@ class TextFormFieldComponent extends StatelessWidget {
   final void Function(String)? onChanged;
   final void Function()? onTap;
   final void Function(String?)? onSaved;
+  final void Function(String)? onFieldSubmitted;
 
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
@@ -87,6 +89,7 @@ class TextFormFieldComponent extends StatelessWidget {
       validator: validator,
       onChanged: onChanged,
       onSaved: onSaved,
+      onFieldSubmitted: onFieldSubmitted,
       obscureText: obscureText,
       obscuringCharacter: obscuringCharacter,
       keyboardType: keyboardType,

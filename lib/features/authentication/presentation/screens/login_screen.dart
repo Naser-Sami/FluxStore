@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '/core/_core.dart';
 import '/config/_config.dart';
+import '/core/_core.dart';
 import '/features/authentication/presentation/presentation.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -15,27 +15,25 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: TPadding.p53,
-            horizontal: TPadding.p36,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: TPadding.p36),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: TSize.s44),
                 TextWidget(
                   LocaleKeys.Authentication_loginInto,
-                  style: context.textTheme.headlineLarge?.copyWith(height: 2.0),
+                  style: context.textTheme.headlineLarge?.copyWith(height: 1.7),
                 ),
                 TextWidget(
                   LocaleKeys.Authentication_yourAccount,
-                  style: context.textTheme.headlineLarge?.copyWith(height: 2.0),
+                  style: context.textTheme.headlineLarge?.copyWith(height: 1.7),
                 ),
                 const SizedBox(height: TSize.s48),
-
                 TextFormFieldComponent(
                   labelText: LocaleKeys.Authentication_emailAddress,
+                  keyboardType: TextInputType.emailAddress,
                   validator:
                       (value) => TValidator.validateEmail(
                         LocaleKeys.Authentication_emailAddress,
@@ -44,13 +42,25 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: TSize.s20),
                 TextFormFieldComponent(
                   labelText: LocaleKeys.Authentication_password,
+                  keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                   validator:
                       (value) => TValidator.validateEmail(
                         LocaleKeys.Authentication_password,
                       ),
                 ),
-                const SizedBox(height: TSize.s44),
+                const SizedBox(height: TSize.s24),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: GestureDetector(
+                    onTap: () => context.push(ForgotPasswordScreen.routeName),
+                    child: TextWidget(
+                      LocaleKeys.Authentication_forgotPassword,
+                      style: context.textTheme.bodySmall,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: TSize.s24),
                 Center(
                   child: CustomButton(
                     onTap: () {},
@@ -76,6 +86,7 @@ class LoginScreen extends StatelessWidget {
                         CreateAccountScreen.routeName,
                       ),
                 ),
+                const SizedBox(height: TSize.s24),
               ],
             ),
           ),

@@ -57,7 +57,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 SizedBox(
                   height: context.screenHeight * 0.50,
                   width: context.screenWidth,
-                  child: ColoredBox(color: Colors.white),
+                  child: const ColoredBox(color: Colors.white),
                 ),
                 SizedBox(
                   height: context.screenHeight * 0.50,

@@ -9,12 +9,12 @@ final sl = GetIt.I;
 
 class DI {
   Future<void> initDio() async {
-    sl.registerLazySingleton<DioService>(() => DioService());
+    sl.registerLazySingleton<DioService>(DioService.new);
   }
 
   Future<void> initSecureStorageService() async {
     sl.registerLazySingleton<SecureStorageService>(
-      () => SecureStorageService(),
+      SecureStorageService.new,
     );
   }
 
@@ -26,14 +26,14 @@ class DI {
 
   Future<void> initServices() async {
     sl.registerLazySingleton<INotificationsService>(
-      () => NotificationsServiceImpl(),
+      NotificationsServiceImpl.new,
     );
 
-    sl.registerLazySingleton<IGeolocatorService>(() => GeolocatorServiceImpl());
+    sl.registerLazySingleton<IGeolocatorService>(GeolocatorServiceImpl.new);
 
-    sl.registerLazySingleton<IGeocodingService>(() => GeocodingServiceImpl());
+    sl.registerLazySingleton<IGeocodingService>(GeocodingServiceImpl.new);
 
-    sl.registerLazySingleton<IGeoCodeService>(() => GeoCodeServiceImpl());
+    sl.registerLazySingleton<IGeoCodeService>(GeoCodeServiceImpl.new);
   }
 
   Future<void> initDataSources() async {}
@@ -43,7 +43,7 @@ class DI {
   Future<void> initUseCases() async {}
 
   Future<void> initControllers() async {
-    sl.registerLazySingleton<ThemeCubit>(() => ThemeCubit());
+    sl.registerLazySingleton<ThemeCubit>(ThemeCubit.new);
   }
 
   Future<void> init() async {

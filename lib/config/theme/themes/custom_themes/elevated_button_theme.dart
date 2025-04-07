@@ -7,7 +7,7 @@ final elevatedButtonThemeDark = ElevatedButtonThemeData(
     fixedSize: const Size(double.maxFinite, TSize.s50),
     backgroundColor: DarkThemeColors.primary,
     foregroundColor: DarkThemeColors.onPrimary,
-    disabledBackgroundColor: DarkThemeColors.primaryFixedDim,
+    disabledBackgroundColor: DarkThemeColors.primaryContainer,
     disabledForegroundColor: DarkThemeColors.onPrimary,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(TRadius.r08),
@@ -22,7 +22,7 @@ final elevatedButtonThemeLight = ElevatedButtonThemeData(
     fixedSize: const Size(double.maxFinite, TSize.s50),
     backgroundColor: LightThemeColors.primary,
     foregroundColor: LightThemeColors.onPrimary,
-    disabledBackgroundColor: LightThemeColors.primaryFixedDim,
+    disabledBackgroundColor: LightThemeColors.primaryContainer,
     disabledForegroundColor: LightThemeColors.onPrimary,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(TRadius.r08),

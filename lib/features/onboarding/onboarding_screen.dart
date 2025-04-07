@@ -183,6 +183,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     const SizedBox(height: TSize.s24),
                     CustomButton(
                       onTap: () => context.go(CreateAccountScreen.routeName),
+                      textColor: Colors.white,
+                      borderColor: Colors.white,
                       text: LocaleKeys.Onboarding_ShoppingNow,
                     ).scaleAnimation(
                       duration: const Duration(milliseconds: 600),

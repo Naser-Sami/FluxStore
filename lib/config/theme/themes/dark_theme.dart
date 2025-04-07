@@ -3,14 +3,14 @@ import '/config/theme/_theme.dart';
 
 ThemeData _darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
   brightness: Brightness.dark,
-  scaffoldBackgroundColor: DarkThemeColors.background,
+  scaffoldBackgroundColor: DarkThemeColors.surface,
   colorScheme: darkColorScheme,
   textTheme: TTextTheme.darkTextTheme,
   primaryTextTheme: TTextTheme.darkTextTheme,
   textButtonTheme: darkTextButtonTheme,
   extensions: darkExtensions,
   dividerTheme: darkDividerTheme,
-  dividerColor: DarkThemeColors.onBackground.withValues(alpha: 0.25),
+  dividerColor: DarkThemeColors.onSurface.withValues(alpha: 0.25),
   cardTheme: darkCardTheme,
   cardColor: DarkThemeColors.surface,
   popupMenuTheme: darkPopupMenuTheme,

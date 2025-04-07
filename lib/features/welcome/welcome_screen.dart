@@ -38,7 +38,7 @@ class WelcomeScreen extends StatelessWidget {
                     TextWidget(
                       LocaleKeys.Welcome_welcomeMessage,
                       style: context.textTheme.headlineLarge?.copyWith(
-                        color: context.theme.colorScheme.onPrimary,
+                        color: Colors.white,
                       ),
                     ).scaleAnimation(
                       duration: const Duration(milliseconds: 800),
@@ -47,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
                     TextWidget(
                       LocaleKeys.Welcome_explore,
                       style: context.textTheme.titleLarge?.copyWith(
-                        color: context.theme.colorScheme.onPrimary,
+                        color: Colors.white,
                       ),
                     ).scaleAnimation(
                       duration: const Duration(milliseconds: 900),
@@ -56,6 +56,8 @@ class WelcomeScreen extends StatelessWidget {
                     CustomButton(
                       onTap: () => context.go(OnboardingScreen.routeName),
                       text: LocaleKeys.Welcome_getStarted,
+                      textColor: Colors.white,
+                      borderColor: Colors.white,
                     ).scaleAnimation(
                       duration: const Duration(milliseconds: 1000),
                     ),

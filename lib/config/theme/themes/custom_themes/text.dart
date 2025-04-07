@@ -7,97 +7,89 @@ class TTextTheme {
 
   static TextTheme lightTextTheme = TextTheme(
     displayLarge: TTextStyle.displayLarge().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
     displayMedium: TTextStyle.displayMedium().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
     displaySmall: TTextStyle.displaySmall().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
     headlineLarge: TTextStyle.headlineLarge().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
     headlineMedium: TTextStyle.headlineMedium().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
     headlineSmall: TTextStyle.headlineSmall().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
     titleLarge: TTextStyle.titleLarge().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
     titleMedium: TTextStyle.titleMedium().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
     titleSmall: TTextStyle.titleSmall().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
-    bodyLarge: TTextStyle.bodyLarge().apply(
-      color: LightThemeColors.onBackground,
-    ),
+    bodyLarge: TTextStyle.bodyLarge().apply(color: LightThemeColors.onSurface),
     bodyMedium: TTextStyle.bodyMedium().apply(
-      color: LightThemeColors.onBackground.withValues(alpha: 0.60),
+      color: LightThemeColors.onSurface.withValues(alpha: 0.60),
     ),
     bodySmall: TTextStyle.bodySmall().apply(
-      color: LightThemeColors.onBackground.withValues(alpha: 0.60),
+      color: LightThemeColors.onSurface.withValues(alpha: 0.60),
     ),
     labelLarge: TTextStyle.labelLarge().apply(
-      color: LightThemeColors.onBackground.withValues(alpha: 0.60),
+      color: LightThemeColors.onSurface.withValues(alpha: 0.60),
     ),
     labelMedium: TTextStyle.labelMedium().apply(
-      color: LightThemeColors.onBackground.withValues(alpha: 0.60),
+      color: LightThemeColors.onSurface.withValues(alpha: 0.60),
     ),
     labelSmall: TTextStyle.labelSmall().apply(
-      color: LightThemeColors.onBackground.withValues(alpha: 0.60),
+      color: LightThemeColors.onSurface.withValues(alpha: 0.60),
     ),
   );
 
   static TextTheme darkTextTheme = TextTheme(
     displayLarge: TTextStyle.displayLarge().apply(
-      color: DarkThemeColors.onBackground,
+      color: DarkThemeColors.onSurface,
     ),
     displayMedium: TTextStyle.displayMedium().apply(
-      color: DarkThemeColors.onBackground,
+      color: DarkThemeColors.onSurface,
     ),
     displaySmall: TTextStyle.displaySmall().apply(
-      color: DarkThemeColors.onBackground,
+      color: DarkThemeColors.onSurface,
     ),
     headlineLarge: TTextStyle.headlineLarge().apply(
-      color: DarkThemeColors.onBackground,
+      color: DarkThemeColors.onSurface,
     ),
     headlineMedium: TTextStyle.headlineMedium().apply(
-      color: DarkThemeColors.onBackground,
+      color: DarkThemeColors.onSurface,
     ),
     headlineSmall: TTextStyle.headlineSmall().apply(
-      color: DarkThemeColors.onBackground,
+      color: DarkThemeColors.onSurface,
     ),
-    titleLarge: TTextStyle.titleLarge().apply(
-      color: DarkThemeColors.onBackground,
-    ),
+    titleLarge: TTextStyle.titleLarge().apply(color: DarkThemeColors.onSurface),
     titleMedium: TTextStyle.titleMedium().apply(
-      color: DarkThemeColors.onBackground,
+      color: DarkThemeColors.onSurface,
     ),
-    titleSmall: TTextStyle.titleSmall().apply(
-      color: DarkThemeColors.onBackground,
-    ),
-    bodyLarge: TTextStyle.bodyLarge().apply(
-      color: DarkThemeColors.onBackground,
-    ),
+    titleSmall: TTextStyle.titleSmall().apply(color: DarkThemeColors.onSurface),
+    bodyLarge: TTextStyle.bodyLarge().apply(color: DarkThemeColors.onSurface),
     bodyMedium: TTextStyle.bodyMedium().apply(
-      color: DarkThemeColors.onBackground.withValues(alpha: 0.60),
+      color: DarkThemeColors.onSurface.withValues(alpha: 0.60),
     ),
     bodySmall: TTextStyle.bodySmall().apply(
-      color: DarkThemeColors.onBackground.withValues(alpha: 0.60),
+      color: DarkThemeColors.onSurface.withValues(alpha: 0.60),
     ),
     labelLarge: TTextStyle.labelLarge().apply(
-      color: DarkThemeColors.onBackground.withValues(alpha: 0.60),
+      color: DarkThemeColors.onSurface.withValues(alpha: 0.60),
     ),
     labelMedium: TTextStyle.labelMedium().apply(
-      color: DarkThemeColors.onBackground.withValues(alpha: 0.60),
+      color: DarkThemeColors.onSurface.withValues(alpha: 0.60),
     ),
     labelSmall: TTextStyle.labelSmall().apply(
-      color: DarkThemeColors.onBackground.withValues(alpha: 0.60),
+      color: DarkThemeColors.onSurface.withValues(alpha: 0.60),
     ),
   );
 }

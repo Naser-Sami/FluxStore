@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '/config/_config.dart';
 
 final appBarThemeDark = AppBarTheme(
-  backgroundColor: DarkThemeColors.background,
+  backgroundColor: DarkThemeColors.surface,
   foregroundColor: DarkThemeColors.onSurface,
   elevation: 0,
   scrolledUnderElevation: 0.0,
@@ -14,7 +14,7 @@ final appBarThemeDark = AppBarTheme(
 );
 
 final appBarThemeLight = AppBarTheme(
-  backgroundColor: LightThemeColors.background,
+  backgroundColor: LightThemeColors.surface,
   foregroundColor: LightThemeColors.onSurface,
   elevation: 0,
   scrolledUnderElevation: 0.0,

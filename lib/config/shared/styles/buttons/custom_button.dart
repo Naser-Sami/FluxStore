@@ -8,11 +8,15 @@ class CustomButton extends StatelessWidget {
   final void Function() onTap;
   final String text;
   final Color? backgroundColor;
+  final Color? textColor;
+  final Color? borderColor;
   const CustomButton({
     super.key,
     required this.onTap,
     required this.text,
     this.backgroundColor,
+    this.textColor,
+    this.borderColor,
   });
 
   @override
@@ -32,14 +36,14 @@ class CustomButton extends StatelessWidget {
               color: backgroundColor ?? Colors.grey.withValues(alpha: 0.80),
               borderRadius: BorderRadius.circular(TRadius.r30),
               border: Border.all(
-                color: context.theme.colorScheme.onPrimary,
+                color: borderColor ?? context.theme.colorScheme.onPrimary,
                 width: 2.0,
               ),
             ),
             child: TextWidget(
               text,
               style: context.textTheme.titleMedium?.copyWith(
-                color: context.theme.colorScheme.onPrimary,
+                color: textColor ?? context.theme.colorScheme.onPrimary,
               ),
             ),
           ),

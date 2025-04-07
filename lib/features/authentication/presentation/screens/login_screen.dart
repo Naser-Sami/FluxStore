@@ -55,7 +55,7 @@ class LoginScreen extends StatelessWidget {
                   child: CustomButton(
                     onTap: () {},
                     text: LocaleKeys.Authentication_login,
-                    backgroundColor: context.theme.colorScheme.onSecondary,
+                    backgroundColor: context.theme.colorScheme.secondary,
                   ),
                 ),
                 const SizedBox(height: TSize.s28),

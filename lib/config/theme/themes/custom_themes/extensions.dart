@@ -9,7 +9,7 @@ import '/core/utils/extensions/custom_box_decoration_theme_extension.dart';
 /// ------------------------------
 
 Iterable<ThemeExtension<dynamic>>? lightExtensions = <ThemeExtension<dynamic>>[
-  AppColorsExtension(skeleton: LightThemeColors.secondaryFixed),
+  AppColorsExtension(skeleton: LightThemeColors.secondaryContainer),
   CustomBoxDecorationTheme(
     customBoxDecoration: const BoxDecoration(
       color: LightThemeColors.primaryContainer,
@@ -34,7 +34,7 @@ Iterable<ThemeExtension<dynamic>>? lightExtensions = <ThemeExtension<dynamic>>[
 /// ------------------------------
 
 Iterable<ThemeExtension<dynamic>>? darkExtensions = <ThemeExtension<dynamic>>[
-  AppColorsExtension(skeleton: DarkThemeColors.secondaryFixed),
+  AppColorsExtension(skeleton: DarkThemeColors.secondaryContainer),
   CustomBoxDecorationTheme(
     customBoxDecoration: const BoxDecoration(
       color: DarkThemeColors.primaryContainer,

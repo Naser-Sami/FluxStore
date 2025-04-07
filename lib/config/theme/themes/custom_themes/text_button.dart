@@ -9,9 +9,7 @@ final darkTextButtonTheme = TextButtonThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(TRadius.r08),
     ),
-    textStyle: TTextStyle.titleMedium().apply(
-      color: DarkThemeColors.onBackground,
-    ),
+    textStyle: TTextStyle.titleMedium().apply(color: DarkThemeColors.onSurface),
   ),
 );
 
@@ -24,7 +22,7 @@ final lightTextButtonTheme = TextButtonThemeData(
       borderRadius: BorderRadius.circular(TRadius.r08),
     ),
     textStyle: TTextStyle.titleMedium().apply(
-      color: LightThemeColors.onBackground,
+      color: LightThemeColors.onSurface,
     ),
   ),
 );

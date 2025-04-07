@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import '/config/_config.dart';
 
 final bottomSheetThemeDark = const BottomSheetThemeData(
-  backgroundColor: DarkThemeColors.secondaryContainer,
-  modalBackgroundColor: DarkThemeColors.secondaryContainer,
+  backgroundColor: DarkThemeColors.surface,
+  modalBackgroundColor: DarkThemeColors.surface,
   shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(
-      top: Radius.circular(16.0),
-    ),
+    borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
   ),
 );
 
 final bottomSheetThemeLight = const BottomSheetThemeData(
-  backgroundColor: LightThemeColors.background,
-  modalBackgroundColor: LightThemeColors.background,
+  backgroundColor: LightThemeColors.surface,
+  modalBackgroundColor: LightThemeColors.surface,
   shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(
-      top: Radius.circular(16.0),
-    ),
+    borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
   ),
 );

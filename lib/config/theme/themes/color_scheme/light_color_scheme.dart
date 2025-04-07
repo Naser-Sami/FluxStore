@@ -3,48 +3,47 @@ import '/config/_config.dart' show LightThemeColors;
 
 final ColorScheme lightColorScheme = const ColorScheme.light(
   brightness: Brightness.light,
-  onSurface: LightThemeColors.onSurface,
+
   primary: LightThemeColors.primary,
   onPrimary: LightThemeColors.onPrimary,
   primaryContainer: LightThemeColors.primaryContainer,
   onPrimaryContainer: LightThemeColors.onPrimaryContainer,
-  primaryFixed: LightThemeColors.onPrimaryFixed,
-  primaryFixedDim: LightThemeColors.primaryFixedDim,
-  onPrimaryFixedVariant: LightThemeColors.onPrimaryFixedVariant,
+
   secondary: LightThemeColors.secondary,
   onSecondary: LightThemeColors.onSecondary,
   secondaryContainer: LightThemeColors.onSecondaryContainer,
-  secondaryFixed: LightThemeColors.secondaryFixed,
-  onSecondaryFixed: LightThemeColors.onSecondaryFixed,
-  secondaryFixedDim: LightThemeColors.secondaryFixedDim,
-  onSecondaryFixedVariant: LightThemeColors.onSecondaryFixedVariant,
+  onSecondaryContainer: LightThemeColors.onSurface,
+
   tertiary: LightThemeColors.tertiary,
   onTertiary: LightThemeColors.onTertiary,
   tertiaryContainer: LightThemeColors.tertiaryContainer,
   onTertiaryContainer: LightThemeColors.onTertiaryContainer,
-  tertiaryFixed: LightThemeColors.tertiaryFixed,
-  onTertiaryFixed: LightThemeColors.onTertiaryFixed,
-  tertiaryFixedDim: LightThemeColors.tertiaryFixedDim,
-  onTertiaryFixedVariant: LightThemeColors.onTertiaryFixedVariant,
+
   error: LightThemeColors.error,
   onError: LightThemeColors.onError,
   errorContainer: LightThemeColors.errorContainer,
   onErrorContainer: LightThemeColors.onErrorContainer,
-  outline: LightThemeColors.outline,
-  outlineVariant: LightThemeColors.outlineVariant,
-  surface: LightThemeColors.surface,
-  onSecondaryContainer: LightThemeColors.onSurface,
-  surfaceContainerHighest: LightThemeColors.surfaceContainerHightest,
-  surfaceContainerHigh: LightThemeColors.surfaceContainerHight,
-  surfaceContainer: LightThemeColors.surfaceContainer,
-  surfaceContainerLow: LightThemeColors.surfaceContainerLow,
-  surfaceContainerLowest: LightThemeColors.surfaceContainerLowest,
-  surfaceTint: LightThemeColors.surfaceTint,
+
   surfaceDim: LightThemeColors.surfaceDim,
+  surface: LightThemeColors.surface,
   surfaceBright: LightThemeColors.surfaceBright,
-  inversePrimary: LightThemeColors.inversePrimary,
+
   inverseSurface: LightThemeColors.inverseSurface,
   onInverseSurface: LightThemeColors.inverseOnSurface,
+  inversePrimary: LightThemeColors.inversePrimary,
+
+  surfaceContainerLowest: LightThemeColors.surfaceContainerLowest,
+  surfaceContainerLow: LightThemeColors.surfaceContainerLow,
+  surfaceContainer: LightThemeColors.surfaceContainer,
+  surfaceContainerHigh: LightThemeColors.surfaceContainerHight,
+  surfaceContainerHighest: LightThemeColors.surfaceContainerHightest,
+
+  onSurface: LightThemeColors.onSurface,
+  onSurfaceVariant: LightThemeColors.onSurfaceVariant,
+
+  outline: LightThemeColors.outline,
+  outlineVariant: LightThemeColors.outlineVariant,
+
   shadow: LightThemeColors.shadow,
   scrim: LightThemeColors.scrim,
 );

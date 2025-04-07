@@ -81,7 +81,7 @@ dependencies:
   encrypt: ^5.0.3
 
   # Store Data Securely
-  flutter_secure_storage: ^4.2.1
+  flutter_secure_storage: ^9.2.4
 
   # For Location Services
   geocoding: ^3.0.0

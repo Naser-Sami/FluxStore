@@ -1,0 +1,138 @@
+{
+  "Welcome": {
+    "welcomeMessage": "مرحباً بك في GemStore!",
+    "explore": "منزل عشاق الموضة",
+    "getStarted": "ابدأ الآن"
+  },
+ "Onboarding": {
+  "title1": "اكتشف شيئًا جديدًا",
+  "subtitle1": "وصلت تشكيلات جديدة خصيصًا لك",
+  "title2": "تحديث إطلالتك العصرية",
+  "subtitle2": "أشهر العلامات التجارية وآخر الصيحات",
+  "title3": "اكتشف أسلوبك الحقيقي",
+  "subtitle3": "استرخ ودع الأناقة تأتي إليك",
+  "ShoppingNow": "تسوّق الآن"
+},
+  "Authentication": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "rememberMe": "تذكرني",
+    "loginWith": "تسجيل الدخول باستخدام",
+    "noAccount": "ليس لديك حساب؟",
+    "haveAccount": "لديك حساب بالفعل؟",
+    "create": "إنشاء",
+    "loginInto": "تسجيل الدخول إلى",
+    "yourAccount": "حسابك",
+    "enterYourName": "أدخل اسمك",
+    "emailAddress": "البريد الإلكتروني",
+     "verificationCode": "رمز التحقق",
+    "enterYourEmailHere": "أدخل بريدك الإلكتروني هنا",
+    "createNewPassword": "إنشاء كلمة مرور جديدة",
+    "forgotPasswordMsg":"أدخل البريد الإلكتروني المرتبط بحسابك وسنرسل لك بريدًا إلكترونيًا يحتوي على تعليمات إعادة تعيين كلمة المرور",
+    "verificationCodeMsg": "يرجى إدخال رمز التحقق الذي أرسلناه إلى عنوان بريدك الإلكتروني",
+    "createNewPasswordMsg": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور المستخدمة سابقًا",
+    "newPassword": "كلمة مرور جديدة",
+    "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+     "confirm": "تأكيد",
+    "browseHome": "تصفح الصفحة الرئيسية",
+    "yourPasswordHasBeenChanged":"تم تغيير كلمة مرورك",
+    "welcomeBackDiscoverNow": "مرحبًا بعودتك! اكتشف الآن!",
+    "orSignUpWith": "أو قم بالتسجيل باستخدام",
+    "orLoginWith": "أو قم بتسجيل الدخول باستخدام"
+  },
+  "Home": {
+    "title": "الرئيسية",
+    "welcome": "مرحباً",
+    "searchPlaceholder": "ابحث عن المنتجات..."
+  },
+  "Product": {
+    "title": "المنتج",
+    "description": "الوصف",
+    "price": "السعر",
+    "reviews": "التقييمات",
+    "addToCart": "أضف إلى السلة",
+    "outOfStock": "غير متوفر",
+    "inStock": "متوفر",
+    "quantity": "الكمية",
+    "category": "الفئة",
+    "relatedProducts": "منتجات ذات صلة"
+  },
+  "Cart": {
+    "title": "سلة المشتريات",
+    "empty": "سلة المشتريات فارغة",
+    "total": "الإجمالي",
+    "checkout": "الدفع",
+    "remove": "إزالة",
+    "updateQuantity": "تحديث الكمية"
+  },
+  "Checkout": {
+    "title": "الدفع",
+    "shippingAddress": "عنوان الشحن",
+    "billingAddress": "عنوان الفاتورة",
+    "paymentMethod": "طريقة الدفع",
+    "placeOrder": "تأكيد الطلب",
+    "orderSummary": "ملخص الطلب"
+  },
+  "Orders": {
+    "title": "الطلبات",
+    "orderNumber": "رقم الطلب",
+    "status": "الحالة",
+    "pending": "قيد الانتظار",
+    "processing": "جار المعالجة",
+    "shipped": "تم الشحن",
+    "delivered": "تم التوصيل",
+    "cancelled": "تم الإلغاء",
+    "orderDetails": "تفاصيل الطلب"
+  },
+  "Profile": {
+    "title": "الملف الشخصي",
+    "editProfile": "تعديل الملف الشخصي",
+    "personalInfo": "المعلومات الشخصية",
+    "addresses": "العناوين",
+    "paymentMethods": "طرق الدفع",
+    "orderHistory": "سجل الطلبات",
+    "changePassword": "تغيير كلمة المرور"
+  },
+  "Settings": {
+    "title": "الإعدادات",
+    "language": "اللغة",
+    "theme": "المظهر",
+    "notifications": "الإشعارات"
+  },
+  "Common": {
+    "yes": "نعم",
+    "no": "لا",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "submit": "إرسال",
+    "back": "رجوع",
+    "close": "إغلاق",
+    "next": "التالي",
+    "previous": "السابق",
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ ما",
+    "success": "تم بنجاح",
+    "retry": "إعادة المحاولة",
+    "noResultsFound": "لم يتم العثور على نتائج"
+  },
+  "Validation": {
+    "isRequired": "مطلوب",
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "بريد إلكتروني غير صالح",
+    "passwordTooShort": "كلمة المرور قصيرة جداً",
+    "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين"
+  },
+  "Notifications": {
+    "newMessage": "لديك رسالة جديدة",
+    "orderUpdate": "تم تحديث طلبك",
+    "promo": "عرض ترويجي جديد متاح"
+  }
+}

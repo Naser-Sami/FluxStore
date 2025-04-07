@@ -1,0 +1,138 @@
+{
+  "Welcome": {
+    "welcomeMessage": "Welcome to GemStore!",
+    "explore": "The home of fashionista",
+    "getStarted": "Get Started"
+  },
+  "Onboarding": {
+    "title1": "Discover something new",
+    "subtitle1": "Special new arrivals just for you",
+    "title2": "Update trendy outfit",
+    "subtitle2": "Favorite brands and hottest trends",
+    "title3": "Explore your true style",
+    "subtitle3": "Relax and let us bring the style to you",
+    "ShoppingNow": "Shopping Now"
+  },
+  "Authentication": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password",
+    "rememberMe": "Remember Me",
+    "loginWith": "Login with",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "create": "Create",
+    "loginInto": "Login into",
+    "yourAccount": "your account",
+    "enterYourName": "Enter your name",
+    "emailAddress": "Email Address",
+    "verificationCode": "Verification code",
+    "enterYourEmailHere": "Enter your email here",
+    "createNewPassword": "Create new password",
+    "forgotPasswordMsg":"Enter email associated with your account and we’ll send and email with instructions to reset your password",
+    "verificationCodeMsg": "Please enter the verification code we sent to your email address",
+    "createNewPasswordMsg": "Your new password must be different from previously used password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "confirm": "Confirm",
+    "browseHome": "Browse Home",
+    "yourPasswordHasBeenChanged":"Your password has been changed",
+    "welcomeBackDiscoverNow": "Welcome back! Discover now!",
+    "orSignUpWith": "Or sign up with",
+    "orLoginWith": "Or login with"
+  },
+  "Home": {
+    "title": "Home",
+    "welcome": "Welcome",
+    "searchPlaceholder": "Search for products..."
+  },
+  "Product": {
+    "title": "Product",
+    "description": "Description",
+    "price": "Price",
+    "reviews": "Reviews",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock",
+    "quantity": "Quantity",
+    "category": "Category",
+    "relatedProducts": "Related Products"
+  },
+  "Cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "updateQuantity": "Update Quantity"
+  },
+  "Checkout": {
+    "title": "Checkout",
+    "shippingAddress": "Shipping Address",
+    "billingAddress": "Billing Address",
+    "paymentMethod": "Payment Method",
+    "placeOrder": "Place Order",
+    "orderSummary": "Order Summary"
+  },
+  "Orders": {
+    "title": "Orders",
+    "orderNumber": "Order #",
+    "status": "Status",
+    "pending": "Pending",
+    "processing": "Processing",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled",
+    "orderDetails": "Order Details"
+  },
+  "Profile": {
+    "title": "Profile",
+    "editProfile": "Edit Profile",
+    "personalInfo": "Personal Information",
+    "addresses": "Addresses",
+    "paymentMethods": "Payment Methods",
+    "orderHistory": "Order History",
+    "changePassword": "Change Password"
+  },
+  "Settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "notifications": "Notifications"
+  },
+  "Common": {
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "submit": "Submit",
+    "back": "Back",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "success": "Success",
+    "retry": "Retry",
+    "noResultsFound": "No results found"
+  },
+  "Validation": {
+    "isRequired": "is required",
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "passwordTooShort": "Password is too short",
+    "passwordsDoNotMatch": "Passwords do not match"
+  },
+  "Notifications": {
+    "newMessage": "You have a new message",
+    "orderUpdate": "Your order has been updated",
+    "promo": "New promotion available"
+  }
+}

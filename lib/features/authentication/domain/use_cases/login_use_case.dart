@@ -9,7 +9,7 @@ class LoginUseCase extends BaseUseCase<UserEntity, LoginParams> {
   LoginUseCase({required this.loginRepository});
 
   @override
-  Future<Either<Failure, UserEntity>> call(p) async {
+  Future<Either<Failure<String>, UserEntity>> call(p) async {
     try {
       return await loginRepository.login(p);
     } catch (e) {

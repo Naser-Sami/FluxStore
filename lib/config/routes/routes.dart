@@ -1,3 +1,4 @@
+import 'package:flux_store/features/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
@@ -103,5 +104,13 @@ final router = GoRouter(
     ///
     /// End Authentication
     ///
+    /// - Home
+    GoRoute(
+      path: HomeScreen.routeName,
+      name: HomeScreen.name,
+      pageBuilder:
+          (context, state) =>
+              scaleDownTransitionPage(context, state, const HomeScreen()),
+    ),
   ],
 );

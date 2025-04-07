@@ -14,7 +14,9 @@ class LoginRepositoryImplementation implements ILoginRepository {
   LoginRepositoryImplementation({required this.authenticationRemoteDataSource});
 
   @override
-  Future<Either<Failure, UserEntity>> login(LoginParams loginParams) async {
+  Future<Either<Failure<String>, UserEntity>> login(
+    LoginParams loginParams,
+  ) async {
     try {
       final result = await authenticationRemoteDataSource.login(loginParams);
 
@@ -30,7 +32,7 @@ class LoginRepositoryImplementation implements ILoginRepository {
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {
-      return const Left(Failure(statusCode: 500, error: "Registration error."));
+      return Left(Failure(statusCode: 500, error: e.toString()));
     }
   }
 }

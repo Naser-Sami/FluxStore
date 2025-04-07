@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '/features/_features.dart' show OnboardingScreen;
 import '/config/_config.dart' show TextWidget, TSize, TPadding, CustomButton;
 import '/core/_core.dart';
+import '/features/_features.dart' show OnboardingScreen;
 
 class WelcomeScreen extends StatelessWidget {
   static const String routeName = '/welcome';

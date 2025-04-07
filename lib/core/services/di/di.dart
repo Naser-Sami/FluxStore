@@ -59,6 +59,7 @@ class DI {
 
   Future<void> initControllers() async {
     sl.registerLazySingleton<ThemeCubit>(ThemeCubit.new);
+    sl.registerLazySingleton<UserSessionCubit>(UserSessionCubit.new);
     sl.registerLazySingleton<LoginBloc>(
       () => LoginBloc(loginUseCase: sl<LoginUseCase>()),
     );

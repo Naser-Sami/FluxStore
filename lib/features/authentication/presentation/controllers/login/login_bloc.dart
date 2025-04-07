@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flux_store/features/_features.dart';
+
+import '/features/_features.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -25,7 +26,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             LoginFailure(error: failure.error, statusCode: failure.statusCode),
           );
         },
-        (user) {
+        (user) async {
           emit(LoginSuccess(user: user));
         },
       );

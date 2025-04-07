@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '/features/_features.dart';
 import '/config/_config.dart' show ThemeCubit;
 import '/core/_core.dart' show sl;
+import '/features/_features.dart';
 
 final providers = [
   BlocProvider<ThemeCubit>(create: (context) => sl<ThemeCubit>()),
-  BlocProvider<LoginBloc>(create: (context) => sl<LoginBloc>()),
+  BlocProvider<UserSessionCubit>(create: (context) => sl<UserSessionCubit>()),
 ];

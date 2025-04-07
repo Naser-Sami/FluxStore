@@ -4,7 +4,7 @@ import '/config/theme/_theme.dart';
 ThemeData _darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: DarkThemeColors.background,
-  colorScheme: colorSchemeDark,
+  colorScheme: darkColorScheme,
   textTheme: TTextTheme.darkTextTheme,
   primaryTextTheme: TTextTheme.darkTextTheme,
   textButtonTheme: darkTextButtonTheme,

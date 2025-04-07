@@ -115,6 +115,15 @@ abstract class  LocaleKeys {
   static const Common_success = 'Common.success';
   static const Common_retry = 'Common.retry';
   static const Common_noResultsFound = 'Common.noResultsFound';
+  static const Common_thanks = 'Common.thanks';
+  static const Common_congratulations = 'Common.congratulations';
+  static const Common_otpSuccess = 'Common.otpSuccess';
+  static const Common_otpFailed = 'Common.otpFailed';
+  static const Common_sendOtp = 'Common.sendOtp';
+  static const Common_verifyOtp = 'Common.verifyOtp';
+  static const Common_resendOtp = 'Common.resendOtp';
+  static const Common_resendIn = 'Common.resendIn';
+  static const Common_seconds = 'Common.seconds';
   static const Common = 'Common';
   static const Validation_isRequired = 'Validation.isRequired';
   static const Validation_required = 'Validation.required';

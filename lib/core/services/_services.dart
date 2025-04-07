@@ -1,7 +1,7 @@
 export 'di/di.dart';
 export 'local_db/_local_db.dart';
 export 'apis_service/_apis_service.dart';
-export 'email_service/email_service.dart';
+export 'email_service/_email_service.dart';
 export 'location_service/_location_service.dart';
 export 'firebase_service/_firebase_service.dart';
 export 'navigation_service/navigation_service.dart';

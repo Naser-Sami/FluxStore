@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import '/config/_config.dart';
 
 final appBarThemeDark = AppBarTheme(
@@ -11,6 +13,7 @@ final appBarThemeDark = AppBarTheme(
   toolbarTextStyle: TTextTheme.darkTextTheme.titleLarge,
   iconTheme: const IconThemeData(color: DarkThemeColors.onSurface),
   actionsIconTheme: const IconThemeData(color: DarkThemeColors.onSurface),
+  systemOverlayStyle: SystemUiOverlayStyle.light,
 );
 
 final appBarThemeLight = AppBarTheme(
@@ -23,4 +26,5 @@ final appBarThemeLight = AppBarTheme(
   toolbarTextStyle: TTextTheme.lightTextTheme.titleLarge,
   iconTheme: const IconThemeData(color: LightThemeColors.onSurface),
   actionsIconTheme: const IconThemeData(color: LightThemeColors.onSurface),
+  systemOverlayStyle: SystemUiOverlayStyle.dark,
 );

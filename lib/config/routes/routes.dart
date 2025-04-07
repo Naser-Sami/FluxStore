@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
-import '/core/_core.dart';
 import '/config/_config.dart';
+import '/core/_core.dart';
 import '/features/_features.dart';
 
 // GoRouter configuration
@@ -73,7 +73,32 @@ final router = GoRouter(
     ),
 
     /// - Verification Code
+    GoRoute(
+      path: VerificationCodeScreen.routeName,
+      name: VerificationCodeScreen.name,
+      pageBuilder: (context, state) {
+        final args = state.extra as Map<String, dynamic>;
+        final email = args['email'];
+
+        return scaleDownTransitionPage(
+          context,
+          state,
+          VerificationCodeScreen(email: email),
+        );
+      },
+    ),
+
     /// - Create New Password
+    GoRoute(
+      path: CreateNewPasswordScreen.routeName,
+      name: CreateNewPasswordScreen.name,
+      pageBuilder:
+          (context, state) => scaleDownTransitionPage(
+            context,
+            state,
+            const CreateNewPasswordScreen(),
+          ),
+    ),
 
     ///
     /// End Authentication

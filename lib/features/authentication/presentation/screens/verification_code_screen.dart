@@ -1,52 +1,107 @@
+import 'dart:async';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '/config/_config.dart' show TPadding, TSize, TextWidget;
-import '/core/_core.dart' show LocaleKeys, BuildContextExtensions;
+import '/core/_core.dart'
+    show
+        BuildContextExtensions,
+        ISendEmailOtpService,
+        LocaleKeys,
+        showLoadingDialog,
+        sl;
+import '/features/authentication/_authentication.dart' show OTPInput;
 
-class VerificationCodeScreen extends StatelessWidget {
+class VerificationCodeScreen extends StatefulWidget {
   static const String routeName = '/verification-code';
   static const String name = 'Verification Code';
-  const VerificationCodeScreen({super.key});
+
+  const VerificationCodeScreen({super.key, required this.email});
+  final String email;
+
+  @override
+  State<VerificationCodeScreen> createState() => _VerificationCodeScreenState();
+}
+
+class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
+  Timer? _timer;
+  int _remainingSeconds = 60;
+
+  @override
+  void initState() {
+    super.initState();
+    _startCountdown();
+  }
+
+  void _startCountdown() {
+    _remainingSeconds = 60; // ✅ Start from 60
+    _timer?.cancel(); // Clear any existing timer
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      if (_remainingSeconds == 0) {
+        timer.cancel();
+      } else {
+        setState(() {
+          _remainingSeconds--;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _resendCode() async {
+    // Show loading dialog
+    showLoadingDialog(context);
+    await sl<ISendEmailOtpService>().sendOTP(email: widget.email);
+    _startCountdown(); // ✅ Restart timer
+    // Hide loading dialog
+    if (mounted) Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final canResend = _remainingSeconds == 0;
+
     return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: TPadding.p36),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: TSize.s44),
-                TextWidget(
-                  LocaleKeys.Authentication_verificationCode,
-                  style: context.textTheme.headlineLarge?.copyWith(height: 1.7),
-                ),
-                const SizedBox(height: TSize.s08),
-                TextWidget(
-                  LocaleKeys.Authentication_verificationCodeMsg,
-                  style: context.textTheme.bodySmall?.copyWith(height: 1.7),
-                ),
-                const SizedBox(height: TSize.s48),
-                // TextFormFieldComponent(
-                //   labelText: LocaleKeys.Authentication_enterYourEmailHere,
-                //   keyboardType: TextInputType.emailAddress,
-                //   prefixIcon: const Icon(Icons.email_outlined),
-                //   validator:
-                //       (value) => TValidator.validateEmail(
-                //         LocaleKeys.Authentication_enterYourEmailHere,
-                //       ),
-                //   onFieldSubmitted: (val) {
-                //     // Send OTP to the user via email
-                //     // Navigate to the verification code screen
-                //   },
-                // ),
-              ],
+      appBar: AppBar(automaticallyImplyLeading: false),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: TPadding.p36),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: TSize.s96),
+            TextWidget(
+              LocaleKeys.Authentication_verificationCode,
+              style: context.textTheme.headlineLarge?.copyWith(height: 1.7),
             ),
-          ),
+            const SizedBox(height: TSize.s08),
+            TextWidget(
+              LocaleKeys.Authentication_verificationCodeMsg,
+              style: context.textTheme.bodyMedium?.copyWith(height: 1.7),
+            ),
+            const Spacer(),
+            const OTPInput(),
+            const SizedBox(height: TSize.s24),
+            TextButton(
+              onPressed: canResend ? _resendCode : null,
+              child: TextWidget(
+                canResend
+                    ? LocaleKeys.Common_resendOtp
+                    : '${LocaleKeys.Common_resendIn.tr()} $_remainingSeconds ${LocaleKeys.Common_seconds.tr()}',
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: canResend ? context.theme.colorScheme.primary : null,
+                  fontWeight: canResend ? FontWeight.bold : null,
+                ),
+              ),
+            ),
+            const Spacer(flex: 2),
+          ],
         ),
       ),
     );

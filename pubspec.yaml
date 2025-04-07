@@ -98,6 +98,9 @@ dependencies:
   animate_do: ^4.2.0
   flutter_animate: ^4.5.2
 
+  # Send OTP Via Email
+  email_otp: ^3.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

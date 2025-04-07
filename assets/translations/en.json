@@ -121,7 +121,16 @@
     "error": "Something went wrong",
     "success": "Success",
     "retry": "Retry",
-    "noResultsFound": "No results found"
+    "noResultsFound": "No results found",
+    "thanks": "Thanks",
+    "congratulations": "Congratulations!",
+    "otpSuccess":"OTP has been sent to your email",
+    "otpFailed": "OTP failed to send, please try again",
+    "sendOtp": "Send OTP",
+    "verifyOtp": "Verify OTP",
+    "resendOtp": "Resend Code",
+    "resendIn": "Resend in",
+    "seconds": "seconds"
   },
   "Validation": {
     "isRequired": "is required",

@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 // Packages
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart';
 
 // Files
 import '/core/_core.dart';
@@ -20,20 +20,29 @@ class TDeviceUtils {
 
   static final size = MediaQuery.of(context).size;
 
-  static void hideKeyboard() => FocusScope.of(context).requestFocus(FocusNode());
+  static void hideKeyboard() =>
+      FocusScope.of(context).requestFocus(FocusNode());
 
-  static Future<void> setStatusBarColor(Color color) async =>
+  static Future<void> setStatusBarColor({Color? color}) async =>
       SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: color),
+        SystemUiOverlayStyle(
+          statusBarColor: color,
+          statusBarIconBrightness:
+              Theme.of(context).brightness == Brightness.dark
+                  ? Brightness.light
+                  : Brightness.dark,
+        ),
       );
 
-  static bool isLandscapeOrientation() => View.of(context).viewInsets.bottom == 0;
+  static bool isLandscapeOrientation() =>
+      View.of(context).viewInsets.bottom == 0;
 
-  static bool isPortraitOrientation() => View.of(context).viewInsets.bottom != 0;
+  static bool isPortraitOrientation() =>
+      View.of(context).viewInsets.bottom != 0;
 
   static void setFullScreen(bool enable) => SystemChrome.setEnabledSystemUIMode(
-        enable ? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge,
-      );
+    enable ? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge,
+  );
 
   static double getScreenHeight() => MediaQuery.of(context).size.height;
 
@@ -49,7 +58,8 @@ class TDeviceUtils {
 
   static double getKeyboardHeight() => View.of(context).viewInsets.bottom;
 
-  static Future<bool> isKeyboardVisible() async => View.of(context).viewInsets.bottom > 0;
+  static Future<bool> isKeyboardVisible() async =>
+      View.of(context).viewInsets.bottom > 0;
 
   static bool isPhysicalDevice() =>
       defaultTargetPlatform == TargetPlatform.android ||
@@ -59,7 +69,8 @@ class TDeviceUtils {
 
   static bool isMediumLayout() => getScreenWidth() < largeLayout;
 
-  static bool isSmallOrPhysicalDevice() => isPhysicalDevice() || isSmallLayout();
+  static bool isSmallOrPhysicalDevice() =>
+      isPhysicalDevice() || isSmallLayout();
 
   static void vibrate(Duration duration) {
     HapticFeedback.vibrate();
@@ -67,18 +78,16 @@ class TDeviceUtils {
   }
 
   static Future<void> setPreferredOrientations(
-          List<DeviceOrientation> orientations) async =>
-      await SystemChrome.setPreferredOrientations(orientations);
+    List<DeviceOrientation> orientations,
+  ) async => await SystemChrome.setPreferredOrientations(orientations);
 
-  static void hideStatusBar() => SystemChrome.setEnabledSystemUIMode(
-        SystemUiMode.manual,
-        overlays: [],
-      );
+  static void hideStatusBar() =>
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
   static void showStatusBar() => SystemChrome.setEnabledSystemUIMode(
-        SystemUiMode.manual,
-        overlays: SystemUiOverlay.values,
-      );
+    SystemUiMode.manual,
+    overlays: SystemUiOverlay.values,
+  );
 
   static Future<bool> hasInternetConnection(String url) async {
     try {
@@ -97,5 +106,6 @@ class TDeviceUtils {
   static bool isFuchsia() => Platform.isFuchsia;
   static int numberOfProcessors() => Platform.numberOfProcessors;
 
-  static bool isDesktop() => (Platform.isMacOS || Platform.isLinux || Platform.isWindows);
+  static bool isDesktop() =>
+      (Platform.isMacOS || Platform.isLinux || Platform.isWindows);
 }

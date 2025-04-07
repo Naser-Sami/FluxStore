@@ -15,5 +15,6 @@ abstract class IServiceInitializer {
   Future<void> initFirebase();
   Future<void> initFirebaseMessaging();
   Future<void> initServiceLocator();
+  Future<void> initEmailOtpService();
   void removeSplashScreen();
 }

@@ -137,7 +137,16 @@ class CodegenLoader extends AssetLoader{
     "error": "Something went wrong",
     "success": "Success",
     "retry": "Retry",
-    "noResultsFound": "No results found"
+    "noResultsFound": "No results found",
+    "thanks": "Thanks",
+    "congratulations": "Congratulations!",
+    "otpSuccess": "OTP has been sent to your email",
+    "otpFailed": "OTP failed to send, please try again",
+    "sendOtp": "Send OTP",
+    "verifyOtp": "Verify OTP",
+    "resendOtp": "Resend Code",
+    "resendIn": "Resend in",
+    "seconds": "seconds"
   },
   "Validation": {
     "isRequired": "is required",
@@ -275,7 +284,16 @@ static const Map<String,dynamic> _ar = {
     "error": "حدث خطأ ما",
     "success": "تم بنجاح",
     "retry": "إعادة المحاولة",
-    "noResultsFound": "لم يتم العثور على نتائج"
+    "noResultsFound": "لم يتم العثور على نتائج",
+    "thanks": "شكراً لك!",
+    "congratulations": "تهانينا!",
+    "otpSuccess": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
+    "otpFailed": "فشل إرسال  رمز التحقق، يرجى المحاولة مرة أخرى",
+    "sendOtp": "أرسل رمز التحقق",
+    "verifyOtp": "تأكيد رمز التحقق",
+    "resendOtp": "إعادة إرسال رمز التحقق",
+    "resendIn": "إعادة إرسال خلال",
+    "seconds": "ثواني"
   },
   "Validation": {
     "isRequired": "مطلوب",

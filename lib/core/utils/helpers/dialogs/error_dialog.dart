@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '/core/_core.dart' show LocaleKeys, BuildContextExtensions;
 import '/config/_config.dart' show TSize, TextWidget, TPadding;
 
 errorDialog(BuildContext context, {required String message}) {
@@ -17,7 +19,7 @@ errorDialog(BuildContext context, {required String message}) {
               padding: const EdgeInsets.all(TPadding.p06),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.red.shade100,
+                color: context.theme.colorScheme.error,
               ),
               child: const Icon(
                 Icons.error_outline,
@@ -27,7 +29,7 @@ errorDialog(BuildContext context, {required String message}) {
             ),
             const SizedBox(height: TSize.s12),
             TextWidget(
-              'Error',
+              LocaleKeys.Common_error.tr(),
               style: theme.textTheme.titleLarge,
             ),
             const SizedBox(height: TSize.s16),
@@ -45,7 +47,7 @@ errorDialog(BuildContext context, {required String message}) {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const TextWidget('Close'),
+              child: TextWidget(LocaleKeys.Common_close.tr()),
             ),
           ),
         ],

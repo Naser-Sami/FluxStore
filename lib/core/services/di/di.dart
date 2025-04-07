@@ -13,9 +13,7 @@ class DI {
   }
 
   Future<void> initSecureStorageService() async {
-    sl.registerLazySingleton<SecureStorageService>(
-      SecureStorageService.new,
-    );
+    sl.registerLazySingleton<SecureStorageService>(SecureStorageService.new);
   }
 
   Future<void> initFirebase() async {}
@@ -34,6 +32,8 @@ class DI {
     sl.registerLazySingleton<IGeocodingService>(GeocodingServiceImpl.new);
 
     sl.registerLazySingleton<IGeoCodeService>(GeoCodeServiceImpl.new);
+
+    sl.registerLazySingleton<ISendEmailOtpService>(SendEmailOtpServiceImpl.new);
   }
 
   Future<void> initDataSources() async {}

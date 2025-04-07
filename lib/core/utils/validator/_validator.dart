@@ -13,12 +13,13 @@ class TValidator {
 
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return '${LocaleKeys.Authentication_email} ${LocaleKeys.Validation_isRequired}'
-          .tr();
+      return '${LocaleKeys.Authentication_email.tr()} ${LocaleKeys.Validation_isRequired.tr()}';
     }
 
     // Regular expression for email validation
-    final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    final emailRegExp = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$",
+    );
 
     if (!emailRegExp.hasMatch(value)) {
       return LocaleKeys.Validation_invalidEmail.tr();

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '/config/_config.dart' show IconWidget, TSize, TextWidget;
+import '/core/_core.dart' show LocaleKeys;
 
-successDialog(BuildContext context,
-    {required String message, required void Function()? onPressed}) {
+successDialog(
+  BuildContext context, {
+  required String message,
+  required void Function()? onPressed,
+  bool barrierDismissible = true,
+}) {
   final theme = Theme.of(context);
 
   return showDialog(
     context: context,
+    barrierDismissible: barrierDismissible,
     builder: (BuildContext context) {
       return AlertDialog(
         contentPadding: const EdgeInsets.all(24),
@@ -28,7 +34,7 @@ successDialog(BuildContext context,
             ),
             const SizedBox(height: TSize.s12),
             TextWidget(
-              'Congratulations!',
+              LocaleKeys.Common_congratulations,
               style: theme.textTheme.titleLarge,
             ),
             const SizedBox(height: TSize.s16),
@@ -44,7 +50,7 @@ successDialog(BuildContext context,
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: ElevatedButton(
               onPressed: onPressed,
-              child: const TextWidget('Thanks'),
+              child: const TextWidget(LocaleKeys.Common_thanks),
             ),
           ),
         ],

@@ -91,7 +91,10 @@ class _OTPInputState extends State<OTPInput> {
                     borderColor = Colors.green;
 
                     // Navigate to the next screen
-                    context.push(CreateNewPasswordScreen.routeName);
+                    context.push(
+                      CreateNewPasswordScreen.routeName,
+                      extra: {'email': widget.email},
+                    );
 
                     // Send the TOKEN via API to user email
                     context.read<ForgotPasswordCubit>().forgotPassword(

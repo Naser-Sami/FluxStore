@@ -5,10 +5,11 @@ import '/features/_features.dart'
 
 class ResetPasswordCubit extends Cubit<String> {
   final ResetPasswordUseCase resetPasswordUseCase;
+
   ResetPasswordCubit({required this.resetPasswordUseCase}) : super("");
 
   Future<void> resetPassword({required ResetPasswordParams params}) async {
     final response = await resetPasswordUseCase.call(params);
-    response.fold((failure) => emit(failure.error), emit);
+    response.fold((failure) => emit("Error: ${failure.error}"), emit);
   }
 }

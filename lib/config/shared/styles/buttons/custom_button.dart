@@ -1,4 +1,5 @@
 import 'dart:ui' show ImageFilter;
+
 import 'package:flutter/material.dart';
 
 import '/config/_config.dart' show TRadius, OnTapScaler, TPadding, TextWidget;
@@ -42,6 +43,7 @@ class CustomButton extends StatelessWidget {
             ),
             child: TextWidget(
               text,
+              textAlign: TextAlign.center,
               style: context.textTheme.titleMedium?.copyWith(
                 color: textColor ?? context.theme.colorScheme.onPrimary,
               ),

@@ -35,9 +35,9 @@ final router = GoRouter(
     GoRoute(
       path: WelcomeScreen.routeName,
       name: WelcomeScreen.name,
-      pageBuilder:
-          (context, state) =>
-              scaleDownTransitionPage(context, state, const WelcomeScreen()),
+      pageBuilder: (context, state) {
+        return scaleDownTransitionPage(context, state, const WelcomeScreen());
+      },
     ),
     GoRoute(
       path: OnboardingScreen.routeName,
@@ -115,15 +115,19 @@ final router = GoRouter(
     GoRoute(
       path: CreateNewPasswordScreen.routeName,
       name: CreateNewPasswordScreen.name,
-      pageBuilder:
-          (context, state) => scaleDownTransitionPage(
-            context,
-            state,
-            BlocProvider(
-              create: (context) => sl<ResetPasswordCubit>(),
-              child: const CreateNewPasswordScreen(),
-            ),
+      pageBuilder: (context, state) {
+        final args = state.extra as Map<String, dynamic>;
+        final email = args['email'];
+
+        return scaleDownTransitionPage(
+          context,
+          state,
+          BlocProvider(
+            create: (context) => sl<ResetPasswordCubit>(),
+            child: CreateNewPasswordScreen(email: email),
           ),
+        );
+      },
     ),
 
     ///

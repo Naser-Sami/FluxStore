@@ -10,7 +10,6 @@ import '/core/_core.dart'
         ISendEmailOtpService,
         LocaleKeys,
         TValidator,
-        successDialog,
         errorDialog,
         showLoadingDialog;
 import 'verification_code_screen.dart';

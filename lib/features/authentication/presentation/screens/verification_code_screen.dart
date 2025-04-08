@@ -86,7 +86,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
               style: context.textTheme.bodyMedium?.copyWith(height: 1.7),
             ),
             const Spacer(),
-            const OTPInput(),
+            OTPInput(email: widget.email),
             const SizedBox(height: TSize.s24),
             TextButton(
               onPressed: canResend ? _resendCode : null,

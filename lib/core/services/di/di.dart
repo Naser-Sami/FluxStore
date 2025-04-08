@@ -54,6 +54,16 @@ class DI {
         authenticationRemoteDataSource: sl<IAuthenticationRemoteDataSource>(),
       ),
     );
+    sl.registerLazySingleton<IForgotPasswordRepository>(
+      () => ForgotPasswordRepositoryImplementation(
+        authenticationRemoteDataSource: sl<IAuthenticationRemoteDataSource>(),
+      ),
+    );
+    sl.registerLazySingleton<IResetPasswordRepository>(
+      () => ResetPasswordRepositoryImplementation(
+        authenticationRemoteDataSource: sl<IAuthenticationRemoteDataSource>(),
+      ),
+    );
   }
 
   Future<void> initUseCases() async {
@@ -62,6 +72,16 @@ class DI {
     );
     sl.registerLazySingleton<SignUpUseCase>(
       () => SignUpUseCase(signUpRepository: sl<ISignUpRepository>()),
+    );
+    sl.registerLazySingleton<ForgotPasswordUseCase>(
+      () => ForgotPasswordUseCase(
+        forgotPasswordRepository: sl<IForgotPasswordRepository>(),
+      ),
+    );
+    sl.registerLazySingleton<ResetPasswordUseCase>(
+      () => ResetPasswordUseCase(
+        resetPasswordRepository: sl<IResetPasswordRepository>(),
+      ),
     );
   }
 
@@ -73,6 +93,15 @@ class DI {
     );
     sl.registerLazySingleton<SignUpBloc>(
       () => SignUpBloc(signUpUseCase: sl<SignUpUseCase>()),
+    );
+    sl.registerLazySingleton<ForgotPasswordCubit>(
+      () => ForgotPasswordCubit(
+        forgotPasswordUseCase: sl<ForgotPasswordUseCase>(),
+      ),
+    );
+    sl.registerLazySingleton<ResetPasswordCubit>(
+      () =>
+          ResetPasswordCubit(resetPasswordUseCase: sl<ResetPasswordUseCase>()),
     );
   }
 

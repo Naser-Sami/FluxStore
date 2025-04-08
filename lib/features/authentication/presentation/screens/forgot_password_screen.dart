@@ -76,27 +76,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       final emailSent = await sl<ISendEmailOtpService>()
                           .sendOTP(email: _emailController.text);
 
-                      // Get the OTP to compare with the user input
-                      sl<ISendEmailOtpService>().getOTP();
-
                       // Hide loading dialog
                       if (context.mounted) Navigator.of(context).pop();
 
                       if (emailSent) {
                         if (context.mounted) {
-                          successDialog(
-                            context,
-                            barrierDismissible: false,
-                            message: LocaleKeys.Common_otpSuccess,
-                            onPressed: () {
-                              // Navigate to the verification code screen
-                              // and pass the email to the screen
-                              context.push(
-                                VerificationCodeScreen.routeName,
-                                extra: {'email': _emailController.text},
-                              );
-                              Navigator.of(context).pop();
-                            },
+                          // Navigate to the verification code screen
+                          // and pass the email to the screen
+                          context.push(
+                            VerificationCodeScreen.routeName,
+                            extra: {'email': _emailController.text},
                           );
                         }
                       } else {

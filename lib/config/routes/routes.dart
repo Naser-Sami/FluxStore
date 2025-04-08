@@ -103,7 +103,10 @@ final router = GoRouter(
         return scaleDownTransitionPage(
           context,
           state,
-          VerificationCodeScreen(email: email),
+          BlocProvider(
+            create: (context) => sl<ForgotPasswordCubit>(),
+            child: VerificationCodeScreen(email: email),
+          ),
         );
       },
     ),
@@ -116,7 +119,10 @@ final router = GoRouter(
           (context, state) => scaleDownTransitionPage(
             context,
             state,
-            const CreateNewPasswordScreen(),
+            BlocProvider(
+              create: (context) => sl<ResetPasswordCubit>(),
+              child: const CreateNewPasswordScreen(),
+            ),
           ),
     ),
 

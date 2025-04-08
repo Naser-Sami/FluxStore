@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flux_store/core/services/di/di.dart';
-import 'package:flux_store/features/_features.dart';
 import 'package:go_router/go_router.dart';
+
+import '/core/services/di/di.dart';
+import '/features/_features.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home';

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flux_store/features/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
@@ -9,11 +9,11 @@ import '/features/_features.dart';
 
 // GoRouter configuration
 final router = GoRouter(
+  navigatorKey: navigatorKey,
   initialLocation: SplashScreen.routeName,
   debugLogDiagnostics: true,
   // refreshListenable: GoRouterRefreshStream(sl<UserSessionCubit>()),
   observers: [AppNavigatorObserver()],
-  navigatorKey: navigatorKey,
   errorBuilder: (context, state) {
     if (state.uri.path.contains('/link')) {}
 
@@ -133,11 +133,78 @@ final router = GoRouter(
     ///
     /// End Authentication
     ///
-    /// - Home
-    GoRoute(
-      path: HomeScreen.routeName,
-      name: HomeScreen.name,
-      pageBuilder: (context, state) => const CupertinoPage(child: HomeScreen()),
+    /// - Bottom Navigation Bar
+    /// - Flux Store
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return StartScreen(navigationShell: navigationShell);
+      },
+      branches: [
+        // Home Shell Branch
+        StatefulShellBranch(
+          navigatorKey: homeSectionNavigator,
+          routes: [
+            GoRoute(
+              path: '/home',
+              name: 'Home',
+              pageBuilder:
+                  (context, state) => CupertinoPage(
+                    child: Scaffold(
+                      appBar: AppBar(title: const Text('Home')),
+                      body: const Center(child: Text('Home')),
+                    ),
+                  ),
+            ),
+          ],
+        ),
+
+        //  Search Shell Branch
+        StatefulShellBranch(
+          navigatorKey: searchSectionNavigator,
+          routes: [
+            GoRoute(
+              path: '/search',
+              name: 'Search',
+              pageBuilder:
+                  (context, state) => const CupertinoPage(
+                    child: Scaffold(body: Center(child: Text('Search'))),
+                  ),
+            ),
+          ],
+        ),
+
+        //  Cart Shell Branch
+        StatefulShellBranch(
+          navigatorKey: cartSectionNavigator,
+          routes: [
+            GoRoute(
+              path: '/cart',
+              name: 'Cart',
+              pageBuilder:
+                  (context, state) => const CupertinoPage(
+                    child: Scaffold(body: Center(child: Text('Cart'))),
+                  ),
+            ),
+          ],
+        ),
+        //  Profile Shell Branch
+        StatefulShellBranch(
+          navigatorKey: profileSectionNavigator,
+          routes: [
+            GoRoute(
+              path: '/profile',
+              name: 'Profile',
+              pageBuilder:
+                  (context, state) => const CupertinoPage(
+                    child: Scaffold(body: Center(child: Text('Profile'))),
+                  ),
+            ),
+          ],
+        ),
+      ],
     ),
+
+    /// ..
+    /// End Bottom Navigation Bar
   ],
 );

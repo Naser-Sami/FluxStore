@@ -31,6 +31,7 @@ class TPadding {
   static const double p20 = 20.0;
   static const double p24 = 24.0;
   static const double p26 = 26.0;
+  static const double p28 = 28.0;
   static const double p32 = 32.0;
   static const double p36 = 36.0;
   static const double p42 = 42.0;

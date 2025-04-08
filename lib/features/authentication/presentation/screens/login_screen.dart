@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '/config/_config.dart';
 import '/core/_core.dart';
 import '/features/authentication/_authentication.dart';
-import '/features/home_screen.dart';
+import '/features/_features.dart' show HomeScreen;
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';

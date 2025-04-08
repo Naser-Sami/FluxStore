@@ -5,11 +5,11 @@ import 'package:go_router/go_router.dart';
 import '/config/_config.dart'
     show BottomNavigationBarComponent, BottomNavigationBarCubit;
 
-class StartScreen extends StatelessWidget {
+class BottomNavigationBarWidget extends StatelessWidget {
   static const routeName = '/flux-store';
   static const String name = 'Flux Store';
 
-  const StartScreen({super.key, required this.navigationShell});
+  const BottomNavigationBarWidget({super.key, required this.navigationShell});
   final StatefulNavigationShell navigationShell;
 
   @override

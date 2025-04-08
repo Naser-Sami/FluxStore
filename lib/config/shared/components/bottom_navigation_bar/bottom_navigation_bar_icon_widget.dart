@@ -22,7 +22,6 @@ class BottomNavigationBarIconWidget extends StatelessWidget {
     return Expanded(
       child: SizedBox(
         width: context.screenWidth,
-        height: 34,
         child: OnTapScaler(
           onTap:
               () => context.read<BottomNavigationBarCubit>().changeIndex(index),

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -137,7 +136,7 @@ final router = GoRouter(
     /// - Flux Store
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return StartScreen(navigationShell: navigationShell);
+        return BottomNavigationBarWidget(navigationShell: navigationShell);
       },
       branches: [
         // Home Shell Branch
@@ -148,12 +147,7 @@ final router = GoRouter(
               path: '/home',
               name: 'Home',
               pageBuilder:
-                  (context, state) => CupertinoPage(
-                    child: Scaffold(
-                      appBar: AppBar(title: const Text('Home')),
-                      body: const Center(child: Text('Home')),
-                    ),
-                  ),
+                  (context, state) => const CupertinoPage(child: HomeScreen()),
             ),
           ],
         ),
@@ -166,9 +160,8 @@ final router = GoRouter(
               path: '/search',
               name: 'Search',
               pageBuilder:
-                  (context, state) => const CupertinoPage(
-                    child: Scaffold(body: Center(child: Text('Search'))),
-                  ),
+                  (context, state) =>
+                      const CupertinoPage(child: SearchScreen()),
             ),
           ],
         ),
@@ -181,9 +174,7 @@ final router = GoRouter(
               path: '/cart',
               name: 'Cart',
               pageBuilder:
-                  (context, state) => const CupertinoPage(
-                    child: Scaffold(body: Center(child: Text('Cart'))),
-                  ),
+                  (context, state) => const CupertinoPage(child: CartScreen()),
             ),
           ],
         ),
@@ -195,9 +186,8 @@ final router = GoRouter(
               path: '/profile',
               name: 'Profile',
               pageBuilder:
-                  (context, state) => const CupertinoPage(
-                    child: Scaffold(body: Center(child: Text('Profile'))),
-                  ),
+                  (context, state) =>
+                      const CupertinoPage(child: ProfileScreen()),
             ),
           ],
         ),

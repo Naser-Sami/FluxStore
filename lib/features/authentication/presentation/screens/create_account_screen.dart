@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flux_store/features/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
 import '/features/authentication/_authentication.dart';
+import '/features/_features.dart' show HomeScreen;
 
 class CreateAccountScreen extends StatefulWidget {
   static const String routeName = '/create-account';

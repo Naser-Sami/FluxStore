@@ -12,11 +12,11 @@ class BottomNavigationBarComponent extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(TRadius.r24)),
         child: BottomAppBar(
-          height: 50,
+          height: 52,
           padding: EdgeInsets.fromLTRB(
-            TPadding.p12,
-            TPadding.p24,
-            TPadding.p12,
+            TPadding.p20,
+            TPadding.p28,
+            TPadding.p20,
             0,
           ),
           child: Row(

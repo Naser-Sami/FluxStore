@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 
 import '/core/_core.dart' show sl;
 import '/features/_features.dart';
-import '/features/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/';

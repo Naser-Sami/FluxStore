@@ -46,6 +46,18 @@
     "orSignUpWith": "Or sign up with",
     "orLoginWith": "Or login with"
   },
+  "DrawerMenu": {
+    "homePage": "Home Page",
+    "discover": "Discover",
+    "myOrders": "My Orders",
+    "profile": "Profile",
+    "myProfile": "My Profile",
+    "otherC" : "OTHER",
+    "settings": "Settings",
+    "support": "Support",
+    "help": "Help",
+    "aboutUs": "About Us"
+  },
   "Home": {
     "title": "Home",
     "welcome": "Welcome",
@@ -130,7 +142,9 @@
     "verifyOtp": "Verify OTP",
     "resendOtp": "Resend Code",
     "resendIn": "Resend in",
-    "seconds": "seconds"
+    "seconds": "seconds",
+    "light": "Light",
+    "dark": "Dark"
   },
   "Validation": {
     "isRequired": "is required",

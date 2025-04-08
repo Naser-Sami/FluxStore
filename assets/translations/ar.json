@@ -46,6 +46,18 @@
     "orSignUpWith": "أو قم بالتسجيل باستخدام",
     "orLoginWith": "أو قم بتسجيل الدخول باستخدام"
   },
+  "DrawerMenu": {
+    "homePage": "الصفحة الرئيسية",
+    "discover": "اكتشف",
+    "myOrders": "طلباتي",
+    "profile": "الملف الشخصي",
+    "myProfile": "الملف الشخصي",
+    "otherC" : "أخرى",
+    "settings": "الإعدادات",
+    "support": "الدعم",
+    "help": "المساعدة",
+    "aboutUs": "حولنا"
+  },
   "Home": {
     "title": "الرئيسية",
     "welcome": "مرحباً",
@@ -130,7 +142,9 @@
     "verifyOtp": "تأكيد رمز التحقق",
     "resendOtp": "إعادة إرسال رمز التحقق",
     "resendIn": "إعادة إرسال خلال",
-    "seconds": "ثواني"
+    "seconds": "ثواني",
+    "light": "فاتح",
+    "dark": "داكن"
   },
   "Validation": {
     "isRequired": "مطلوب",

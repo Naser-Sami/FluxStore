@@ -47,6 +47,17 @@ abstract class  LocaleKeys {
   static const Authentication_orSignUpWith = 'Authentication.orSignUpWith';
   static const Authentication_orLoginWith = 'Authentication.orLoginWith';
   static const Authentication = 'Authentication';
+  static const DrawerMenu_homePage = 'DrawerMenu.homePage';
+  static const DrawerMenu_discover = 'DrawerMenu.discover';
+  static const DrawerMenu_myOrders = 'DrawerMenu.myOrders';
+  static const DrawerMenu_profile = 'DrawerMenu.profile';
+  static const DrawerMenu_myProfile = 'DrawerMenu.myProfile';
+  static const DrawerMenu_otherC = 'DrawerMenu.otherC';
+  static const DrawerMenu_settings = 'DrawerMenu.settings';
+  static const DrawerMenu_support = 'DrawerMenu.support';
+  static const DrawerMenu_help = 'DrawerMenu.help';
+  static const DrawerMenu_aboutUs = 'DrawerMenu.aboutUs';
+  static const DrawerMenu = 'DrawerMenu';
   static const Home_title = 'Home.title';
   static const Home_welcome = 'Home.welcome';
   static const Home_searchPlaceholder = 'Home.searchPlaceholder';
@@ -124,6 +135,8 @@ abstract class  LocaleKeys {
   static const Common_resendOtp = 'Common.resendOtp';
   static const Common_resendIn = 'Common.resendIn';
   static const Common_seconds = 'Common.seconds';
+  static const Common_light = 'Common.light';
+  static const Common_dark = 'Common.dark';
   static const Common = 'Common';
   static const Validation_isRequired = 'Validation.isRequired';
   static const Validation_required = 'Validation.required';

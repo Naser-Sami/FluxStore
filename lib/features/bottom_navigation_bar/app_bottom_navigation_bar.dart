@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flux_store/core/_core.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart'
     show BottomNavigationBarComponent, BottomNavigationBarCubit, TRadius;
-import '/features/_features.dart' show MainAppBar;
+import '/core/_core.dart';
+import '/features/_features.dart' show CustomDrawer, MainAppBar;
 
 class AppBottomNavigationBar extends StatefulWidget {
   static const routeName = '/flux-store';
@@ -65,23 +65,26 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
 
   Widget _buildDrawer() {
     return Scaffold(
-      body: SlideTransition(
-        position: _slideAnimation,
-        child: ScaleTransition(
-          scale: _menuScaleAnimation,
-          child: const Center(child: Text('Drawer')),
+      body: SafeArea(
+        child: SlideTransition(
+          position: _slideAnimation,
+          child: ScaleTransition(
+            scale: _menuScaleAnimation,
+            child: const CustomDrawer(),
+          ),
         ),
       ),
     );
   }
 
   Widget _buildMainScaffold() {
+    final double top = isCollapsed ? 0 : 0.1 * context.screenWidth;
     final double left = isCollapsed ? 0 : 0.6 * context.screenWidth;
     final double right = isCollapsed ? 0 : -0.4 * context.screenWidth;
 
     return AnimatedPositioned(
       duration: duration,
-      top: 0,
+      top: top,
       bottom: 0,
       left: left,
       right: right,

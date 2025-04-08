@@ -62,6 +62,18 @@ class CodegenLoader extends AssetLoader{
     "orSignUpWith": "Or sign up with",
     "orLoginWith": "Or login with"
   },
+  "DrawerMenu": {
+    "homePage": "Home Page",
+    "discover": "Discover",
+    "myOrders": "My Orders",
+    "profile": "Profile",
+    "myProfile": "My Profile",
+    "otherC": "OTHER",
+    "settings": "Settings",
+    "support": "Support",
+    "help": "Help",
+    "aboutUs": "About Us"
+  },
   "Home": {
     "title": "Home",
     "welcome": "Welcome",
@@ -146,7 +158,9 @@ class CodegenLoader extends AssetLoader{
     "verifyOtp": "Verify OTP",
     "resendOtp": "Resend Code",
     "resendIn": "Resend in",
-    "seconds": "seconds"
+    "seconds": "seconds",
+    "light": "Light",
+    "dark": "Dark"
   },
   "Validation": {
     "isRequired": "is required",
@@ -208,6 +222,18 @@ static const Map<String,dynamic> _ar = {
     "welcomeBackDiscoverNow": "مرحبًا بعودتك! اكتشف الآن!",
     "orSignUpWith": "أو قم بالتسجيل باستخدام",
     "orLoginWith": "أو قم بتسجيل الدخول باستخدام"
+  },
+  "DrawerMenu": {
+    "homePage": "الصفحة الرئيسية",
+    "discover": "اكتشف",
+    "myOrders": "طلباتي",
+    "profile": "الملف الشخصي",
+    "myProfile": "الملف الشخصي",
+    "otherC": "أخرى",
+    "settings": "الإعدادات",
+    "support": "الدعم",
+    "help": "المساعدة",
+    "aboutUs": "حولنا"
   },
   "Home": {
     "title": "الرئيسية",
@@ -293,7 +319,9 @@ static const Map<String,dynamic> _ar = {
     "verifyOtp": "تأكيد رمز التحقق",
     "resendOtp": "إعادة إرسال رمز التحقق",
     "resendIn": "إعادة إرسال خلال",
-    "seconds": "ثواني"
+    "seconds": "ثواني",
+    "light": "فاتح",
+    "dark": "داكن"
   },
   "Validation": {
     "isRequired": "مطلوب",

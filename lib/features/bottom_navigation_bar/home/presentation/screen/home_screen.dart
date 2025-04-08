@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = sl<UserSessionCubit>().state;
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      // appBar: AppBar(title: const Text('Home')),
       body: Center(child: TextWidget('Welcome  ${user?.username}')),
     );
   }

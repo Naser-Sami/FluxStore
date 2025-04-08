@@ -1,33 +1,141 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flux_store/core/_core.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart'
-    show BottomNavigationBarComponent, BottomNavigationBarCubit;
+    show BottomNavigationBarComponent, BottomNavigationBarCubit, TRadius;
+import '/features/_features.dart' show MainAppBar;
 
-class AppBottomNavigationBar extends StatelessWidget {
+class AppBottomNavigationBar extends StatefulWidget {
   static const routeName = '/flux-store';
   static const String name = 'Flux Store';
 
-  const AppBottomNavigationBar({super.key, required this.navigationShell});
   final StatefulNavigationShell navigationShell;
+
+  const AppBottomNavigationBar({super.key, required this.navigationShell});
+
+  @override
+  State<AppBottomNavigationBar> createState() => _AppBottomNavigationBarState();
+}
+
+class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
+    with SingleTickerProviderStateMixin {
+  double dragStartX = 0.0;
+  bool isCollapsed = true;
+  final Duration duration = const Duration(milliseconds: 300);
+
+  late final AnimationController _controller;
+  late final Animation<double> _scaleAnimation;
+  late final Animation<double> _menuScaleAnimation;
+  late final Animation<Offset> _slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeAnimations();
+  }
+
+  void _initializeAnimations() {
+    _controller = AnimationController(vsync: this, duration: duration);
+
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.8).animate(_controller);
+    _menuScaleAnimation = Tween<double>(
+      begin: 0.5,
+      end: 1.0,
+    ).animate(_controller);
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(-1, 0),
+      end: Offset.zero,
+    ).animate(_controller);
+  }
+
+  void _toggleDrawer() {
+    setState(() {
+      isCollapsed ? _controller.forward() : _controller.reverse();
+      isCollapsed = !isCollapsed;
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Widget _buildDrawer() {
+    return Scaffold(
+      body: SlideTransition(
+        position: _slideAnimation,
+        child: ScaleTransition(
+          scale: _menuScaleAnimation,
+          child: const Center(child: Text('Drawer')),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMainScaffold() {
+    final double left = isCollapsed ? 0 : 0.6 * context.screenWidth;
+    final double right = isCollapsed ? 0 : -0.4 * context.screenWidth;
+
+    return AnimatedPositioned(
+      duration: duration,
+      top: 0,
+      bottom: 0,
+      left: left,
+      right: right,
+      child: ScaleTransition(
+        scale: _scaleAnimation,
+        child: Material(
+          animationDuration: duration,
+          borderRadius: BorderRadius.circular(TRadius.r40),
+          elevation: 10,
+          color: context.theme.colorScheme.surface,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(TRadius.r40),
+            child: Scaffold(
+              extendBody: true,
+              resizeToAvoidBottomInset: true,
+              appBar: MainAppBar(onMenuPressed: _toggleDrawer),
+              body: widget.navigationShell,
+              bottomNavigationBar: const BottomNavigationBarComponent(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
       child: BlocListener<BottomNavigationBarCubit, int>(
-        listener: (context, state) {
-          navigationShell.goBranch(
-            state,
-            initialLocation: state == navigationShell.currentIndex,
+        listener: (context, index) {
+          widget.navigationShell.goBranch(
+            index,
+            initialLocation: index == widget.navigationShell.currentIndex,
           );
         },
-        child: Scaffold(
-          extendBody: true,
-          resizeToAvoidBottomInset: true,
-          body: navigationShell,
-          bottomNavigationBar: const BottomNavigationBarComponent(),
+        child: GestureDetector(
+          onHorizontalDragStart: (details) {
+            dragStartX = details.localPosition.dx;
+          },
+          onHorizontalDragUpdate: (details) {
+            final delta = details.localPosition.dx - dragStartX;
+
+            // Detect swipe right to open
+            if (isCollapsed && delta > 100) {
+              _toggleDrawer();
+            }
+
+            // Detect swipe left to close
+            if (!isCollapsed && delta < -100) {
+              _toggleDrawer();
+            }
+          },
+          child: Stack(children: [_buildDrawer(), _buildMainScaffold()]),
         ),
       ),
     );

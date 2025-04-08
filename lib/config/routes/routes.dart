@@ -136,7 +136,7 @@ final router = GoRouter(
     /// - Flux Store
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return BottomNavigationBarWidget(navigationShell: navigationShell);
+        return AppBottomNavigationBar(navigationShell: navigationShell);
       },
       branches: [
         // Home Shell Branch

@@ -101,6 +101,7 @@ dependencies:
   # Send OTP Via Email
   email_otp: ^3.0.2
   dartz: ^0.10.1
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

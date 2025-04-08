@@ -45,7 +45,7 @@ class _ThemeButtonsState extends State<ThemeButtons> {
                     width: width * 0.32,
                     child: Center(
                       child: TextWidget(
-                        e.name,
+                        e.name.toCapitalized,
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),

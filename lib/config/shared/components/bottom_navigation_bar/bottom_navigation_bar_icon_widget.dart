@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/config/_config.dart'
     show BottomNavigationBarCubit, IconWidget, OnTapScaler;
@@ -22,6 +23,7 @@ class BottomNavigationBarIconWidget extends StatelessWidget {
     return Expanded(
       child: SizedBox(
         width: context.screenWidth,
+        height: 24.r,
         child: OnTapScaler(
           onTap:
               () => context.read<BottomNavigationBarCubit>().changeIndex(index),
@@ -29,6 +31,7 @@ class BottomNavigationBarIconWidget extends StatelessWidget {
             builder: (context, state) {
               return IconWidget(
                 name: iconName,
+                width: 24.r,
                 color: state == index ? color : color.withValues(alpha: 0.50),
               );
             },

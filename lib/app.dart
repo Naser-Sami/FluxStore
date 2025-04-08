@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Files
 import '/config/_config.dart';
@@ -42,17 +43,22 @@ class ThemeWrapper extends StatelessWidget {
       builder: (context, state) {
         return GestureDetector(
           onTap: () => unfocusKeyboard(context),
-          child: MaterialApp.router(
-            title: AppConfig.appName,
-            debugShowCheckedModeBanner: false,
-            themeMode: state,
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            scrollBehavior: scrollBehavior,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            routerConfig: router,
+          child: ScreenUtilInit(
+            designSize: const Size(360, 690),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            child: MaterialApp.router(
+              title: AppConfig.appName,
+              debugShowCheckedModeBanner: false,
+              themeMode: state,
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              scrollBehavior: scrollBehavior,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              routerConfig: router,
+            ),
           ),
         );
       },

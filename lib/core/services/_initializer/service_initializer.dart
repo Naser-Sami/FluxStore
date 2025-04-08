@@ -7,6 +7,7 @@ abstract class IServiceInitializer {
       WidgetsFlutterBinding.ensureInitialized();
   void initSplashScreen();
   Future<void> initLocalization();
+  Future<void> initScreenUtils();
   void initPathUrlStrategy();
   void initGoRouter();
   Future<void> initHydratedBloc();

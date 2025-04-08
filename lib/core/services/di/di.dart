@@ -49,11 +49,19 @@ class DI {
         authenticationRemoteDataSource: sl<IAuthenticationRemoteDataSource>(),
       ),
     );
+    sl.registerLazySingleton<ISignUpRepository>(
+      () => SignUpRepositoryImplementation(
+        authenticationRemoteDataSource: sl<IAuthenticationRemoteDataSource>(),
+      ),
+    );
   }
 
   Future<void> initUseCases() async {
     sl.registerLazySingleton<LoginUseCase>(
       () => LoginUseCase(loginRepository: sl<ILoginRepository>()),
+    );
+    sl.registerLazySingleton<SignUpUseCase>(
+      () => SignUpUseCase(signUpRepository: sl<ISignUpRepository>()),
     );
   }
 
@@ -62,6 +70,9 @@ class DI {
     sl.registerLazySingleton<UserSessionCubit>(UserSessionCubit.new);
     sl.registerLazySingleton<LoginBloc>(
       () => LoginBloc(loginUseCase: sl<LoginUseCase>()),
+    );
+    sl.registerLazySingleton<SignUpBloc>(
+      () => SignUpBloc(signUpUseCase: sl<SignUpUseCase>()),
     );
   }
 

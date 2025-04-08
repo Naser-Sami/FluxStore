@@ -1,7 +1,7 @@
 class ApiEndpoints {
   static const String baseUrl = 'http://localhost:5232/api/';
 
-  static const String register = 'auth/register';
+  static const String signUp = 'auth/register';
   static const String login = 'auth/login';
   static const String products = 'products';
   static const String category = 'category';

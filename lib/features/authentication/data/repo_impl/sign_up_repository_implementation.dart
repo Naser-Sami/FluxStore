@@ -3,16 +3,18 @@ import 'package:dartz/dartz.dart';
 import '/core/_core.dart' show Failure;
 import '/features/authentication/_authentication.dart';
 
-class LoginRepositoryImplementation implements ILoginRepository {
+class SignUpRepositoryImplementation implements ISignUpRepository {
   final IAuthenticationRemoteDataSource authenticationRemoteDataSource;
-  LoginRepositoryImplementation({required this.authenticationRemoteDataSource});
+  SignUpRepositoryImplementation({
+    required this.authenticationRemoteDataSource,
+  });
 
   @override
-  Future<Either<Failure<String>, UserEntity>> login(
-    LoginParams loginParams,
+  Future<Either<Failure<String>, UserEntity>> signUp(
+    SignUpParams signUpParams,
   ) async {
     try {
-      final result = await authenticationRemoteDataSource.login(loginParams);
+      final result = await authenticationRemoteDataSource.signUp(signUpParams);
 
       // Map the result to the UserEntity
       if (result != null) {

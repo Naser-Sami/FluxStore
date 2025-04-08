@@ -58,7 +58,10 @@ final router = GoRouter(
           (context, state) => scaleDownTransitionPage(
             context,
             state,
-            const CreateAccountScreen(),
+            BlocProvider(
+              create: (context) => sl<SignUpBloc>(),
+              child: const CreateAccountScreen(),
+            ),
           ),
     ),
 

@@ -6,7 +6,7 @@ class TValidator {
 
   static String? validateEmptyText(String? fieldName, String? value) {
     if (value == null || value.isEmpty) {
-      return '$fieldName ${LocaleKeys.Validation_isRequired}'.tr();
+      return '${fieldName?.tr()} ${LocaleKeys.Validation_isRequired.tr()}';
     }
     return null;
   }

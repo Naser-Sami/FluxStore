@@ -48,7 +48,6 @@ class _LoginScreenState extends State<LoginScreen> {
             showLoadingDialog(context);
           } else if (state is LoginSuccess) {
             context.pop();
-
             await sl<UserSessionCubit>().saveUser(state.user);
             // handel user or admin
             if (context.mounted) {

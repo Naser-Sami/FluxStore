@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/config/_config.dart';
-import '/core/_core.dart' show BuildContextExtensions, sl;
+import '/core/_core.dart' show BuildContextExtensions;
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key});

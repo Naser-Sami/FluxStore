@@ -87,6 +87,9 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
     final double left = isCollapsed ? 0 : 0.6 * context.screenWidth;
     final double right = isCollapsed ? 0 : -0.4 * context.screenWidth;
 
+    final showAppBar = widget.navigationShell.currentIndex < 3;
+    final showNavBar = widget.navigationShell.currentIndex < 4;
+
     return AnimatedPositioned(
       duration: duration,
       top: top,
@@ -111,11 +114,10 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
               extendBody: true,
               resizeToAvoidBottomInset: true,
               appBar:
-                  widget.navigationShell.currentIndex != 3
-                      ? MainAppBar(onMenuPressed: _toggleDrawer)
-                      : null,
+                  showAppBar ? MainAppBar(onMenuPressed: _toggleDrawer) : null,
               body: widget.navigationShell,
-              bottomNavigationBar: const BottomNavigationBarComponent(),
+              bottomNavigationBar:
+                  showNavBar ? const BottomNavigationBarComponent() : null,
             ),
           ),
         ),

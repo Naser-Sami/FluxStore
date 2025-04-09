@@ -33,7 +33,10 @@ class CustomDrawer extends StatelessWidget {
             const Spacer(),
             const TextWidget(LocaleKeys.DrawerMenu_otherC),
             const Spacer(),
-            const DrawerSectionTwo(),
+            DrawerSectionTwo(
+              navigationShell: navigationShell,
+              onItemSelected: onItemSelected,
+            ),
             const Spacer(flex: 2),
             const ThemeButtons(),
             const Spacer(flex: 3),

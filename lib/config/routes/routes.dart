@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -144,8 +145,8 @@ final router = GoRouter(
           navigatorKey: homeSectionNavigator,
           routes: [
             GoRoute(
-              path: '/home',
-              name: 'Home',
+              path: HomeScreen.routeName,
+              name: HomeScreen.name,
               pageBuilder:
                   (context, state) => const CupertinoPage(child: HomeScreen()),
             ),
@@ -157,8 +158,8 @@ final router = GoRouter(
           navigatorKey: searchSectionNavigator,
           routes: [
             GoRoute(
-              path: '/search',
-              name: 'Search',
+              path: SearchScreen.routeName,
+              name: SearchScreen.name,
               pageBuilder:
                   (context, state) =>
                       const CupertinoPage(child: SearchScreen()),
@@ -171,23 +172,69 @@ final router = GoRouter(
           navigatorKey: cartSectionNavigator,
           routes: [
             GoRoute(
-              path: '/cart',
-              name: 'Cart',
+              path: CartScreen.routeName,
+              name: CartScreen.name,
               pageBuilder:
                   (context, state) => const CupertinoPage(child: CartScreen()),
             ),
           ],
         ),
+
         //  Profile Shell Branch
         StatefulShellBranch(
           navigatorKey: profileSectionNavigator,
           routes: [
             GoRoute(
-              path: '/profile',
-              name: 'Profile',
+              path: ProfileScreen.routeName,
+              name: ProfileScreen.name,
               pageBuilder:
                   (context, state) =>
                       const CupertinoPage(child: ProfileScreen()),
+            ),
+          ],
+        ),
+
+        //  Settings Shell Branch
+        StatefulShellBranch(
+          navigatorKey: settingsSectionNavigator,
+          routes: [
+            GoRoute(
+              path: '/settings',
+              name: 'Settings',
+              pageBuilder:
+                  (context, state) => const CupertinoPage(
+                    child: Scaffold(body: Center(child: Text("Settings"))),
+                  ),
+            ),
+          ],
+        ),
+
+        //  Settings Shell Branch
+        StatefulShellBranch(
+          navigatorKey: supportSectionNavigator,
+          routes: [
+            GoRoute(
+              path: '/support',
+              name: 'Support',
+              pageBuilder:
+                  (context, state) => const CupertinoPage(
+                    child: Scaffold(body: Center(child: Text("Support"))),
+                  ),
+            ),
+          ],
+        ),
+
+        //  About Us Shell Branch
+        StatefulShellBranch(
+          navigatorKey: aboutUsSectionNavigator,
+          routes: [
+            GoRoute(
+              path: '/about-us',
+              name: 'About Us',
+              pageBuilder:
+                  (context, state) => const CupertinoPage(
+                    child: Scaffold(body: Center(child: Text("About Us"))),
+                  ),
             ),
           ],
         ),

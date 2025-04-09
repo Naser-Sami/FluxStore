@@ -9,8 +9,8 @@ abstract class BaseUseCase<T, P> {
 }
 
 // without any parameters
-class NoP extends Equatable {
-  const NoP();
+class NoParams extends Equatable {
+  const NoParams();
 
   @override
   List<Object?> get props => [];

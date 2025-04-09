@@ -7,8 +7,10 @@ class ApiEndpoints {
   static const String forgotPassword = 'auth/forgot-password';
   static const String resetPassword = 'auth/reset-password';
 
+  // Categories
+  static const String category = 'Category';
+
   static const String products = 'products';
-  static const String category = 'category';
   static const String categoryList = 'category-list';
   static const String search = 'products/search';
   static const String cart = 'carts';

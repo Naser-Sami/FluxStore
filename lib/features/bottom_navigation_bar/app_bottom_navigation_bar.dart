@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import '/config/_config.dart'
     show BottomNavigationBarComponent, BottomNavigationBarCubit, TRadius;
 import '/core/_core.dart';
-import '/features/_features.dart' show CustomDrawer, MainAppBar;
+import '/features/_features.dart'
+    show CustomDrawer, MainAppBar, OnDrawerTapCubit;
 
 class AppBottomNavigationBar extends StatefulWidget {
   static const routeName = '/flux-store';
@@ -22,7 +23,6 @@ class AppBottomNavigationBar extends StatefulWidget {
 class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
     with SingleTickerProviderStateMixin {
   double dragStartX = 0.0;
-  bool isCollapsed = true;
   final Duration duration = const Duration(milliseconds: 300);
 
   late final AnimationController _controller;
@@ -51,10 +51,10 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   }
 
   void _toggleDrawer() {
-    setState(() {
-      isCollapsed ? _controller.forward() : _controller.reverse();
-      isCollapsed = !isCollapsed;
-    });
+    context.read<OnDrawerTapCubit>().state
+        ? _controller.forward()
+        : _controller.reverse();
+    context.read<OnDrawerTapCubit>().toggleDrawer();
   }
 
   @override
@@ -70,7 +70,10 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
           position: _slideAnimation,
           child: ScaleTransition(
             scale: _menuScaleAnimation,
-            child: const CustomDrawer(),
+            child: CustomDrawer(
+              navigationShell: widget.navigationShell,
+              onItemSelected: _toggleDrawer,
+            ),
           ),
         ),
       ),
@@ -78,6 +81,8 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   }
 
   Widget _buildMainScaffold() {
+    bool isCollapsed = context.watch<OnDrawerTapCubit>().state;
+
     final double top = isCollapsed ? 0 : 0.1 * context.screenWidth;
     final double left = isCollapsed ? 0 : 0.6 * context.screenWidth;
     final double right = isCollapsed ? 0 : -0.4 * context.screenWidth;
@@ -135,7 +140,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
           },
           onHorizontalDragUpdate: (details) {
             final delta = details.localPosition.dx - dragStartX;
-
+            bool isCollapsed = context.read<OnDrawerTapCubit>().state;
             // Detect swipe right to open
             if (isCollapsed && delta > 100) {
               _toggleDrawer();

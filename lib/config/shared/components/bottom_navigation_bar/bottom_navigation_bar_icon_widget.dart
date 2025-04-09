@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '/config/_config.dart'
     show BottomNavigationBarCubit, IconWidget, OnTapScaler;
 import '/core/_core.dart' show BuildContextExtensions;
+import '/features/_features.dart' show DrawerCubit;
 
 class BottomNavigationBarIconWidget extends StatelessWidget {
   const BottomNavigationBarIconWidget({
@@ -25,8 +26,10 @@ class BottomNavigationBarIconWidget extends StatelessWidget {
         width: context.screenWidth,
         height: 24.r,
         child: OnTapScaler(
-          onTap:
-              () => context.read<BottomNavigationBarCubit>().changeIndex(index),
+          onTap: () {
+            context.read<BottomNavigationBarCubit>().changeIndex(index);
+            context.read<DrawerCubit>().selectItem(index);
+          },
           child: BlocBuilder<BottomNavigationBarCubit, int>(
             builder: (context, state) {
               return IconWidget(

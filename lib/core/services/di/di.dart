@@ -91,6 +91,7 @@ class DI {
       BottomNavigationBarCubit.new,
     );
     sl.registerLazySingleton<DrawerCubit>(DrawerCubit.new);
+    sl.registerLazySingleton<OnDrawerTapCubit>(OnDrawerTapCubit.new);
     sl.registerLazySingleton<UserSessionCubit>(UserSessionCubit.new);
     sl.registerLazySingleton<LoginBloc>(
       () => LoginBloc(loginUseCase: sl<LoginUseCase>()),

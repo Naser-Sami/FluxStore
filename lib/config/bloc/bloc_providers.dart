@@ -10,4 +10,8 @@ final providers = [
     create: (context) => sl<BottomNavigationBarCubit>(),
   ),
   BlocProvider<UserSessionCubit>(create: (context) => sl<UserSessionCubit>()),
+  BlocProvider<DrawerCubit>(
+    create: (context) => sl<DrawerCubit>()..loadDrawerItems(),
+  ),
+  BlocProvider<OnDrawerTapCubit>(create: (context) => sl<OnDrawerTapCubit>()),
 ];

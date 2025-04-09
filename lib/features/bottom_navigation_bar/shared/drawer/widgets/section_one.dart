@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
 import '/features/_features.dart' show DrawerCubit, DrawerItem;
 
 class DrawerSectionOne extends StatelessWidget {
-  const DrawerSectionOne({super.key});
+  const DrawerSectionOne({
+    super.key,
+    required this.navigationShell,
+    required this.onItemSelected,
+  });
+  final StatefulNavigationShell navigationShell;
+  final VoidCallback onItemSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +47,17 @@ class DrawerSectionOne extends StatelessWidget {
                   ),
                 ),
                 OnTapScaler(
-                  onTap: () {
+                  onTap: () async {
                     context.read<DrawerCubit>().selectItem(index);
+                    context.read<BottomNavigationBarCubit>().changeIndex(index);
+                    navigationShell.goBranch(
+                      index,
+                      initialLocation: index == navigationShell.currentIndex,
+                    );
+                    await Future.delayed(
+                      const Duration(milliseconds: 500),
+                      onItemSelected,
+                    );
                   },
                   child: ListTile(
                     leading: IconWidget(

@@ -30,6 +30,13 @@ class DrawerCubit extends Cubit<List<DrawerItem>> {
 
     // Optionally trigger the onTap callback
     final selectedItem = updatedList[index];
-    selectedItem.onTap?.call();
+  }
+}
+
+class OnDrawerTapCubit extends Cubit<bool> {
+  OnDrawerTapCubit() : super(true);
+
+  void toggleDrawer() {
+    emit(!state);
   }
 }

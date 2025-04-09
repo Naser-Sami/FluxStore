@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
+import '/features/_features.dart' show DrawerCubit;
 import 'widgets/_widgets.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -9,29 +11,26 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: TPadding.p16),
-      child: SizedBox(
-        width: context.screenWidth * 0.6,
-        child: const SingleChildScrollView(
-          child: Column(
+    return BlocProvider(
+      create: (_) => sl<DrawerCubit>()..loadDrawerItems(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: TPadding.p16),
+        child: SizedBox(
+          width: context.screenWidth * 0.6,
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: TPadding.p12,
-                  bottom: TPadding.p32,
-                ),
-                child: InfoCard(),
-              ),
+              Spacer(flex: 2),
+              InfoCard(),
+              Spacer(),
               DrawerSectionOne(),
-              SizedBox(height: TPadding.p24),
+              Spacer(),
               TextWidget(LocaleKeys.DrawerMenu_otherC),
-              SizedBox(height: TPadding.p24),
+              Spacer(),
               DrawerSectionTwo(),
-              SizedBox(height: TPadding.p24),
+              Spacer(flex: 2),
               ThemeButtons(),
-              SizedBox(height: TPadding.p42),
+              Spacer(flex: 3),
             ],
           ),
         ),

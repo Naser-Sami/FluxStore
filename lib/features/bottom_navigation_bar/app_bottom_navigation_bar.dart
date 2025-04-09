@@ -96,7 +96,12 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
           elevation: 10,
           color: context.theme.colorScheme.surface,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(TRadius.r40),
+            borderRadius:
+                TDeviceUtils.isIOS() && context.screenHeight > 670
+                    ? BorderRadius.circular(TRadius.r40)
+                    : isCollapsed
+                    ? BorderRadius.zero
+                    : BorderRadius.circular(TRadius.r40),
             child: Scaffold(
               extendBody: true,
               resizeToAvoidBottomInset: true,

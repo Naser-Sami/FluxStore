@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart' show VoidCallback;
 
 class DrawerItem {
-  String? title;
-  String? icon;
-  bool isSelected;
-  VoidCallback? onTap;
-  DrawerItem({this.title, this.icon, this.isSelected = false, this.onTap});
+  final String icon;
+  final String title;
+  final VoidCallback? onTap;
+  final bool isSelected;
+
+  DrawerItem({
+    required this.icon,
+    required this.title,
+    this.onTap,
+    this.isSelected = false,
+  });
+
+  DrawerItem copyWith({bool? isSelected}) {
+    return DrawerItem(
+      icon: icon,
+      title: title,
+      onTap: onTap,
+      isSelected: isSelected ?? this.isSelected,
+    );
+  }
 }

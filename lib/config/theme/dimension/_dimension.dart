@@ -23,6 +23,9 @@ class TRadius {
 class TPadding {
   TPadding._();
 
+  static const double p01 = 1.0;
+  static const double p01_5 = 1.5;
+  static const double p02 = 2.0;
   static const double p04 = 4.0;
   static const double p06 = 6.0;
   static const double p08 = 8.0;

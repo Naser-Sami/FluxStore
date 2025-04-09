@@ -29,7 +29,10 @@ class LocalizationWrapper extends StatelessWidget {
       path: 'assets/translations',
       startLocale: const Locale('en'),
       fallbackLocale: const Locale('en'),
-      child: const ThemeWrapper(),
+      child: BlocProvider(
+        create: (_) => LanguageCubit(const Locale('en')),
+        child: const ThemeWrapper(),
+      ),
     );
   }
 }

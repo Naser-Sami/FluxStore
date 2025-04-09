@@ -144,7 +144,9 @@
     "resendIn": "Resend in",
     "seconds": "seconds",
     "light": "Light",
-    "dark": "Dark"
+    "dark": "Dark",
+    "english": "English",
+    "arabic": "عربي"
   },
   "Validation": {
     "isRequired": "is required",

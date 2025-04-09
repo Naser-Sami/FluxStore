@@ -3,7 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart'
-    show BottomNavigationBarComponent, BottomNavigationBarCubit, TRadius;
+    show
+        BottomNavigationBarComponent,
+        BottomNavigationBarCubit,
+        LanguageCubit,
+        TRadius;
 import '/core/_core.dart';
 import '/features/_features.dart'
     show CustomDrawer, MainAppBar, OnDrawerTapCubit;

@@ -144,7 +144,9 @@
     "resendIn": "إعادة إرسال خلال",
     "seconds": "ثواني",
     "light": "فاتح",
-    "dark": "داكن"
+    "dark": "داكن",
+    "english": "English",
+    "arabic": "عربي"
   },
   "Validation": {
     "isRequired": "مطلوب",

@@ -14,10 +14,10 @@ class BottomNavigationBarComponent extends StatelessWidget {
       delay: const Duration(milliseconds: 200),
       duration: const Duration(milliseconds: 1200),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-          TPadding.p24,
+        padding: EdgeInsets.fromLTRB(
+          TPadding.p32.r,
           0,
-          TPadding.p24,
+          TPadding.p32.r,
           TPadding.p42,
         ),
         child: ClipRRect(

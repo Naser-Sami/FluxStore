@@ -38,6 +38,8 @@ class CustomDrawer extends StatelessWidget {
               onItemSelected: onItemSelected,
             ),
             const Spacer(flex: 2),
+            const LanguagesButtons(),
+            const Spacer(),
             const ThemeButtons(),
             const Spacer(flex: 3),
           ],

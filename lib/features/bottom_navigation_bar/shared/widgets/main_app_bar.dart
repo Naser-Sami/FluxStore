@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
@@ -10,12 +11,16 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
-      leading: IconButton(
-        icon: IconWidget(
-          name: 'menu',
-          color: context.theme.colorScheme.onSurface,
+      leadingWidth: 100,
+      leading: Padding(
+        padding: EdgeInsetsDirectional.only(start: TPadding.p16.r),
+        child: IconButton(
+          icon: IconWidget(
+            name: 'menu',
+            color: context.theme.colorScheme.onSurface,
+          ),
+          onPressed: onMenuPressed,
         ),
-        onPressed: onMenuPressed,
       ),
       title: const TextWidget('Flux Store'),
       actions: [
@@ -26,6 +31,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           onPressed: () {},
         ),
+        SizedBox(width: TPadding.p16.r),
       ],
     );
   }

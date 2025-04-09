@@ -29,7 +29,7 @@ class DrawerCubit extends Cubit<List<DrawerItem>> {
     emit(updatedList);
 
     // Optionally trigger the onTap callback
-    final selectedItem = updatedList[index];
+    // final selectedItem = updatedList[index];
   }
 }
 

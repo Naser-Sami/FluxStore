@@ -38,12 +38,19 @@ class DI {
   }
 
   Future<void> initDataSources() async {
+    // Authentication
     sl.registerLazySingleton<IAuthenticationRemoteDataSource>(
       AuthenticationRemoteDataSource.new,
+    );
+
+    // Categories
+    sl.registerLazySingleton<ICategoriesRemoteDataSource>(
+      CategoriesRemoteDataSourceImpl.new,
     );
   }
 
   Future<void> initRepositories() async {
+    // Authentication
     sl.registerLazySingleton<ILoginRepository>(
       () => LoginRepositoryImplementation(
         authenticationRemoteDataSource: sl<IAuthenticationRemoteDataSource>(),
@@ -64,9 +71,17 @@ class DI {
         authenticationRemoteDataSource: sl<IAuthenticationRemoteDataSource>(),
       ),
     );
+
+    // Categories
+    sl.registerLazySingleton<ICategoriesRepository>(
+      () => CategoriesRepositoryImplementation(
+        categoriesRemoteDataSource: sl<ICategoriesRemoteDataSource>(),
+      ),
+    );
   }
 
   Future<void> initUseCases() async {
+    //  Authentication
     sl.registerLazySingleton<LoginUseCase>(
       () => LoginUseCase(loginRepository: sl<ILoginRepository>()),
     );
@@ -82,6 +97,17 @@ class DI {
       () => ResetPasswordUseCase(
         resetPasswordRepository: sl<IResetPasswordRepository>(),
       ),
+    );
+
+    // Categories
+    sl.registerLazySingleton<GetAllCategoriesUseCase>(
+      () => GetAllCategoriesUseCase(
+        categoriesRepository: sl<ICategoriesRepository>(),
+      ),
+    );
+    sl.registerLazySingleton<GetCategoryUseCase>(
+      () =>
+          GetCategoryUseCase(categoriesRepository: sl<ICategoriesRepository>()),
     );
   }
 
@@ -107,6 +133,12 @@ class DI {
     sl.registerLazySingleton<ResetPasswordCubit>(
       () =>
           ResetPasswordCubit(resetPasswordUseCase: sl<ResetPasswordUseCase>()),
+    );
+    sl.registerLazySingleton<CategoryBloc>(
+      () => CategoryBloc(
+        getAllCategoriesUseCase: sl<GetAllCategoriesUseCase>(),
+        getCategoryUseCase: sl<GetCategoryUseCase>(),
+      ),
     );
   }
 

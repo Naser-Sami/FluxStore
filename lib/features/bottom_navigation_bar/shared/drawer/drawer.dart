@@ -16,12 +16,11 @@ class CustomDrawer extends StatelessWidget {
         child: const SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  top: TPadding.p32,
-                  bottom: TPadding.p48,
+                  top: TPadding.p12,
+                  bottom: TPadding.p32,
                 ),
                 child: InfoCard(),
               ),

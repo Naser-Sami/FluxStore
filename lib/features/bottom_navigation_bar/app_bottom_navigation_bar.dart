@@ -100,7 +100,10 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
             child: Scaffold(
               extendBody: true,
               resizeToAvoidBottomInset: true,
-              appBar: MainAppBar(onMenuPressed: _toggleDrawer),
+              appBar:
+                  widget.navigationShell.currentIndex != 3
+                      ? MainAppBar(onMenuPressed: _toggleDrawer)
+                      : null,
               body: widget.navigationShell,
               bottomNavigationBar: const BottomNavigationBarComponent(),
             ),

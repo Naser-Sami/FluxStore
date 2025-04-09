@@ -12,32 +12,35 @@ class DrawerSectionOne extends StatefulWidget {
 }
 
 class _DrawerSectionOneState extends State<DrawerSectionOne> {
-  final List<DrawerItem> _drawerItems = [
-    DrawerItem(
-      icon: 'home',
-      title: LocaleKeys.DrawerMenu_homePage,
-      onTap: () {},
-      isSelected: true,
-    ),
-    DrawerItem(
-      icon: 'search',
-      title: LocaleKeys.DrawerMenu_discover,
-      onTap: () {},
-      isSelected: false,
-    ),
-    DrawerItem(
-      icon: 'bag',
-      title: LocaleKeys.DrawerMenu_myOrders,
-      onTap: () {},
-      isSelected: false,
-    ),
-    DrawerItem(
-      icon: 'profile',
-      title: LocaleKeys.DrawerMenu_myProfile,
-      onTap: () {},
-      isSelected: false,
-    ),
-  ];
+  List<DrawerItem> _drawerItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _drawerItems =
+        _drawerItems = [
+          DrawerItem(
+            icon: 'home',
+            title: LocaleKeys.DrawerMenu_homePage,
+            isSelected: true,
+          ),
+          DrawerItem(
+            icon: 'search',
+            title: LocaleKeys.DrawerMenu_discover,
+            isSelected: false,
+          ),
+          DrawerItem(
+            icon: 'bag',
+            title: LocaleKeys.DrawerMenu_myOrders,
+            isSelected: false,
+          ),
+          DrawerItem(
+            icon: 'profile',
+            title: LocaleKeys.DrawerMenu_myProfile,
+            isSelected: false,
+          ),
+        ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +50,32 @@ class _DrawerSectionOneState extends State<DrawerSectionOne> {
     return Column(
       children: [
         for (var item in _drawerItems)
-          ClipRRect(
-            borderRadius: BorderRadius.circular(TRadius.r10),
-            child: ColoredBox(
-              color:
-                  item.isSelected
-                      ? color.primaryContainer.withValues(alpha: 0.30)
-                      : Colors.transparent,
-              child: OnTapScaler(
-                onTap: item.onTap ?? () {},
+          Stack(
+            children: [
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 300),
+                height: 56,
+                width: item.isSelected ? context.screenWidth * 0.6 : 0,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(TRadius.r10),
+                  child: ColoredBox(
+                    color:
+                        item.isSelected
+                            ? color.primaryContainer.withValues(alpha: 0.30)
+                            : Colors.transparent,
+                  ),
+                ),
+              ),
+              OnTapScaler(
+                onTap: () {
+                  // set all to false
+                  for (var i in _drawerItems) {
+                    i.isSelected = false;
+                  }
+                  setState(() {
+                    item.isSelected = !item.isSelected;
+                  });
+                },
                 child: ListTile(
                   leading: IconWidget(
                     width: 18,
@@ -71,7 +91,7 @@ class _DrawerSectionOneState extends State<DrawerSectionOne> {
                   ),
                 ),
               ),
-            ),
+            ],
           ),
       ],
     );

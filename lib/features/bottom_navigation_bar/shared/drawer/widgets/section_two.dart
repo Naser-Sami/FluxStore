@@ -14,19 +14,19 @@ class DrawerSectionTwo extends StatefulWidget {
 class _DrawerSectionTwoState extends State<DrawerSectionTwo> {
   final List<DrawerItem> _drawerItems = [
     DrawerItem(
-      icon: 'home',
+      icon: 'settings',
       title: LocaleKeys.DrawerMenu_settings,
       onTap: () {},
       isSelected: false,
     ),
     DrawerItem(
-      icon: 'search',
+      icon: 'mail',
       title: LocaleKeys.DrawerMenu_support,
       onTap: () {},
       isSelected: false,
     ),
     DrawerItem(
-      icon: 'bag',
+      icon: 'info',
       title: LocaleKeys.DrawerMenu_aboutUs,
       onTap: () {},
       isSelected: false,

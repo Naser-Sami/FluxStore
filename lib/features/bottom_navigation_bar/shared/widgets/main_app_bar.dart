@@ -25,6 +25,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: const TextWidget('Flux Store'),
       actions: [
         IconButton(
+          icon: const Icon(Icons.language),
+          onPressed: () {
+            // show menu to change language
+          },
+        ),
+        IconButton(
           icon: IconWidget(
             name: 'notifications',
             color: context.theme.colorScheme.onSurface,

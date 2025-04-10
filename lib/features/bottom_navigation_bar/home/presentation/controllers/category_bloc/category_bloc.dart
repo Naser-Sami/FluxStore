@@ -18,6 +18,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   }) : super(
          CategoryState(
            isLoading: false,
+           isError: false,
            categories: [],
            category: Category.empty(),
          ),
@@ -33,7 +34,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     emit(state.copyWith(isLoading: true));
     final result = await getAllCategoriesUseCase.call(const NoParams());
     result.fold(
-      (failure) => emit(state.copyWith(categories: [], isLoading: false)),
+      (failure) =>
+          emit(state.copyWith(categories: [], isLoading: false, isError: true)),
       (categories) =>
           emit(state.copyWith(categories: categories, isLoading: false)),
     );
@@ -46,8 +48,13 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     emit(state.copyWith(isLoading: true));
     final result = await getCategoryUseCase(event.id);
     result.fold(
-      (failure) =>
-          emit(state.copyWith(category: Category.empty(), isLoading: false)),
+      (failure) => emit(
+        state.copyWith(
+          category: Category.empty(),
+          isLoading: false,
+          isError: true,
+        ),
+      ),
       (category) => emit(state.copyWith(category: category, isLoading: false)),
     );
   }

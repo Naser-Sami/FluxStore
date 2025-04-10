@@ -42,6 +42,13 @@ class CategoriesList extends StatelessWidget {
                     ],
                   );
                 }
+
+                if (state.isError) {
+                  return const Center(
+                    child: TextWidget(LocaleKeys.Common_error),
+                  );
+                }
+
                 if (state.categories.isEmpty) {
                   return const Center(
                     child: TextWidget(LocaleKeys.Common_noResultsFound),

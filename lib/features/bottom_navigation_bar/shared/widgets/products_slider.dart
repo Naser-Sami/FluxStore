@@ -40,7 +40,15 @@ class ProductsSlider extends StatelessWidget {
             separatorBuilder:
                 (context, index) => const SizedBox(width: TSize.s10),
             itemBuilder: (context, index) {
-              return ProductItem(index: index, controller: controller);
+              final bool paddingOnFirst = index == 0;
+              final bool paddingOnLast = index == 13;
+              return Padding(
+                padding: EdgeInsets.only(
+                  left: paddingOnFirst ? TPadding.p32 : 0,
+                  right: paddingOnLast ? TSize.s32 : 0,
+                ),
+                child: ProductItem(index: index, controller: controller),
+              );
             },
           ),
         ).scaleAnimation(scaleBegin: const Offset(1.3, 1.3)),

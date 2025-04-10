@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/config/_config.dart';
-import '/core/_core.dart' show sl;
+import '/core/_core.dart' show LocaleKeys, sl;
 import '/features/_features.dart'
     show
         CategoriesList,
         CategoryBloc,
         CollectionsSliderBanner,
         GetAllCategoryEvent,
+        ProductsSlider,
         SelectedCategoryCubit;
 
 class HomeScreen extends StatelessWidget {
@@ -33,6 +34,9 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: TSize.s30),
             const CollectionsSliderBanner(),
             const SizedBox(height: TSize.s30),
+            const ProductsSlider(title: LocaleKeys.Product_featureProducts),
+            const SizedBox(height: TSize.s30),
+            const ProductsSlider(title: LocaleKeys.Common_recommended),
           ],
         ),
       ),

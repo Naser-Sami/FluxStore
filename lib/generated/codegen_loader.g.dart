@@ -89,7 +89,9 @@ class CodegenLoader extends AssetLoader{
     "inStock": "In Stock",
     "quantity": "Quantity",
     "category": "Category",
-    "relatedProducts": "Related Products"
+    "relatedProducts": "Related Products",
+    "featureProducts": "Feature Products",
+    "topCollection": "Top Collection"
   },
   "Cart": {
     "title": "Shopping Cart",
@@ -160,7 +162,16 @@ class CodegenLoader extends AssetLoader{
     "resendIn": "Resend in",
     "seconds": "seconds",
     "light": "Light",
-    "dark": "Dark"
+    "dark": "Dark",
+    "english": "English",
+    "arabic": "عربي",
+    "showAll": "Show All",
+    "recommended": "Recommended",
+    "search": "Search",
+    "recentSearches": "Recent Searches",
+    "noRecentSearches": "No recent searches",
+    "clear": "Clear",
+    "searchResults": "Search Results"
   },
   "Validation": {
     "isRequired": "is required",
@@ -250,7 +261,9 @@ static const Map<String,dynamic> _ar = {
     "inStock": "متوفر",
     "quantity": "الكمية",
     "category": "الفئة",
-    "relatedProducts": "منتجات ذات صلة"
+    "relatedProducts": "منتجات ذات صلة",
+    "featureProducts": "منتجات مميزة",
+    "topCollection": "أفضل المجموعات"
   },
   "Cart": {
     "title": "سلة المشتريات",
@@ -321,7 +334,16 @@ static const Map<String,dynamic> _ar = {
     "resendIn": "إعادة إرسال خلال",
     "seconds": "ثواني",
     "light": "فاتح",
-    "dark": "داكن"
+    "dark": "داكن",
+    "english": "English",
+    "arabic": "عربي",
+    "showAll": "إظهار الكل",
+    "recommended": "موصى به",
+    "search": "بحث",
+    "recentSearches": "عمليات البحث الأخيرة",
+    "noRecentSearches": "لا توجد عمليات بحث حديثة",
+    "clear": "مسح",
+    "searchResults": "نتائج البحث"
   },
   "Validation": {
     "isRequired": "مطلوب",

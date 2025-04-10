@@ -73,7 +73,9 @@
     "inStock": "In Stock",
     "quantity": "Quantity",
     "category": "Category",
-    "relatedProducts": "Related Products"
+    "relatedProducts": "Related Products",
+    "featureProducts": "Feature Products",
+    "topCollection": "Top Collection"
   },
   "Cart": {
     "title": "Shopping Cart",
@@ -146,7 +148,14 @@
     "light": "Light",
     "dark": "Dark",
     "english": "English",
-    "arabic": "عربي"
+    "arabic": "عربي",
+    "showAll": "Show All",
+    "recommended": "Recommended",
+    "search": "Search",
+    "recentSearches": "Recent Searches",
+    "noRecentSearches": "No recent searches",
+    "clear": "Clear",
+    "searchResults": "Search Results" 
   },
   "Validation": {
     "isRequired": "is required",

@@ -72,6 +72,8 @@ abstract class  LocaleKeys {
   static const Product_quantity = 'Product.quantity';
   static const Product_category = 'Product.category';
   static const Product_relatedProducts = 'Product.relatedProducts';
+  static const Product_featureProducts = 'Product.featureProducts';
+  static const Product_topCollection = 'Product.topCollection';
   static const Product = 'Product';
   static const Cart_title = 'Cart.title';
   static const Cart_empty = 'Cart.empty';
@@ -137,6 +139,15 @@ abstract class  LocaleKeys {
   static const Common_seconds = 'Common.seconds';
   static const Common_light = 'Common.light';
   static const Common_dark = 'Common.dark';
+  static const Common_english = 'Common.english';
+  static const Common_arabic = 'Common.arabic';
+  static const Common_showAll = 'Common.showAll';
+  static const Common_recommended = 'Common.recommended';
+  static const Common_search = 'Common.search';
+  static const Common_recentSearches = 'Common.recentSearches';
+  static const Common_noRecentSearches = 'Common.noRecentSearches';
+  static const Common_clear = 'Common.clear';
+  static const Common_searchResults = 'Common.searchResults';
   static const Common = 'Common';
   static const Validation_isRequired = 'Validation.isRequired';
   static const Validation_required = 'Validation.required';

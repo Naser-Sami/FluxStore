@@ -1,8 +1,7 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flux_store/features/_features.dart' show CollectionsSliderBody;
 
-import '/core/_core.dart' show BuildContextExtensions;
+import '/core/_core.dart' show AnimatedWidgetX, BuildContextExtensions;
 
 class CollectionsSliderBanner extends StatefulWidget {
   const CollectionsSliderBanner({super.key});
@@ -44,48 +43,46 @@ class _CollectionsSliderBannerState extends State<CollectionsSliderBanner> {
   Widget build(BuildContext context) {
     final color = context.theme.colorScheme;
 
-    return FadeIn(
-      child: SizedBox(
-        height: 168,
-        child: PageView.builder(
-          controller: _pageController,
-          itemCount: images.length,
-          onPageChanged: (value) {
-            setState(() {
-              _currentPage = value;
-            });
-          },
-          itemBuilder: (context, index) {
-            return AnimatedBuilder(
-              animation: _pageController,
-              builder: (context, child) {
-                double scale = 1.0;
-                if (_pageController.hasClients &&
-                    _pageController.position.hasContentDimensions) {
-                  final pageOffset =
-                      (_pageController.page ?? _pageController.initialPage) -
-                      index;
-                  scale = (1 - (pageOffset.abs() * 0.3)).clamp(0.82, 1.0);
-                }
+    return SizedBox(
+      height: 168,
+      child: PageView.builder(
+        controller: _pageController,
+        itemCount: images.length,
+        onPageChanged: (value) {
+          setState(() {
+            _currentPage = value;
+          });
+        },
+        itemBuilder: (context, index) {
+          return AnimatedBuilder(
+            animation: _pageController,
+            builder: (context, child) {
+              double scale = 1.0;
+              if (_pageController.hasClients &&
+                  _pageController.position.hasContentDimensions) {
+                final pageOffset =
+                    (_pageController.page ?? _pageController.initialPage) -
+                    index;
+                scale = (1 - (pageOffset.abs() * 0.3)).clamp(0.82, 1.0);
+              }
 
-                return Center(
-                  child: SizedBox(
-                    height: 168 * scale,
-                    width: 340 * scale,
-                    child: child,
-                  ),
-                );
-              },
-              child: CollectionsSliderBody(
-                color: color,
-                currentPage: _currentPage,
-                index: index,
-                images: images,
-              ),
-            );
-          },
-        ),
+              return Center(
+                child: SizedBox(
+                  height: 168 * scale,
+                  width: 340 * scale,
+                  child: child,
+                ),
+              );
+            },
+            child: CollectionsSliderBody(
+              color: color,
+              currentPage: _currentPage,
+              index: index,
+              images: images,
+            ),
+          );
+        },
       ),
-    );
+    ).scaleAnimation(scaleBegin: const Offset(1.3, 1.3));
   }
 }

@@ -5,7 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '/config/_config.dart';
 import '/core/_core.dart' show BuildContextExtensions, LocaleKeys;
 import '/features/_features.dart'
-    show CategoryBloc, CategoryItem, CategoryState, SelectedCategoryCubit;
+    show
+        CategoryBloc,
+        CategoryItem,
+        CategoryState,
+        SelectedCategoryCubit,
+        ShimmerCategoryItem;
 
 class CategoriesList extends StatelessWidget {
   const CategoriesList({super.key});
@@ -30,12 +35,11 @@ class CategoriesList extends StatelessWidget {
             child: BlocBuilder<CategoryBloc, CategoryState>(
               builder: (context, state) {
                 if (state.isLoading) {
-                  return const SizedBox(
-                    width: 40,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [CircularProgressIndicator()],
-                    ),
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      for (int i = 0; i < 4; i++) const ShimmerCategoryItem(),
+                    ],
                   );
                 }
                 if (state.categories.isEmpty) {
@@ -52,10 +56,10 @@ class CategoriesList extends StatelessWidget {
                       (context, index) => SizedBox(width: TSize.s34.r),
                   itemBuilder: (context, index) {
                     final category = state.categories[index];
+
                     return BlocBuilder<SelectedCategoryCubit, String?>(
                       builder: (context, selectedId) {
                         final isSelected = selectedId == category.id;
-
                         return CategoryItem(
                           onCategoryTap:
                               () => context

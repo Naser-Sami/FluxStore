@@ -73,7 +73,9 @@
     "inStock": "متوفر",
     "quantity": "الكمية",
     "category": "الفئة",
-    "relatedProducts": "منتجات ذات صلة"
+    "relatedProducts": "منتجات ذات صلة",
+    "featureProducts": "منتجات مميزة",
+    "topCollection": "أفضل المجموعات"
   },
   "Cart": {
     "title": "سلة المشتريات",
@@ -146,7 +148,15 @@
     "light": "فاتح",
     "dark": "داكن",
     "english": "English",
-    "arabic": "عربي"
+    "arabic": "عربي",
+    "showAll": "إظهار الكل",
+    "recommended": "موصى به",
+    "search": "بحث",
+    "recentSearches": "عمليات البحث الأخيرة",
+    "noRecentSearches": "لا توجد عمليات بحث حديثة",
+    "clear": "مسح",
+    "searchResults": "نتائج البحث"
+    
   },
   "Validation": {
     "isRequired": "مطلوب",

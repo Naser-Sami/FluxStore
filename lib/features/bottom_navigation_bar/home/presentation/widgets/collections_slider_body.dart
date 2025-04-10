@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flux_store/config/_config.dart';
 import 'package:flux_store/features/_features.dart'
@@ -39,22 +38,7 @@ class CollectionsSliderBody extends StatelessWidget {
                 AnimatedScale(
                   duration: const Duration(milliseconds: 500),
                   scale: _currentPage == index ? 1.0 : 1.2,
-                  child: CachedNetworkImage(
-                    imageUrl: images[index],
-                    alignment: Alignment.topCenter,
-                    fit: BoxFit.cover,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [CircularProgressIndicator()],
-                          ),
-                        ),
-                    errorWidget:
-                        (context, url, error) => const Icon(Icons.error),
-                  ),
+                  child: CachedNetWorkImageComponent(imageUrl: images[index]),
                 ),
 
                 ColoredBox(color: Colors.black.withValues(alpha: 0.30)),

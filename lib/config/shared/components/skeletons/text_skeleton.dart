@@ -10,6 +10,7 @@ class TextSkeleton extends StatelessWidget {
     required this.radius,
     this.alignment = Alignment.centerLeft,
     super.key,
+    TextStyle? style,
   });
 
   final TextStyle textStyle;

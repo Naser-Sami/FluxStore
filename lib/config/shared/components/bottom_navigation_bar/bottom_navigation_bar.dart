@@ -10,7 +10,7 @@ class BottomNavigationBarComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeIn(
+    return FadeInUp(
       delay: const Duration(milliseconds: 200),
       duration: const Duration(milliseconds: 1200),
       child: Padding(
@@ -24,6 +24,9 @@ class BottomNavigationBarComponent extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(TRadius.r20.r)),
           child: BottomAppBar(
             height: 52,
+            // color: context.theme.colorScheme.onTertiaryContainer.withValues(
+            //   alpha: 0.9,
+            // ),
             padding: EdgeInsets.fromLTRB(
               TPadding.p20,
               context.screenHeight < 670 ? 4 : TPadding.p28,

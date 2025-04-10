@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Category extends Equatable {
-  final int id;
+  final String id;
   final String name;
   final String iconName;
 
@@ -11,13 +11,13 @@ class Category extends Equatable {
     required this.iconName,
   });
 
-  Category copyWith({int? id, String? name, String? iconName}) => Category(
+  Category copyWith({String? id, String? name, String? iconName}) => Category(
     id: id ?? this.id,
     name: name ?? this.name,
     iconName: iconName ?? this.iconName,
   );
 
-  static Category empty() => const Category(id: 0, name: '', iconName: '');
+  static Category empty() => const Category(id: '', name: '', iconName: '');
 
   @override
   String toString() {

@@ -55,7 +55,7 @@ class DrawerSectionOne extends StatelessWidget {
                       initialLocation: index == navigationShell.currentIndex,
                     );
                     await Future.delayed(
-                      const Duration(milliseconds: 500),
+                      const Duration(milliseconds: 300),
                       onItemSelected,
                     );
                   },

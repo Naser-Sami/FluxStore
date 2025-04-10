@@ -11,11 +11,13 @@ class CategoryItem extends StatelessWidget {
     required this.onCategoryTap,
     required this.name,
     required this.icon,
+    required this.isSelected,
   });
 
   final VoidCallback onCategoryTap;
   final String name;
   final String icon;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +33,18 @@ class CategoryItem extends StatelessWidget {
               padding: const EdgeInsets.all(TPadding.p02),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: color.primary, width: 1),
+                border: Border.all(
+                  color: isSelected ? color.primary : Colors.transparent,
+                  width: 1,
+                ),
               ),
               child: Container(
                 padding: const EdgeInsets.all(TPadding.p08),
                 decoration: BoxDecoration(
-                  color: color.primary,
+                  color:
+                      isSelected
+                          ? color.primary
+                          : color.secondary.withValues(alpha: 0.80),
                   shape: BoxShape.circle,
                 ),
                 child: IconWidget(name: icon, color: color.onPrimary),

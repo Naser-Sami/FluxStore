@@ -7,8 +7,9 @@ import '/features/_features.dart'
     show
         CategoriesList,
         CategoryBloc,
+        CollectionsSliderBanner,
         GetAllCategoryEvent,
-        CollectionsSliderBanner;
+        SelectedCategoryCubit;
 
 class HomeScreen extends StatelessWidget {
   static const routeName = '/home';
@@ -17,8 +18,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<CategoryBloc>()..add(GetAllCategoryEvent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<CategoryBloc>()..add(GetAllCategoryEvent()),
+        ),
+        BlocProvider(create: (context) => SelectedCategoryCubit()),
+      ],
       child: Scaffold(
         body: ListView(
           shrinkWrap: true,

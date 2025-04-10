@@ -17,9 +17,9 @@ class _CollectionsSliderBannerState extends State<CollectionsSliderBanner> {
   int _currentPage = 0;
 
   final List<String> images = [
-    'https://images.unsplash.com/photo-1736344319749-93bc29f03d5d?q=80&w=3870&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1743083931860-05b751559acb?q=80&w=3870&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1743110337303-2edffbeab0b1?q=80&w=3764&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1603189343302-e603f7add05a?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   ];
 
   @override

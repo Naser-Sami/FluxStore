@@ -109,6 +109,21 @@ class DI {
       () =>
           GetCategoryUseCase(categoriesRepository: sl<ICategoriesRepository>()),
     );
+    sl.registerLazySingleton<CreateCategoryUseCase>(
+      () => CreateCategoryUseCase(
+        categoriesRepository: sl<ICategoriesRepository>(),
+      ),
+    );
+    sl.registerLazySingleton<UpdateCategoryUseCase>(
+      () => UpdateCategoryUseCase(
+        categoriesRepository: sl<ICategoriesRepository>(),
+      ),
+    );
+    sl.registerLazySingleton<DeleteCategoryUseCase>(
+      () => DeleteCategoryUseCase(
+        categoriesRepository: sl<ICategoriesRepository>(),
+      ),
+    );
   }
 
   Future<void> initControllers() async {
@@ -136,6 +151,9 @@ class DI {
       () => CategoryBloc(
         getAllCategoriesUseCase: sl<GetAllCategoriesUseCase>(),
         getCategoryUseCase: sl<GetCategoryUseCase>(),
+        createCategoryUseCase: sl<CreateCategoryUseCase>(),
+        updateCategoryUseCase: sl<UpdateCategoryUseCase>(),
+        deleteCategoryUseCase: sl<DeleteCategoryUseCase>(),
       ),
     );
   }

@@ -9,6 +9,6 @@ class ForgotPasswordCubit extends Cubit<String> {
 
   Future<void> forgotPassword({required ForgotPasswordParams params}) async {
     final response = await forgotPasswordUseCase.call(params);
-    response.fold((failure) => emit(failure.error), emit);
+    response.fold((failure) => emit("Error: ${failure.error}"), emit);
   }
 }

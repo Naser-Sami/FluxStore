@@ -14,9 +14,15 @@ import '/features/_features.dart'
 class CreateNewPasswordScreen extends StatefulWidget {
   static const String routeName = '/create-new-password';
   static const String name = 'Create New Password';
-  const CreateNewPasswordScreen({super.key, required this.email});
+
+  const CreateNewPasswordScreen({
+    super.key,
+    required this.email,
+    required this.token,
+  });
 
   final String email;
+  final String token;
 
   @override
   State<CreateNewPasswordScreen> createState() =>
@@ -48,7 +54,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
 
       context.read<ResetPasswordCubit>().resetPassword(
         params: ResetPasswordParams(
-          token: 'your_token_here', // TODO: fetch from URL
+          token: widget.token,
           email: widget.email,
           newPassword: _passwordController.text.trim(),
           confirmNewPassword: _confirmPasswordController.text.trim(),

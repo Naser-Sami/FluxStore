@@ -20,7 +20,7 @@ showModalBottomSheetOnSuccessResetPassword(
     builder: (context) {
       final colors = context.theme.colorScheme;
       return FractionallySizedBox(
-        heightFactor: 0.55,
+        heightFactor: context.screenHeight > 670 ? 0.45 : 0.55,
         child: SizedBox(
           width: context.screenWidth,
           child: Padding(

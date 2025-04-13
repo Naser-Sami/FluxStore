@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flux_store/features/admin/admin_dashboard_screen.dart';
+import 'package:flux_store/features/_admin/admin_dashboard_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
@@ -146,13 +146,18 @@ final router = GoRouter(
       pageBuilder: (context, state) {
         final args = state.extra as Map<String, dynamic>;
         final email = args['email'];
+        final token = args['token'];
 
         return scaleDownTransitionPage(
           context,
           state,
-          BlocProvider(
-            create: (context) => sl<ResetPasswordCubit>(),
-            child: CreateNewPasswordScreen(email: email),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => sl<LoginBloc>()),
+              BlocProvider(create: (context) => sl<ResetPasswordCubit>()),
+            ],
+
+            child: CreateNewPasswordScreen(email: email, token: token),
           ),
         );
       },

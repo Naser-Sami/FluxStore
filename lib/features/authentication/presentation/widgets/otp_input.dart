@@ -51,68 +51,72 @@ class _OTPInputState extends State<OTPInput> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(length, (i) {
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 6),
-          width: 56,
-          height: 56,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color:
-                  borderColor ??
-                  context.theme.colorScheme.secondary.withValues(alpha: 0.40),
+        return BlocListener<ForgotPasswordCubit, String>(
+          listener: (context, state) {
+            if (!state.contains('Error')) {
+              context.push(
+                CreateNewPasswordScreen.routeName,
+                extra: {'email': widget.email, 'token': state},
+              );
+            }
+          },
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 6),
+            width: 56,
+            height: 56,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color:
+                    borderColor ??
+                    context.theme.colorScheme.secondary.withValues(alpha: 0.40),
+              ),
             ),
-          ),
-          child: TextFormField(
-            controller: controllers[i],
-            focusNode: focusNodes[i],
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            maxLength: 1,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: const InputDecoration(
-              counterText: '',
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.zero,
-            ),
-            style: context.textTheme.bodyLarge?.copyWith(
-              fontSize: 20,
-              color: context.theme.colorScheme.primary,
-            ),
-            onChanged: (value) {
-              if (value.isNotEmpty) {
-                if (i < length - 1) {
-                  FocusScope.of(context).requestFocus(focusNodes[i + 1]);
-                } else {
-                  // Verify the OTP
-                  final otpCode = controllers.map((e) => e.text).join();
-                  if (verifyOTP(otpCode)) {
-                    borderColor = Colors.green;
-
-                    // Navigate to the next screen
-                    context.push(
-                      CreateNewPasswordScreen.routeName,
-                      extra: {'email': widget.email},
-                    );
-
-                    // Send the TOKEN via API to user email
-                    context.read<ForgotPasswordCubit>().forgotPassword(
-                      params: ForgotPasswordParams(email: widget.email),
-                    );
+            child: TextFormField(
+              controller: controllers[i],
+              focusNode: focusNodes[i],
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              maxLength: 1,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(
+                counterText: '',
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.zero,
+              ),
+              style: context.textTheme.bodyLarge?.copyWith(
+                fontSize: 20,
+                color: context.theme.colorScheme.primary,
+              ),
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  if (i < length - 1) {
+                    FocusScope.of(context).requestFocus(focusNodes[i + 1]);
                   } else {
-                    borderColor = context.theme.colorScheme.error;
-                  }
+                    // Verify the OTP
+                    final otpCode = controllers.map((e) => e.text).join();
+                    if (verifyOTP(otpCode)) {
+                      borderColor = Colors.green;
 
-                  focusNodes[i].unfocus(); // Final field
+                      // Send the TOKEN to the user
+                      context.read<ForgotPasswordCubit>().forgotPassword(
+                        params: ForgotPasswordParams(email: widget.email),
+                      );
+                    } else {
+                      borderColor = context.theme.colorScheme.error;
+                    }
+
+                    focusNodes[i].unfocus(); // Final field
+                  }
+                } else {
+                  borderColor = null;
+                  if (i > 0) {
+                    FocusScope.of(context).requestFocus(focusNodes[i - 1]);
+                  }
                 }
-              } else {
-                borderColor = null;
-                if (i > 0) {
-                  FocusScope.of(context).requestFocus(focusNodes[i - 1]);
-                }
-              }
-            },
+              },
+            ),
           ),
         );
       }),

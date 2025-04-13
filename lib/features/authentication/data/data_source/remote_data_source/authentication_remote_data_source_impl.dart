@@ -50,14 +50,6 @@ class AuthenticationRemoteDataSource
         parser: (data) => data,
       );
 
-      /**
- * Unhandled error: type '_Map<String, dynamic>' is not a subtype of type 'String'
-{
-     "message": "Reset token generated",
-     "resetToken": "Password reset email sent."
-}
-*/
-
       return response;
     } catch (e) {
       rethrow;
@@ -72,13 +64,6 @@ class AuthenticationRemoteDataSource
         data: params.toMap(),
         parser: (data) => data,
       );
-
-      /**
- * Unhandled error: type '_Map<String, dynamic>' is not a subtype of type 'String'
-{
-     "message": "Password reset successfully."
-}
-*/
 
       return response;
     } catch (e) {

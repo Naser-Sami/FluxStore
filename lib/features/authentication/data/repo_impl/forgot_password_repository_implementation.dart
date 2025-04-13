@@ -15,11 +15,9 @@ class ForgotPasswordRepositoryImplementation
     ForgotPasswordParams params,
   ) async {
     try {
-      final result = await authenticationRemoteDataSource.forgotPassword(
-        params,
-      );
-      if (result != null) {
-        return Right(result);
+      final token = await authenticationRemoteDataSource.forgotPassword(params);
+      if (token != null) {
+        return Right(token);
       }
       return const Left(
         Failure(statusCode: 400, error: "Something went wrong."),

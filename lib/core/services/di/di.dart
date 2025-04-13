@@ -112,29 +112,27 @@ class DI {
   }
 
   Future<void> initControllers() async {
-    sl.registerLazySingleton<ThemeCubit>(ThemeCubit.new);
-    sl.registerLazySingleton<BottomNavigationBarCubit>(
-      BottomNavigationBarCubit.new,
-    );
-    sl.registerLazySingleton<DrawerCubit>(DrawerCubit.new);
-    sl.registerLazySingleton<OnDrawerTapCubit>(OnDrawerTapCubit.new);
-    sl.registerLazySingleton<UserSessionCubit>(UserSessionCubit.new);
-    sl.registerLazySingleton<LoginBloc>(
+    sl.registerFactory<ThemeCubit>(ThemeCubit.new);
+    sl.registerFactory<BottomNavigationBarCubit>(BottomNavigationBarCubit.new);
+    sl.registerFactory<DrawerCubit>(DrawerCubit.new);
+    sl.registerFactory<OnDrawerTapCubit>(OnDrawerTapCubit.new);
+    sl.registerFactory<UserSessionCubit>(UserSessionCubit.new);
+    sl.registerFactory<LoginBloc>(
       () => LoginBloc(loginUseCase: sl<LoginUseCase>()),
     );
-    sl.registerLazySingleton<SignUpBloc>(
+    sl.registerFactory<SignUpBloc>(
       () => SignUpBloc(signUpUseCase: sl<SignUpUseCase>()),
     );
-    sl.registerLazySingleton<ForgotPasswordCubit>(
+    sl.registerFactory<ForgotPasswordCubit>(
       () => ForgotPasswordCubit(
         forgotPasswordUseCase: sl<ForgotPasswordUseCase>(),
       ),
     );
-    sl.registerLazySingleton<ResetPasswordCubit>(
+    sl.registerFactory<ResetPasswordCubit>(
       () =>
           ResetPasswordCubit(resetPasswordUseCase: sl<ResetPasswordUseCase>()),
     );
-    sl.registerLazySingleton<CategoryBloc>(
+    sl.registerFactory<CategoryBloc>(
       () => CategoryBloc(
         getAllCategoriesUseCase: sl<GetAllCategoriesUseCase>(),
         getCategoryUseCase: sl<GetCategoryUseCase>(),

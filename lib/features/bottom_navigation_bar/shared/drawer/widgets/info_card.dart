@@ -13,25 +13,31 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = context.theme.colorScheme;
     final textStyle = context.textTheme;
-    final user = sl<UserSessionCubit>().state;
 
-    return ListTile(
-      leading: CircleAvatar(
-        radius: 30,
-        backgroundColor: color.secondary,
-        child: Icon(CupertinoIcons.person, color: color.onSecondary),
-      ),
-      title: TextWidget(
-        user?.username ?? "User Name",
-        style: textStyle.titleLarge?.copyWith(fontSize: 18.sp),
-      ),
-      subtitle: TextWidget(
-        user?.email ?? "user@email.com",
-        style: textStyle.bodyMedium?.copyWith(
-          fontSize: 10.sp,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+    return FutureBuilder(
+      future: sl<UserSessionCubit>().getSavedUser(),
+      builder: (context, snapshot) {
+        final user = snapshot.data;
+
+        return ListTile(
+          leading: CircleAvatar(
+            radius: 30,
+            backgroundColor: color.secondary,
+            child: Icon(CupertinoIcons.person, color: color.onSecondary),
+          ),
+          title: TextWidget(
+            user?.username ?? "User Name",
+            style: textStyle.titleLarge?.copyWith(fontSize: 18.sp),
+          ),
+          subtitle: TextWidget(
+            user?.email ?? "user@email.com",
+            style: textStyle.bodyMedium?.copyWith(
+              fontSize: 10.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
+      },
     );
   }
 }

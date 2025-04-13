@@ -24,6 +24,7 @@ class DrawerSectionOne extends StatelessWidget {
     return BlocBuilder<DrawerCubit, List<DrawerItem>>(
       builder: (context, items) {
         return ListView.builder(
+          key: UniqueKey(),
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: items.length - 3,
@@ -31,6 +32,7 @@ class DrawerSectionOne extends StatelessWidget {
             final item = items[index];
 
             return Stack(
+              key: ValueKey('SectionOneItem-$index'),
               children: [
                 AnimatedPositioned(
                   duration: const Duration(milliseconds: 300),

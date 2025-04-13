@@ -74,7 +74,7 @@ class CategoriesList extends StatelessWidget {
                                   .select(category.id),
                           isSelected: isSelected,
                           name: category.name,
-                          icon: category.iconName,
+                          icon: category.imageUrl,
                         );
                       },
                     );

@@ -20,6 +20,8 @@ final router = GoRouter(
     return ErrorPage(state.error.toString());
   },
   redirect: (context, state) async {
+    sl<UserSessionCubit>().getToken();
+
     if (state.uri.path.contains('/link')) {
       // return BottomNavigationBarWidget.routeName;
     }
@@ -47,7 +49,7 @@ final router = GoRouter(
               scaleDownTransitionPage(context, state, const OnboardingScreen()),
     ),
 
-    ///
+    /// ---------------------------------------------------------
     /// Authentication
     ///
     /// - Create Account
@@ -130,9 +132,9 @@ final router = GoRouter(
       },
     ),
 
-    ///
+    /// ---------------------------------------------------------
     /// End Authentication
-    ///
+
     /// - Bottom Navigation Bar
     /// - Flux Store
     StatefulShellRoute.indexedStack(

@@ -1,5 +1,9 @@
 class ApiEndpoints {
+  // Base URL for the API
   static const String baseUrl = 'http://localhost:5232/api/';
+
+  // Token for authentication
+  static String token = '';
 
   // Authentication
   static const String signUp = 'auth/register';

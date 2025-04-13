@@ -12,7 +12,10 @@ class DioService {
       baseUrl: ApiEndpoints.baseUrl,
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 5),
-      headers: {'content-type': 'application/json; charset=utf-8'},
+      headers: {
+        'content-type': 'application/json; charset=utf-8',
+        'Authorization': 'Bearer ${ApiEndpoints.token}',
+      },
     ),
   );
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flux_store/core/s.o.l.i.d/1_single_responsibility_principle_s.r.p.dart';
 
 import '/core/_core.dart' show ApiEndpoints, SecureStorageService, sl;
 import '/features/_features.dart' show UserEntity, UserMapper, UserModel;
@@ -22,7 +23,7 @@ class UserSessionCubit extends Cubit<UserEntity?> {
       _storage.write(key: 'user', value: jsonData),
     ]);
 
-    setUser(user);
+    await setUser(user);
   }
 
   Future<UserEntity?> getSavedUser() async {

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flux_store/features/admin/admin_dashboard_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
@@ -20,12 +21,25 @@ final router = GoRouter(
     return ErrorPage(state.error.toString());
   },
   redirect: (context, state) async {
-    sl<UserSessionCubit>().getToken();
+    final user = await sl<UserSessionCubit>().getSavedUser();
 
-    if (state.uri.path.contains('/link')) {
-      // return BottomNavigationBarWidget.routeName;
+    if (user == null) return null;
+
+    final isAdminPage = state.matchedLocation.startsWith('/admin');
+
+    // If user is admin
+    if (user.role.toLowerCase() == 'admin') {
+      // Prevent admin from going to customer-only pages, or redirect to admin dashboard
+      if (!isAdminPage) return AdminDashboardScreen.routeName;
     }
-    return null;
+
+    // If user is customer
+    if (user.role.toLowerCase() == 'customer') {
+      // Prevent customer from accessing admin pages
+      if (isAdminPage) return HomeScreen.routeName;
+    }
+
+    return null; // allow normal navigation
   },
   routes: [
     GoRoute(
@@ -47,6 +61,18 @@ final router = GoRouter(
       pageBuilder:
           (context, state) =>
               scaleDownTransitionPage(context, state, const OnboardingScreen()),
+    ),
+
+    // ADMIN
+    GoRoute(
+      path: AdminDashboardScreen.routeName,
+      name: AdminDashboardScreen.name,
+      pageBuilder:
+          (context, state) => scaleDownTransitionPage(
+            context,
+            state,
+            const AdminDashboardScreen(),
+          ),
     ),
 
     /// ---------------------------------------------------------

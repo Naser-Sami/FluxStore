@@ -1,7 +1,11 @@
 import 'package:dartz/dartz.dart';
 
 import '/core/_core.dart' show Failure;
-import '../../_authentication.dart';
+import '/features/_features.dart'
+    show
+        ForgotPasswordParams,
+        IForgotPasswordRepository,
+        IAuthenticationRemoteDataSource;
 
 class ForgotPasswordRepositoryImplementation
     implements IForgotPasswordRepository {

@@ -1,4 +1,4 @@
-import '../../_authentication.dart' show UserEntity, UserModel;
+import '/features/_features.dart' show UserEntity, UserModel;
 
 class UserMapper {
   // Mapping user entity to user model

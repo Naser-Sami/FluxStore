@@ -11,7 +11,7 @@ import '/core/_core.dart'
         LocaleKeys,
         showLoadingDialog,
         sl;
-import '../../_authentication.dart' show OTPInput;
+import '/features/_features.dart' show OTPInput;
 
 class VerificationCodeScreen extends StatefulWidget {
   static const String routeName = '/verification-code';

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '/core/_core.dart' show Failure, BaseUseCase;
-import '../../_authentication.dart'
+import '/features/_features.dart'
     show UserEntity, ISignUpRepository, SignUpParams;
 
 class SignUpUseCase extends BaseUseCase<UserEntity, SignUpParams> {

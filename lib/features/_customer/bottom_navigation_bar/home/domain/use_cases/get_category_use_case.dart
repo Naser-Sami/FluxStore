@@ -10,7 +10,7 @@ class GetCategoryUseCase extends BaseUseCase<Category, int> {
   @override
   Future<Either<Failure, Category>> call(int id) async {
     try {
-      return await categoriesRepository.getCategory(id);
+      return await categoriesRepository.getById(id);
     } catch (e) {
       return Left(Failure(error: e.toString()));
     }

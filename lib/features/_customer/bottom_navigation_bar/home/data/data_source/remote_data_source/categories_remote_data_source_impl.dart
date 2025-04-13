@@ -1,30 +1,46 @@
 import '/core/_core.dart' show ApiEndpoints, DioService;
 import '/features/_features.dart'
-    show ICategoriesRemoteDataSource, CategoryModel;
+    show
+        ICategoriesRemoteDataSource,
+        CategoryModel,
+        CreateCategoryParams,
+        UpdateCategoryParams;
 
 class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   final DioService dioService = DioService();
 
   @override
-  Future<CategoryModel> addCategory(CategoryModel category) {
-    // TODO: implement addCategory
-    throw UnimplementedError();
+  Future<String> create(CreateCategoryParams category) async {
+    try {
+      final response = await dioService.post<String>(
+        path: ApiEndpoints.category,
+        data: category.toMap(),
+      );
+
+      if (response == null) return 'Failed to create category';
+      return response;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> deleteAllCategories() {
-    // TODO: implement deleteAllCategories
-    throw UnimplementedError();
+  Future<String> delete(int id) async {
+    try {
+      final response = await dioService.delete(
+        path: ApiEndpoints.category,
+        data: {'id': id},
+      );
+
+      if (response == null) return 'Failed to delete category';
+      return response;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> deleteCategory(int id) {
-    // TODO: implement deleteCategory
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<CategoryModel>> getCategories() async {
+  Future<List<CategoryModel>> getAll() async {
     try {
       final response = await dioService.get<List<CategoryModel>>(
         path: ApiEndpoints.category,
@@ -42,7 +58,7 @@ class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   }
 
   @override
-  Future<CategoryModel> getCategory(int id) async {
+  Future<CategoryModel> getById(int id) async {
     try {
       final response = await dioService.get<CategoryModel>(
         path: ApiEndpoints.category,
@@ -56,8 +72,17 @@ class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   }
 
   @override
-  Future<CategoryModel> updateCategory(CategoryModel category) {
-    // TODO: implement updateCategory
-    throw UnimplementedError();
+  Future<String> update(UpdateCategoryParams category) async {
+    try {
+      final response = await dioService.post<String>(
+        path: ApiEndpoints.category,
+        data: category.toMap(),
+      );
+
+      if (response == null) return 'Failed to update category';
+      return response;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

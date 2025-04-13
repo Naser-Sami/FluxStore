@@ -10,7 +10,7 @@ class GetAllCategoriesUseCase extends BaseUseCase<List<Category>, NoParams> {
   @override
   Future<Either<Failure, List<Category>>> call(NoParams p) async {
     try {
-      return await categoriesRepository.getCategories();
+      return await categoriesRepository.getAll();
     } catch (e) {
       return Left(Failure(error: e.toString()));
     }

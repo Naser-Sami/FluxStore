@@ -1,10 +1,10 @@
-import '/features/_features.dart' show CategoryModel;
+import '/features/_features.dart'
+    show CategoryModel, CreateCategoryParams, UpdateCategoryParams;
 
 abstract class ICategoriesRemoteDataSource {
-  Future<List<CategoryModel>> getCategories();
-  Future<CategoryModel> getCategory(int id);
-  Future<CategoryModel> addCategory(CategoryModel category);
-  Future<CategoryModel> updateCategory(CategoryModel category);
-  Future<void> deleteCategory(int id);
-  Future<void> deleteAllCategories();
+  Future<List<CategoryModel>> getAll();
+  Future<CategoryModel> getById(int id);
+  Future<String> create(CreateCategoryParams params);
+  Future<String> update(UpdateCategoryParams category);
+  Future<String> delete(int id);
 }

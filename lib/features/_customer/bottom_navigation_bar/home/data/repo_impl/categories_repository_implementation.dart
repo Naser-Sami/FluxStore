@@ -6,7 +6,9 @@ import '/features/_features.dart'
         Category,
         CategoryMapper,
         ICategoriesRepository,
-        ICategoriesRemoteDataSource;
+        ICategoriesRemoteDataSource,
+        CreateCategoryParams,
+        UpdateCategoryParams;
 
 class CategoriesRepositoryImplementation implements ICategoriesRepository {
   final ICategoriesRemoteDataSource categoriesRemoteDataSource;
@@ -15,27 +17,45 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
   });
 
   @override
-  Future<Either<Failure<String>, Category>> addCategory(Category category) {
-    // TODO: implement addCategory
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> deleteAllCategories() {
-    // TODO: implement deleteAllCategories
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> deleteCategory(int id) {
-    // TODO: implement deleteCategory
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure<String>, List<Category>>> getCategories() async {
+  Future<Either<Failure<String>, String>> create(
+    CreateCategoryParams category,
+  ) async {
     try {
-      final result = await categoriesRemoteDataSource.getCategories();
+      final result = await categoriesRemoteDataSource.create(category);
+
+      if (result == 'Category created successfully') {
+        return Right(result);
+      } else {
+        return Left(Failure(statusCode: 500, error: result));
+      }
+    } on Failure catch (e) {
+      return Left(Failure(statusCode: e.statusCode, error: e.error));
+    } catch (e) {
+      return Left(Failure(statusCode: 500, error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure<String>, String>> delete(int id) async {
+    try {
+      final result = await categoriesRemoteDataSource.delete(id);
+
+      if (result == 'Category deleted successfully') {
+        return Right(result);
+      } else {
+        return Left(Failure(statusCode: 500, error: result));
+      }
+    } on Failure catch (e) {
+      return Left(Failure(statusCode: e.statusCode, error: e.error));
+    } catch (e) {
+      return Left(Failure(statusCode: 500, error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure<String>, List<Category>>> getAll() async {
+    try {
+      final result = await categoriesRemoteDataSource.getAll();
       final resultEntity = result.map(CategoryMapper.toEntity).toList();
       return Right(resultEntity);
     } on Failure catch (e) {
@@ -46,9 +66,9 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
   }
 
   @override
-  Future<Either<Failure<String>, Category>> getCategory(int id) async {
+  Future<Either<Failure<String>, Category>> getById(int id) async {
     try {
-      final result = await categoriesRemoteDataSource.getCategory(id);
+      final result = await categoriesRemoteDataSource.getById(id);
       final resultEntity = CategoryMapper.toEntity(result);
       return Right(resultEntity);
     } on Failure catch (e) {
@@ -59,8 +79,21 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
   }
 
   @override
-  Future<Either<Failure<String>, Category>> updateCategory(Category category) {
-    // TODO: implement updateCategory
-    throw UnimplementedError();
+  Future<Either<Failure<String>, String>> update(
+    UpdateCategoryParams category,
+  ) async {
+    try {
+      final result = await categoriesRemoteDataSource.update(category);
+
+      if (result == 'Category updated successfully') {
+        return Right(result);
+      } else {
+        return Left(Failure(statusCode: 500, error: result));
+      }
+    } on Failure catch (e) {
+      return Left(Failure(statusCode: e.statusCode, error: e.error));
+    } catch (e) {
+      return Left(Failure(statusCode: 500, error: e.toString()));
+    }
   }
 }

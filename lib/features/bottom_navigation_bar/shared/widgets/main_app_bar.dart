@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flux_store/features/_initial_screens/welcome/welcome_screen.dart';
+import 'package:flux_store/features/authentication/_authentication.dart';
+import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
@@ -28,6 +31,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.language),
           onPressed: () {
             // show menu to change language
+            sl<UserSessionCubit>().logout();
+            context.go(WelcomeScreen.routeName);
           },
         ),
         IconButton(

@@ -110,6 +110,9 @@ dependencies:
   # For Loading Animation
   shimmer: ^3.0.0
 
+  # For GraphQL Queries And Api Calls
+  graphql_flutter: ^5.2.0-beta.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

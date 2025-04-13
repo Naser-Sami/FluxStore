@@ -49,6 +49,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
       context.read<ResetPasswordCubit>().resetPassword(
         params: ResetPasswordParams(
           token: 'your_token_here', // TODO: fetch from URL
+          email: widget.email,
           newPassword: _passwordController.text.trim(),
           confirmNewPassword: _confirmPasswordController.text.trim(),
         ),

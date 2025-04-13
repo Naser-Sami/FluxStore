@@ -1,6 +1,8 @@
 PODS:
   - app_links (0.0.2):
     - Flutter
+  - connectivity_plus (0.0.1):
+    - Flutter
   - Firebase/CoreOnly (11.10.0):
     - FirebaseCore (~> 11.10.0)
   - firebase_core (3.13.0):
@@ -42,6 +44,7 @@ PODS:
 
 DEPENDENCIES:
   - app_links (from `.symlinks/plugins/app_links/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
@@ -62,6 +65,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   app_links:
     :path: ".symlinks/plugins/app_links/ios"
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
@@ -83,6 +88,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   app_links: 76b66b60cc809390ca1ad69bfd66b998d2387ac7
+  connectivity_plus: cb623214f4e1f6ef8fe7403d580fdad517d2f7dd
   Firebase: 1fe1c0a7d9aaea32efe01fbea5f0ebd8d70e53a2
   firebase_core: 2d4534e7b489907dcede540c835b48981d890943
   FirebaseCore: 8344daef5e2661eb004b177488d6f9f0f24251b7

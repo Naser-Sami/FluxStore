@@ -5,14 +5,12 @@ class SignUpParams extends Equatable {
   final String email;
   final String password;
   final String confirmPassword;
-  final int role;
 
   const SignUpParams({
     required this.username,
     required this.email,
     required this.password,
     required this.confirmPassword,
-    this.role = 0,
   });
 
   // toMap
@@ -22,10 +20,9 @@ class SignUpParams extends Equatable {
       'email': email,
       'password': password,
       'confirmPassword': confirmPassword,
-      'role': role,
     };
   }
 
   @override
-  List<Object?> get props => [username, email, password, confirmPassword, role];
+  List<Object?> get props => [username, email, password, confirmPassword];
 }

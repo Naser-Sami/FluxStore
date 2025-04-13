@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
-import '/features/authentication/_authentication.dart';
 import '/features/_features.dart' show HomeScreen;
+import '/features/authentication/_authentication.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   static const String routeName = '/create-account';
@@ -31,7 +31,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
         confirmPassword: _confirmPasswordController.text.trim(),
-        role: 0,
       );
 
       if (_passwordController.text.trim() !=
@@ -74,7 +73,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             context.pop();
             errorDialog(
               context,
-              message: state.error.replaceAll('Exception: ', ''),
+              message:
+                  state.error.startsWith('Exception:')
+                      ? state.error.substring(10)
+                      : state.error,
             );
           }
         },

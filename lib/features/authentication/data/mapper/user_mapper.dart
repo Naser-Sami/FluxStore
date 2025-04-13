@@ -8,9 +8,7 @@ class UserMapper {
       username: userModel.username,
       email: userModel.email,
       role: userModel.role,
-      token: userModel.token, // Assuming token is a string in the UserModel
-      refreshToken: userModel.refreshToken,
-      expiration: userModel.expiration,
+      token: userModel.token,
     );
   }
 
@@ -21,8 +19,6 @@ class UserMapper {
       email: userEntity.email,
       role: userEntity.role,
       token: userEntity.token,
-      refreshToken: userEntity.refreshToken,
-      expiration: userEntity.expiration,
     );
   }
 }

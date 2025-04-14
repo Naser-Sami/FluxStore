@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/config/_config.dart'
     show TPadding, TSize, TextWidget, CustomButton, IconWidget;
 import '/core/_core.dart' show LocaleKeys, BuildContextExtensions;
-import '/features/_features.dart'
-    show LoginParams, LoginBloc, LoginButtonPressed;
+import '/features/_features.dart' show LoginParams, LoginBloc, OnLoginEvent;
 
 showModalBottomSheetOnSuccessResetPassword(
   BuildContext context, {
@@ -58,7 +57,7 @@ showModalBottomSheetOnSuccessResetPassword(
                       );
 
                       context.read<LoginBloc>().add(
-                        LoginButtonPressed(params: params),
+                        OnLoginEvent(params: params),
                       );
                     },
                     backgroundColor: colors.primary,

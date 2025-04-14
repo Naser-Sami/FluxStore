@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
+import 'title_with_show_all.dart';
 
 class ProductsSlider extends StatelessWidget {
   const ProductsSlider({super.key, required this.title});
@@ -14,22 +14,7 @@ class ProductsSlider extends StatelessWidget {
 
     return Column(
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: TPadding.p32.r),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextWidget(title, style: context.textTheme.titleLarge),
-              OnTapScaler(
-                onTap: () {},
-                child: TextWidget(
-                  LocaleKeys.Common_showAll,
-                  style: context.textTheme.bodySmall,
-                ),
-              ),
-            ],
-          ),
-        ),
+        TitleWithShowAll(title: title, onShowAll: () {}),
         const SizedBox(height: TSize.s20),
         SizedBox(
           height: 227,
@@ -44,8 +29,8 @@ class ProductsSlider extends StatelessWidget {
               final bool paddingOnLast = index == 13;
               return Padding(
                 padding: EdgeInsets.only(
-                  left: paddingOnFirst ? TPadding.p32 : 0,
-                  right: paddingOnLast ? TSize.s32 : 0,
+                  left: paddingOnFirst ? TPadding.p24 : 0,
+                  right: paddingOnLast ? TSize.s24 : 0,
                 ),
                 child: ProductItem(index: index, controller: controller),
               );
@@ -65,39 +50,46 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (context, child) {
-        double offset = 0;
+    return OnTapScaler(
+      onTap: () {},
+      child: AnimatedBuilder(
+        animation: controller,
+        builder: (context, child) {
+          double offset = 0;
 
-        if (controller.hasClients) {
-          offset = controller.offset - index * 134;
-        }
+          if (controller.hasClients) {
+            offset = controller.offset - index * 134;
+          }
 
-        final double scale = (1 - (offset.abs() / 1000)).clamp(0.95, 1.0);
-        final double opacity = (1 - (offset.abs() / 500)).clamp(0.5, 1.0);
+          final double scale = (1 - (offset.abs() / 1000)).clamp(0.95, 1.0);
+          final double opacity = (1 - (offset.abs() / 500)).clamp(0.5, 1.0);
 
-        return Opacity(
-          opacity: opacity,
-          child: Transform.scale(scale: scale, child: child),
-        );
-      },
-      child: Container(
-        height: 227,
-        width: 134,
-        decoration: BoxDecoration(
-          color:
-              TFunctions.isDarkMode(context)
-                  ? TFunctions.generateRandomLightColor().withValues(alpha: 0.4)
-                  : TFunctions.generateRandomDarkColor().withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(TPadding.p16),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(TPadding.p16),
-          child: Image.asset(
-            "assets/images/women-feature-products-${index + 1}.png",
-            fit: BoxFit.cover,
-            alignment: Alignment.bottomCenter,
+          return Opacity(
+            opacity: opacity,
+            child: Transform.scale(scale: scale, child: child),
+          );
+        },
+        child: Container(
+          height: 227,
+          width: 134,
+          decoration: BoxDecoration(
+            color:
+                TFunctions.isDarkMode(context)
+                    ? TFunctions.generateRandomLightColor().withValues(
+                      alpha: 0.4,
+                    )
+                    : TFunctions.generateRandomDarkColor().withValues(
+                      alpha: 0.1,
+                    ),
+            borderRadius: BorderRadius.circular(TPadding.p16),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(TPadding.p16),
+            child: Image.asset(
+              "assets/images/women-feature-products-${index + 1}.png",
+              fit: BoxFit.cover,
+              alignment: Alignment.bottomCenter,
+            ),
           ),
         ),
       ),

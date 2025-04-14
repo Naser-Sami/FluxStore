@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      context.read<LoginBloc>().add(LoginButtonPressed(params: params));
+      context.read<LoginBloc>().add(OnLoginEvent(params: params));
     }
   }
 

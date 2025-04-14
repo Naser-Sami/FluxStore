@@ -24,7 +24,7 @@ class _CollectionsSliderBannerState extends State<CollectionsSliderBanner> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.7, initialPage: 1);
+    _pageController = PageController(viewportFraction: 0.80, initialPage: 1);
     _currentPage = 1;
 
     // Trigger scaling once layout is built
@@ -48,6 +48,7 @@ class _CollectionsSliderBannerState extends State<CollectionsSliderBanner> {
       child: PageView.builder(
         controller: _pageController,
         itemCount: images.length,
+        physics: const BouncingScrollPhysics(),
         onPageChanged: (value) {
           setState(() {
             _currentPage = value;

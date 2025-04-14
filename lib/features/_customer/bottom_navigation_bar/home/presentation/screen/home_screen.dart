@@ -3,14 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart' show LocaleKeys, sl;
-import '/features/_features.dart'
-    show
-        CategoriesList,
-        CategoryBloc,
-        CollectionsSliderBanner,
-        GetAllCategoryEvent,
-        ProductsSlider,
-        SelectedCategoryCubit;
+import '/features/_features.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = '/home';
@@ -26,18 +19,21 @@ class HomeScreen extends StatelessWidget {
         ),
         BlocProvider(create: (context) => SelectedCategoryCubit()),
       ],
-      child: Scaffold(
-        body: ListView(
-          shrinkWrap: true,
-          children: [
-            const CategoriesList(),
-            const SizedBox(height: TSize.s30),
-            const CollectionsSliderBanner(),
-            const SizedBox(height: TSize.s30),
-            const ProductsSlider(title: LocaleKeys.Product_featureProducts),
-            const SizedBox(height: TSize.s30),
-            const ProductsSlider(title: LocaleKeys.Common_recommended),
-          ],
+      child: const Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            spacing: TSize.s30,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              CategoriesList(),
+              CollectionsSliderBanner(),
+              ProductsSlider(title: LocaleKeys.Product_featureProducts),
+              NewCollectionBanner(),
+              RecommendedProducts(),
+              TopCollections(),
+              SizedBox(height: TSize.s116),
+            ],
+          ),
         ),
       ),
     );

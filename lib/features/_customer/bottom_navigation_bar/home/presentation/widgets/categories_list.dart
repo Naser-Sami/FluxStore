@@ -25,9 +25,7 @@ class CategoriesList extends StatelessWidget {
         }
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: TPadding.p32.r,
-        ).copyWith(top: TPadding.p28.r),
+        padding: EdgeInsets.only(top: TPadding.p28.r),
         child: SizedBox(
           height: 60.h,
           width: context.screenWidth,

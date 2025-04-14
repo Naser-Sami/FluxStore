@@ -71,7 +71,10 @@ final router = GoRouter(
           (context, state) => scaleDownTransitionPage(
             context,
             state,
-            const AdminDashboardScreen(),
+            BlocProvider(
+              create: (context) => sl<CategoryBloc>(),
+              child: const AdminDashboardScreen(),
+            ),
           ),
     ),
 

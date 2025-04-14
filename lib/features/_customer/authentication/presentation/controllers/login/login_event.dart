@@ -7,9 +7,9 @@ sealed class LoginEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class LoginButtonPressed extends LoginEvent {
+final class OnLoginEvent extends LoginEvent {
   final LoginParams params;
-  const LoginButtonPressed({required this.params});
+  const OnLoginEvent({required this.params});
 
   @override
   List<Object> get props => [params];

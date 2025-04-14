@@ -29,18 +29,22 @@ class UserSessionCubit extends Cubit<UserEntity?> {
     final data = await _storage.read(key: 'user');
     if (data == null) return null;
 
-    final jsonData = jsonDecode(data);
-    // Check if the JSON data is a Map
-    if (jsonData is! Map<String, dynamic>) {
-      throw Exception('Invalid JSON data');
+    try {
+      final jsonData = jsonDecode(data);
+      // Check if the JSON data is a Map
+      if (jsonData is! Map<String, dynamic>) {
+        throw Exception('Invalid JSON data');
+      }
+
+      final userModel = UserModel.fromJson(jsonData);
+      final user = UserMapper.toEntity(userModel);
+
+      await getToken();
+
+      return user;
+    } catch (e) {
+      return null;
     }
-
-    final userModel = UserModel.fromJson(jsonData);
-    final user = UserMapper.toEntity(userModel);
-
-    await getToken();
-
-    return user;
   }
 
   Future<void> setToken(String token) async {

@@ -12,6 +12,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scrollController = ScrollControllerProvider.of(context);
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -19,9 +21,10 @@ class HomeScreen extends StatelessWidget {
         ),
         BlocProvider(create: (context) => SelectedCategoryCubit()),
       ],
-      child: const Scaffold(
+      child: Scaffold(
         body: SingleChildScrollView(
-          child: Column(
+          controller: scrollController,
+          child: const Column(
             spacing: TSize.s30,
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -31,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               NewCollectionBanner(),
               RecommendedProducts(),
               TopCollections(),
-              SizedBox(height: TSize.s116),
+              SizedBox(height: TSize.s36),
             ],
           ),
         ),

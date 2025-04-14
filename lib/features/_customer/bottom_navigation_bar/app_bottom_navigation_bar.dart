@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,6 +26,9 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   double dragStartX = 0.0;
   final Duration duration = const Duration(milliseconds: 300);
 
+  late final ScrollController _scrollController;
+  bool _isScrollingDown = false;
+
   late final AnimationController _controller;
   late final Animation<double> _scaleAnimation;
   late final Animation<double> _menuScaleAnimation;
@@ -34,6 +38,9 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   void initState() {
     super.initState();
     _initializeAnimations();
+
+    _scrollController = ScrollController();
+    _scrollController.addListener(_handleScroll);
   }
 
   void _initializeAnimations() {
@@ -57,8 +64,24 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
     context.read<OnDrawerTapCubit>().toggleDrawer();
   }
 
+  void _handleScroll() {
+    if (_scrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
+      if (!_isScrollingDown) {
+        setState(() => _isScrollingDown = true);
+      }
+    } else if (_scrollController.position.userScrollDirection ==
+        ScrollDirection.forward) {
+      if (_isScrollingDown) {
+        setState(() => _isScrollingDown = false);
+      }
+    }
+  }
+
   @override
   void dispose() {
+    _scrollController.removeListener(_handleScroll);
+    _scrollController.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -114,10 +137,14 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
               extendBody: true,
               resizeToAvoidBottomInset: true,
               appBar:
-                  showAppBar ? MainAppBar(onMenuPressed: _toggleDrawer) : null,
-              body: widget.navigationShell,
+                  showAppBar && !_isScrollingDown
+                      ? MainAppBar(onMenuPressed: _toggleDrawer)
+                      : null,
               bottomNavigationBar:
-                  showNavBar ? const BottomNavigationBarComponent() : null,
+                  showNavBar && !_isScrollingDown
+                      ? const BottomNavigationBarComponent()
+                      : null,
+              body: widget.navigationShell,
             ),
           ),
         ),
@@ -127,35 +154,59 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: BlocListener<BottomNavigationBarCubit, int>(
-        listener: (context, index) {
-          widget.navigationShell.goBranch(
-            index,
-            initialLocation: index == widget.navigationShell.currentIndex,
-          );
-        },
-        child: GestureDetector(
-          onHorizontalDragStart: (details) {
-            dragStartX = details.localPosition.dx;
+    return ScrollControllerProvider(
+      scrollController: _scrollController,
+      child: PopScope(
+        canPop: false,
+        child: BlocListener<BottomNavigationBarCubit, int>(
+          listener: (context, index) {
+            widget.navigationShell.goBranch(
+              index,
+              initialLocation: index == widget.navigationShell.currentIndex,
+            );
           },
-          onHorizontalDragUpdate: (details) {
-            final delta = details.localPosition.dx - dragStartX;
-            bool isCollapsed = context.read<OnDrawerTapCubit>().state;
-            // Detect swipe right to open
-            if (isCollapsed && delta > 100) {
-              _toggleDrawer();
-            }
+          child: GestureDetector(
+            onHorizontalDragStart: (details) {
+              dragStartX = details.localPosition.dx;
+            },
+            onHorizontalDragUpdate: (details) {
+              final delta = details.localPosition.dx - dragStartX;
+              bool isCollapsed = context.read<OnDrawerTapCubit>().state;
+              // Detect swipe right to open
+              if (isCollapsed && delta > 100) {
+                _toggleDrawer();
+              }
 
-            // Detect swipe left to close
-            if (!isCollapsed && delta < -100) {
-              _toggleDrawer();
-            }
-          },
-          child: Stack(children: [_buildDrawer(), _buildMainScaffold()]),
+              // Detect swipe left to close
+              if (!isCollapsed && delta < -100) {
+                _toggleDrawer();
+              }
+            },
+            child: Stack(children: [_buildDrawer(), _buildMainScaffold()]),
+          ),
         ),
       ),
     );
   }
+}
+
+class ScrollControllerProvider extends InheritedWidget {
+  final ScrollController scrollController;
+
+  const ScrollControllerProvider({
+    super.key,
+    required this.scrollController,
+    required super.child,
+  });
+
+  static ScrollController of(BuildContext context) {
+    final provider =
+        context.dependOnInheritedWidgetOfExactType<ScrollControllerProvider>();
+    assert(provider != null, 'No ScrollControllerProvider found in context');
+    return provider!.scrollController;
+  }
+
+  @override
+  bool updateShouldNotify(covariant ScrollControllerProvider oldWidget) =>
+      scrollController != oldWidget.scrollController;
 }

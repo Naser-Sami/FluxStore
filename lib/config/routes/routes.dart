@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flux_store/features/_admin/admin_dashboard_screen.dart';
+import 'package:flux_store/features/admin/admin_dashboard_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';

@@ -7,7 +7,9 @@ import '/config/_config.dart';
 import '/core/_core.dart';
 
 class InfoCard extends StatelessWidget {
-  const InfoCard({super.key});
+  const InfoCard({super.key, this.radius = 30});
+
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class InfoCard extends StatelessWidget {
 
         return ListTile(
           leading: CircleAvatar(
-            radius: 30,
+            radius: radius,
             backgroundColor: color.secondary,
             child: Icon(CupertinoIcons.person, color: color.onSecondary),
           ),

@@ -34,10 +34,6 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           IconButton(
             icon: const Icon(Icons.language),
             onPressed: () {
-              // show menu to change language
-              // sl<UserSessionCubit>().logout();
-              // context.go(SplashScreen.routeName);
-
               if (context.locale == const Locale('ar')) {
                 context.read<LanguageCubit>().changeLanguage(
                   const Locale('en'),
@@ -58,6 +54,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             onPressed: () {},
           ),
+
           SizedBox(width: TPadding.p16.r),
         ],
       ),

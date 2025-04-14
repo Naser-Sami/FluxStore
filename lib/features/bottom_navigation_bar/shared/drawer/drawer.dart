@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
+import '/features/_features.dart' show InfoCard;
 import 'widgets/_widgets.dart';
 
 class CustomDrawer extends StatelessWidget {

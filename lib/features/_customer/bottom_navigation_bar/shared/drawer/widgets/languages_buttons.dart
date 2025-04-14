@@ -10,7 +10,7 @@ class LanguagesButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = context.screenWidth * 0.6;
+    final width = context.screenWidth;
 
     return BlocBuilder<LanguageCubit, Locale>(
       builder: (context, state) {

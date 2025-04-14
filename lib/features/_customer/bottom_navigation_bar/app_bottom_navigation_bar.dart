@@ -4,7 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart'
-    show BottomNavigationBarComponent, BottomNavigationBarCubit, TRadius;
+    show
+        BottomNavigationBarComponent,
+        BottomNavigationBarCubit,
+        ScrollControllerProvider,
+        TRadius;
 import '/core/_core.dart';
 import '/features/_features.dart'
     show CustomDrawer, MainAppBar, OnDrawerTapCubit;
@@ -32,7 +36,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   late final AnimationController _controller;
   late final Animation<double> _scaleAnimation;
   late final Animation<double> _menuScaleAnimation;
-  late final Animation<Offset> _slideAnimation;
+  late Animation<Offset> _slideAnimation;
 
   @override
   void initState() {
@@ -51,8 +55,9 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
       begin: 0.5,
       end: 1.0,
     ).animate(_controller);
+
     _slideAnimation = Tween<Offset>(
-      begin: const Offset(-1, 0),
+      begin: Offset.zero,
       end: Offset.zero,
     ).animate(_controller);
   }
@@ -106,9 +111,23 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   Widget _buildMainScaffold() {
     bool isCollapsed = context.watch<OnDrawerTapCubit>().state;
 
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
+
     final double top = isCollapsed ? 0 : 0.1 * context.screenWidth;
-    final double left = isCollapsed ? 0 : 0.6 * context.screenWidth;
-    final double right = isCollapsed ? 0 : -0.4 * context.screenWidth;
+
+    final double left =
+        isCollapsed
+            ? 0
+            : isRTL
+            ? -0.4 * context.screenWidth
+            : 0.6 * context.screenWidth;
+
+    final double right =
+        isCollapsed
+            ? 0
+            : isRTL
+            ? 0.6 * context.screenWidth
+            : -0.4 * context.screenWidth;
 
     final showAppBar = widget.navigationShell.currentIndex < 3;
     final showNavBar = widget.navigationShell.currentIndex < 4;
@@ -154,6 +173,13 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
 
   @override
   Widget build(BuildContext context) {
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
+
+    _slideAnimation = Tween<Offset>(
+      begin: isRTL ? Offset.zero : const Offset(-1, 0),
+      end: isRTL ? Offset.zero : Offset.zero,
+    ).animate(_controller);
+
     return ScrollControllerProvider(
       scrollController: _scrollController,
       child: PopScope(
@@ -172,14 +198,15 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
             onHorizontalDragUpdate: (details) {
               final delta = details.localPosition.dx - dragStartX;
               bool isCollapsed = context.read<OnDrawerTapCubit>().state;
-              // Detect swipe right to open
-              if (isCollapsed && delta > 100) {
-                _toggleDrawer();
+
+              if (isCollapsed &&
+                  ((isRTL && delta < -100) || (!isRTL && delta > 100))) {
+                _toggleDrawer(); // open
               }
 
-              // Detect swipe left to close
-              if (!isCollapsed && delta < -100) {
-                _toggleDrawer();
+              if (!isCollapsed &&
+                  ((isRTL && delta > 100) || (!isRTL && delta < -100))) {
+                _toggleDrawer(); // close
               }
             },
             child: Stack(children: [_buildDrawer(), _buildMainScaffold()]),
@@ -188,25 +215,4 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
       ),
     );
   }
-}
-
-class ScrollControllerProvider extends InheritedWidget {
-  final ScrollController scrollController;
-
-  const ScrollControllerProvider({
-    super.key,
-    required this.scrollController,
-    required super.child,
-  });
-
-  static ScrollController of(BuildContext context) {
-    final provider =
-        context.dependOnInheritedWidgetOfExactType<ScrollControllerProvider>();
-    assert(provider != null, 'No ScrollControllerProvider found in context');
-    return provider!.scrollController;
-  }
-
-  @override
-  bool updateShouldNotify(covariant ScrollControllerProvider oldWidget) =>
-      scrollController != oldWidget.scrollController;
 }

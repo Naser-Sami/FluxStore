@@ -19,7 +19,7 @@ class CustomDrawer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TPadding.p16),
       child: SizedBox(
-        width: context.screenWidth * 0.6,
+        width: context.screenWidth,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

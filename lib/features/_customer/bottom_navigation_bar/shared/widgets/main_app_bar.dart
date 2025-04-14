@@ -1,11 +1,11 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
-import '/features/_features.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({super.key, required this.onMenuPressed});
@@ -35,8 +35,20 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             icon: const Icon(Icons.language),
             onPressed: () {
               // show menu to change language
-              sl<UserSessionCubit>().logout();
-              context.go(SplashScreen.routeName);
+              // sl<UserSessionCubit>().logout();
+              // context.go(SplashScreen.routeName);
+
+              if (context.locale == const Locale('ar')) {
+                context.read<LanguageCubit>().changeLanguage(
+                  const Locale('en'),
+                  context,
+                );
+              } else {
+                context.read<LanguageCubit>().changeLanguage(
+                  const Locale('ar'),
+                  context,
+                );
+              }
             },
           ),
           IconButton(

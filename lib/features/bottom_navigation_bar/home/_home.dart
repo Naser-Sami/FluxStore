@@ -1,3 +1,3 @@
-export 'data/data.dart';
-export 'domain/domain.dart';
+export '../../category/data/data.dart';
+export '../../category/domain/domain.dart';
 export 'presentation/presentation.dart';

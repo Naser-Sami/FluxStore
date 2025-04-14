@@ -5,12 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '/config/_config.dart';
 import '/core/_core.dart' show BuildContextExtensions, LocaleKeys;
 import '/features/_features.dart'
-    show
-        CategoryBloc,
-        CategoryItem,
-        CategoryState,
-        SelectedCategoryCubit,
-        ShimmerCategoryItem;
+    show CategoryBloc, CategoryState, SelectedCategoryCubit;
+import 'category_item.dart';
 
 class CategoriesList extends StatelessWidget {
   const CategoriesList({super.key});

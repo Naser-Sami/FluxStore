@@ -1,5 +1,12 @@
-export '_initial_screens/_initial_screens.dart';
-export '_modules/_modules.dart';
 export '_new_feature/_new_feature.dart';
+export '_shared/_shared.dart';
 export 'authentication/_authentication.dart';
-export 'bottom_navigation_bar/_bottom_navigation_bar.dart';
+export 'bottom_navigation_bar.dart';
+export 'cart/_cart.dart';
+export 'category/_category.dart';
+export 'home/_home.dart';
+export 'onboarding/onboarding_screen.dart';
+export 'profile/_profile.dart';
+export 'search/_search.dart';
+export 'splash/splash_screen.dart';
+export 'welcome/welcome_screen.dart';

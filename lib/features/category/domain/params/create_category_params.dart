@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class CreateCategoryParams extends Equatable {
+class CreateCategoryParams {
   final String name;
   final String description;
   final String imageUrl;
@@ -14,7 +12,4 @@ class CreateCategoryParams extends Equatable {
   Map<String, dynamic> toMap() {
     return {'name': name, 'description': description, 'imageUrl': imageUrl};
   }
-
-  @override
-  List<Object?> get props => [name, description, imageUrl];
 }

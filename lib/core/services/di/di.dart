@@ -51,6 +51,11 @@ class DI {
       AuthenticationRemoteDataSource.new,
     );
 
+    // Profile
+    sl.registerLazySingleton<IProfileRemoteDataSource>(
+      ProfileRemoteDataSourceImpl.new,
+    );
+
     // Categories
     sl.registerLazySingleton<ICategoriesRemoteDataSource>(
       CategoriesRemoteDataSourceImpl.new,
@@ -80,10 +85,17 @@ class DI {
       ),
     );
 
+    // Profile
+    sl.registerLazySingleton<IProfileRepository>(
+      () => ProfileRepositoryImplementation(
+        remoteDataSource: sl<IProfileRemoteDataSource>(),
+      ),
+    );
+
     // Categories
     sl.registerLazySingleton<ICategoriesRepository>(
       () => CategoriesRepositoryImplementation(
-        categoriesRemoteDataSource: sl<ICategoriesRemoteDataSource>(),
+        remoteDataSource: sl<ICategoriesRemoteDataSource>(),
       ),
     );
   }
@@ -105,6 +117,14 @@ class DI {
       () => ResetPasswordUseCase(
         resetPasswordRepository: sl<IResetPasswordRepository>(),
       ),
+    );
+
+    // Profile
+    sl.registerLazySingleton<GetProfileUseCase>(
+      () => GetProfileUseCase(repository: sl<IProfileRepository>()),
+    );
+    sl.registerLazySingleton<UpdateProfileUseCase>(
+      () => UpdateProfileUseCase(repository: sl<IProfileRepository>()),
     );
 
     // Categories
@@ -154,6 +174,12 @@ class DI {
     sl.registerFactory<ResetPasswordCubit>(
       () =>
           ResetPasswordCubit(resetPasswordUseCase: sl<ResetPasswordUseCase>()),
+    );
+    sl.registerFactory<ProfileBloc>(
+      () => ProfileBloc(
+        getProfileUseCase: sl<GetProfileUseCase>(),
+        updateProfileUseCase: sl<UpdateProfileUseCase>(),
+      ),
     );
     sl.registerFactory<CategoryBloc>(
       () => CategoryBloc(

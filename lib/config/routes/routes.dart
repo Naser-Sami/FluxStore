@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flux_store/features/admin/admin_dashboard_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
 import '/features/_features.dart';
+import '/features/admin/admin_dashboard_screen.dart';
 
 // GoRouter configuration
 final router = GoRouter(
@@ -21,7 +21,8 @@ final router = GoRouter(
     return ErrorPage(state.error.toString());
   },
   redirect: (context, state) async {
-    if (ApiEndpoints.token == null) return null;
+    // log("Token: ${ApiEndpoints.token}");
+    // if (ApiEndpoints.token == null) return null;
 
     final user = await sl<UserSessionCubit>().getSavedUser();
     final isAdminPage = state.matchedLocation.startsWith('/admin');

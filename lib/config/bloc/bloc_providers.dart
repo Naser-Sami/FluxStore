@@ -9,6 +9,9 @@ final providers = [
   BlocProvider<BottomNavigationBarCubit>(
     create: (context) => sl<BottomNavigationBarCubit>(),
   ),
+  BlocProvider<ProfileBloc>(
+    create: (context) => sl<ProfileBloc>()..add(const GetProfileEvent()),
+  ),
   BlocProvider<UserSessionCubit>(create: (context) => sl<UserSessionCubit>()),
   BlocProvider<DrawerCubit>(
     create: (context) => sl<DrawerCubit>()..loadDrawerItems(),

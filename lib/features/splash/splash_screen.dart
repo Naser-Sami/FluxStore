@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '/core/_core.dart' show sl;
+import '/core/_core.dart' show ApiEndpoints;
 import '/features/_features.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,9 +21,7 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkSession() async {
-    final user = await sl<UserSessionCubit>().getSavedUser();
-    if (user != null) {
-      await sl<UserSessionCubit>().setUser(user);
+    if (ApiEndpoints.token != null) {
       if (mounted) {
         context.go(HomeScreen.routeName);
       }

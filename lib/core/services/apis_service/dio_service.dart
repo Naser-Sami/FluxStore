@@ -1,13 +1,18 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flux_store/features/_features.dart' show WelcomeScreen;
+import 'package:go_router/go_router.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '/core/_core.dart' show SecureStorageService, sl;
+import '/core/_core.dart' show SecureStorageService, navigatorKey, sl;
 import '_apis_service.dart';
 
 class DioService {
   final _storage = sl<SecureStorageService>();
+  bool _isRefreshing = false;
+  final List<Function()> _retryQueue = [];
 
   // Dio instance
   final Dio dio = Dio(
@@ -31,35 +36,54 @@ class DioService {
         responseHeader: true,
       ),
     );
+
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          // Add Authorization header
-          ApiEndpoints.token = await _storage.read(key: 'accessToken');
-          if (ApiEndpoints.token != null) {
-            options.headers['Authorization'] = 'Bearer ${ApiEndpoints.token}';
+          final token = await _storage.read(key: 'accessToken');
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
           }
           handler.next(options);
         },
         onError: (DioException error, handler) async {
-          // Check if token expired
-          if (error.response?.statusCode == 401) {
-            final refreshed = await _refreshToken();
+          if (error.response?.statusCode == 401 &&
+              error.requestOptions.path !=
+                  ApiEndpoints.baseUrl + ApiEndpoints.refreshToken) {
+            final completer = Completer<Response>();
 
-            if (refreshed) {
-              ApiEndpoints.token = await _storage.read(key: 'accessToken');
-              error.requestOptions.headers['Authorization'] =
-                  'Bearer ${ApiEndpoints.token}';
+            _retryQueue.add(() async {
+              try {
+                final newToken = await _storage.read(key: 'accessToken');
+                final newOptions = error.requestOptions;
+                newOptions.headers['Authorization'] = 'Bearer $newToken';
+                final response = await dio.fetch(newOptions);
+                completer.complete(response);
+              } catch (e) {
+                completer.completeError(e);
+              }
+            });
 
-              // Retry original request
-              final cloneReq = await dio.fetch(error.requestOptions);
-              return handler.resolve(cloneReq);
-            } else {
-              // Token refresh failed, log out
-              await _storage.deleteAll();
-              // redirect to login screen
-              ApiEndpoints.token = null;
+            if (!_isRefreshing) {
+              _isRefreshing = true;
+              final success = await _refreshToken();
+              _isRefreshing = false;
+
+              final queue = List<Function()>.from(_retryQueue);
+              _retryQueue.clear();
+              for (var retry in queue) {
+                retry();
+              }
+
+              if (!success) {
+                await _storage.deleteAll();
+                log('Navigating to WelcomeScreen');
+                ApiEndpoints.token = null;
+                navigatorKey.currentContext?.go(WelcomeScreen.routeName);
+              }
             }
+
+            return handler.resolve(await completer.future);
           }
 
           return handler.next(error);
@@ -70,15 +94,14 @@ class DioService {
 
   Future<bool> _refreshToken() async {
     final refreshToken = await _storage.read(key: 'refreshToken');
-    if (refreshToken == null) return false;
+    final accessToken = await _storage.read(key: 'accessToken');
+
+    if (refreshToken == null || accessToken == null) return false;
 
     try {
       final response = await dio.post(
         ApiEndpoints.baseUrl + ApiEndpoints.refreshToken,
-        data: {
-          'token': await _storage.read(key: 'accessToken'),
-          'refreshToken': refreshToken,
-        },
+        data: {'token': accessToken, 'refreshToken': refreshToken},
       );
 
       final newAccessToken = response.data['token'];

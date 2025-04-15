@@ -11,17 +11,15 @@ import '/features/_features.dart'
         UpdateCategoryParams;
 
 class CategoriesRepositoryImplementation implements ICategoriesRepository {
-  final ICategoriesRemoteDataSource categoriesRemoteDataSource;
-  CategoriesRepositoryImplementation({
-    required this.categoriesRemoteDataSource,
-  });
+  final ICategoriesRemoteDataSource remoteDataSource;
+  CategoriesRepositoryImplementation({required this.remoteDataSource});
 
   @override
   Future<Either<Failure<String>, String>> create(
     CreateCategoryParams category,
   ) async {
     try {
-      final result = await categoriesRemoteDataSource.create(category);
+      final result = await remoteDataSource.create(category);
 
       if (result == 'Category created successfully') {
         return Right(result);
@@ -38,7 +36,7 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
   @override
   Future<Either<Failure<String>, String>> delete(int id) async {
     try {
-      final result = await categoriesRemoteDataSource.delete(id);
+      final result = await remoteDataSource.delete(id);
 
       if (result == 'Category deleted successfully') {
         return Right(result);
@@ -55,7 +53,7 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
   @override
   Future<Either<Failure<String>, List<Category>>> getAll() async {
     try {
-      final result = await categoriesRemoteDataSource.getAll();
+      final result = await remoteDataSource.getAll();
       final resultEntity = result.map(CategoryMapper.toEntity).toList();
       return Right(resultEntity);
     } on Failure catch (e) {
@@ -68,7 +66,7 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
   @override
   Future<Either<Failure<String>, Category>> getById(int id) async {
     try {
-      final result = await categoriesRemoteDataSource.getById(id);
+      final result = await remoteDataSource.getById(id);
       final resultEntity = CategoryMapper.toEntity(result);
       return Right(resultEntity);
     } on Failure catch (e) {
@@ -83,7 +81,7 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
     UpdateCategoryParams category,
   ) async {
     try {
-      final result = await categoriesRemoteDataSource.update(category);
+      final result = await remoteDataSource.update(category);
 
       if (result == 'Category updated successfully') {
         return Right(result);

@@ -279,5 +279,12 @@ final router = GoRouter(
 
     /// ..
     /// End Bottom Navigation Bar
+    GoRoute(
+      path: ProfileSettingsScreen.routeName,
+      name: ProfileSettingsScreen.name,
+      pageBuilder:
+          (context, state) =>
+              const CupertinoPage(child: ProfileSettingsScreen()),
+    ),
   ],
 );

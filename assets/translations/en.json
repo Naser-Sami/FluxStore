@@ -44,7 +44,8 @@
     "yourPasswordHasBeenChanged":"Your password has been changed",
     "welcomeBackDiscoverNow": "Welcome back! Discover now!",
     "orSignUpWith": "Or sign up with",
-    "orLoginWith": "Or login with"
+    "orLoginWith": "Or login with",
+    "userName": "User Name"
   },
   "DrawerMenu": {
     "homePage": "Home Page",
@@ -109,9 +110,24 @@
     "editProfile": "Edit Profile",
     "personalInfo": "Personal Information",
     "addresses": "Addresses",
+    "address": "Address",
     "paymentMethods": "Payment Methods",
     "orderHistory": "Order History",
-    "changePassword": "Change Password"
+    "changePassword": "Change Password",
+    "vouchers":"Vouchers",
+    "voucher":"Voucher",
+    "myWishlist":"My Wishlist",
+    "rateUs":"Rate Us",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "gender": "Gender",
+    "phonNumber": "Phone Number",
+    "profileSettings":"Profile Settings",
+    "saveChanges": "Save Changes",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
   },
   "Settings": {
     "title": "Settings",

@@ -44,7 +44,8 @@
     "yourPasswordHasBeenChanged":"تم تغيير كلمة مرورك",
     "welcomeBackDiscoverNow": "مرحبًا بعودتك! اكتشف الآن!",
     "orSignUpWith": "أو قم بالتسجيل باستخدام",
-    "orLoginWith": "أو قم بتسجيل الدخول باستخدام"
+    "orLoginWith": "أو قم بتسجيل الدخول باستخدام",
+    "userName": "اسم المستخدم"
   },
   "DrawerMenu": {
     "homePage": "الصفحة الرئيسية",
@@ -111,7 +112,22 @@
     "addresses": "العناوين",
     "paymentMethods": "طرق الدفع",
     "orderHistory": "سجل الطلبات",
-    "changePassword": "تغيير كلمة المرور"
+    "changePassword": "تغيير كلمة المرور",
+    "address": "العنوان",
+    "vouchers": "القسائم",
+    "voucher": "قسيمة",
+    "myWishlist": "قائمتي المفضلة",
+    "rateUs": "قيمنا",
+    "firstName": "الاسم الأول",
+    "lastName": "الاسم الأخير",
+    "email": "البريد الإلكتروني",
+    "gender": "الجنس",
+    "phonNumber": "رقم الهاتف",
+    "profileSettings":"إعدادات الملف الشخصي",
+    "saveChanges": "حفظ التغييرات",
+    "male": "ذكر",
+    "female": "أنثى",
+    "other": "أخرى"
   },
   "Settings": {
     "title": "الإعدادات",
@@ -156,7 +172,6 @@
     "noRecentSearches": "لا توجد عمليات بحث حديثة",
     "clear": "مسح",
     "searchResults": "نتائج البحث"
-    
   },
   "Validation": {
     "isRequired": "مطلوب",

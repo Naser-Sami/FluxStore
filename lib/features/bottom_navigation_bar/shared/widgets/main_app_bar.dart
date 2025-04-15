@@ -29,7 +29,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: onMenuPressed,
           ),
         ),
-        title: const TextWidget('Flux Store'),
+        title: const TextWidget(AppConfig.appName),
         actions: [
           IconButton(
             icon: const Icon(Icons.language),

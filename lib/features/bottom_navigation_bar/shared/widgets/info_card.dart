@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flux_store/features/_features.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
+import '/features/_features.dart' show UserSessionCubit;
 
 class InfoCard extends StatelessWidget {
   const InfoCard({super.key, this.radius = 30});
@@ -28,7 +28,7 @@ class InfoCard extends StatelessWidget {
             child: Icon(CupertinoIcons.person, color: color.onSecondary),
           ),
           title: TextWidget(
-            user?.username ?? "User Name",
+            user?.username ?? LocaleKeys.Authentication_userName,
             style: textStyle.titleLarge?.copyWith(fontSize: 18.sp),
           ),
           subtitle: TextWidget(

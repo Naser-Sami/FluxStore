@@ -3,9 +3,12 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '/core/_core.dart' show SecureStorageService, sl;
 import '_apis_service.dart';
 
 class DioService {
+  final _storage = sl<SecureStorageService>();
+
   // Dio instance
   final Dio dio = Dio(
     BaseOptions(
@@ -28,6 +31,65 @@ class DioService {
         responseHeader: true,
       ),
     );
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          // Add Authorization header
+          final accessToken = await _storage.read(key: 'accessToken');
+          if (accessToken != null) {
+            options.headers['Authorization'] = 'Bearer $accessToken';
+          }
+          handler.next(options);
+        },
+        onError: (DioException error, handler) async {
+          // Check if token expired
+          if (error.response?.statusCode == 401) {
+            final refreshed = await _refreshToken();
+
+            if (refreshed) {
+              final newAccessToken = await _storage.read(key: 'accessToken');
+              error.requestOptions.headers['Authorization'] =
+                  'Bearer $newAccessToken';
+
+              // Retry original request
+              final cloneReq = await dio.fetch(error.requestOptions);
+              return handler.resolve(cloneReq);
+            } else {
+              // Token refresh failed, log out
+              await _storage.deleteAll();
+              // redirect to login screen
+            }
+          }
+
+          return handler.next(error);
+        },
+      ),
+    );
+  }
+
+  Future<bool> _refreshToken() async {
+    final refreshToken = await _storage.read(key: 'refreshToken');
+    if (refreshToken == null) return false;
+
+    try {
+      final response = await dio.post(
+        ApiEndpoints.baseUrl + ApiEndpoints.refreshToken,
+        data: {
+          'token': await _storage.read(key: 'accessToken'),
+          'refreshToken': refreshToken,
+        },
+      );
+
+      final newAccessToken = response.data['token'];
+      final newRefreshToken = response.data['refreshToken'];
+
+      await _storage.write(key: 'accessToken', value: newAccessToken);
+      await _storage.write(key: 'refreshToken', value: newRefreshToken);
+
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   // Optional cancel token for request cancellation

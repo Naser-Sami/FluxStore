@@ -8,6 +8,7 @@ class UserMapper {
       email: userModel.email,
       role: userModel.role,
       token: userModel.token,
+      refreshToken: userModel.refreshToken,
     );
   }
 
@@ -18,6 +19,7 @@ class UserMapper {
       email: userEntity.email,
       role: userEntity.role,
       token: userEntity.token,
+      refreshToken: userEntity.refreshToken,
     );
   }
 }

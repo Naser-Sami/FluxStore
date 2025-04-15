@@ -3,7 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
-import '/features/_features.dart' show InfoCard, SplashScreen, UserSessionCubit;
+import '/features/_features.dart'
+    show InfoCard, ProfileSettingsScreen, SplashScreen, UserSessionCubit;
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile';
@@ -26,7 +27,9 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   const Expanded(child: InfoCard(radius: 40)),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(ProfileSettingsScreen.routeName);
+                    },
                     icon: Icon(Icons.settings, color: iconColor),
                   ),
                 ],
@@ -58,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
                       child: ListTile(
                         minTileHeight: 76,
                         leading: IconWidget(name: 'location', color: iconColor),
-                        title: const Text('Address'),
+                        title: const TextWidget(LocaleKeys.Profile_address),
                         trailing: Icon(
                           Icons.arrow_forward_ios,
                           color: iconColor,
@@ -71,7 +74,9 @@ class ProfileScreen extends StatelessWidget {
                       child: ListTile(
                         minTileHeight: 76,
                         leading: IconWidget(name: 'wallet', color: iconColor),
-                        title: const Text('Payment Method'),
+                        title: const TextWidget(
+                          LocaleKeys.Profile_paymentMethods,
+                        ),
                         trailing: Icon(
                           Icons.arrow_forward_ios,
                           color: iconColor,
@@ -84,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
                       child: ListTile(
                         minTileHeight: 76,
                         leading: IconWidget(name: 'voucher', color: iconColor),
-                        title: const Text('Voucher'),
+                        title: const TextWidget(LocaleKeys.Profile_vouchers),
                         trailing: Icon(
                           Icons.arrow_forward_ios,
                           color: iconColor,
@@ -97,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
                       child: ListTile(
                         minTileHeight: 76,
                         leading: IconWidget(name: 'favorite', color: iconColor),
-                        title: const Text('My Wishlist'),
+                        title: const TextWidget(LocaleKeys.Profile_myWishlist),
                         trailing: Icon(
                           Icons.arrow_forward_ios,
                           color: iconColor,
@@ -110,7 +115,7 @@ class ProfileScreen extends StatelessWidget {
                       child: ListTile(
                         minTileHeight: 76,
                         leading: IconWidget(name: 'star', color: iconColor),
-                        title: const Text('Rate Us'),
+                        title: const TextWidget(LocaleKeys.Profile_rateUs),
                         trailing: Icon(
                           Icons.arrow_forward_ios,
                           color: iconColor,
@@ -126,7 +131,9 @@ class ProfileScreen extends StatelessWidget {
                       child: ListTile(
                         minTileHeight: 76,
                         leading: IconWidget(name: 'logout', color: iconColor),
-                        title: const Text('Logout'),
+                        title: const TextWidget(
+                          LocaleKeys.Authentication_logout,
+                        ),
                       ),
                     ),
                   ],

@@ -1,28 +1,37 @@
 class UserModel {
-  final String username;
-  final String email;
-  final String role;
   final String token;
+  final String refreshToken;
+  final String email;
+  final String username;
+  final String role;
 
   const UserModel({
-    required this.username,
-    required this.email,
-    required this.role,
     required this.token,
+    required this.refreshToken,
+    required this.email,
+    required this.username,
+    required this.role,
   });
 
   // fromJson
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      username: json['username'] ?? "",
-      email: json['email'] ?? "",
-      role: json['role'] ?? "Customer",
       token: json['token'] ?? "",
+      refreshToken: json['refreshToken'] ?? "",
+      email: json['email'] ?? "",
+      username: json['username'] ?? "",
+      role: json['role'] ?? "Customer",
     );
   }
 
   // toJson
   Map<String, dynamic> toJson() {
-    return {'username': username, 'email': email, 'role': role, 'token': token};
+    return {
+      'token': token,
+      'refreshToken': refreshToken,
+      'email': email,
+      'username': username,
+      'role': role,
+    };
   }
 }

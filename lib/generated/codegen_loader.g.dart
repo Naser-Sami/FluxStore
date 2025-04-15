@@ -60,7 +60,8 @@ class CodegenLoader extends AssetLoader{
     "yourPasswordHasBeenChanged": "Your password has been changed",
     "welcomeBackDiscoverNow": "Welcome back! Discover now!",
     "orSignUpWith": "Or sign up with",
-    "orLoginWith": "Or login with"
+    "orLoginWith": "Or login with",
+    "userName": "User Name"
   },
   "DrawerMenu": {
     "homePage": "Home Page",
@@ -125,9 +126,24 @@ class CodegenLoader extends AssetLoader{
     "editProfile": "Edit Profile",
     "personalInfo": "Personal Information",
     "addresses": "Addresses",
+    "address": "Address",
     "paymentMethods": "Payment Methods",
     "orderHistory": "Order History",
-    "changePassword": "Change Password"
+    "changePassword": "Change Password",
+    "vouchers": "Vouchers",
+    "voucher": "Voucher",
+    "myWishlist": "My Wishlist",
+    "rateUs": "Rate Us",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "gender": "Gender",
+    "phonNumber": "Phone Number",
+    "profileSettings": "Profile Settings",
+    "saveChanges": "Save Changes",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
   },
   "Settings": {
     "title": "Settings",
@@ -232,7 +248,8 @@ static const Map<String,dynamic> _ar = {
     "yourPasswordHasBeenChanged": "تم تغيير كلمة مرورك",
     "welcomeBackDiscoverNow": "مرحبًا بعودتك! اكتشف الآن!",
     "orSignUpWith": "أو قم بالتسجيل باستخدام",
-    "orLoginWith": "أو قم بتسجيل الدخول باستخدام"
+    "orLoginWith": "أو قم بتسجيل الدخول باستخدام",
+    "userName": "اسم المستخدم"
   },
   "DrawerMenu": {
     "homePage": "الصفحة الرئيسية",
@@ -299,7 +316,22 @@ static const Map<String,dynamic> _ar = {
     "addresses": "العناوين",
     "paymentMethods": "طرق الدفع",
     "orderHistory": "سجل الطلبات",
-    "changePassword": "تغيير كلمة المرور"
+    "changePassword": "تغيير كلمة المرور",
+    "address": "العنوان",
+    "vouchers": "القسائم",
+    "voucher": "قسيمة",
+    "myWishlist": "قائمتي المفضلة",
+    "rateUs": "قيمنا",
+    "firstName": "الاسم الأول",
+    "lastName": "الاسم الأخير",
+    "email": "البريد الإلكتروني",
+    "gender": "الجنس",
+    "phonNumber": "رقم الهاتف",
+    "profileSettings": "إعدادات الملف الشخصي",
+    "saveChanges": "حفظ التغييرات",
+    "male": "ذكر",
+    "female": "أنثى",
+    "other": "أخرى"
   },
   "Settings": {
     "title": "الإعدادات",

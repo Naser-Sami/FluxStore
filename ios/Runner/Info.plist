@@ -65,5 +65,24 @@
 		<string>en</string>
 		<string>ar</string>
 	</array>
+
+	<!-- Google Sign In -->
+	<key>GIDClientID</key>
+	<!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
+	<string>289955428637-ir0ihdv2vhj3ek9j0dumfq7ofuaff99v.apps.googleusercontent.com</string>
+	<!-- Google Sign-in Section -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+				<string>com.googleusercontent.apps.289955428637-ir0ihdv2vhj3ek9j0dumfq7ofuaff99v</string>
+			</array>
+		</dict>
+	</array>
+	<!-- End of the Google Sign-in Section -->
 </dict>
 </plist>

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
 import '/config/_config.dart';
@@ -17,7 +18,14 @@ class DI {
     sl.registerLazySingleton<SecureStorageService>(SecureStorageService.new);
   }
 
-  Future<void> initFirebase() async {}
+  Future<void> initFirebase() async {
+    final firebaseAuth = FirebaseAuth.instance;
+    sl.registerLazySingleton<FirebaseAuth>(() => firebaseAuth);
+
+    sl.registerLazySingleton<IFirebaseAuthService>(FirebaseAuthServiceImpl.new);
+
+    sl.registerLazySingleton<ISocialSignInService>(SocialSignInServiceImpl.new);
+  }
 
   Future<void> initFirebaseFirestore() async {}
 

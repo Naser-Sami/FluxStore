@@ -113,4 +113,26 @@ class TFunctions {
       random.nextInt(128) + 128,
     );
   }
+
+  static String generateStrongPassword({
+    int length = 12,
+    bool includeLetters = true,
+    bool includeNumbers = true,
+    bool includeSymbols = true,
+  }) {
+    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numbers = '0123456789';
+    const symbols = '!@#\$%^&*()_-+=<>?';
+
+    String chars = '';
+    if (includeLetters) chars += letters;
+    if (includeNumbers) chars += numbers;
+    if (includeSymbols) chars += symbols;
+
+    final rand = Random.secure();
+    return List.generate(
+      length,
+      (index) => chars[rand.nextInt(chars.length)],
+    ).join();
+  }
 }

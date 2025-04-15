@@ -112,6 +112,8 @@ dependencies:
 
   # For GraphQL Queries And Api Calls
   graphql_flutter: ^5.2.0-beta.8
+  firebase_auth: ^5.5.2
+  google_sign_in: ^6.3.0
 
 dev_dependencies:
   flutter_test:

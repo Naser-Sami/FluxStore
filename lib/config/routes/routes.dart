@@ -21,20 +21,19 @@ final router = GoRouter(
     return ErrorPage(state.error.toString());
   },
   redirect: (context, state) async {
+    if (ApiEndpoints.token == null) return null;
+
     final user = await sl<UserSessionCubit>().getSavedUser();
-
-    if (user == null) return null;
-
     final isAdminPage = state.matchedLocation.startsWith('/admin');
 
     // If user is admin
-    if (user.role.toLowerCase() == 'admin') {
+    if (user?.role.toLowerCase() == 'admin') {
       // Prevent admin from going to customer-only pages, or redirect to admin dashboard
       if (!isAdminPage) return AdminDashboardScreen.routeName;
     }
 
     // If user is customer
-    if (user.role.toLowerCase() == 'customer') {
+    if (user?.role.toLowerCase() == 'customer') {
       // Prevent customer from accessing admin pages
       if (isAdminPage) return HomeScreen.routeName;
     }
@@ -89,8 +88,11 @@ final router = GoRouter(
           (context, state) => scaleDownTransitionPage(
             context,
             state,
-            BlocProvider(
-              create: (context) => sl<SignUpBloc>(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => sl<SignUpBloc>()),
+                BlocProvider(create: (context) => sl<LoginBloc>()),
+              ],
               child: const CreateAccountScreen(),
             ),
           ),
@@ -104,8 +106,11 @@ final router = GoRouter(
           (context, state) => scaleDownTransitionPage(
             context,
             state,
-            BlocProvider(
-              create: (context) => sl<LoginBloc>(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => sl<SignUpBloc>()),
+                BlocProvider(create: (context) => sl<LoginBloc>()),
+              ],
               child: const LoginScreen(),
             ),
           ),

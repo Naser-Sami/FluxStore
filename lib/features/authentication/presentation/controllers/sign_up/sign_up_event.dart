@@ -7,10 +7,17 @@ sealed class SignUpEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class SignUpButtonPressed extends SignUpEvent {
+final class OnSignUpEvent extends SignUpEvent {
   final SignUpParams params;
-  const SignUpButtonPressed({required this.params});
+  const OnSignUpEvent({required this.params});
 
   @override
   List<Object> get props => [params];
+}
+
+final class GoogleAuthEvent extends SignUpEvent {
+  const GoogleAuthEvent();
+
+  @override
+  List<Object> get props => [];
 }

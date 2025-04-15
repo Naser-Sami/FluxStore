@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '/core/_core.dart' show ApiEndpoints, DioService;
 import '/features/_features.dart'
     show
@@ -18,8 +20,13 @@ class AuthenticationRemoteDataSource
       final response = await dioService.post<UserModel>(
         path: ApiEndpoints.login,
         data: params.toMap(),
-        parser: (data) => UserModel.fromJson(data),
+        parser: (data) {
+          log('data : $data');
+          return UserModel.fromJson(data);
+        },
       );
+
+      log("response : $response");
 
       return response;
     } catch (e) {

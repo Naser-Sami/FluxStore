@@ -35,9 +35,9 @@ class DioService {
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           // Add Authorization header
-          final accessToken = await _storage.read(key: 'accessToken');
-          if (accessToken != null) {
-            options.headers['Authorization'] = 'Bearer $accessToken';
+          ApiEndpoints.token = await _storage.read(key: 'accessToken');
+          if (ApiEndpoints.token != null) {
+            options.headers['Authorization'] = 'Bearer ${ApiEndpoints.token}';
           }
           handler.next(options);
         },
@@ -47,9 +47,9 @@ class DioService {
             final refreshed = await _refreshToken();
 
             if (refreshed) {
-              final newAccessToken = await _storage.read(key: 'accessToken');
+              ApiEndpoints.token = await _storage.read(key: 'accessToken');
               error.requestOptions.headers['Authorization'] =
-                  'Bearer $newAccessToken';
+                  'Bearer ${ApiEndpoints.token}';
 
               // Retry original request
               final cloneReq = await dio.fetch(error.requestOptions);
@@ -58,6 +58,7 @@ class DioService {
               // Token refresh failed, log out
               await _storage.deleteAll();
               // redirect to login screen
+              ApiEndpoints.token = null;
             }
           }
 

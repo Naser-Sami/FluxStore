@@ -12,7 +12,20 @@
           "package_name": "com.example.flux_store"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "289955428637-0penrqnntdimojsqq3ten4gh02fi0oa9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flux_store",
+            "certificate_hash": "9c15c6eebceb6b54ea4edb5092998acf964b3c03"
+          }
+        },
+        {
+          "client_id": "289955428637-8iplierfn06o9sgt56dlmombibou4hj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDjSRhn5Q6ozXjDzdGjSK4E-hKEuXjB8c8"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289955428637-8iplierfn06o9sgt56dlmombibou4hj0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289955428637-ir0ihdv2vhj3ek9j0dumfq7ofuaff99v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fluxStore"
+              }
+            }
+          ]
         }
       }
     }

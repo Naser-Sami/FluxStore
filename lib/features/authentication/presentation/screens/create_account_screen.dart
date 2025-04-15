@@ -17,13 +17,12 @@ class CreateAccountScreen extends StatefulWidget {
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
-  void _signUpButtonPressed() {
+  void _signUp() {
     if (_formKey.currentState?.validate() ?? false) {
       final params = SignUpParams(
         username: _nameController.text.trim(),
@@ -39,7 +38,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           message: LocaleKeys.Validation_passwordsDoNotMatch,
         );
       } else {
-        context.read<SignUpBloc>().add(SignUpButtonPressed(params: params));
+        context.read<SignUpBloc>().add(OnSignUpEvent(params: params));
       }
     }
   }
@@ -138,7 +137,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   const SizedBox(height: TSize.s44),
                   Center(
                     child: CustomButton(
-                      onTap: _signUpButtonPressed,
+                      onTap: _signUp,
                       text: LocaleKeys.Authentication_signup,
                       backgroundColor: context.theme.colorScheme.secondary,
                     ),

@@ -12,8 +12,10 @@ class LoginUseCase extends BaseUseCase<UserEntity, LoginParams> {
   Future<Either<Failure<String>, UserEntity>> call(p) async {
     try {
       return await loginRepository.login(p);
+    } on Failure catch (e) {
+      return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {
-      return const Left(Failure(statusCode: 500, error: "Login error."));
+      return Left(Failure(statusCode: 500, error: e.toString()));
     }
   }
 }

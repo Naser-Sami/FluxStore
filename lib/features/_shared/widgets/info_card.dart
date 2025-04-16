@@ -8,9 +8,7 @@ import '/core/_core.dart';
 import '/features/_features.dart' show LoadedState, ProfileBloc, ProfileState;
 
 class InfoCard extends StatelessWidget {
-  const InfoCard({super.key, this.radius = 30});
-
-  final double radius;
+  const InfoCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +22,24 @@ class InfoCard extends StatelessWidget {
           final image = '${ApiEndpoints.imageUrl}${user.imageUrl}';
 
           return ListTile(
-            leading: CircleAvatar(
-              radius: radius,
-              backgroundColor: color.secondary,
+            leading: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: color.onSecondary,
+                shape: BoxShape.circle,
+                image:
+                    user.imageUrl != ''
+                        ? DecorationImage(
+                          image: NetworkImage(image),
+                          fit: BoxFit.cover,
+                        )
+                        : null,
+              ),
               child:
                   user.imageUrl == ''
                       ? Icon(CupertinoIcons.person, color: color.onSecondary)
-                      : Image.network(image, fit: BoxFit.cover),
+                      : null,
             ),
             title: TextWidget(
               user.firstName.isNotEmpty

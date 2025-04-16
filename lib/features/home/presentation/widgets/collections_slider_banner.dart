@@ -24,7 +24,7 @@ class _CollectionsSliderBannerState extends State<CollectionsSliderBanner> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.80, initialPage: 1);
+    _pageController = PageController(viewportFraction: 0.75, initialPage: 1);
     _currentPage = 1;
 
     // Trigger scaling once layout is built

@@ -36,7 +36,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Expanded(child: InfoCard(radius: 40)),
+                        const Expanded(child: InfoCard()),
                         IconButton(
                           onPressed: () {
                             context.push(ProfileSettingsScreen.routeName);

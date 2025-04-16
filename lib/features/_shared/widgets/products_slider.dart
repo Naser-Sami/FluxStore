@@ -72,7 +72,13 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnTapScaler(
-      onTap: () {},
+      onTap: () {
+        controller.animateTo(
+          index * 134,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      },
       child: AnimatedBuilder(
         animation: controller,
         builder: (context, child) {

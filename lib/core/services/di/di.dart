@@ -132,6 +132,9 @@ class DI {
     sl.registerLazySingleton<UpdateProfileUseCase>(
       () => UpdateProfileUseCase(repository: sl<IProfileRepository>()),
     );
+    sl.registerLazySingleton<UpdateProfileImageUseCase>(
+      () => UpdateProfileImageUseCase(repository: sl<IProfileRepository>()),
+    );
 
     // Categories
     sl.registerLazySingleton<GetAllCategoriesUseCase>(
@@ -185,6 +188,7 @@ class DI {
       () => ProfileBloc(
         getProfileUseCase: sl<GetProfileUseCase>(),
         updateProfileUseCase: sl<UpdateProfileUseCase>(),
+        updateProfileImageUseCase: sl<UpdateProfileImageUseCase>(),
       ),
     );
     sl.registerFactory<CategoryBloc>(

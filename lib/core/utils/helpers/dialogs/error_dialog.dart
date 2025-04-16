@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart' show TSize, TextWidget, TPadding;
 import '/core/_core.dart' show LocaleKeys, BuildContextExtensions;
@@ -46,7 +45,7 @@ errorDialog(BuildContext context, {required String message}) {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: ElevatedButton(
               onPressed: () {
-                context.pop();
+                Navigator.of(context).pop();
               },
               child: TextWidget(LocaleKeys.Common_close.tr()),
             ),

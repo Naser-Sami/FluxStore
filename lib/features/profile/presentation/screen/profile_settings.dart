@@ -97,6 +97,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
       listener: (context, state) {
         if (state is LoadingState) {
           showLoadingDialog(context);
+          context.pop();
         }
 
         if (state is ErrorState) {
@@ -104,7 +105,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
         }
 
         if (state is LoadedState) {
-          context.pop();
+          // context.pop();
         }
       },
       child: Scaffold(

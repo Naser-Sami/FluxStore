@@ -22,3 +22,12 @@ class UpdateProfileEvent extends ProfileEvent {
   @override
   List<Object> get props => [params];
 }
+
+class UpdateProfileImageEvent extends ProfileEvent {
+  final File file;
+
+  const UpdateProfileImageEvent({required this.file});
+
+  @override
+  List<Object> get props => [file];
+}

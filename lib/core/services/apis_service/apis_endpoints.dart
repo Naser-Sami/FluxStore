@@ -1,6 +1,7 @@
 class ApiEndpoints {
   // Base URL for the API
   static const String baseUrl = 'http://localhost:5232/api/';
+  static const String imageUrl = 'http://localhost:5232/';
 
   // Token for authentication
   static String? accessToken;
@@ -15,6 +16,7 @@ class ApiEndpoints {
 
   // Profile
   static const String profile = 'user/profile';
+  static const String updateProfileImage = 'user/update-profile-image';
 
   // Categories
   static const String category = 'Category';

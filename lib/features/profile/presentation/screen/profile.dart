@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,10 +6,8 @@ import '/config/_config.dart';
 import '/core/_core.dart';
 import '/features/_features.dart'
     show
-        ErrorState,
         InfoCard,
         LoadedState,
-        LoadingState,
         ProfileBloc,
         ProfileSettingsScreen,
         ProfileState,
@@ -30,16 +26,7 @@ class ProfileScreen extends StatelessWidget {
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        if (state is LoadingState) {
-          showLoadingDialog(context);
-        }
-
-        if (state is ErrorState) {
-          errorDialog(context, message: state.error);
-        }
-
         if (state is LoadedState) {
-          log('message: ${state.profile.toString()}');
           return Scaffold(
             appBar: AppBar(toolbarHeight: 20),
             body: SafeArea(

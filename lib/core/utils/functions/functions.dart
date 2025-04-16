@@ -1,7 +1,9 @@
 // Packages
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 // Files
 import '/core/utils/_utils.dart';
@@ -134,5 +136,26 @@ class TFunctions {
       length,
       (index) => chars[rand.nextInt(chars.length)],
     ).join();
+  }
+
+  static Future<File?> pickAndUploadProfileImage(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      // Pick image from gallery or camera
+      final XFile? image = await picker.pickImage(
+        source: ImageSource.gallery, // or ImageSource.camera
+        imageQuality: 85, // compress
+      );
+
+      if (image == null) return null;
+
+      final File file = File(image.path);
+
+      return file;
+    } catch (e) {
+      debugPrint('Image upload error: $e');
+      return null;
+    }
   }
 }

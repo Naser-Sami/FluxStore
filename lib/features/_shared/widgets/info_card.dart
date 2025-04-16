@@ -5,8 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
-import '/features/_features.dart'
-    show ErrorState, LoadedState, LoadingState, ProfileBloc, ProfileState;
+import '/features/_features.dart' show LoadedState, ProfileBloc, ProfileState;
 
 class InfoCard extends StatelessWidget {
   const InfoCard({super.key, this.radius = 30});
@@ -20,21 +19,18 @@ class InfoCard extends StatelessWidget {
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        if (state is LoadingState) {
-          showLoadingDialog(context);
-        }
-
-        if (state is ErrorState) {
-          errorDialog(context, message: state.error);
-        }
-
         if (state is LoadedState) {
           final user = state.profile;
+          final image = '${ApiEndpoints.imageUrl}${user.imageUrl}';
+
           return ListTile(
             leading: CircleAvatar(
               radius: radius,
               backgroundColor: color.secondary,
-              child: Icon(CupertinoIcons.person, color: color.onSecondary),
+              child:
+                  user.imageUrl == ''
+                      ? Icon(CupertinoIcons.person, color: color.onSecondary)
+                      : Image.network(image, fit: BoxFit.cover),
             ),
             title: TextWidget(
               user.firstName.isNotEmpty

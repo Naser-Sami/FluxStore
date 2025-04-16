@@ -12,6 +12,9 @@ final sl = GetIt.I;
 class DI {
   Future<void> initDio() async {
     sl.registerLazySingleton<DioService>(DioService.new);
+    sl.registerLazySingleton<ApiClient>(
+      () => ApiClient(dio: sl<DioService>().dio),
+    );
   }
 
   Future<void> initSecureStorageService() async {
@@ -43,6 +46,9 @@ class DI {
     sl.registerLazySingleton<IGeoCodeService>(GeoCodeServiceImpl.new);
 
     sl.registerLazySingleton<ISendEmailOtpService>(SendEmailOtpServiceImpl.new);
+
+    sl.registerLazySingleton(RefreshTokenHandler.new);
+    sl.registerLazySingleton(() => AuthService(sl<RefreshTokenHandler>()));
   }
 
   Future<void> initDataSources() async {

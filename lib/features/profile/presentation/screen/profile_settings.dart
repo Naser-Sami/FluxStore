@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flux_store/core/utils/_utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flux_store/features/profile/presentation/controllers/_controllers.dart';
+import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart'
     show
@@ -9,8 +11,20 @@ import '/config/_config.dart'
         TSize,
         TextFormFieldComponent,
         TextWidget;
-import '/core/_core.dart' show BuildContextExtensions, LocaleKeys;
-import '/features/_features.dart' show AddProfileImage;
+import '/core/_core.dart'
+    show
+        BuildContextExtensions,
+        LocaleKeys,
+        TValidator,
+        errorDialog,
+        showLoadingDialog;
+import '/features/_features.dart'
+    show
+        AddProfileImage,
+        ProfileBloc,
+        ProfileState,
+        UpdateProfileEvent,
+        UpdateProfileParams;
 
 class ProfileSettingsScreen extends StatefulWidget {
   static const routeName = '/profile/settings';
@@ -27,6 +41,43 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
+  String gender = 'Other';
+
+  @override
+  void initState() {
+    super.initState();
+    initializeProfileData();
+  }
+
+  void initializeProfileData() {
+    final state = context.read<ProfileBloc>().state;
+    _firstNameController.text = state.profile.firstName;
+    _lastNameController.text = state.profile.lastName;
+    _emailController.text = state.profile.email;
+    _phoneController.text = state.profile.phoneNumber;
+    if (state.profile.gender == '') {
+      gender = 'Other';
+    } else {
+      gender = state.profile.gender;
+    }
+  }
+
+  void _updateProfile() {
+    if (_formKey.currentState!.validate()) {
+      context.read<ProfileBloc>().add(
+        UpdateProfileEvent(
+          params: UpdateProfileParams(
+            firstName: _firstNameController.text,
+            lastName: _lastNameController.text,
+            gender: gender,
+            phoneNumber: _phoneController.text,
+            imageUrl: '',
+            address: '',
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   void dispose() {
@@ -42,125 +93,154 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   Widget build(BuildContext context) {
     final color = context.theme.colorScheme;
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Profile Settings')),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: TPadding.p24,
-            horizontal: TPadding.p32,
-          ),
-          child: Column(
-            children: [
-              const AddProfileImage(),
-              const Spacer(),
-              Expanded(
-                child: Row(
+    return BlocListener<ProfileBloc, ProfileState>(
+      listener: (context, state) {
+        if (state is LoadingState) {
+          showLoadingDialog(context);
+        }
+
+        if (state is ErrorState) {
+          errorDialog(context, message: state.error);
+        }
+
+        if (state is LoadedState) {
+          context.pop();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Profile Settings')),
+        body: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: TPadding.p24,
+              horizontal: TPadding.p32,
+            ),
+            child: BlocBuilder<ProfileBloc, ProfileState>(
+              builder: (context, state) {
+                return Column(
                   children: [
+                    const AddProfileImage(),
+                    const Spacer(),
                     Expanded(
-                      flex: 6,
-                      child: TextFormFieldComponent(
-                        controller: _firstNameController,
-                        hintText: LocaleKeys.Profile_firstName,
-                        labelText: LocaleKeys.Profile_firstName,
-                        onChanged: (value) {},
-                        validator:
-                            (value) => TValidator.validateEmptyText(
-                              LocaleKeys.Profile_firstName,
-                              value,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 6,
+                            child: TextFormFieldComponent(
+                              controller: _firstNameController,
+                              hintText: LocaleKeys.Profile_firstName,
+                              labelText: LocaleKeys.Profile_firstName,
+                              onChanged: (value) {},
+                              validator:
+                                  (value) => TValidator.validateEmptyText(
+                                    LocaleKeys.Profile_firstName,
+                                    value,
+                                  ),
                             ),
-                      ),
-                    ),
-                    const SizedBox(width: TPadding.p16),
-                    Expanded(
-                      flex: 4,
-                      child: TextFormFieldComponent(
-                        controller: _lastNameController,
-                        hintText: LocaleKeys.Profile_lastName,
-                        labelText: LocaleKeys.Profile_lastName,
-                        onChanged: (value) {},
-                        validator:
-                            (value) => TValidator.validateEmptyText(
-                              LocaleKeys.Profile_lastName,
-                              value,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: TSize.s30),
-              TextFormFieldComponent(
-                controller: _emailController,
-                hintText: LocaleKeys.Profile_email,
-                labelText: LocaleKeys.Profile_email,
-                onChanged: (value) {},
-                validator: TValidator.validateEmail,
-              ),
-              const SizedBox(height: TSize.s30),
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        height: 55,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(color: color.outline, width: 1),
                           ),
-                        ),
-                        child: DropdownButton(
-                          isExpanded: true,
-                          // value: LocaleKeys.Profile_male,
-                          icon: const SizedBox(),
-                          underline: const SizedBox(),
-                          borderRadius: BorderRadius.circular(TRadius.r12),
-                          items: [
-                            // DropdownMenuItem(
-                            //   value: "Male",
-                            //   child: TextWidget(LocaleKeys.Profile_male),
-                            // ),
-                            // DropdownMenuItem(
-                            //   value: 'Female',
-                            //   child: TextWidget(LocaleKeys.Profile_female),
-                            // ),
-                            // DropdownMenuItem(
-                            //   value: LocaleKeys.Profile_other,
-                            //   child: const TextWidget('Other'),
-                            // ),
-                          ],
-                          onChanged: (value) {},
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: TPadding.p16),
-                    Expanded(
-                      flex: 7,
-                      child: TextFormFieldComponent(
-                        controller: _phoneController,
-                        hintText: LocaleKeys.Profile_phonNumber,
-                        labelText: LocaleKeys.Profile_phonNumber,
-                        onChanged: (value) {},
-                        validator:
-                            (value) => TValidator.validateEmptyText(
-                              LocaleKeys.Profile_phonNumber,
-                              value,
+                          const SizedBox(width: TPadding.p16),
+                          Expanded(
+                            flex: 4,
+                            child: TextFormFieldComponent(
+                              controller: _lastNameController,
+                              hintText: LocaleKeys.Profile_lastName,
+                              labelText: LocaleKeys.Profile_lastName,
+                              onChanged: (value) {},
+                              validator:
+                                  (value) => TValidator.validateEmptyText(
+                                    LocaleKeys.Profile_lastName,
+                                    value,
+                                  ),
                             ),
+                          ),
+                        ],
                       ),
                     ),
+                    const SizedBox(height: TSize.s30),
+                    TextFormFieldComponent(
+                      controller: _emailController,
+                      hintText: LocaleKeys.Profile_email,
+                      labelText: LocaleKeys.Profile_email,
+                      onChanged: (value) {},
+                      readOnly: true,
+                      validator: TValidator.validateEmail,
+                    ),
+                    const SizedBox(height: TSize.s30),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              height: 55,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: color.outline,
+                                    width: 1,
+                                  ),
+                                ),
+                              ),
+                              child: DropdownButton(
+                                isExpanded: true,
+                                value: gender,
+                                icon: const SizedBox(),
+                                underline: const SizedBox(),
+                                borderRadius: BorderRadius.circular(
+                                  TRadius.r12,
+                                ),
+                                items: [
+                                  const DropdownMenuItem(
+                                    value: "Male",
+                                    child: TextWidget('Male'),
+                                  ),
+                                  const DropdownMenuItem(
+                                    value: 'Female',
+                                    child: TextWidget('Female'),
+                                  ),
+                                  const DropdownMenuItem(
+                                    value: 'Other',
+                                    child: TextWidget('Other'),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  setState(() {
+                                    gender = value.toString();
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: TPadding.p16),
+                          Expanded(
+                            flex: 7,
+                            child: TextFormFieldComponent(
+                              controller: _phoneController,
+                              hintText: LocaleKeys.Profile_phonNumber,
+                              labelText: LocaleKeys.Profile_phonNumber,
+                              onChanged: (value) {},
+                              validator:
+                                  (value) => TValidator.validateEmptyText(
+                                    LocaleKeys.Profile_phonNumber,
+                                    value,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(flex: 2),
+                    CustomButton(
+                      backgroundColor: color.secondary,
+                      onTap: _updateProfile,
+                      text: LocaleKeys.Profile_saveChanges,
+                    ),
+                    const Spacer(),
                   ],
-                ),
-              ),
-              const Spacer(flex: 2),
-              CustomButton(
-                backgroundColor: color.secondary,
-                onTap: () {},
-                text: LocaleKeys.Profile_saveChanges,
-              ),
-              const Spacer(),
-            ],
+                );
+              },
+            ),
           ),
         ),
       ),

@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '/core/_core.dart' show ApiEndpoints, SecureStorageService, sl;
+import '/core/_core.dart'
+    show ApiEndpoints, Constants, SecureStorageService, sl;
 import '/features/_features.dart' show UserEntity, UserMapper, UserModel;
 
 class UserSessionCubit extends Cubit<UserEntity?> {
@@ -18,7 +19,7 @@ class UserSessionCubit extends Cubit<UserEntity?> {
     final jsonData = jsonEncode(userModel.toJson());
 
     await Future.wait([
-      setToken(user.token),
+      setToken(user.token, user.refreshToken),
       _storage.write(key: 'user', value: jsonData),
     ]);
 
@@ -47,19 +48,28 @@ class UserSessionCubit extends Cubit<UserEntity?> {
     }
   }
 
-  Future<void> setToken(String token) async {
-    await _storage.write(key: 'token', value: token);
-    ApiEndpoints.token = token;
+  Future<void> setToken(String token, String refreshToken) async {
+    await _storage.write(key: Constants.keyToken, value: token);
+    await _storage.write(key: Constants.keyRefreshToken, value: refreshToken);
+
+    ApiEndpoints.accessToken = token;
+    ApiEndpoints.refreshToken = refreshToken;
   }
 
   Future<void> getToken() async {
-    final token = await _storage.read(key: 'token');
-    ApiEndpoints.token = token ?? '';
+    final token = await _storage.read(key: Constants.keyToken);
+    final refreshToken = await _storage.read(key: Constants.keyRefreshToken);
+
+    ApiEndpoints.accessToken = token ?? '';
+    ApiEndpoints.refreshToken = refreshToken ?? '';
   }
 
   Future<void> clearToken() async {
-    await _storage.delete(key: 'token');
-    ApiEndpoints.token = '';
+    await _storage.delete(key: Constants.keyToken);
+    await _storage.delete(key: Constants.keyRefreshToken);
+
+    ApiEndpoints.accessToken = null;
+    ApiEndpoints.refreshToken = null;
   }
 
   Future<void> clearUser() async {

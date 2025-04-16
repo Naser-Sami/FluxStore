@@ -20,26 +20,18 @@ final router = GoRouter(
 
     return ErrorPage(state.error.toString());
   },
-  redirect: (context, state) async {
-    // log("Token: ${ApiEndpoints.token}");
-    // if (ApiEndpoints.token == null) return null;
+  redirect: (context, state) {
+    final user = sl<UserSessionCubit>().state;
 
-    final user = await sl<UserSessionCubit>().getSavedUser();
-    final isAdminPage = state.matchedLocation.startsWith('/admin');
-
-    // If user is admin
-    if (user?.role.toLowerCase() == 'admin') {
-      // Prevent admin from going to customer-only pages, or redirect to admin dashboard
-      if (!isAdminPage) return AdminDashboardScreen.routeName;
+    if (user?.role == 'admin' && !state.matchedLocation.startsWith('/admin')) {
+      return AdminDashboardScreen.routeName;
+    }
+    if (user?.role == 'customer' &&
+        state.matchedLocation.startsWith('/admin')) {
+      return HomeScreen.routeName;
     }
 
-    // If user is customer
-    if (user?.role.toLowerCase() == 'customer') {
-      // Prevent customer from accessing admin pages
-      if (isAdminPage) return HomeScreen.routeName;
-    }
-
-    return null; // allow normal navigation
+    return null;
   },
   routes: [
     GoRoute(

@@ -45,7 +45,8 @@
     "welcomeBackDiscoverNow": "Welcome back! Discover now!",
     "orSignUpWith": "Or sign up with",
     "orLoginWith": "Or login with",
-    "userName": "User Name"
+    "userName": "User Name",
+    "phoneNumber": "Phone Number"
   },
   "DrawerMenu": {
     "homePage": "Home Page",

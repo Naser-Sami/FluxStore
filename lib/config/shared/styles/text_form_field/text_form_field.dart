@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '/core/_core.dart';
 import '/config/_config.dart';
+import '/core/_core.dart';
 
 class TextFormFieldComponent extends StatelessWidget {
   const TextFormFieldComponent({
@@ -29,6 +29,7 @@ class TextFormFieldComponent extends StatelessWidget {
     this.onSaved,
     this.label,
     this.labelText,
+    this.readOnly = false,
   });
 
   // Variables
@@ -58,6 +59,7 @@ class TextFormFieldComponent extends StatelessWidget {
 
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +84,7 @@ class TextFormFieldComponent extends StatelessWidget {
     final theme = Theme.of(context);
 
     return TextFormField(
+      readOnly: readOnly,
       focusNode: focusNode,
       autofocus: autofocus,
       controller: controller,

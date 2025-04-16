@@ -18,4 +18,12 @@ class Constants {
   // ******************
   static const String pathSystemIcons = "assets/icons/";
   static const String pathImages = "assets/images/";
+
+  // ******************
+  // *** KEYS ***
+  // ******************
+  static const String keyToken = "access-token";
+  static const String keyRefreshToken = "refresh-token";
+  static const String keyUser = "user";
+  static const String keyUserSession = "user_session";
 }

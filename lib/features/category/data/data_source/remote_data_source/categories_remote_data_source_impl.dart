@@ -1,4 +1,4 @@
-import '/core/_core.dart' show ApiEndpoints, DioService;
+import '/core/_core.dart' show ApiEndpoints, ApiClient, sl;
 import '/features/_features.dart'
     show
         ICategoriesRemoteDataSource,
@@ -7,12 +7,12 @@ import '/features/_features.dart'
         UpdateCategoryParams;
 
 class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
-  final DioService dioService = DioService();
+  final ApiClient apiClient = sl<ApiClient>();
 
   @override
   Future<String> create(CreateCategoryParams category) async {
     try {
-      final response = await dioService.post<String>(
+      final response = await apiClient.post<String>(
         path: ApiEndpoints.category,
         data: category.toMap(),
       );
@@ -27,7 +27,7 @@ class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   @override
   Future<String> delete(int id) async {
     try {
-      final response = await dioService.delete(
+      final response = await apiClient.delete(
         path: ApiEndpoints.category,
         data: {'id': id},
       );
@@ -42,7 +42,7 @@ class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   @override
   Future<List<CategoryModel>> getAll() async {
     try {
-      final response = await dioService.get<List<CategoryModel>>(
+      final response = await apiClient.get<List<CategoryModel>>(
         path: ApiEndpoints.category,
         parser:
             (data) =>
@@ -60,7 +60,7 @@ class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   @override
   Future<CategoryModel> getById(int id) async {
     try {
-      final response = await dioService.get<CategoryModel>(
+      final response = await apiClient.get<CategoryModel>(
         path: ApiEndpoints.category,
         parser: (data) => CategoryModel.fromJson(data),
       );
@@ -74,7 +74,7 @@ class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   @override
   Future<String> update(UpdateCategoryParams category) async {
     try {
-      final response = await dioService.post<String>(
+      final response = await apiClient.post<String>(
         path: ApiEndpoints.category,
         data: category.toMap(),
       );

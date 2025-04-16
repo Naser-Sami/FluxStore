@@ -45,7 +45,8 @@
     "welcomeBackDiscoverNow": "مرحبًا بعودتك! اكتشف الآن!",
     "orSignUpWith": "أو قم بالتسجيل باستخدام",
     "orLoginWith": "أو قم بتسجيل الدخول باستخدام",
-    "userName": "اسم المستخدم"
+    "userName": "اسم المستخدم",
+    "phoneNumber": "رقم الهاتف"
   },
   "DrawerMenu": {
     "homePage": "الصفحة الرئيسية",

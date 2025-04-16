@@ -1,32 +1,29 @@
 part of 'profile_bloc.dart';
 
-class ProfileState extends Equatable {
-  const ProfileState({
-    required this.profile,
-    required this.error,
-    required this.statusCode,
-    required this.isLoading,
-  });
-
+sealed class ProfileState extends Equatable {
+  const ProfileState({required this.profile});
   final Profile profile;
-  final String error;
-  final int statusCode;
-  final bool isLoading;
-
-  ProfileState copyWith({
-    Profile? profile,
-    String? error,
-    int? statusCode,
-    bool? isLoading,
-  }) {
-    return ProfileState(
-      profile: profile ?? this.profile,
-      error: error ?? this.error,
-      statusCode: statusCode ?? this.statusCode,
-      isLoading: isLoading ?? this.isLoading,
-    );
-  }
 
   @override
-  List<Object> get props => [profile, error, statusCode, isLoading];
+  List<Object> get props => [profile];
+}
+
+class InitialState extends ProfileState {
+  const InitialState({required super.profile});
+}
+
+class LoadingState extends ProfileState {
+  const LoadingState({required super.profile});
+}
+
+class LoadedState extends ProfileState {
+  const LoadedState({required super.profile});
+}
+
+class ErrorState extends ProfileState {
+  const ErrorState({required super.profile, required this.error});
+  final String error;
+
+  @override
+  List<Object> get props => [profile, error];
 }

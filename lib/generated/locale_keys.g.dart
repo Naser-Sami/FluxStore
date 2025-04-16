@@ -47,6 +47,7 @@ abstract class  LocaleKeys {
   static const Authentication_orSignUpWith = 'Authentication.orSignUpWith';
   static const Authentication_orLoginWith = 'Authentication.orLoginWith';
   static const Authentication_userName = 'Authentication.userName';
+  static const Authentication_phoneNumber = 'Authentication.phoneNumber';
   static const Authentication = 'Authentication';
   static const DrawerMenu_homePage = 'DrawerMenu.homePage';
   static const DrawerMenu_discover = 'DrawerMenu.discover';

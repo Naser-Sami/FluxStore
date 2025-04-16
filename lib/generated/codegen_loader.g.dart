@@ -61,7 +61,8 @@ class CodegenLoader extends AssetLoader{
     "welcomeBackDiscoverNow": "Welcome back! Discover now!",
     "orSignUpWith": "Or sign up with",
     "orLoginWith": "Or login with",
-    "userName": "User Name"
+    "userName": "User Name",
+    "phoneNumber": "Phone Number"
   },
   "DrawerMenu": {
     "homePage": "Home Page",
@@ -249,7 +250,8 @@ static const Map<String,dynamic> _ar = {
     "welcomeBackDiscoverNow": "مرحبًا بعودتك! اكتشف الآن!",
     "orSignUpWith": "أو قم بالتسجيل باستخدام",
     "orLoginWith": "أو قم بتسجيل الدخول باستخدام",
-    "userName": "اسم المستخدم"
+    "userName": "اسم المستخدم",
+    "phoneNumber": "رقم الهاتف"
   },
   "DrawerMenu": {
     "homePage": "الصفحة الرئيسية",

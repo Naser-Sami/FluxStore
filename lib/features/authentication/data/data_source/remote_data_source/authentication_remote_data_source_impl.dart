@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import '/core/_core.dart' show ApiEndpoints, DioService;
+import '/core/_core.dart' show ApiEndpoints, ApiClient, sl;
 import '/features/_features.dart'
     show
         IAuthenticationRemoteDataSource,
@@ -12,12 +12,12 @@ import '/features/_features.dart'
 
 class AuthenticationRemoteDataSource
     implements IAuthenticationRemoteDataSource {
-  final DioService dioService = DioService();
+  final ApiClient apiClient = sl<ApiClient>();
 
   @override
   Future<UserModel?> login(LoginParams params) async {
     try {
-      final response = await dioService.post<UserModel>(
+      final response = await apiClient.post<UserModel>(
         path: ApiEndpoints.login,
         data: params.toMap(),
         parser: (data) {
@@ -37,7 +37,7 @@ class AuthenticationRemoteDataSource
   @override
   Future<UserModel?> signUp(SignUpParams params) async {
     try {
-      final response = await dioService.post<UserModel>(
+      final response = await apiClient.post<UserModel>(
         path: ApiEndpoints.signUp,
         data: params.toMap(),
         parser: (data) => UserModel.fromJson(data),
@@ -51,7 +51,7 @@ class AuthenticationRemoteDataSource
   @override
   Future<String?> forgotPassword(ForgotPasswordParams params) async {
     try {
-      final response = await dioService.post<String>(
+      final response = await apiClient.post<String>(
         path: ApiEndpoints.forgotPassword,
         data: params.toMap(),
         parser: (data) => data,
@@ -66,7 +66,7 @@ class AuthenticationRemoteDataSource
   @override
   Future<String?> resetPassword(ResetPasswordParams params) async {
     try {
-      final response = await dioService.post<String>(
+      final response = await apiClient.post<String>(
         path: ApiEndpoints.resetPassword,
         data: params.toMap(),
         parser: (data) => data,

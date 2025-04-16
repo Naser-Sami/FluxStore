@@ -1,5 +1,6 @@
 export '_initializer/_initializer.dart';
 export 'apis_service/_apis_service.dart';
+export 'auth_service/auth_service.dart';
 export 'di/di.dart';
 export 'email_service/_email_service.dart';
 export 'firebase_service/_firebase_service.dart';

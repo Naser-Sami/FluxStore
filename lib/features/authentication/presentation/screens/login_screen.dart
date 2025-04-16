@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _loginButtonPressed() {
+  void _login() {
     if (_formKey.currentState?.validate() ?? false) {
       final params = LoginParams(
         email: _emailController.text.trim(),
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: TSize.s24),
                   Center(
                     child: CustomButton(
-                      onTap: _loginButtonPressed,
+                      onTap: _login,
                       text: LocaleKeys.Authentication_login,
                       backgroundColor: context.theme.colorScheme.secondary,
                     ),

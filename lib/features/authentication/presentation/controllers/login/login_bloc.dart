@@ -10,13 +10,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase loginUseCase;
 
   LoginBloc({required this.loginUseCase}) : super(LoginInitial()) {
-    on(_loginButtonPressed);
+    on(_login);
   }
 
-  Future<void> _loginButtonPressed(
-    OnLoginEvent event,
-    Emitter<LoginState> emit,
-  ) async {
+  Future<void> _login(OnLoginEvent event, Emitter<LoginState> emit) async {
     emit(LoginLoading());
     try {
       final result = await loginUseCase.call(event.params);

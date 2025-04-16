@@ -1,20 +1,9 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:flux_store/features/_features.dart' show WelcomeScreen;
-import 'package:go_router/go_router.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '/core/_core.dart' show SecureStorageService, navigatorKey, sl;
 import '_apis_service.dart';
 
 class DioService {
-  final _storage = sl<SecureStorageService>();
-  bool _isRefreshing = false;
-  final List<Function()> _retryQueue = [];
-
-  // Dio instance
   final Dio dio = Dio(
     BaseOptions(
       baseUrl: ApiEndpoints.baseUrl,
@@ -22,12 +11,11 @@ class DioService {
       receiveTimeout: const Duration(seconds: 5),
       headers: {
         'content-type': 'application/json; charset=utf-8',
-        'Authorization': 'Bearer ${ApiEndpoints.token}',
+        'Authorization': 'Bearer ${ApiEndpoints.accessToken}',
       },
     ),
   );
 
-  // Constructor to add interceptors
   DioService() {
     dio.interceptors.add(
       PrettyDioLogger(
@@ -36,227 +24,6 @@ class DioService {
         responseHeader: true,
       ),
     );
-
-    dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) async {
-          final token = await _storage.read(key: 'accessToken');
-          if (token != null) {
-            options.headers['Authorization'] = 'Bearer $token';
-          }
-          handler.next(options);
-        },
-        onError: (DioException error, handler) async {
-          if (error.response?.statusCode == 401 &&
-              error.requestOptions.path !=
-                  ApiEndpoints.baseUrl + ApiEndpoints.refreshToken) {
-            final completer = Completer<Response>();
-
-            _retryQueue.add(() async {
-              try {
-                final newToken = await _storage.read(key: 'accessToken');
-                final newOptions = error.requestOptions;
-                newOptions.headers['Authorization'] = 'Bearer $newToken';
-                final response = await dio.fetch(newOptions);
-                completer.complete(response);
-              } catch (e) {
-                completer.completeError(e);
-              }
-            });
-
-            if (!_isRefreshing) {
-              _isRefreshing = true;
-              final success = await _refreshToken();
-              _isRefreshing = false;
-
-              final queue = List<Function()>.from(_retryQueue);
-              _retryQueue.clear();
-              for (var retry in queue) {
-                retry();
-              }
-
-              if (!success) {
-                await _storage.deleteAll();
-                log('Navigating to WelcomeScreen');
-                ApiEndpoints.token = null;
-                navigatorKey.currentContext?.go(WelcomeScreen.routeName);
-              }
-            }
-
-            return handler.resolve(await completer.future);
-          }
-
-          return handler.next(error);
-        },
-      ),
-    );
-  }
-
-  Future<bool> _refreshToken() async {
-    final refreshToken = await _storage.read(key: 'refreshToken');
-    final accessToken = await _storage.read(key: 'accessToken');
-
-    if (refreshToken == null || accessToken == null) return false;
-
-    try {
-      final response = await dio.post(
-        ApiEndpoints.baseUrl + ApiEndpoints.refreshToken,
-        data: {'token': accessToken, 'refreshToken': refreshToken},
-      );
-
-      final newAccessToken = response.data['token'];
-      final newRefreshToken = response.data['refreshToken'];
-
-      await _storage.write(key: 'accessToken', value: newAccessToken);
-      await _storage.write(key: 'refreshToken', value: newRefreshToken);
-
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
-
-  // Optional cancel token for request cancellation
-  CancelToken? cancelToken;
-
-  /// Cancel any ongoing requests
-  void cancelOngoingRequests() {
-    if (cancelToken != null && !cancelToken!.isCancelled) {
-      cancelToken?.cancel('Request canceled.');
-    }
-    cancelToken = CancelToken();
-  }
-
-  /// General HTTP Request Handler
-  Future<T?> request<T>({
-    required String path,
-    required String method,
-    Map<String, dynamic>? queryParameters,
-    Object? data,
-    Map<String, dynamic>? headers,
-    CancelToken? token,
-    T Function(dynamic data)? parser,
-  }) async {
-    try {
-      // Make HTTP request
-      final response = await dio.request(
-        path,
-        options: Options(method: method, headers: headers),
-        queryParameters: queryParameters,
-        data: data,
-        cancelToken: token ?? cancelToken,
-      );
-
-      // Parse response using the provided parser
-      if (parser != null) {
-        return parser(response.data);
-      } else {
-        return response.data as T;
-      }
-    } on DioException catch (e) {
-      log('DioException: ${e.message}');
-      if (CancelToken.isCancel(e)) {
-        log('Request canceled');
-        throw Exception('Request canceled: $e');
-      } else {
-        handleError(e);
-        throw Exception(e);
-      }
-    } catch (e) {
-      log('Unhandled error: $e');
-      throw Exception(e);
-    }
-  }
-
-  /// GET Method
-  Future<T?> get<T>({
-    required String path,
-    Map<String, dynamic>? queryParameters,
-    Map<String, dynamic>? headers,
-    CancelToken? token,
-    T Function(dynamic data)? parser,
-  }) async {
-    return request(
-      path: path,
-      method: 'GET',
-      queryParameters: queryParameters,
-      headers: headers,
-      token: token,
-      parser: parser,
-    );
-  }
-
-  /// POST Method
-  Future<T?> post<T>({
-    required String path,
-    Object? data,
-    Map<String, dynamic>? headers,
-    CancelToken? token,
-    T Function(dynamic data)? parser,
-  }) async {
-    return request(
-      path: path,
-      method: 'POST',
-      data: data,
-      headers: headers,
-      token: token,
-      parser: parser,
-    );
-  }
-
-  /// PUT Method
-  Future<T?> put<T>({
-    required String path,
-    Object? data,
-    Map<String, dynamic>? headers,
-    CancelToken? token,
-    T Function(dynamic data)? parser,
-  }) async {
-    return request(
-      path: path,
-      method: 'PUT',
-      data: data,
-      headers: headers,
-      token: token,
-      parser: parser,
-    );
-  }
-
-  /// DELETE Method
-  Future<T?> delete<T>({
-    required String path,
-    Object? data,
-    Map<String, dynamic>? headers,
-    CancelToken? token,
-    T Function(dynamic data)? parser,
-  }) async {
-    return request(
-      path: path,
-      method: 'DELETE',
-      data: data,
-      headers: headers,
-      token: token,
-      parser: parser,
-    );
-  }
-
-  /// Handle Errors Globally
-  void handleError(DioException error) {
-    switch (error.type) {
-      case DioExceptionType.connectionTimeout:
-        log('Connection timeout: ${error.message}');
-        throw Exception('Connection timeout: ${error.message}');
-      case DioExceptionType.receiveTimeout:
-        log('Receive timeout: ${error.message}');
-        throw Exception('Receive timeout: ${error.message}');
-      case DioExceptionType.badResponse:
-        log(
-          'Bad response: ${error.response?.statusCode} ${error.response?.data}',
-        );
-        throw Exception(error.response?.data['message']);
-      default:
-        log('Unexpected error: ${error.message}');
-        throw Exception('Unexpected error: ${error.message}');
-    }
+    dio.interceptors.add(AuthInterceptor(dio));
   }
 }

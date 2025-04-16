@@ -15,30 +15,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc({
     required this.getProfileUseCase,
     required this.updateProfileUseCase,
-  }) : super(
-         ProfileState(
-           profile: Profile.empty(),
-           error: '',
-           statusCode: 0,
-           isLoading: false,
-         ),
-       ) {
+  }) : super(InitialState(profile: Profile.empty())) {
     on(_getProfile);
     on(_updateProfile);
   }
 
   void _getProfile(GetProfileEvent event, Emitter<ProfileState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(LoadedState(profile: state.profile));
     final result = await getProfileUseCase(const NoParams());
     result.fold(
-      (failure) => emit(
-        state.copyWith(
-          error: failure.error,
-          statusCode: failure.statusCode,
-          isLoading: false,
-        ),
-      ),
-      (profile) => emit(state.copyWith(profile: profile, isLoading: false)),
+      (failure) =>
+          emit(ErrorState(profile: state.profile, error: failure.error)),
+      (profile) => emit(LoadedState(profile: profile)),
     );
   }
 
@@ -46,18 +34,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     UpdateProfileEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(LoadedState(profile: state.profile));
     final result = await updateProfileUseCase(event.params);
     result.fold(
-      (failure) => emit(
-        state.copyWith(
-          error: failure.error,
-          statusCode: failure.statusCode,
-          isLoading: false,
-        ),
-      ),
-      (profile) =>
-          emit(state.copyWith(profile: state.profile, isLoading: false)),
+      (failure) =>
+          emit(ErrorState(profile: state.profile, error: failure.error)),
+      (profile) => emit(LoadedState(profile: state.profile)),
     );
   }
 }

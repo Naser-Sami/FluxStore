@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '/core/_core.dart' show ApiEndpoints;
+import '/core/_core.dart' show AuthService, Constants, SecureStorageService, sl;
 import '/features/_features.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,15 +21,24 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkSession() async {
-    if (ApiEndpoints.token != null) {
-      if (mounted) {
-        context.go(HomeScreen.routeName);
-      }
-    } else {
-      if (mounted) {
-        context.go(WelcomeScreen.routeName);
+    final token = await sl<SecureStorageService>().read(
+      key: Constants.keyToken,
+    );
+    final refreshToken = await sl<SecureStorageService>().read(
+      key: Constants.keyRefreshToken,
+    );
+
+    if (token != null && refreshToken != null) {
+      final refreshed = await sl<AuthService>().tryRefreshToken(
+        token,
+        refreshToken,
+      );
+      if (refreshed) {
+        if (mounted) context.go(HomeScreen.routeName);
+        return;
       }
     }
+    if (mounted) context.go(WelcomeScreen.routeName);
   }
 
   @override

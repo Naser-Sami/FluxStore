@@ -11,13 +11,14 @@ class ProductsSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = ScrollController();
+    final textTheme = context.theme.textTheme;
 
     return Column(
       children: [
         TitleWithShowAll(title: title, onShowAll: () {}),
         const SizedBox(height: TSize.s20),
         SizedBox(
-          height: 227,
+          height: 287,
           child: ListView.separated(
             controller: controller,
             scrollDirection: Axis.horizontal,
@@ -32,7 +33,27 @@ class ProductsSlider extends StatelessWidget {
                   left: paddingOnFirst ? TPadding.p24 : 0,
                   right: paddingOnLast ? TSize.s24 : 0,
                 ),
-                child: ProductItem(index: index, controller: controller),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ProductItem(index: index, controller: controller),
+                    const SizedBox(height: TSize.s14),
+                    TextWidget(
+                      "Long Sleeve Shirt",
+                      style: textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    TextWidget(
+                      "\$100.00",
+                      style: textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),

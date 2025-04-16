@@ -10,6 +10,12 @@ import '/features/_features.dart';
 final sl = GetIt.I;
 
 class DI {
+  Future<void> internetConnectionChecker() async {
+    sl.registerLazySingleton<InternetConnectionCubit>(
+      InternetConnectionCubit.new,
+    );
+  }
+
   Future<void> initDio() async {
     sl.registerLazySingleton<DioService>(DioService.new);
     sl.registerLazySingleton<ApiClient>(
@@ -203,6 +209,7 @@ class DI {
   }
 
   Future<void> init() async {
+    await internetConnectionChecker();
     await initServices();
     await initDataSources();
     await initRepositories();

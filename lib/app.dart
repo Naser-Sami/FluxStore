@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Files
 import '/config/_config.dart';
-import '/core/_core.dart' show AppConfig;
+import '/core/_core.dart'
+    show AppConfig, InternetConnectionCubit, InternetStatus;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -50,17 +51,41 @@ class ThemeWrapper extends StatelessWidget {
             designSize: const Size(360, 690),
             minTextAdapt: true,
             splitScreenMode: true,
-            child: MaterialApp.router(
-              title: AppConfig.appName,
-              debugShowCheckedModeBanner: false,
-              themeMode: state,
-              theme: lightTheme,
-              darkTheme: darkTheme,
-              scrollBehavior: scrollBehavior,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              routerConfig: router,
+            child: BlocBuilder<InternetConnectionCubit, InternetStatus>(
+              builder: (context, status) {
+                if (status == InternetStatus.disconnected) {
+                  return const MaterialApp(
+                    title: AppConfig.appName,
+                    debugShowCheckedModeBanner: false,
+                    home: Scaffold(
+                      body: SafeArea(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.wifi_off, size: 80, color: Colors.red),
+                              SizedBox(height: 10),
+                              Text('No Internet Connection'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
+                return MaterialApp.router(
+                  title: AppConfig.appName,
+                  debugShowCheckedModeBanner: false,
+                  themeMode: state,
+                  theme: lightTheme,
+                  darkTheme: darkTheme,
+                  scrollBehavior: scrollBehavior,
+                  localizationsDelegates: context.localizationDelegates,
+                  supportedLocales: context.supportedLocales,
+                  locale: context.locale,
+                  routerConfig: router,
+                );
+              },
             ),
           ),
         );

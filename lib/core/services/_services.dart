@@ -5,6 +5,7 @@ export 'di/di.dart';
 export 'email_service/_email_service.dart';
 export 'firebase_service/_firebase_service.dart';
 export 'graphql_service/_graphql_service.dart';
+export 'internet_connection/internet_connection_cubit.dart';
 export 'local_db/_local_db.dart';
 export 'location_service/_location_service.dart';
 export 'navigation_service/navigation_service.dart';

@@ -112,9 +112,16 @@ dependencies:
 
   # For GraphQL Queries And Api Calls
   graphql_flutter: ^5.2.0-beta.8
+
+  # For Firebase Authentication
   firebase_auth: ^5.5.2
   google_sign_in: ^6.3.0
+
+  # For Image Picker
   image_picker: ^1.1.2
+
+  # For Internet Connection Checker
+  internet_connection_checker: ^3.0.1
 
 dev_dependencies:
   flutter_test:

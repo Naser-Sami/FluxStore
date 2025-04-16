@@ -20,13 +20,14 @@ final router = GoRouter(
 
     return ErrorPage(state.error.toString());
   },
-  redirect: (context, state) {
-    final user = sl<UserSessionCubit>().state;
+  redirect: (context, state) async {
+    final user = await sl<UserSessionCubit>().getSavedUser();
 
-    if (user?.role == 'admin' && !state.matchedLocation.startsWith('/admin')) {
+    if (user?.role.toLowerCase() == 'admin' &&
+        !state.matchedLocation.startsWith('/admin')) {
       return AdminDashboardScreen.routeName;
     }
-    if (user?.role == 'customer' &&
+    if (user?.role.toLowerCase() == 'customer' &&
         state.matchedLocation.startsWith('/admin')) {
       return HomeScreen.routeName;
     }

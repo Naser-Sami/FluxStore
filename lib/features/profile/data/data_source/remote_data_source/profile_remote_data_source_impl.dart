@@ -26,10 +26,9 @@ class ProfileRemoteDataSourceImpl implements IProfileRemoteDataSource {
   @override
   Future<void> update(UpdateProfileParams params) async {
     try {
-      final response = await apiClient.put<ProfileModel>(
+      final response = await apiClient.put<String>(
         path: ApiEndpoints.profile,
         data: params.toMap(),
-        parser: (data) => ProfileModel.fromJson(data),
       );
       if (response == null) return;
     } catch (e) {

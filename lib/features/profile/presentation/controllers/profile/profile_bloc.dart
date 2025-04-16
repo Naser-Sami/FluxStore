@@ -45,11 +45,23 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(LoadedState(profile: state.profile));
-    final result = await updateProfileUseCase(event.params);
-    result.fold(
+
+    final updateProfileResult = await updateProfileUseCase(event.params);
+    if (updateProfileResult.isLeft()) {
+      updateProfileResult.fold(
+        (failure) =>
+            emit(ErrorState(profile: state.profile, error: failure.error)),
+        (_) {},
+      );
+      return;
+    }
+
+    // ✅ Get latest profile data from backend after upload
+    final profileResult = await getProfileUseCase(const NoParams());
+    profileResult.fold(
       (failure) =>
           emit(ErrorState(profile: state.profile, error: failure.error)),
-      (profile) => emit(LoadedState(profile: state.profile)),
+      (profile) => emit(LoadedState(profile: profile)),
     );
   }
 

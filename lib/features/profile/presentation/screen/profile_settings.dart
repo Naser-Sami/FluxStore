@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flux_store/features/profile/presentation/controllers/_controllers.dart';
@@ -54,6 +56,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     _firstNameController.text = state.profile.firstName;
     _lastNameController.text = state.profile.lastName;
     _emailController.text = state.profile.email;
+
+    log('Phone Number: ${state.profile.phoneNumber}');
     _phoneController.text = state.profile.phoneNumber;
     if (state.profile.gender == '') {
       gender = 'Other';
@@ -63,6 +67,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   }
 
   void _updateProfile() {
+    final state = context.read<ProfileBloc>().state;
+
     if (_formKey.currentState!.validate()) {
       context.read<ProfileBloc>().add(
         UpdateProfileEvent(
@@ -70,12 +76,15 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
             firstName: _firstNameController.text,
             lastName: _lastNameController.text,
             gender: gender,
+            email: _emailController.text,
             phoneNumber: _phoneController.text,
-            imageUrl: '',
-            address: '',
+            imageUrl: state.profile.imageUrl,
+            address: state.profile.address,
           ),
         ),
       );
+
+      context.pop();
     }
   }
 
@@ -164,7 +173,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                       hintText: LocaleKeys.Profile_email,
                       labelText: LocaleKeys.Profile_email,
                       onChanged: (value) {},
-                      readOnly: true,
+                      // readOnly: true,
                       validator: TValidator.validateEmail,
                     ),
                     const SizedBox(height: TSize.s30),
@@ -174,7 +183,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                           Expanded(
                             flex: 3,
                             child: Container(
-                              height: 55,
+                              height: 54,
                               decoration: BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(

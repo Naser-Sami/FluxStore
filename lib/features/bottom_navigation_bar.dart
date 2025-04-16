@@ -157,7 +157,10 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
               resizeToAvoidBottomInset: true,
               appBar:
                   showAppBar && !_isScrollingDown
-                      ? MainAppBar(onMenuPressed: _toggleDrawer)
+                      ? MainAppBar(
+                        onMenuPressed: _toggleDrawer,
+                        index: widget.navigationShell.currentIndex,
+                      )
                       : null,
               bottomNavigationBar:
                   showNavBar && !_isScrollingDown

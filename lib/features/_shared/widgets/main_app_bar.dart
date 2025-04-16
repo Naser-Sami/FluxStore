@@ -8,8 +8,13 @@ import '/config/_config.dart';
 import '/core/_core.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppBar({super.key, required this.onMenuPressed});
+  const MainAppBar({
+    super.key,
+    required this.onMenuPressed,
+    required this.index,
+  });
   final VoidCallback onMenuPressed;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: onMenuPressed,
           ),
         ),
-        title: const TextWidget(AppConfig.appName),
+        title:
+            index == 1
+                ? const TextWidget(LocaleKeys.DrawerMenu_discover)
+                : const TextWidget(AppConfig.appName),
         actions: [
           IconButton(
             icon: const Icon(Icons.language),

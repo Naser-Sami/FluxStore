@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '/core/_core.dart'
     show ApiClient, ApiEndpoints, Constants, SecureStorageService, sl;
 
@@ -16,10 +14,6 @@ class RefreshTokenHandler {
     ApiEndpoints.accessToken = accessToken;
     ApiEndpoints.refreshToken = refreshToken;
 
-    log('message: accessToken: $accessToken');
-    log('message: refreshToken: $refreshToken');
-    //inaser94@gmail.com
-
     if (refreshToken == null || accessToken == null) return false;
 
     try {
@@ -27,9 +21,6 @@ class RefreshTokenHandler {
         path: ApiEndpoints.refresh,
         data: {'token': accessToken, 'refreshToken': refreshToken},
       );
-
-      log('message: response: $response');
-      log('message: response token: ${response['token']}');
 
       final newAccessToken = response['token'];
       final newRefreshToken = response['refreshToken'];

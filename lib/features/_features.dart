@@ -7,6 +7,7 @@ export 'home/_home.dart';
 export 'internet_connection/_internet_connection.dart';
 export 'navigation/_navigation.dart';
 export 'onboarding/onboarding_screen.dart';
+export 'product/_product.dart';
 export 'profile/_profile.dart';
 export 'search/_search.dart';
 export 'splash/splash_screen.dart';

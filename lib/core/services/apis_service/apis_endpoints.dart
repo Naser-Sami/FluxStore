@@ -20,4 +20,8 @@ class ApiEndpoints {
 
   // Categories
   static const String category = 'Category';
+
+  // Products
+  static const String product = 'Products';
+  static const String productAddReview = 'Products/add-review';
 }

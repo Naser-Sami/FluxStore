@@ -12,6 +12,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: const Drawer(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(TPadding.p20),

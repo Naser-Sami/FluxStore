@@ -1,11 +1,11 @@
 export '_new_feature/_new_feature.dart';
 export '_shared/_shared.dart';
 export 'authentication/_authentication.dart';
-export 'bottom_navigation_bar.dart';
 export 'cart/_cart.dart';
 export 'category/_category.dart';
 export 'home/_home.dart';
-export 'no_internet_connection_screen.dart';
+export 'internet_connection/_internet_connection.dart';
+export 'navigation/_navigation.dart';
 export 'onboarding/onboarding_screen.dart';
 export 'profile/_profile.dart';
 export 'search/_search.dart';

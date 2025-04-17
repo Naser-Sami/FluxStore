@@ -5,6 +5,7 @@ export 'bottom_navigation_bar.dart';
 export 'cart/_cart.dart';
 export 'category/_category.dart';
 export 'home/_home.dart';
+export 'no_internet_connection_screen.dart';
 export 'onboarding/onboarding_screen.dart';
 export 'profile/_profile.dart';
 export 'search/_search.dart';

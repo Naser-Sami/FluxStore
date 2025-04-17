@@ -36,6 +36,13 @@ final router = GoRouter(
   },
   routes: [
     GoRoute(
+      path: NoInternetConnectionScreen.routeName,
+      name: NoInternetConnectionScreen.name,
+      builder: (context, state) {
+        return const NoInternetConnectionScreen();
+      },
+    ),
+    GoRoute(
       path: SplashScreen.routeName,
       name: SplashScreen.name,
       pageBuilder:

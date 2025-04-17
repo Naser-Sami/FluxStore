@@ -1,1 +1,1 @@
-enum InternetStatus { connected, disconnected }
+enum InternetStatus { initial, connected, disconnected }

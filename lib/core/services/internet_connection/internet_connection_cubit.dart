@@ -9,7 +9,7 @@ class InternetConnectionCubit extends Cubit<InternetStatus> {
   late StreamSubscription<InternetConnectionStatus> _subscription;
   final connectionChecker = InternetConnectionChecker.instance;
 
-  InternetConnectionCubit() : super(InternetStatus.connected) {
+  InternetConnectionCubit() : super(InternetStatus.initial) {
     _subscription = connectionChecker.onStatusChange.listen((status) {
       if (status == InternetConnectionStatus.connected) {
         emit(InternetStatus.connected);
@@ -17,6 +17,13 @@ class InternetConnectionCubit extends Cubit<InternetStatus> {
         emit(InternetStatus.disconnected);
       }
     });
+
+    _checkInitialStatus(); // 👇 async first-time check
+  }
+
+  Future<void> _checkInitialStatus() async {
+    final isConnected = await connectionChecker.hasConnection;
+    emit(isConnected ? InternetStatus.connected : InternetStatus.disconnected);
   }
 
   @override

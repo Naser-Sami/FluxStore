@@ -113,7 +113,11 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
 
     final isRTL = Directionality.of(context) == TextDirection.rtl;
 
-    final double top = isCollapsed ? 0 : 0.1 * context.screenWidth;
+    final topHeight =
+        context.isLandscape
+            ? 0.0 * context.screenHeight
+            : 0.1 * context.screenHeight;
+    final double top = isCollapsed ? 0 : topHeight;
 
     final double left =
         isCollapsed

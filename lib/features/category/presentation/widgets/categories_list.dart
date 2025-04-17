@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart' show BuildContextExtensions, LocaleKeys;
@@ -21,9 +20,9 @@ class CategoriesList extends StatelessWidget {
         }
       },
       child: Padding(
-        padding: EdgeInsets.only(top: TPadding.p28.r),
+        padding: const EdgeInsets.only(top: TPadding.p28),
         child: SizedBox(
-          height: 60.h,
+          height: 70,
           width: context.screenWidth,
           child: Center(
             child: BlocBuilder<CategoryBloc, CategoryState>(
@@ -54,7 +53,7 @@ class CategoriesList extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: state.categories.length,
                   separatorBuilder:
-                      (context, index) => SizedBox(width: TSize.s34.r),
+                      (context, index) => const SizedBox(width: TSize.s34),
                   itemBuilder: (context, index) {
                     final category = state.categories[index];
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '/core/_core.dart' show AppColorsExtension;
 import '/config/_config.dart';
-import '/core/utils/extensions/custom_box_decoration_theme_extension.dart';
+import '../../../../core/utils/extensions/custom_box_decoration_theme.dart';
 
 /// ------------------------------
 /// Custom Extensions -Light Theme

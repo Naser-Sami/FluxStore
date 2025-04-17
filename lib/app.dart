@@ -1,13 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Files
 import '/config/_config.dart';
-import '/core/_core.dart'
-    show AppConfig, InternetConnectionCubit, InternetStatus;
-import '/features/_features.dart' show NoInternetConnectionScreen;
+import '/core/_core.dart' show AppConfig;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -48,40 +45,17 @@ class ThemeWrapper extends StatelessWidget {
       builder: (context, state) {
         return GestureDetector(
           onTap: () => unfocusKeyboard(context),
-          child: ScreenUtilInit(
-            designSize: const Size(360, 690),
-            minTextAdapt: true,
-            splitScreenMode: true,
-            child: MaterialApp.router(
-              title: AppConfig.appName,
-              debugShowCheckedModeBanner: false,
-              themeMode: state,
-              theme: lightTheme,
-              darkTheme: darkTheme,
-              scrollBehavior: scrollBehavior,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              routerConfig: router,
-              builder: (context, child) {
-                return Stack(
-                  children: [
-                    child!,
-                    BlocBuilder<InternetConnectionCubit, InternetStatus>(
-                      builder: (context, status) {
-                        if (status == InternetStatus.initial) {
-                          return const SizedBox.shrink();
-                        }
-                        if (status == InternetStatus.disconnected) {
-                          return const NoInternetConnectionScreen(); // overlays the app
-                        }
-                        return const SizedBox.shrink();
-                      },
-                    ),
-                  ],
-                );
-              },
-            ),
+          child: MaterialApp.router(
+            title: AppConfig.appName,
+            debugShowCheckedModeBanner: false,
+            themeMode: state,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            scrollBehavior: scrollBehavior,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            routerConfig: router,
           ),
         );
       },

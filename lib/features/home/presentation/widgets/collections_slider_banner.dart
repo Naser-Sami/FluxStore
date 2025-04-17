@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flux_store/features/_features.dart' show CollectionsSliderBody;
 
-import '/core/_core.dart' show AnimatedWidgetX, BuildContextExtensions;
+import '/core/_core.dart'
+    show AnimatedWidgetX, BuildContextExtensions, OrientationExtension;
 
 class CollectionsSliderBanner extends StatefulWidget {
   const CollectionsSliderBanner({super.key});
@@ -12,7 +13,7 @@ class CollectionsSliderBanner extends StatefulWidget {
 }
 
 class _CollectionsSliderBannerState extends State<CollectionsSliderBanner> {
-  late final PageController _pageController;
+  late PageController _pageController;
   int _currentPage = 0;
 
   final List<String> images = [
@@ -69,8 +70,8 @@ class _CollectionsSliderBannerState extends State<CollectionsSliderBanner> {
 
               return Center(
                 child: SizedBox(
-                  height: 168 * scale,
-                  width: 340 * scale,
+                  height: context.isLandscape ? 300 * scale : 168 * scale,
+                  width: context.isLandscape ? 460 * scale : 340 * scale,
                   child: child,
                 ),
               );

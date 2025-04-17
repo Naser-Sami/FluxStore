@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
@@ -45,12 +44,12 @@ class InfoCard extends StatelessWidget {
               user.firstName.isNotEmpty
                   ? '${user.firstName} ${user.lastName}'
                   : LocaleKeys.Authentication_userName,
-              style: textStyle.titleLarge?.copyWith(fontSize: 18.sp),
+              style: textStyle.titleLarge?.copyWith(fontSize: 18),
             ),
             subtitle: TextWidget(
               user.email,
               style: textStyle.bodyMedium?.copyWith(
-                fontSize: 10.sp,
+                fontSize: 10,
                 fontWeight: FontWeight.bold,
               ),
             ),

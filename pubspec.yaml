@@ -100,9 +100,9 @@ dependencies:
 
   # Send OTP Via Email
   email_otp: ^3.0.2
+
+  # Error Handling
   dartz: ^0.10.1
-  # Screen Util
-  flutter_screenutil: ^5.9.3
 
   # For Network Image Caching
   cached_network_image: ^3.4.1

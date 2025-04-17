@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '/core/_core.dart'
-    show
-        ApiEndpoints,
-        AuthService,
-        Constants,
-        LocalAuthenticationService,
-        SecureStorageService,
-        sl;
+import '/core/_core.dart' show AuthService, Constants, SecureStorageService, sl;
 import '/features/_features.dart';
 
 class SplashScreen extends StatefulWidget {

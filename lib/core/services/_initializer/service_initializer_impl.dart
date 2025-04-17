@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv;
 import 'package:flutter_native_splash/flutter_native_splash.dart'
     show FlutterNativeSplash;
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart' show getTemporaryDirectory;
@@ -19,7 +18,6 @@ class ServiceInitializer extends IServiceInitializer {
   Future<void> init() async {
     initSplashScreen();
     await initLocalization();
-    await initScreenUtils();
     initPathUrlStrategy();
     initGoRouter();
     await initHydratedBloc();
@@ -50,11 +48,6 @@ class ServiceInitializer extends IServiceInitializer {
   @override
   Future<void> initLocalization() async {
     await EasyLocalization.ensureInitialized();
-  }
-
-  @override
-  Future<void> initScreenUtils() async {
-    await ScreenUtil.ensureScreenSize();
   }
 
   @override

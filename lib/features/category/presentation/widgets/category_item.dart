@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '/config/_config.dart';
@@ -49,7 +48,7 @@ class CategoryItem extends StatelessWidget {
               child: IconWidget(name: icon, color: color.onPrimary),
             ),
           ),
-          SizedBox(height: TPadding.p04.r),
+          const SizedBox(height: TPadding.p04),
           TextWidget(name, style: context.textTheme.bodyMedium),
         ],
       ),
@@ -94,7 +93,7 @@ class ShimmerCategoryItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: TPadding.p04.r),
+                const SizedBox(height: TPadding.p04),
                 TextSkeleton(
                   textStyle: context.textTheme.bodyMedium!,
                   widthFactor: 0.5,

@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
@@ -25,7 +24,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         leadingWidth: 100,
         leading: Padding(
-          padding: EdgeInsetsDirectional.only(start: TPadding.p16.r),
+          padding: const EdgeInsetsDirectional.only(start: TPadding.p16),
           child: IconButton(
             icon: IconWidget(
               name: 'menu',
@@ -63,7 +62,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {},
           ),
 
-          SizedBox(width: TPadding.p16.r),
+          const SizedBox(width: TPadding.p16),
         ],
       ),
     );

@@ -17,6 +17,36 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (context.isLandscape) {
+      return SizedBox(
+        height: context.screenHeight,
+        width: context.screenWidth,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: TSize.s48),
+              const InfoCard(),
+              const SizedBox(height: TSize.s24),
+              DrawerSectionOne(
+                navigationShell: navigationShell,
+                onItemSelected: onItemSelected,
+              ),
+              const SizedBox(height: TSize.s24),
+              const TextWidget(LocaleKeys.DrawerMenu_otherC),
+              const SizedBox(height: TSize.s24),
+              DrawerSectionTwo(
+                navigationShell: navigationShell,
+                onItemSelected: onItemSelected,
+              ),
+              const SizedBox(height: TSize.s48),
+              const ThemeButtons(),
+              const SizedBox(height: TSize.s48),
+            ],
+          ),
+        ),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TPadding.p16),
       child: SizedBox(
@@ -39,8 +69,6 @@ class CustomDrawer extends StatelessWidget {
               onItemSelected: onItemSelected,
             ),
             const Spacer(flex: 2),
-            // const LanguagesButtons(),
-            // const Spacer(),
             const ThemeButtons(),
             const Spacer(flex: 3),
           ],

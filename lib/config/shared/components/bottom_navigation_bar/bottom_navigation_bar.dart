@@ -1,6 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart' show BuildContextExtensions;
@@ -14,14 +13,14 @@ class BottomNavigationBarComponent extends StatelessWidget {
       delay: const Duration(milliseconds: 200),
       duration: const Duration(milliseconds: 1200),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(
-          TPadding.p32.r,
+        padding: const EdgeInsets.fromLTRB(
+          TPadding.p32,
           0,
-          TPadding.p32.r,
+          TPadding.p32,
           TPadding.p42,
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(TRadius.r20.r)),
+          borderRadius: const BorderRadius.all(Radius.circular(TRadius.r20)),
           child: BottomAppBar(
             height: 52,
             // color: context.theme.colorScheme.onTertiaryContainer.withValues(

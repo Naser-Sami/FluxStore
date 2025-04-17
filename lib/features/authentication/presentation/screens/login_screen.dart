@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -16,9 +18,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _storage = sl<SecureStorageService>();
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(tryBiometricLogin);
+  }
 
   void _login() {
     if (_formKey.currentState?.validate() ?? false) {
@@ -27,6 +37,29 @@ class _LoginScreenState extends State<LoginScreen> {
         password: _passwordController.text.trim(),
       );
       context.read<LoginBloc>().add(OnLoginEvent(params: params));
+    }
+  }
+
+  Future<void> tryBiometricLogin() async {
+    final refreshToken = await _storage.read(key: Constants.keyRefreshToken);
+    log('Refreshing token: $refreshToken');
+
+    if (refreshToken == null) {
+      log('No refresh token found');
+      return;
+    }
+
+    final isAuthenticated =
+        await LocalAuthenticationService.authenticateWithBiometrics();
+
+    if (isAuthenticated) {
+      final success = await sl<RefreshTokenHandler>().tryRefreshToken();
+
+      if (success) {
+        if (mounted) context.go(HomeScreen.routeName);
+      } else {
+        // fallback or show login form
+      }
     }
   }
 

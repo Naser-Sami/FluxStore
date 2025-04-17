@@ -22,8 +22,7 @@ class Constants {
   // ******************
   // *** KEYS ***
   // ******************
-  static const String keyToken = "access-token";
+  static const String keyAccessToken = "access-token";
   static const String keyRefreshToken = "refresh-token";
-  static const String keyUser = "user";
   static const String keyUserSession = "user_session";
 }

@@ -19,15 +19,16 @@ class UserSessionCubit extends Cubit<UserEntity?> {
     final jsonData = jsonEncode(userModel.toJson());
 
     await Future.wait([
-      setToken(user.token, user.refreshToken),
-      _storage.write(key: 'user', value: jsonData),
+      setAccessToken(user.token),
+      setRefreshToken(user.refreshToken),
+      _storage.write(key: Constants.keyUserSession, value: jsonData),
     ]);
 
     await setUser(user);
   }
 
   Future<UserEntity?> getSavedUser() async {
-    final data = await _storage.read(key: 'user');
+    final data = await _storage.read(key: Constants.keyUserSession);
     if (data == null) return null;
 
     try {
@@ -40,7 +41,7 @@ class UserSessionCubit extends Cubit<UserEntity?> {
       final userModel = UserModel.fromJson(jsonData);
       final user = UserMapper.toEntity(userModel);
 
-      await getToken();
+      await Future.wait([getAccessToken(), getRefreshToken()]);
 
       return user;
     } catch (e) {
@@ -48,38 +49,47 @@ class UserSessionCubit extends Cubit<UserEntity?> {
     }
   }
 
-  Future<void> setToken(String token, String refreshToken) async {
-    await _storage.write(key: Constants.keyToken, value: token);
-    await _storage.write(key: Constants.keyRefreshToken, value: refreshToken);
-
+  Future<void> setAccessToken(String token) async {
+    await _storage.write(key: Constants.keyAccessToken, value: token);
     ApiEndpoints.accessToken = token;
+  }
+
+  Future<void> setRefreshToken(String refreshToken) async {
+    await _storage.write(key: Constants.keyRefreshToken, value: refreshToken);
     ApiEndpoints.refreshToken = refreshToken;
   }
 
-  Future<void> getToken() async {
-    final token = await _storage.read(key: Constants.keyToken);
-    final refreshToken = await _storage.read(key: Constants.keyRefreshToken);
-
+  Future<void> getAccessToken() async {
+    final token = await _storage.read(key: Constants.keyAccessToken);
     ApiEndpoints.accessToken = token ?? '';
+  }
+
+  Future<void> getRefreshToken() async {
+    final refreshToken = await _storage.read(key: Constants.keyRefreshToken);
     ApiEndpoints.refreshToken = refreshToken ?? '';
   }
 
-  Future<void> clearToken() async {
-    await _storage.delete(key: Constants.keyToken);
-    await _storage.delete(key: Constants.keyRefreshToken);
-
+  Future<void> clearAccessToken() async {
+    await _storage.delete(key: Constants.keyAccessToken);
     ApiEndpoints.accessToken = null;
+  }
+
+  Future<void> clearRefreshToken() async {
+    await _storage.delete(key: Constants.keyRefreshToken);
     ApiEndpoints.refreshToken = null;
   }
 
   Future<void> clearUser() async {
-    await _storage.delete(key: 'user');
-    await clearToken();
+    await Future.wait([
+      _storage.delete(key: Constants.keyUserSession),
+      clearAccessToken(),
+    ]);
+
     _clear();
   }
 
   Future<void> logout() async {
-    await clearToken();
-    await clearUser();
+    // Do not clear the refresh token here
+    await Future.wait([clearAccessToken(), clearUser()]);
   }
 }

@@ -21,7 +21,7 @@ class AuthInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = await _storage.read(key: Constants.keyToken);
+    final token = await _storage.read(key: Constants.keyAccessToken);
     ApiEndpoints.accessToken = token;
 
     if (token != null) {
@@ -39,7 +39,7 @@ class AuthInterceptor extends Interceptor {
 
       _retryQueue.add(() async {
         try {
-          final newToken = await _storage.read(key: Constants.keyToken);
+          final newToken = await _storage.read(key: Constants.keyAccessToken);
           ApiEndpoints.accessToken = newToken;
 
           err.requestOptions.headers['Authorization'] = 'Bearer $newToken';

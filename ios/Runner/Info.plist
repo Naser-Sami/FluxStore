@@ -91,5 +91,11 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to photo library</string>
 	<!-- End of Image Picker -->
+
+	<!-- Face Id -->
+	<key>NSFaceIDUsageDescription</key>
+	<string>We use Face ID to let you sign in easily.</string>
+	<!-- End of Face id -->
+	
 </dict>
 </plist>

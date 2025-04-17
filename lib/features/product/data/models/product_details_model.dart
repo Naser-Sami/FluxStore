@@ -15,6 +15,7 @@ class ProductDetailsModel extends Equatable {
     required this.averageRating,
     required this.reviews,
   });
+
   factory ProductDetailsModel.fromJson(Map<String, dynamic> json) {
     return ProductDetailsModel(
       product: ProductModel.fromJson(json['product']),

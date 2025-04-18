@@ -49,21 +49,3 @@ final class GetProductByIdEvent extends ProductsEvent {
   @override
   List<Object> get props => [productId];
 }
-
-final class GetProductDetailsEvent extends ProductsEvent {
-  final String productId;
-
-  const GetProductDetailsEvent(this.productId);
-
-  @override
-  List<Object> get props => [productId];
-}
-
-final class AddReviewEvent extends ProductsEvent {
-  final AddProductReviewParams params;
-
-  const AddReviewEvent(this.params);
-
-  @override
-  List<Object> get props => [params];
-}

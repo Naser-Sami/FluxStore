@@ -292,5 +292,17 @@ final router = GoRouter(
           (context, state) =>
               const CupertinoPage(child: ProfileSettingsScreen()),
     ),
+
+    /// ..
+    /// Products
+    GoRoute(
+      path: ProductDetailsScreen.routeName,
+      name: ProductDetailsScreen.name,
+      pageBuilder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        final productId = extra['productId'];
+        return CupertinoPage(child: ProductDetailsScreen(productId: productId));
+      },
+    ),
   ],
 );

@@ -11,9 +11,6 @@ class ProductMapper {
       stock: model.stock,
       categoryId: model.categoryId,
       createdAt: model.createdAt,
-      additionalImages: model.additionalImages,
-      availableColors: model.availableColors,
-      availableSizes: model.availableSizes,
     );
   }
 
@@ -27,9 +24,6 @@ class ProductMapper {
       stock: entity.stock,
       categoryId: entity.categoryId,
       createdAt: entity.createdAt,
-      additionalImages: entity.additionalImages,
-      availableColors: entity.availableColors,
-      availableSizes: entity.availableSizes,
     );
   }
 }

@@ -29,15 +29,6 @@ final class ProductLoaded extends ProductsState {
   List<Object> get props => [products];
 }
 
-final class ProductDetailsLoaded extends ProductsState {
-  final ProductDetails productDetails;
-
-  const ProductDetailsLoaded(this.productDetails);
-
-  @override
-  List<Object> get props => [productDetails];
-}
-
 final class ProductsError extends ProductsState {
   final String message;
 

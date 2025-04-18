@@ -250,6 +250,10 @@ class DI {
         updateProductUseCase: sl<UpdateProductUseCase>(),
         deleteProductUseCase: sl<DeleteProductUseCase>(),
         getProductByIdUseCase: sl<GetProductByIdUseCase>(),
+      ),
+    );
+    sl.registerFactory<ProductDetailsBloc>(
+      () => ProductDetailsBloc(
         getProductDetailsUseCase: sl<GetProductDetailsUseCase>(),
         addReviewUseCase: sl<AddReviewUseCase>(),
       ),

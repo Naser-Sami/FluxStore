@@ -9,9 +9,6 @@ class Product extends Equatable {
   final int stock;
   final String categoryId;
   final String createdAt;
-  final List<String> additionalImages;
-  final List<String> availableColors;
-  final List<String> availableSizes;
 
   const Product({
     required this.id,
@@ -22,9 +19,6 @@ class Product extends Equatable {
     required this.stock,
     required this.categoryId,
     required this.createdAt,
-    required this.additionalImages,
-    required this.availableColors,
-    required this.availableSizes,
   });
 
   Product copyWith({
@@ -36,9 +30,6 @@ class Product extends Equatable {
     int? stock,
     String? categoryId,
     String? createdAt,
-    List<String>? additionalImages,
-    List<String>? availableColors,
-    List<String>? availableSizes,
   }) {
     return Product(
       id: id ?? this.id,
@@ -49,9 +40,6 @@ class Product extends Equatable {
       stock: stock ?? this.stock,
       categoryId: categoryId ?? this.categoryId,
       createdAt: createdAt ?? this.createdAt,
-      additionalImages: additionalImages ?? this.additionalImages,
-      availableColors: availableColors ?? this.availableColors,
-      availableSizes: availableSizes ?? this.availableSizes,
     );
   }
 
@@ -65,15 +53,12 @@ class Product extends Equatable {
       stock: 0,
       categoryId: '',
       createdAt: '',
-      additionalImages: [],
-      availableColors: [],
-      availableSizes: [],
     );
   }
 
   @override
   String toString() {
-    return 'Product(id: $id, name: $name, description: $description, price: $price, imageUrl: $imageUrl, stock: $stock, categoryId: $categoryId, createdAt: $createdAt, additionalImages: $additionalImages, availableColors: $availableColors, availableSizes: $availableSizes)';
+    return 'Product(id: $id, name: $name, description: $description, price: $price, imageUrl: $imageUrl, stock: $stock, categoryId: $categoryId, createdAt: $createdAt)';
   }
 
   @override
@@ -86,8 +71,5 @@ class Product extends Equatable {
     stock,
     categoryId,
     createdAt,
-    additionalImages,
-    availableColors,
-    availableSizes,
   ];
 }

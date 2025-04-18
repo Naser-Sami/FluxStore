@@ -9,9 +9,6 @@ class ProductModel extends Equatable {
   final int stock;
   final String categoryId;
   final String createdAt;
-  final List<String> additionalImages;
-  final List<String> availableColors;
-  final List<String> availableSizes;
 
   const ProductModel({
     required this.id,
@@ -22,9 +19,6 @@ class ProductModel extends Equatable {
     required this.stock,
     required this.categoryId,
     required this.createdAt,
-    required this.additionalImages,
-    required this.availableColors,
-    required this.availableSizes,
   });
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
@@ -36,9 +30,6 @@ class ProductModel extends Equatable {
       stock: json['stock'] as int,
       categoryId: json['categoryId'] as String,
       createdAt: json['createdAt'] as String,
-      additionalImages: List<String>.from(json['additionalImages']),
-      availableColors: List<String>.from(json['availableColors']),
-      availableSizes: List<String>.from(json['availableSizes']),
     );
   }
 
@@ -52,9 +43,6 @@ class ProductModel extends Equatable {
       'stock': stock,
       'categoryId': categoryId,
       'createdAt': createdAt,
-      'additionalImages': additionalImages,
-      'availableColors': availableColors,
-      'availableSizes': availableSizes,
     };
   }
 
@@ -68,8 +56,5 @@ class ProductModel extends Equatable {
     stock,
     categoryId,
     createdAt,
-    additionalImages,
-    availableColors,
-    availableSizes,
   ];
 }

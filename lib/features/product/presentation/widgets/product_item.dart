@@ -65,10 +65,13 @@ class ProductItem extends StatelessWidget {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(TPadding.p16),
-            child: Image.asset(
-              "assets/images/${product.imageUrl}.png",
-              fit: BoxFit.cover,
-              alignment: Alignment.bottomCenter,
+            child: Hero(
+              tag: "Product-${product.id}",
+              child: Image.asset(
+                "assets/images/${product.imageUrl}.png",
+                fit: BoxFit.cover,
+                alignment: Alignment.bottomCenter,
+              ),
             ),
           ),
         ),

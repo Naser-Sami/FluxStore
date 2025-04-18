@@ -28,7 +28,7 @@ class SearchScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return DiscoverCollectionBaseExpansionTile(
                       children: [
-                        ExpansionTile(
+                        ExpansionTileWidget(
                           key: UniqueKey(),
                           childrenPadding: const EdgeInsetsDirectional.only(
                             start: TPadding.p24,
@@ -38,7 +38,7 @@ class SearchScreen extends StatelessWidget {
                             trailing: TextWidget('128 items'),
                           ),
                           children: [
-                            ExpansionTile(
+                            ExpansionTileWidget(
                               key: UniqueKey(),
                               title: const ListTile(
                                 title: TextWidget('Jeans'),

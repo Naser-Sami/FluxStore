@@ -158,4 +158,17 @@ class TFunctions {
       return null;
     }
   }
+
+  static Color hexToColor(String hex) {
+    // Ensure the string is 6 characters and uppercase
+    hex = hex.toUpperCase().replaceAll('#', '');
+
+    // Add full opacity (FF) if not provided
+    if (hex.length == 6) {
+      hex = 'FF$hex';
+    }
+
+    // Parse and return
+    return Color(int.parse(hex, radix: 16));
+  }
 }

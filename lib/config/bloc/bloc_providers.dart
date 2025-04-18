@@ -20,4 +20,5 @@ final providers = [
     create: (context) => sl<DrawerCubit>()..loadDrawerItems(),
   ),
   BlocProvider<OnDrawerTapCubit>(create: (context) => sl<OnDrawerTapCubit>()),
+  BlocProvider<ProductsBloc>(create: (context) => sl<ProductsBloc>()),
 ];

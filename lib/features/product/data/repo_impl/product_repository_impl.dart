@@ -13,9 +13,9 @@ import '/features/_features.dart'
         AddProductReviewParams,
         IProductRemoteDataSource;
 
-class ProductRepositoryImpl implements IProductRepository {
+class ProductRepositoryImplementation implements IProductRepository {
   final IProductRemoteDataSource remoteDataSource;
-  ProductRepositoryImpl({required this.remoteDataSource});
+  ProductRepositoryImplementation({required this.remoteDataSource});
 
   @override
   Future<Either<Failure<String>, Product>> addProduct(

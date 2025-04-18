@@ -72,6 +72,11 @@ class DI {
     sl.registerLazySingleton<ICategoriesRemoteDataSource>(
       CategoriesRemoteDataSourceImpl.new,
     );
+
+    // Products
+    sl.registerLazySingleton<IProductRemoteDataSource>(
+      ProductRemoteDataSourceImpl.new,
+    );
   }
 
   Future<void> initRepositories() async {
@@ -108,6 +113,13 @@ class DI {
     sl.registerLazySingleton<ICategoriesRepository>(
       () => CategoriesRepositoryImplementation(
         remoteDataSource: sl<ICategoriesRemoteDataSource>(),
+      ),
+    );
+
+    // Products
+    sl.registerLazySingleton<IProductRepository>(
+      () => ProductRepositoryImplementation(
+        remoteDataSource: sl<IProductRemoteDataSource>(),
       ),
     );
   }
@@ -167,6 +179,30 @@ class DI {
         categoriesRepository: sl<ICategoriesRepository>(),
       ),
     );
+
+    // Products
+    sl.registerLazySingleton<GetProductsUseCase>(
+      () => GetProductsUseCase(productRepository: sl<IProductRepository>()),
+    );
+    sl.registerLazySingleton<GetProductByIdUseCase>(
+      () => GetProductByIdUseCase(productRepository: sl<IProductRepository>()),
+    );
+    sl.registerLazySingleton<AddProductUseCase>(
+      () => AddProductUseCase(productRepository: sl<IProductRepository>()),
+    );
+    sl.registerLazySingleton<UpdateProductUseCase>(
+      () => UpdateProductUseCase(productRepository: sl<IProductRepository>()),
+    );
+    sl.registerLazySingleton<DeleteProductUseCase>(
+      () => DeleteProductUseCase(productRepository: sl<IProductRepository>()),
+    );
+    sl.registerLazySingleton<GetProductDetailsUseCase>(
+      () =>
+          GetProductDetailsUseCase(productRepository: sl<IProductRepository>()),
+    );
+    sl.registerLazySingleton<AddReviewUseCase>(
+      () => AddReviewUseCase(productRepository: sl<IProductRepository>()),
+    );
   }
 
   Future<void> initControllers() async {
@@ -204,6 +240,18 @@ class DI {
         createCategoryUseCase: sl<CreateCategoryUseCase>(),
         updateCategoryUseCase: sl<UpdateCategoryUseCase>(),
         deleteCategoryUseCase: sl<DeleteCategoryUseCase>(),
+      ),
+    );
+
+    sl.registerFactory<ProductsBloc>(
+      () => ProductsBloc(
+        addProductUseCase: sl<AddProductUseCase>(),
+        getProductsUseCase: sl<GetProductsUseCase>(),
+        updateProductUseCase: sl<UpdateProductUseCase>(),
+        deleteProductUseCase: sl<DeleteProductUseCase>(),
+        getProductByIdUseCase: sl<GetProductByIdUseCase>(),
+        getProductDetailsUseCase: sl<GetProductDetailsUseCase>(),
+        addReviewUseCase: sl<AddReviewUseCase>(),
       ),
     );
   }

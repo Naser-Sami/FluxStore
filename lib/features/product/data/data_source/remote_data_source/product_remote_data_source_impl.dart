@@ -30,7 +30,7 @@ class ProductRemoteDataSourceImpl implements IProductRemoteDataSource {
   }
 
   @override
-  Future<String> addProductReview(AddProductReviewParams params) async {
+  Future<String> addReview(AddProductReviewParams params) async {
     try {
       final response = await apiClient.post(
         path: ApiEndpoints.productAddReview,
@@ -101,7 +101,7 @@ class ProductRemoteDataSourceImpl implements IProductRemoteDataSource {
   }
 
   @override
-  Future<ProductDetailsModel> getProductsDetailsById(String id) async {
+  Future<ProductDetailsModel> getProductDetails(String id) async {
     try {
       final response = await apiClient.get(
         path: '${ApiEndpoints.product}/$id/details',

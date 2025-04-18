@@ -34,11 +34,11 @@ class ProductRepositoryImpl implements IProductRepository {
   }
 
   @override
-  Future<Either<Failure<String>, String>> addProductReview(
+  Future<Either<Failure<String>, String>> addReview(
     AddProductReviewParams p,
   ) async {
     try {
-      final result = await remoteDataSource.addProductReview(p);
+      final result = await remoteDataSource.addReview(p);
 
       if (result == 'Success') {
         return Right(result);
@@ -98,11 +98,11 @@ class ProductRepositoryImpl implements IProductRepository {
   }
 
   @override
-  Future<Either<Failure<String>, ProductDetails>> getProductsDetailsById(
+  Future<Either<Failure<String>, ProductDetails>> getProductDetails(
     String id,
   ) async {
     try {
-      final result = await remoteDataSource.getProductsDetailsById(id);
+      final result = await remoteDataSource.getProductDetails(id);
       final resultEntity = ProductDetailsMapper.toDomain(result);
 
       return Right(resultEntity);

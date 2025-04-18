@@ -15,10 +15,6 @@ abstract class IProductRepository {
   Future<Either<Failure<String>, Product>> addProduct(AddProductParams p);
   Future<Either<Failure<String>, String>> updateProduct(UpdateProductParams p);
   Future<Either<Failure<String>, String>> deleteProduct(String id);
-  Future<Either<Failure<String>, ProductDetails>> getProductsDetailsById(
-    String id,
-  );
-  Future<Either<Failure<String>, String>> addProductReview(
-    AddProductReviewParams p,
-  );
+  Future<Either<Failure<String>, ProductDetails>> getProductDetails(String id);
+  Future<Either<Failure<String>, String>> addReview(AddProductReviewParams p);
 }

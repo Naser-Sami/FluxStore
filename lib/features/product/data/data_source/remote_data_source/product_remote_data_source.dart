@@ -12,8 +12,8 @@ abstract class IProductRemoteDataSource {
   Future<ProductModel> addProduct(AddProductParams params);
   Future<String> updateProduct(UpdateProductParams params);
   Future<String> deleteProduct(String id);
-  Future<ProductDetailsModel> getProductsDetailsById(String id);
-  Future<String> addProductReview(AddProductReviewParams params);
+  Future<ProductDetailsModel> getProductDetails(String id);
+  Future<String> addReview(AddProductReviewParams params);
 
   // TODO : Add this on the api
   // Future<List<ProductModel>> searchProducts(String query);

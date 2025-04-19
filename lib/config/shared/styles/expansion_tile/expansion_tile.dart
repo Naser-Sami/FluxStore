@@ -28,7 +28,7 @@ class ExpansionTileWidget extends StatelessWidget {
     this.backgroundColor,
     this.tilePadding,
     this.childrenPadding,
-    this.showTrailingIcon = false,
+    this.showTrailingIcon = true,
     this.dense,
   });
 

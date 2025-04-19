@@ -123,6 +123,7 @@ dependencies:
   # For Internet Connection Checker
   internet_connection_checker: ^3.0.1
   local_auth: ^2.3.0
+  fl_chart: ^0.71.0
 
 dev_dependencies:
   flutter_test:

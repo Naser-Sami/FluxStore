@@ -15,8 +15,8 @@ import '/features/_features.dart'
 import 'product_item.dart';
 
 class ProductsSlider extends StatelessWidget {
-  const ProductsSlider({super.key, required this.title});
-  final String title;
+  const ProductsSlider({super.key, this.title});
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +38,8 @@ class ProductsSlider extends StatelessWidget {
 }
 
 class ProductSliderBody extends StatelessWidget {
-  const ProductSliderBody({
-    super.key,
-    required this.title,
-    required this.products,
-  });
-  final String title;
+  const ProductSliderBody({super.key, this.title, required this.products});
+  final String? title;
   final List<Product> products;
 
   @override
@@ -53,8 +49,8 @@ class ProductSliderBody extends StatelessWidget {
 
     return Column(
       children: [
-        TitleWithShowAll(title: title, onShowAll: () {}),
-        const SizedBox(height: TSize.s20),
+        if (title != null) TitleWithShowAll(title: title!, onShowAll: () {}),
+        if (title != null) const SizedBox(height: TSize.s20),
         SizedBox(
           height: 287,
           child: ListView.separated(

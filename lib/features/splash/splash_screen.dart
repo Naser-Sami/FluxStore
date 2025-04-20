@@ -33,7 +33,13 @@ class SplashScreenState extends State<SplashScreen> {
         token,
         refreshToken,
       );
+
       if (refreshed) {
+        final user = await sl<UserSessionCubit>().getSavedUser();
+        if (user?.role.toLowerCase() == 'admin') {
+          if (mounted) context.go(AdminScreen.routeName);
+          return;
+        }
         if (mounted) context.go(HomeScreen.routeName);
         return;
       }

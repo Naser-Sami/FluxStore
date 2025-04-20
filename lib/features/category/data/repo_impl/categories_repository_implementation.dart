@@ -21,11 +21,7 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
     try {
       final result = await remoteDataSource.create(category);
 
-      if (result == 'Category created successfully') {
-        return Right(result);
-      } else {
-        return Left(Failure(statusCode: 500, error: result));
-      }
+      return Right(result);
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {
@@ -34,7 +30,7 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
   }
 
   @override
-  Future<Either<Failure<String>, String>> delete(int id) async {
+  Future<Either<Failure<String>, String>> delete(String id) async {
     try {
       final result = await remoteDataSource.delete(id);
 
@@ -64,7 +60,7 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
   }
 
   @override
-  Future<Either<Failure<String>, Category>> getById(int id) async {
+  Future<Either<Failure<String>, Category>> getById(String id) async {
     try {
       final result = await remoteDataSource.getById(id);
       final resultEntity = CategoryMapper.toEntity(result);
@@ -83,11 +79,7 @@ class CategoriesRepositoryImplementation implements ICategoriesRepository {
     try {
       final result = await remoteDataSource.update(category);
 
-      if (result == 'Category updated successfully') {
-        return Right(result);
-      } else {
-        return Left(Failure(statusCode: 500, error: result));
-      }
+      return Right(result);
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {

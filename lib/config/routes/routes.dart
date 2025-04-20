@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import '/config/_config.dart';
 import '/core/_core.dart';
 import '/features/_features.dart';
-import '/features/admin/admin_dashboard_screen.dart';
 
 // GoRouter configuration
 final router = GoRouter(
@@ -25,7 +24,7 @@ final router = GoRouter(
 
     if (user?.role.toLowerCase() == 'admin' &&
         !state.matchedLocation.startsWith('/admin')) {
-      return AdminDashboardScreen.routeName;
+      return AdminScreen.routeName;
     }
     if (user?.role.toLowerCase() == 'customer' &&
         state.matchedLocation.startsWith('/admin')) {
@@ -65,17 +64,35 @@ final router = GoRouter(
 
     // ADMIN
     GoRoute(
-      path: AdminDashboardScreen.routeName,
-      name: AdminDashboardScreen.name,
-      pageBuilder:
-          (context, state) => scaleDownTransitionPage(
-            context,
-            state,
-            BlocProvider(
-              create: (context) => sl<CategoryBloc>(),
-              child: const AdminDashboardScreen(),
-            ),
-          ),
+      path: AdminScreen.routeName,
+      name: AdminScreen.name,
+      pageBuilder: (context, state) {
+        return scaleDownTransitionPage(context, state, const AdminScreen());
+      },
+      routes: [
+        GoRoute(
+          path: AddCategoryScreen.routeName,
+          name: AddCategoryScreen.name,
+          pageBuilder: (context, state) {
+            return scaleDownTransitionPage(
+              context,
+              state,
+              const AddCategoryScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: AdminCategoryScreen.routeName,
+          name: AdminCategoryScreen.name,
+          pageBuilder: (context, state) {
+            return scaleDownTransitionPage(
+              context,
+              state,
+              const AdminCategoryScreen(),
+            );
+          },
+        ),
+      ],
     ),
 
     /// ---------------------------------------------------------

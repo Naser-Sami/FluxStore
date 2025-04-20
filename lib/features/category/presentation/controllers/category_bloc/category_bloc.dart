@@ -33,6 +33,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
          CategoryState(
            isLoading: false,
            isError: false,
+           isSuccess: false,
            categories: [],
            category: Category.empty(),
          ),
@@ -48,13 +49,25 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     GetAllCategoryEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, isError: false, isSuccess: false));
     final result = await getAllCategoriesUseCase.call(const NoParams());
     result.fold(
-      (failure) =>
-          emit(state.copyWith(categories: [], isLoading: false, isError: true)),
-      (categories) =>
-          emit(state.copyWith(categories: categories, isLoading: false)),
+      (failure) => emit(
+        state.copyWith(
+          categories: [],
+          isLoading: false,
+          isError: true,
+          isSuccess: false,
+        ),
+      ),
+      (categories) => emit(
+        state.copyWith(
+          categories: categories,
+          isLoading: false,
+          isError: false,
+          isSuccess: true,
+        ),
+      ),
     );
   }
 
@@ -62,7 +75,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     GetCategoryByIdEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, isError: false, isSuccess: false));
     final result = await getCategoryUseCase(event.id);
     result.fold(
       (failure) => emit(
@@ -70,9 +83,17 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           category: Category.empty(),
           isLoading: false,
           isError: true,
+          isSuccess: false,
         ),
       ),
-      (category) => emit(state.copyWith(category: category, isLoading: false)),
+      (category) => emit(
+        state.copyWith(
+          category: category,
+          isLoading: false,
+          isError: false,
+          isSuccess: true,
+        ),
+      ),
     );
   }
 
@@ -80,7 +101,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     CreateCategoryEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, isError: false, isSuccess: false));
     final result = await createCategoryUseCase(event.params);
     result.fold(
       (failure) => emit(
@@ -88,9 +109,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           category: Category.empty(),
           isLoading: false,
           isError: true,
+          isSuccess: false,
         ),
       ),
-      (category) => emit(state.copyWith(isLoading: false)),
+      (category) => emit(
+        state.copyWith(isLoading: false, isError: false, isSuccess: true),
+      ),
     );
   }
 
@@ -98,7 +122,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     UpdateCategoryEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, isError: false, isSuccess: false));
     final result = await updateCategoryUseCase(event.params);
     result.fold(
       (failure) => emit(
@@ -106,9 +130,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           category: Category.empty(),
           isLoading: false,
           isError: true,
+          isSuccess: false,
         ),
       ),
-      (category) => emit(state.copyWith(isLoading: false)),
+      (category) => emit(
+        state.copyWith(isLoading: false, isError: false, isSuccess: true),
+      ),
     );
   }
 
@@ -116,7 +143,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     DeleteCategoryEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, isError: false, isSuccess: false));
     final result = await deleteCategoryUseCase(event.id);
     result.fold(
       (failure) => emit(
@@ -124,9 +151,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           category: Category.empty(),
           isLoading: false,
           isError: true,
+          isSuccess: false,
         ),
       ),
-      (category) => emit(state.copyWith(isLoading: false)),
+      (category) => emit(
+        state.copyWith(isLoading: false, isError: false, isSuccess: true),
+      ),
     );
   }
 }

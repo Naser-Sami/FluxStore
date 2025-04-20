@@ -25,10 +25,10 @@ class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   }
 
   @override
-  Future<String> delete(int id) async {
+  Future<String> delete(String id) async {
     try {
       final response = await apiClient.delete(
-        path: ApiEndpoints.category,
+        path: "${ApiEndpoints.category}/$id",
         data: {'id': id},
       );
 
@@ -58,7 +58,7 @@ class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   }
 
   @override
-  Future<CategoryModel> getById(int id) async {
+  Future<CategoryModel> getById(String id) async {
     try {
       final response = await apiClient.get<CategoryModel>(
         path: ApiEndpoints.category,
@@ -74,8 +74,8 @@ class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
   @override
   Future<String> update(UpdateCategoryParams category) async {
     try {
-      final response = await apiClient.post<String>(
-        path: ApiEndpoints.category,
+      final response = await apiClient.put<String>(
+        path: "${ApiEndpoints.category}/${category.id}",
         data: category.toMap(),
       );
 

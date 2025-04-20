@@ -10,7 +10,7 @@ sealed class CategoryEvent extends Equatable {
 final class GetAllCategoryEvent extends CategoryEvent {}
 
 final class GetCategoryByIdEvent extends CategoryEvent {
-  final int id;
+  final String id;
   const GetCategoryByIdEvent({required this.id});
   @override
   List<Object> get props => [id];
@@ -31,7 +31,7 @@ final class UpdateCategoryEvent extends CategoryEvent {
 }
 
 final class DeleteCategoryEvent extends CategoryEvent {
-  final int id;
+  final String id;
   const DeleteCategoryEvent({required this.id});
   @override
   List<Object> get props => [id];

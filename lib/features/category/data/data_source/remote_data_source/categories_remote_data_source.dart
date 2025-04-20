@@ -3,8 +3,8 @@ import '/features/_features.dart'
 
 abstract class ICategoriesRemoteDataSource {
   Future<List<CategoryModel>> getAll();
-  Future<CategoryModel> getById(int id);
+  Future<CategoryModel> getById(String id);
   Future<String> create(CreateCategoryParams params);
   Future<String> update(UpdateCategoryParams category);
-  Future<String> delete(int id);
+  Future<String> delete(String id);
 }

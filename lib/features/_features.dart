@@ -1,5 +1,6 @@
 export '_new_feature/_new_feature.dart';
 export '_shared/_shared.dart';
+export 'admin/_admin.dart';
 export 'authentication/_authentication.dart';
 export 'cart/_cart.dart';
 export 'category/_category.dart';

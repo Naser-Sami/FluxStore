@@ -6,8 +6,8 @@ import '/features/_features.dart'
 
 abstract class ICategoriesRepository {
   Future<Either<Failure<String>, List<Category>>> getAll();
-  Future<Either<Failure<String>, Category>> getById(int id);
+  Future<Either<Failure<String>, Category>> getById(String id);
   Future<Either<Failure<String>, String>> create(CreateCategoryParams category);
   Future<Either<Failure<String>, String>> update(UpdateCategoryParams category);
-  Future<Either<Failure<String>, String>> delete(int id);
+  Future<Either<Failure<String>, String>> delete(String id);
 }

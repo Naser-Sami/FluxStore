@@ -160,6 +160,7 @@ Page Rebuilds Again
                                   child: const Icon(
                                     Icons.arrow_back_ios,
                                     size: 16,
+                                    color: Colors.black,
                                   ),
                                 ),
                               ),
@@ -173,7 +174,11 @@ Page Rebuilds Again
                                     shape: BoxShape.circle,
                                     color: Colors.white,
                                   ),
-                                  child: const Icon(Icons.favorite, size: 16),
+                                  child: const Icon(
+                                    Icons.favorite,
+                                    size: 16,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ],

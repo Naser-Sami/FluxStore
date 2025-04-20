@@ -29,7 +29,8 @@ class ProfileScreen extends StatelessWidget {
         if (state is LoadedState) {
           return Scaffold(
             appBar: AppBar(toolbarHeight: 20),
-            body: SafeArea(
+            body: SizedBox(
+              height: context.screenHeight,
               child: Padding(
                 padding: const EdgeInsets.all(TPadding.p24),
                 child: ListView(
@@ -48,10 +49,9 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: TSize.s48),
                     Container(
                       width: context.screenWidth,
-                      constraints: BoxConstraints(
-                        maxHeight: context.screenHeight * 0.54,
-                      ),
+                      constraints: const BoxConstraints(maxHeight: 6 * 76),
                       padding: const EdgeInsets.symmetric(horizontal: 4),
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
                       decoration: BoxDecoration(
                         color: color.surface,
                         borderRadius: BorderRadius.circular(TRadius.r20),
@@ -60,8 +60,8 @@ class ProfileScreen extends StatelessWidget {
                             color: context.theme.colorScheme.scrim.withValues(
                               alpha: TFunctions.isDarkMode(context) ? 1 : 0.2,
                             ),
-                            blurRadius: 10,
-                            offset: const Offset(0, 5),
+                            blurRadius: 4,
+                            offset: const Offset(1, 3),
                           ),
                         ],
                       ),
@@ -176,6 +176,7 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: TSize.s20),
                   ],
                 ),
               ),

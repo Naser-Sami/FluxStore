@@ -125,6 +125,9 @@ dependencies:
   local_auth: ^2.3.0
   fl_chart: ^0.71.0
 
+  # Live data
+  web_socket_channel: ^3.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

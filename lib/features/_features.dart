@@ -12,4 +12,5 @@ export 'product/_product.dart';
 export 'profile/_profile.dart';
 export 'search/_search.dart';
 export 'splash/splash_screen.dart';
+export 'stock_market/_stock_market.dart';
 export 'welcome/welcome_screen.dart';

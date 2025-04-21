@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'app.dart';
-import 'config/_config.dart' show providers;
-import 'core/_core.dart' show IServiceInitializer, ServiceInitializer;
+import '/app.dart';
+import '/core/_core.dart' show IServiceInitializer, ServiceInitializer;
+import 'config/bloc/bloc_providers.dart' show providers;
 
 Future<void> main() async {
   IServiceInitializer serviceInitializer = ServiceInitializer();
@@ -11,7 +11,6 @@ Future<void> main() async {
 
   runApp(MultiBlocProvider(providers: providers, child: const MyApp()));
 }
-
 
 // Easy Localization Generated Commands
 // flutter pub run easy_localization:generate --source-dir ./assets/translations

@@ -71,37 +71,43 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
       appBar: AppBar(automaticallyImplyLeading: false),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: TPadding.p36),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: TSize.s96),
-            TextWidget(
-              LocaleKeys.Authentication_verificationCode,
-              style: context.textTheme.headlineLarge?.copyWith(height: 1.7),
-            ),
-            const SizedBox(height: TSize.s08),
-            TextWidget(
-              LocaleKeys.Authentication_verificationCodeMsg,
-              style: context.textTheme.bodyMedium?.copyWith(height: 1.7),
-            ),
-            const Spacer(),
-            OTPInput(email: widget.email),
-            const SizedBox(height: TSize.s24),
-            TextButton(
-              onPressed: canResend ? _resendCode : null,
-              child: TextWidget(
-                canResend
-                    ? LocaleKeys.Common_resendOtp
-                    : '${LocaleKeys.Common_resendIn.tr()} $_remainingSeconds ${LocaleKeys.Common_seconds.tr()}',
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: canResend ? context.theme.colorScheme.primary : null,
-                  fontWeight: canResend ? FontWeight.bold : null,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 700),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: TSize.s96),
+                TextWidget(
+                  LocaleKeys.Authentication_verificationCode,
+                  style: context.textTheme.headlineLarge?.copyWith(height: 1.7),
                 ),
-              ),
+                const SizedBox(height: TSize.s08),
+                TextWidget(
+                  LocaleKeys.Authentication_verificationCodeMsg,
+                  style: context.textTheme.bodyMedium?.copyWith(height: 1.7),
+                ),
+                const Spacer(),
+                OTPInput(email: widget.email),
+                const SizedBox(height: TSize.s24),
+                TextButton(
+                  onPressed: canResend ? _resendCode : null,
+                  child: TextWidget(
+                    canResend
+                        ? LocaleKeys.Common_resendOtp
+                        : '${LocaleKeys.Common_resendIn.tr()} $_remainingSeconds ${LocaleKeys.Common_seconds.tr()}',
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color:
+                          canResend ? context.theme.colorScheme.primary : null,
+                      fontWeight: canResend ? FontWeight.bold : null,
+                    ),
+                  ),
+                ),
+                const Spacer(flex: 2),
+              ],
             ),
-            const Spacer(flex: 2),
-          ],
+          ),
         ),
       ),
     );

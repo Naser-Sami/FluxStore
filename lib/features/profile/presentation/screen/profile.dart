@@ -11,6 +11,7 @@ import '/features/_features.dart'
         ProfileBloc,
         ProfileSettingsScreen,
         ProfileState,
+        RealTimeStockWidget,
         SplashScreen,
         UserSessionCubit;
 
@@ -49,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: TSize.s48),
                     Container(
                       width: context.screenWidth,
-                      constraints: const BoxConstraints(maxHeight: 6 * 76),
+                      constraints: const BoxConstraints(maxHeight: 7 * 76),
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       margin: const EdgeInsets.symmetric(horizontal: 4),
                       decoration: BoxDecoration(
@@ -96,6 +97,23 @@ class ProfileScreen extends StatelessWidget {
                               title: const TextWidget(
                                 LocaleKeys.Profile_paymentMethods,
                               ),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                color: iconColor,
+                              ),
+                            ),
+                          ),
+                          const Divider(),
+                          OnTapScaler(
+                            onTap: () {
+                              context.push(RealTimeStockWidget.routeName);
+                            },
+                            child: ListTile(
+                              minTileHeight: 76,
+                              leading: const Icon(
+                                Icons.money_off_csred_outlined,
+                              ),
+                              title: const TextWidget('Stocks'),
                               trailing: Icon(
                                 Icons.arrow_forward_ios,
                                 color: iconColor,

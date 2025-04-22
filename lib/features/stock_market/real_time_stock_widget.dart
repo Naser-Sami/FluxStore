@@ -6,6 +6,8 @@ import 'web_socket_service.dart';
 import 'websocket.dart';
 
 class RealTimeStockWidget extends StatefulWidget {
+  static const routeName = '/real-time-stock';
+  static const name = 'Real Time Stock';
   @override
   RealTimeStockWidgetState createState() => RealTimeStockWidgetState();
 }
@@ -24,7 +26,8 @@ class RealTimeStockWidgetState extends State<RealTimeStockWidget> {
     _webSocketService.sendMessage({
       "action": "subscribe",
       "params": {
-        "symbols": "AAPL,INFY,TRP,QQQ,IXIC,EUR/USD,USD/JPY,BTC/USD,ETH/BTC",
+        "symbols":
+            "AAPL,INFY,TRP,QQQ,IXIC,EUR/USD,USD/JPY,BTC/USD,ETH/BTC,RY,RY:TSX",
       },
     });
 

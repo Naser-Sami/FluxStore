@@ -82,66 +82,72 @@ class _AdminCategoryScreenState extends State<AdminCategoryScreen> {
           if (state.isSuccess) {
             return Padding(
               padding: const EdgeInsets.all(TPadding.p24),
-              child: ListView.builder(
-                itemCount: state.categories.length,
-                itemBuilder: (context, index) {
-                  final category = state.categories[index];
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 700),
+                  child: ListView.builder(
+                    itemCount: state.categories.length,
+                    itemBuilder: (context, index) {
+                      final category = state.categories[index];
 
-                  return ExpansionTileWidget(
-                    trailing: IconButton(
-                      onPressed: () => _deleteCategory(category.id),
-                      icon: const Icon(Icons.delete_forever_rounded),
-                    ),
-                    title: BlocBuilder<ThemeCubit, ThemeMode>(
-                      builder: (context, state) {
-                        return ListTile(
-                          leading: IconWidget(
-                            name: category.imageUrl,
-                            color: context.theme.colorScheme.onSurface,
-                            width: 20,
-                            height: 20,
-                          ),
-                          title: Text(
-                            category.name,
-                            style: context.textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            category.description,
-                            style: context.textTheme.bodySmall,
-                          ),
-                        );
-                      },
-                    ),
-                    children: [
-                      Builder(
-                        builder: (context) {
-                          _categoryName.text = category.name;
-                          _categoryDescription.text = category.description;
-                          _categoryImageUrl.text = category.imageUrl;
+                      return ExpansionTileWidget(
+                        trailing: IconButton(
+                          onPressed: () => _deleteCategory(category.id),
+                          icon: const Icon(Icons.delete_forever_rounded),
+                        ),
+                        title: BlocBuilder<ThemeCubit, ThemeMode>(
+                          builder: (context, state) {
+                            print(category.name + category.id);
+                            return ListTile(
+                              leading: IconWidget(
+                                name: category.imageUrl,
+                                color: context.theme.colorScheme.onSurface,
+                                width: 20,
+                                height: 20,
+                              ),
+                              title: Text(
+                                category.name,
+                                style: context.textTheme.titleMedium,
+                              ),
+                              subtitle: Text(
+                                category.description,
+                                style: context.textTheme.bodySmall,
+                              ),
+                            );
+                          },
+                        ),
+                        children: [
+                          Builder(
+                            builder: (context) {
+                              _categoryName.text = category.name;
+                              _categoryDescription.text = category.description;
+                              _categoryImageUrl.text = category.imageUrl;
 
-                          return AddEditCategoryBody(
-                            formKey: _formKey,
-                            categoryName: _categoryName,
-                            categoryDescription: _categoryDescription,
-                            categoryImageUrl: _categoryImageUrl,
-                            onTap:
-                                () async => _updateCategory(
-                                  UpdateCategoryParams(
-                                    id: category.id,
-                                    name: _categoryName.text.trim(),
-                                    description:
-                                        _categoryDescription.text.trim(),
-                                    imageUrl: _categoryImageUrl.text.trim(),
-                                    updatedAt: DateTime.now(),
-                                  ),
-                                ),
-                            buttonTitle: 'Update Category',
-                          );
-                        },
-                      ),
-                    ],
-                  );
-                },
+                              return AddEditCategoryBody(
+                                formKey: _formKey,
+                                categoryName: _categoryName,
+                                categoryDescription: _categoryDescription,
+                                categoryImageUrl: _categoryImageUrl,
+                                onTap:
+                                    () async => _updateCategory(
+                                      UpdateCategoryParams(
+                                        id: category.id,
+                                        name: _categoryName.text.trim(),
+                                        description:
+                                            _categoryDescription.text.trim(),
+                                        imageUrl: _categoryImageUrl.text.trim(),
+                                        updatedAt: DateTime.now(),
+                                      ),
+                                    ),
+                                buttonTitle: 'Update Category',
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
               ),
             );
           }

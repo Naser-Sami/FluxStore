@@ -321,5 +321,14 @@ final router = GoRouter(
         return CupertinoPage(child: ProductDetailsScreen(productId: productId));
       },
     ),
+
+    // Stocks
+    GoRoute(
+      path: RealTimeStockWidget.routeName,
+      name: RealTimeStockWidget.name,
+      pageBuilder: (context, state) {
+        return CupertinoPage(child: RealTimeStockWidget());
+      },
+    ),
   ],
 );

@@ -30,6 +30,7 @@ class SearchScreen extends StatelessWidget {
                       children: [
                         ExpansionTileWidget(
                           key: UniqueKey(),
+                          showTrailingIcon: false,
                           childrenPadding: const EdgeInsetsDirectional.only(
                             start: TPadding.p24,
                           ),
@@ -40,6 +41,7 @@ class SearchScreen extends StatelessWidget {
                           children: [
                             ExpansionTileWidget(
                               key: UniqueKey(),
+                              showTrailingIcon: false,
                               title: const ListTile(
                                 title: TextWidget('Jeans'),
                                 trailing: TextWidget('14 items'),

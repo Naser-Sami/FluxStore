@@ -27,25 +27,28 @@ class AdminScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(TPadding.p24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: TSize.s24),
-              TextButton(
-                onPressed: () {
-                  context.push(
-                    AdminScreen.routeName + AdminCategoryScreen.routeName,
-                  );
-                },
-                child: TextWidget(
-                  LocaleKeys.Product_category,
-                  style: context.textTheme.titleLarge,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 700),
+          child: Padding(
+            padding: const EdgeInsets.all(TPadding.p24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: TSize.s24),
+                TextButton(
+                  onPressed: () {
+                    context.push(
+                      AdminScreen.routeName + AdminCategoryScreen.routeName,
+                    );
+                  },
+                  child: TextWidget(
+                    LocaleKeys.Product_category,
+                    style: context.textTheme.titleLarge,
+                  ),
                 ),
-              ),
-              const SizedBox(height: TSize.s24),
-            ],
+                const SizedBox(height: TSize.s24),
+              ],
+            ),
           ),
         ),
       ),

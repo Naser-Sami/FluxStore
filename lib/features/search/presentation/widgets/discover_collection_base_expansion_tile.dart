@@ -16,6 +16,7 @@ class DiscoverCollectionBaseExpansionTile extends StatelessWidget {
     return ExpansionTileWidget(
       key: UniqueKey(),
       initiallyExpanded: false,
+      showTrailingIcon: false,
       title: const DiscoverCollectionBaseItem(),
       children: children,
     );

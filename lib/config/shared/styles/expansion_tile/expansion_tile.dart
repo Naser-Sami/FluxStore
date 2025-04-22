@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '/config/_config.dart' show TRadius;
 import '/core/_core.dart' show BuildContextExtensions;
 
 class ExpansionTileWidget extends StatelessWidget {
@@ -46,11 +47,14 @@ class ExpansionTileWidget extends StatelessWidget {
       child: ExpansionTileTheme(
         data: const ExpansionTileThemeData(
           tilePadding: EdgeInsets.zero,
-          // shape: OutlineInputBorder(
-          //   gapPadding: 0,
-          //   borderRadius: BorderRadius.all(Radius.circular(TRadius.r16)),
-          //   borderSide: BorderSide.none,
-          // ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(TRadius.r16)),
+          ),
+          collapsedShape: OutlineInputBorder(
+            gapPadding: 0,
+            borderRadius: BorderRadius.all(Radius.circular(TRadius.r16)),
+            borderSide: BorderSide.none,
+          ),
         ),
         child: ExpansionTile(
           key: key,
@@ -65,9 +69,12 @@ class ExpansionTileWidget extends StatelessWidget {
           backgroundColor: backgroundColor,
           tilePadding: tilePadding ?? EdgeInsets.zero,
           childrenPadding: childrenPadding,
-          // shape: const RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.all(Radius.circular(TRadius.r16)),
-          // ),
+          collapsedShape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(TRadius.r16)),
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(TRadius.r16)),
+          ),
           children: children,
         ),
       ),

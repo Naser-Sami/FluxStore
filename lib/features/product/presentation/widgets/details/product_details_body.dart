@@ -578,7 +578,7 @@ Page Rebuilds Again
                   Positioned(
                     bottom: 0,
                     child: Container(
-                      height: 110,
+                      height: 90,
                       width: context.screenWidth,
                       padding: const EdgeInsets.only(bottom: TPadding.p10),
                       decoration: BoxDecoration(

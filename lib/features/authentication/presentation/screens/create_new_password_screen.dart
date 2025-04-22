@@ -69,66 +69,75 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
       appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: TPadding.p36),
-            child: BlocListener<ResetPasswordCubit, String>(
-              listener: (context, state) {
-                // If the state is not an error message, treat it as success
-                if (state.isNotEmpty &&
-                    !state.toLowerCase().contains("error")) {
-                  showModalBottomSheetOnSuccessResetPassword(
-                    context,
-                    email: widget.email,
-                    password: _passwordController.text.trim(),
-                  );
-                } else {
-                  // Handle error
-                  errorDialog(context, message: state);
-                }
-              },
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: TSize.s44),
-                    TextWidget(
-                      LocaleKeys.Authentication_createNewPassword,
-                      style: context.textTheme.headlineLarge?.copyWith(
-                        height: 1.7,
-                      ),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 700),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: TPadding.p36),
+                child: BlocListener<ResetPasswordCubit, String>(
+                  listener: (context, state) {
+                    // If the state is not an error message, treat it as success
+                    if (state.isNotEmpty &&
+                        !state.toLowerCase().contains("error")) {
+                      showModalBottomSheetOnSuccessResetPassword(
+                        context,
+                        email: widget.email,
+                        password: _passwordController.text.trim(),
+                      );
+                    } else {
+                      // Handle error
+                      errorDialog(context, message: state);
+                    }
+                  },
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: TSize.s44),
+                        TextWidget(
+                          LocaleKeys.Authentication_createNewPassword,
+                          style: context.textTheme.headlineLarge?.copyWith(
+                            height: 1.7,
+                          ),
+                        ),
+                        const SizedBox(height: TSize.s08),
+                        TextWidget(
+                          LocaleKeys.Authentication_createNewPasswordMsg,
+                          style: context.textTheme.bodySmall?.copyWith(
+                            height: 1.7,
+                          ),
+                        ),
+                        const SizedBox(height: TSize.s48),
+                        TextFormFieldComponent(
+                          controller: _passwordController,
+                          labelText: LocaleKeys.Authentication_newPassword,
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: true,
+                          validator: TValidator.validatePassword,
+                        ),
+                        const SizedBox(height: TSize.s20),
+                        TextFormFieldComponent(
+                          controller: _confirmPasswordController,
+                          labelText:
+                              LocaleKeys.Authentication_confirmNewPassword,
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: true,
+                          validator: TValidator.validatePassword,
+                        ),
+                        const SizedBox(height: TSize.s100),
+                        Center(
+                          child: CustomButton(
+                            onTap: _createNewPasswordButtonPressed,
+                            backgroundColor:
+                                context.theme.colorScheme.secondary,
+                            text: LocaleKeys.Authentication_confirm,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: TSize.s08),
-                    TextWidget(
-                      LocaleKeys.Authentication_createNewPasswordMsg,
-                      style: context.textTheme.bodySmall?.copyWith(height: 1.7),
-                    ),
-                    const SizedBox(height: TSize.s48),
-                    TextFormFieldComponent(
-                      controller: _passwordController,
-                      labelText: LocaleKeys.Authentication_newPassword,
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
-                      validator: TValidator.validatePassword,
-                    ),
-                    const SizedBox(height: TSize.s20),
-                    TextFormFieldComponent(
-                      controller: _confirmPasswordController,
-                      labelText: LocaleKeys.Authentication_confirmNewPassword,
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
-                      validator: TValidator.validatePassword,
-                    ),
-                    const SizedBox(height: TSize.s100),
-                    Center(
-                      child: CustomButton(
-                        onTap: _createNewPasswordButtonPressed,
-                        backgroundColor: context.theme.colorScheme.secondary,
-                        text: LocaleKeys.Authentication_confirm,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

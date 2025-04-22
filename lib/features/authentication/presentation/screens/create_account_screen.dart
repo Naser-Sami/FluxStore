@@ -78,87 +78,94 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             );
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: TPadding.p36),
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: TSize.s20),
-                  TextWidget(
-                    LocaleKeys.Authentication_create,
-                    style: context.textTheme.headlineLarge?.copyWith(
-                      height: 1.7,
-                    ),
-                  ),
-                  TextWidget(
-                    LocaleKeys.Authentication_yourAccount,
-                    style: context.textTheme.headlineLarge?.copyWith(
-                      height: 1.7,
-                    ),
-                  ),
-                  const SizedBox(height: TSize.s20),
-                  TextFormFieldComponent(
-                    controller: _nameController,
-                    labelText: LocaleKeys.Authentication_enterYourName,
-                    keyboardType: TextInputType.text,
-                    validator:
-                        (value) => TValidator.validateEmptyText(
-                          LocaleKeys.Authentication_enterYourName,
-                          value,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 700),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: TPadding.p36),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: TSize.s20),
+                      TextWidget(
+                        LocaleKeys.Authentication_create,
+                        style: context.textTheme.headlineLarge?.copyWith(
+                          height: 1.7,
                         ),
+                      ),
+                      TextWidget(
+                        LocaleKeys.Authentication_yourAccount,
+                        style: context.textTheme.headlineLarge?.copyWith(
+                          height: 1.7,
+                        ),
+                      ),
+                      const SizedBox(height: TSize.s20),
+                      TextFormFieldComponent(
+                        controller: _nameController,
+                        labelText: LocaleKeys.Authentication_enterYourName,
+                        keyboardType: TextInputType.text,
+                        validator:
+                            (value) => TValidator.validateEmptyText(
+                              LocaleKeys.Authentication_enterYourName,
+                              value,
+                            ),
+                      ),
+                      const SizedBox(height: TSize.s20),
+                      TextFormFieldComponent(
+                        controller: _emailController,
+                        labelText: LocaleKeys.Authentication_emailAddress,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: TValidator.validateEmail,
+                      ),
+                      const SizedBox(height: TSize.s20),
+                      TextFormFieldComponent(
+                        controller: _passwordController,
+                        labelText: LocaleKeys.Authentication_password,
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,
+                        validator: TValidator.validatePassword,
+                      ),
+                      const SizedBox(height: TSize.s20),
+                      TextFormFieldComponent(
+                        controller: _confirmPasswordController,
+                        labelText: LocaleKeys.Authentication_confirmPassword,
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,
+                        validator: TValidator.validatePassword,
+                      ),
+                      const SizedBox(height: TSize.s44),
+                      Center(
+                        child: CustomButton(
+                          onTap: _signUp,
+                          text: LocaleKeys.Authentication_signup,
+                          backgroundColor: context.theme.colorScheme.secondary,
+                        ),
+                      ),
+                      const SizedBox(height: TSize.s28),
+                      Center(
+                        child: TextWidget(
+                          LocaleKeys.Authentication_orSignUpWith,
+                          style: context.textTheme.bodySmall,
+                        ),
+                      ),
+                      const SizedBox(height: TSize.s28),
+                      const AuthenticationWithSocialWidget(),
+                      const SizedBox(height: TSize.s32),
+                      AuthenticationRichTextWidget(
+                        text1: LocaleKeys.Authentication_haveAccount,
+                        text2: LocaleKeys.Authentication_login,
+                        onTap:
+                            () =>
+                                context.pushReplacement(LoginScreen.routeName),
+                      ),
+                      const SizedBox(height: TSize.s24),
+                    ],
                   ),
-                  const SizedBox(height: TSize.s20),
-                  TextFormFieldComponent(
-                    controller: _emailController,
-                    labelText: LocaleKeys.Authentication_emailAddress,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: TValidator.validateEmail,
-                  ),
-                  const SizedBox(height: TSize.s20),
-                  TextFormFieldComponent(
-                    controller: _passwordController,
-                    labelText: LocaleKeys.Authentication_password,
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
-                    validator: TValidator.validatePassword,
-                  ),
-                  const SizedBox(height: TSize.s20),
-                  TextFormFieldComponent(
-                    controller: _confirmPasswordController,
-                    labelText: LocaleKeys.Authentication_confirmPassword,
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
-                    validator: TValidator.validatePassword,
-                  ),
-                  const SizedBox(height: TSize.s44),
-                  Center(
-                    child: CustomButton(
-                      onTap: _signUp,
-                      text: LocaleKeys.Authentication_signup,
-                      backgroundColor: context.theme.colorScheme.secondary,
-                    ),
-                  ),
-                  const SizedBox(height: TSize.s28),
-                  Center(
-                    child: TextWidget(
-                      LocaleKeys.Authentication_orSignUpWith,
-                      style: context.textTheme.bodySmall,
-                    ),
-                  ),
-                  const SizedBox(height: TSize.s28),
-                  const AuthenticationWithSocialWidget(),
-                  const SizedBox(height: TSize.s32),
-                  AuthenticationRichTextWidget(
-                    text1: LocaleKeys.Authentication_haveAccount,
-                    text2: LocaleKeys.Authentication_login,
-                    onTap: () => context.pushReplacement(LoginScreen.routeName),
-                  ),
-                  const SizedBox(height: TSize.s24),
-                ],
+                ),
               ),
             ),
           ),

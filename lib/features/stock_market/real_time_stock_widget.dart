@@ -41,7 +41,8 @@ class RealTimeStockWidgetState extends State<RealTimeStockWidget> {
           _latestPrices[priceEvent.symbol] = priceEvent;
         });
       } else if (event == "subscribe-status") {
-        print("✅ Subscription confirmed");
+        final success = decoded['success'];
+        print("✅ Subscription confirmed $success");
       }
     });
   }

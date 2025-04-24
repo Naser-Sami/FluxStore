@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '/config/_config.dart' show TextWidget, TSize, TPadding;
 import '/core/_core.dart' show BuildContextExtensions, LocaleKeys, sl;
 import '/features/_features.dart' show SplashScreen, UserSessionCubit;
-import '_admin.dart';
+import '/features/admin/_admin.dart';
 
 class AdminScreen extends StatelessWidget {
   static const String routeName = '/admin/dashboard';
@@ -13,6 +13,12 @@ class AdminScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Scaffold(
+    //   // appBar: AppBar(title: const Text('Admin'), actions: []),
+    //   body: Row(
+    //     children: [const NavigationRailWidget(), Expanded(child: Container())],
+    //   ),
+    // );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Admin'),

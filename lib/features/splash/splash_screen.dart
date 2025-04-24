@@ -27,6 +27,7 @@ class SplashScreenState extends State<SplashScreen> {
     final refreshToken = await sl<SecureStorageService>().read(
       key: Constants.keyRefreshToken,
     );
+    print("🔑 Token: $token");
 
     if (token != null && refreshToken != null) {
       final refreshed = await sl<AuthService>().tryRefreshToken(
@@ -36,6 +37,7 @@ class SplashScreenState extends State<SplashScreen> {
 
       if (refreshed) {
         final user = await sl<UserSessionCubit>().getSavedUser();
+        print("🔑 User: $user");
         if (user?.role.toLowerCase() == 'admin') {
           if (mounted) context.go(AdminScreen.routeName);
           return;

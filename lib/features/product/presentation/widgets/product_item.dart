@@ -67,10 +67,8 @@ class ProductItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(TPadding.p16),
             child: Hero(
               tag: "Product-${product.id}",
-              child: Image.asset(
-                "assets/images/${product.imageUrl}.png",
-                fit: BoxFit.cover,
-                alignment: Alignment.bottomCenter,
+              child: CachedNetWorkImageComponent(
+                imageUrl: ApiEndpoints.imageUrl + product.imageUrl,
               ),
             ),
           ),

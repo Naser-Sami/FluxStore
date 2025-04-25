@@ -1,10 +1,12 @@
 import '/features/_features.dart'
     show
         AddProductParams,
-        UpdateProductParams,
         AddProductReviewParams,
+        ProductDetailsModel,
         ProductModel,
-        ProductDetailsModel;
+        UpdateProductDetailsImagesParams,
+        UpdateProductParams,
+        UpdateProductImagesParams;
 
 abstract class IProductRemoteDataSource {
   Future<List<ProductModel>> getProducts();
@@ -14,8 +16,10 @@ abstract class IProductRemoteDataSource {
   Future<String> deleteProduct(String id);
   Future<ProductDetailsModel> getProductDetails(String id);
   Future<String> addReview(AddProductReviewParams params);
+  Future<String?> uploadImage(UpdateProductImagesParams params);
+  Future<List<String>?> uploadImages(UpdateProductDetailsImagesParams params);
 
-  // TODO : Add this on the api
+  // Add this on the api
   // Future<List<ProductModel>> searchProducts(String query);
   // Future<List<ProductModel>> getProductsByCategory(String category);
 }

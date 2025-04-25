@@ -128,8 +128,8 @@ Page Rebuilds Again
                                   .map(
                                     (image) => SizedBox(
                                       width: context.screenWidth,
-                                      child: Image.asset(
-                                        'assets/images/$image.png',
+                                      child: CachedNetWorkImageComponent(
+                                        imageUrl: ApiEndpoints.imageUrl + image,
                                         fit: BoxFit.contain,
                                       ),
                                     ),

@@ -24,4 +24,7 @@ class ApiEndpoints {
   // Products
   static const String product = 'Products';
   static const String productAddReview = 'Products/add-review';
+  static const String productUpdateImages = 'Products/update-product-image';
+  static const String productUpdateDetailsImages =
+      'Products/update-product-details-images';
 }

@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flux_store/features/product/domain/params/update_product_details_images_params.dart';
-import 'package:flux_store/features/product/domain/params/update_product_images_params.dart';
 
 import '/core/_core.dart' show ApiEndpoints, ApiClient, sl;
 import '/features/_features.dart'
@@ -10,7 +8,9 @@ import '/features/_features.dart'
         UpdateProductParams,
         AddProductReviewParams,
         ProductModel,
-        ProductDetailsModel;
+        ProductDetailsModel,
+        UpdateProductImagesParams,
+        UpdateProductDetailsImagesParams;
 
 class ProductRemoteDataSourceImpl implements IProductRemoteDataSource {
   final ApiClient apiClient = sl<ApiClient>();

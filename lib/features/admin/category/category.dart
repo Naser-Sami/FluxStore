@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart'
     show ExpansionTileWidget, IconWidget, TPadding, ThemeCubit;
 import '/core/_core.dart';
 import '/features/_features.dart'
     show
-        AddCategoryScreen,
         AddEditCategoryBody,
-        AdminScreen,
         CategoryBloc,
         CategoryState,
         DeleteCategoryEvent,
@@ -59,17 +56,6 @@ class _AdminCategoryScreenState extends State<AdminCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Update Category'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.push(AdminScreen.routeName + AddCategoryScreen.routeName);
-            },
-            icon: const Icon(Icons.add),
-          ),
-        ],
-      ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (context, state) {
           if (state.isLoading) {

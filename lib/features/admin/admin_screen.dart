@@ -1,61 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:go_router/go_router.dart';
 
-import '/config/_config.dart' show TextWidget, TSize, TPadding;
-import '/core/_core.dart' show BuildContextExtensions, LocaleKeys, sl;
-import '/features/_features.dart' show SplashScreen, UserSessionCubit;
-import '/features/admin/_admin.dart';
+import '/config/_config.dart' show CustomAppBar, TRadius;
+import '/core/_core.dart' show BuildContextExtensions;
+import 'category/add_category.dart';
+import 'category/category.dart';
+import 'menu_screen.dart';
 
-class AdminScreen extends StatelessWidget {
-  static const String routeName = '/admin/dashboard';
-  static const String name = 'Admin Dashboard';
-  const AdminScreen({super.key});
+class AdminScreen extends StatefulWidget {
+  static const String routeName = '/admin';
+  static const String name = 'Admin';
+  const AdminScreen({super.key, required this.navigationShell});
+
+  final StatefulNavigationShell navigationShell;
+
+  @override
+  State<AdminScreen> createState() => _AdminScreenState();
+}
+
+class _AdminScreenState extends State<AdminScreen> {
+  final ZoomDrawerController _zoomDrawerController = ZoomDrawerController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  String _appBarTitle() {
+    switch (widget.navigationShell.currentIndex) {
+      case 0:
+        return 'Category';
+      case 1:
+        return 'Products';
+      case 2:
+        return 'Orders';
+      case 3:
+        return 'Customers';
+      case 4:
+        return 'Settings';
+      default:
+        return 'Admin';
+    }
+  }
+
+  List<Widget> _appBarActions() {
+    switch (widget.navigationShell.currentIndex) {
+      case 0:
+        return [
+          IconButton(
+            onPressed: () {
+              context.push(
+                "${0}${AdminCategoryScreen.routeName}/${AddCategoryScreen.routeName}",
+              );
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ];
+      default:
+        return [];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   // appBar: AppBar(title: const Text('Admin'), actions: []),
-    //   body: Row(
-    //     children: [const NavigationRailWidget(), Expanded(child: Container())],
-    //   ),
-    // );
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final color = context.theme.colorScheme;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Admin'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              sl<UserSessionCubit>().logout();
-              context.go(SplashScreen.routeName);
-            },
-            icon: const Icon(Icons.logout),
+      body: SizedBox(
+        width: screenWidth,
+        height: screenHeight,
+        child: ZoomDrawer(
+          mainScreenTapClose: true,
+          menuScreenTapClose: true,
+          controller: _zoomDrawerController,
+          menuScreen: MenuScreen(
+            navigationShell: widget.navigationShell,
+            zoomDrawerController: _zoomDrawerController,
           ),
-        ],
-      ),
-      body: SafeArea(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 700),
-          child: Padding(
-            padding: const EdgeInsets.all(TPadding.p24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: TSize.s24),
-                TextButton(
-                  onPressed: () {
-                    context.push(
-                      AdminScreen.routeName + AdminCategoryScreen.routeName,
-                    );
-                  },
-                  child: TextWidget(
-                    LocaleKeys.Product_category,
-                    style: context.textTheme.titleLarge,
-                  ),
-                ),
-                const SizedBox(height: TSize.s24),
-              ],
+          mainScreen: Scaffold(
+            appBar: CustomAppBar(
+              leading: IconButton(
+                onPressed: () => _zoomDrawerController.toggle!(),
+                icon: const Icon(Icons.menu),
+              ),
+              title: Text(_appBarTitle()),
+              actions: _appBarActions(),
             ),
+            body: widget.navigationShell,
           ),
+          borderRadius: TRadius.r24,
+          showShadow: true,
+          angle: 0.0,
+          drawerShadowsBackgroundColor: color.surfaceContainerHighest,
+          slideWidth: screenWidth * 0.75,
         ),
       ),
     );

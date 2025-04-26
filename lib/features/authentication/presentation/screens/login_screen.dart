@@ -56,7 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
       final success = await sl<RefreshTokenHandler>().tryRefreshToken();
 
       if (success) {
-        if (mounted) context.go(HomeScreen.routeName);
+        final user = await sl<UserSessionCubit>().getSavedUser();
+        if (user?.role.toLowerCase() == 'admin') {
+          if (mounted) context.pushReplacement(AdminCategoryScreen.routeName);
+        } else {
+          if (mounted) context.pushReplacement(HomeScreen.routeName);
+        }
       } else {
         // fallback or show login form
       }
@@ -81,9 +86,14 @@ class _LoginScreenState extends State<LoginScreen> {
           } else if (state is LoginSuccess) {
             context.pop();
             await sl<UserSessionCubit>().saveUser(state.user);
+
             // handel user or admin
             if (context.mounted) {
-              context.pushReplacement(HomeScreen.routeName);
+              if (state.user.role.toLowerCase() == 'admin') {
+                context.pushReplacement(AdminCategoryScreen.routeName);
+              } else {
+                context.pushReplacement(HomeScreen.routeName);
+              }
             }
           } else if (state is LoginFailure) {
             context.pop();

@@ -63,34 +63,47 @@ final router = GoRouter(
     ),
 
     // ADMIN
-    GoRoute(
-      path: AdminScreen.routeName,
-      name: AdminScreen.name,
-      pageBuilder: (context, state) {
-        return scaleDownTransitionPage(context, state, const AdminScreen());
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return AdminScreen(navigationShell: navigationShell);
       },
-      routes: [
-        GoRoute(
-          path: AddCategoryScreen.routeName,
-          name: AddCategoryScreen.name,
-          pageBuilder: (context, state) {
-            return scaleDownTransitionPage(
-              context,
-              state,
-              const AddCategoryScreen(),
-            );
-          },
+      branches: [
+        StatefulShellBranch(
+          navigatorKey: adminCategorySectionNavigator,
+          routes: [
+            GoRoute(
+              path: AdminCategoryScreen.routeName,
+              name: AdminCategoryScreen.name,
+              pageBuilder:
+                  (context, state) =>
+                      const CupertinoPage(child: AdminCategoryScreen()),
+              routes: [
+                GoRoute(
+                  path: AddCategoryScreen.routeName,
+                  name: AddCategoryScreen.name,
+                  pageBuilder: (context, state) {
+                    return scaleDownTransitionPage(
+                      context,
+                      state,
+                      const AddCategoryScreen(),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
-        GoRoute(
-          path: AdminCategoryScreen.routeName,
-          name: AdminCategoryScreen.name,
-          pageBuilder: (context, state) {
-            return scaleDownTransitionPage(
-              context,
-              state,
-              const AdminCategoryScreen(),
-            );
-          },
+        StatefulShellBranch(
+          navigatorKey: adminProductSectionNavigator,
+          routes: [
+            GoRoute(
+              path: AdminProductScreen.routeName,
+              name: AdminProductScreen.name,
+              pageBuilder:
+                  (context, state) =>
+                      const CupertinoPage(child: AdminProductScreen()),
+            ),
+          ],
         ),
       ],
     ),

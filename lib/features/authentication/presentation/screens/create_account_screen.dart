@@ -63,9 +63,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           } else if (state is SignUpSuccess) {
             context.pop();
             await sl<UserSessionCubit>().saveUser(state.user);
+
             // handel user or admin
             if (context.mounted) {
-              context.pushReplacement(HomeScreen.routeName);
+              if (state.user.role.toLowerCase() == 'admin') {
+                context.pushReplacement(AdminCategoryScreen.routeName);
+              } else {
+                context.pushReplacement(HomeScreen.routeName);
+              }
             }
           } else if (state is SignUpFailure) {
             context.pop();

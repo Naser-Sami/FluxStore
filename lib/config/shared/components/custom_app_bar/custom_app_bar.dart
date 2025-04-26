@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '/config/_config.dart' show TPadding;
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
   final bool centerTitle;
@@ -22,14 +24,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leadingWidth: leadingWidth,
-      title: title,
-      centerTitle: centerTitle,
-      actions: actions,
-      leading: leading,
-      backgroundColor: backgroundColor,
-      bottom: bottom,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: TPadding.p24),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 700),
+          child: AppBar(
+            leadingWidth: leadingWidth,
+            title: title,
+            centerTitle: centerTitle,
+            actions: actions,
+            leading: leading,
+            backgroundColor: backgroundColor,
+            bottom: bottom,
+          ),
+        ),
+      ),
     );
   }
 

@@ -8,3 +8,7 @@ final profileSectionNavigator = GlobalKey<NavigatorState>();
 final settingsSectionNavigator = GlobalKey<NavigatorState>();
 final supportSectionNavigator = GlobalKey<NavigatorState>();
 final aboutUsSectionNavigator = GlobalKey<NavigatorState>();
+
+final adminSectionNavigator = GlobalKey<NavigatorState>();
+final adminCategorySectionNavigator = GlobalKey<NavigatorState>();
+final adminProductSectionNavigator = GlobalKey<NavigatorState>();

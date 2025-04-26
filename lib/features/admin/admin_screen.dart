@@ -7,6 +7,7 @@ import '/core/_core.dart' show BuildContextExtensions;
 import 'category/add_category.dart';
 import 'category/category.dart';
 import 'menu_screen.dart';
+import 'product/admin_product.dart';
 
 class AdminScreen extends StatefulWidget {
   static const String routeName = '/admin';
@@ -30,9 +31,9 @@ class _AdminScreenState extends State<AdminScreen> {
   String _appBarTitle() {
     switch (widget.navigationShell.currentIndex) {
       case 0:
-        return 'Category';
+        return AdminCategoryScreen.name;
       case 1:
-        return 'Products';
+        return AdminProductScreen.name;
       case 2:
         return 'Orders';
       case 3:
@@ -51,7 +52,7 @@ class _AdminScreenState extends State<AdminScreen> {
           IconButton(
             onPressed: () {
               context.push(
-                "${0}${AdminCategoryScreen.routeName}/${AddCategoryScreen.routeName}",
+                AdminCategoryScreen.routeName + AddCategoryScreen.routeName,
               );
             },
             icon: const Icon(Icons.add),
@@ -60,6 +61,14 @@ class _AdminScreenState extends State<AdminScreen> {
       default:
         return [];
     }
+  }
+
+  bool _shouldShowAppBar(BuildContext context) {
+    final location = GoRouter.of(context).state.path;
+    print('location-> $location');
+    // Only show AppBar when we are exactly on AdminCategoryScreen or AdminProductScreen
+    return location == AdminCategoryScreen.routeName ||
+        location == AdminProductScreen.routeName;
   }
 
   @override
@@ -81,14 +90,19 @@ class _AdminScreenState extends State<AdminScreen> {
             zoomDrawerController: _zoomDrawerController,
           ),
           mainScreen: Scaffold(
-            appBar: CustomAppBar(
-              leading: IconButton(
-                onPressed: () => _zoomDrawerController.toggle!(),
-                icon: const Icon(Icons.menu),
-              ),
-              title: Text(_appBarTitle()),
-              actions: _appBarActions(),
-            ),
+            appBar:
+                _shouldShowAppBar(context)
+                    ? CustomAppBar(
+                      leading: IconButton(
+                        onPressed: () {
+                          _zoomDrawerController.toggle!();
+                        },
+                        icon: const Icon(Icons.menu),
+                      ),
+                      title: Text(_appBarTitle()),
+                      actions: _appBarActions(),
+                    )
+                    : null,
             body: widget.navigationShell,
           ),
           borderRadius: TRadius.r24,

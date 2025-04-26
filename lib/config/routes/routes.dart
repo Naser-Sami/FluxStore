@@ -102,6 +102,15 @@ final router = GoRouter(
               pageBuilder:
                   (context, state) =>
                       const CupertinoPage(child: AdminProductScreen()),
+              routes: [
+                GoRoute(
+                  path: AdminAddProductScreen.routeName,
+                  name: AdminAddProductScreen.name,
+                  pageBuilder:
+                      (context, state) =>
+                          const CupertinoPage(child: AdminAddProductScreen()),
+                ),
+              ],
             ),
           ],
         ),

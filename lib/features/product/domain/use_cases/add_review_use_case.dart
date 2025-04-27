@@ -5,13 +5,13 @@ import '/features/_features.dart'
     show IProductRepository, AddProductReviewParams;
 
 class AddReviewUseCase extends BaseUseCase<String, AddProductReviewParams> {
-  final IProductRepository productRepository;
-  AddReviewUseCase({required this.productRepository});
+  final IProductRepository repository;
+  AddReviewUseCase({required this.repository});
 
   @override
   Future<Either<Failure<String>, String>> call(AddProductReviewParams p) async {
     try {
-      return await productRepository.addReview(p);
+      return await repository.addReview(p);
     } catch (e) {
       return Left(Failure(error: e.toString()));
     }

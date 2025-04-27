@@ -5,13 +5,13 @@ import '/features/_features.dart'
     show UserEntity, ILoginRepository, LoginParams;
 
 class LoginUseCase extends BaseUseCase<UserEntity, LoginParams> {
-  final ILoginRepository loginRepository;
-  LoginUseCase({required this.loginRepository});
+  final ILoginRepository repository;
+  LoginUseCase({required this.repository});
 
   @override
   Future<Either<Failure<String>, UserEntity>> call(p) async {
     try {
-      return await loginRepository.login(p);
+      return await repository.login(p);
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {

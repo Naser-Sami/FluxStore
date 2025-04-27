@@ -89,7 +89,7 @@ class UserSessionCubit extends Cubit<UserEntity?> {
   }
 
   Future<void> logout() async {
-    // Do not clear the refresh token here
+    // Do not clear the refresh token
     await Future.wait([clearAccessToken(), clearUser()]);
   }
 }

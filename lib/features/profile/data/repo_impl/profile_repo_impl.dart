@@ -11,10 +11,10 @@ import '/features/_features.dart'
         UpdateProfileParams,
         ProfileMapper;
 
-class ProfileRepositoryImplementation implements IProfileRepository {
+class ProfileRepository implements IProfileRepository {
   final IProfileRemoteDataSource remoteDataSource;
 
-  ProfileRepositoryImplementation({required this.remoteDataSource});
+  ProfileRepository({required this.remoteDataSource});
 
   @override
   Future<Either<Failure, Profile>> get() async {

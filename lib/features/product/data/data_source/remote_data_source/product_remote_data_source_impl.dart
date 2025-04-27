@@ -9,10 +9,10 @@ import '/features/_features.dart'
         AddProductReviewParams,
         ProductModel,
         ProductDetailsModel,
-        UpdateProductImagesParams,
+        UpdateProductImageParams,
         UpdateProductDetailsImagesParams;
 
-class ProductRemoteDataSourceImpl implements IProductRemoteDataSource {
+class ProductRemoteDataSource implements IProductRemoteDataSource {
   final ApiClient apiClient = sl<ApiClient>();
 
   @override
@@ -139,7 +139,7 @@ class ProductRemoteDataSourceImpl implements IProductRemoteDataSource {
   }
 
   @override
-  Future<String?> uploadImage(UpdateProductImagesParams params) async {
+  Future<String?> uploadImage(UpdateProductImageParams params) async {
     try {
       final formData = FormData.fromMap({
         'image': await MultipartFile.fromFile(

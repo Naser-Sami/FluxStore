@@ -5,3 +5,5 @@ export 'get_product_by_id_use_case.dart';
 export 'get_product_details_use_case.dart';
 export 'get_products_use_case.dart';
 export 'update_product_use_case.dart';
+export 'upload_product_image_use_case.dart';
+export 'upload_product_images_use_case.dart';

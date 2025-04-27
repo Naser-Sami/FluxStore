@@ -43,6 +43,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
     super.initState();
     _initializeAnimations();
 
+    context.read<BottomNavigationBarCubit>().reset();
     _scrollController = ScrollController();
     _scrollController.addListener(_handleScroll);
   }

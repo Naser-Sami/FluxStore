@@ -8,7 +8,7 @@ class RefreshTokenHandler {
 
   RefreshTokenHandler();
 
-  Future<bool> tryRefreshToken() async {
+  Future<UserEntity?> tryRefreshToken() async {
     final refreshToken = await _storage.read(key: Constants.keyRefreshToken);
     final accessToken = await _storage.read(key: Constants.keyAccessToken);
 
@@ -16,7 +16,7 @@ class RefreshTokenHandler {
     ApiEndpoints.refreshToken = refreshToken;
 
     // if (refreshToken == null || accessToken == null) return false;
-    if (refreshToken == null) return false;
+    if (refreshToken == null) return null;
 
     try {
       final response = await _dio.post<UserModel>(
@@ -40,9 +40,15 @@ class RefreshTokenHandler {
       ApiEndpoints.accessToken = newAccessToken;
       ApiEndpoints.refreshToken = newRefreshToken;
 
-      return true;
+      if (response == null) return null;
+      final user = UserMapper.toEntity(response);
+
+      await sl<UserSessionCubit>().clearUser();
+      await sl<UserSessionCubit>().saveUser(user);
+
+      return user;
     } catch (_) {
-      return false;
+      return null;
     }
   }
 }

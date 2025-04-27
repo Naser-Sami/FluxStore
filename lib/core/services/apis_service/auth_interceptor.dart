@@ -52,10 +52,10 @@ class AuthInterceptor extends Interceptor {
 
       if (!_isRefreshing) {
         _isRefreshing = true;
-        final success = await sl<RefreshTokenHandler>().tryRefreshToken();
+        final user = await sl<RefreshTokenHandler>().tryRefreshToken();
         _isRefreshing = false;
 
-        if (!success) {
+        if (user == null) {
           await _storage.deleteAll();
           ApiEndpoints.accessToken = null;
           navigatorKey.currentContext?.go(WelcomeScreen.routeName);

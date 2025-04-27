@@ -4,15 +4,15 @@ import '/core/_core.dart' show BaseUseCase, Failure;
 import '/features/_features.dart' show IProductRepository, UpdateProductParams;
 
 class UpdateProductUseCase extends BaseUseCase<String, UpdateProductParams> {
-  final IProductRepository productRepository;
-  UpdateProductUseCase({required this.productRepository});
+  final IProductRepository repository;
+  UpdateProductUseCase({required this.repository});
 
   @override
   Future<Either<Failure<String>, String>> call(
     UpdateProductParams params,
   ) async {
     try {
-      return await productRepository.updateProduct(params);
+      return await repository.updateProduct(params);
     } catch (e) {
       return Left(Failure(error: e.toString()));
     }

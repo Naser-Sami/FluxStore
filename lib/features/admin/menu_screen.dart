@@ -3,8 +3,8 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart' show OnTapScaler, TPadding, TRadius, TSize;
-import '/core/_core.dart' show BuildContextExtensions;
-import '/features/_features.dart' show InfoCard;
+import '/core/_core.dart' show BuildContextExtensions, sl;
+import '/features/_features.dart' show InfoCard, SplashScreen, UserSessionCubit;
 import 'menu_item_model.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -147,7 +147,10 @@ class _MenuScreenState extends State<MenuScreen> {
                   children: [
                     const Divider(),
                     OnTapScaler(
-                      onTap: () {},
+                      onTap: () {
+                        sl<UserSessionCubit>().logout();
+                        context.go(SplashScreen.routeName);
+                      },
                       child: Row(
                         children: [
                           const Icon(Icons.logout_outlined),

@@ -6,7 +6,7 @@ import '/core/_core.dart' show ApiClient, ApiEndpoints, sl;
 import '/features/_features.dart'
     show IProfileRemoteDataSource, ProfileModel, UpdateProfileParams;
 
-class ProfileRemoteDataSourceImpl implements IProfileRemoteDataSource {
+class ProfileRemoteDataSource implements IProfileRemoteDataSource {
   final ApiClient apiClient = sl<ApiClient>();
 
   @override

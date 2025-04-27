@@ -5,13 +5,13 @@ import '/features/_features.dart'
     show ICategoriesRepository, CreateCategoryParams;
 
 class CreateCategoryUseCase extends BaseUseCase<String, CreateCategoryParams> {
-  final ICategoriesRepository categoriesRepository;
-  CreateCategoryUseCase({required this.categoriesRepository});
+  final ICategoriesRepository repository;
+  CreateCategoryUseCase({required this.repository});
 
   @override
   Future<Either<Failure, String>> call(CreateCategoryParams p) async {
     try {
-      return await categoriesRepository.create(p);
+      return await repository.create(p);
     } catch (e) {
       return Left(Failure(error: e.toString()));
     }

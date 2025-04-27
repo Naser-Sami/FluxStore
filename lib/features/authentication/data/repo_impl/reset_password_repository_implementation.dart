@@ -7,19 +7,16 @@ import '/features/_features.dart'
         IResetPasswordRepository,
         IAuthenticationRemoteDataSource;
 
-class ResetPasswordRepositoryImplementation
-    implements IResetPasswordRepository {
-  final IAuthenticationRemoteDataSource authenticationRemoteDataSource;
-  ResetPasswordRepositoryImplementation({
-    required this.authenticationRemoteDataSource,
-  });
+class ResetPasswordRepository implements IResetPasswordRepository {
+  final IAuthenticationRemoteDataSource remoteDataSource;
+  ResetPasswordRepository({required this.remoteDataSource});
 
   @override
   Future<Either<Failure<String>, String>> resetPassword(
     ResetPasswordParams params,
   ) async {
     try {
-      final result = await authenticationRemoteDataSource.resetPassword(params);
+      final result = await remoteDataSource.resetPassword(params);
       if (result != null) {
         return Right(result);
       }

@@ -1,6 +1,15 @@
+import 'dart:developer' show log;
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '/core/_core.dart'
+    show
+        Constants,
+        LocalAuthenticationService,
+        RefreshTokenHandler,
+        SecureStorageService,
+        sl;
 import '/features/_features.dart';
 
 part 'login_event.dart';
@@ -11,6 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc({required this.loginUseCase}) : super(LoginInitial()) {
     on(_login);
+    on(_biometricLogin);
   }
 
   Future<void> _login(OnLoginEvent event, Emitter<LoginState> emit) async {
@@ -29,6 +39,32 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
     } catch (e) {
       emit(const LoginFailure(error: "Login error."));
+    }
+  }
+
+  Future<void> _biometricLogin(
+    BiometricLoginEvent event,
+    Emitter<LoginState> emit,
+  ) async {
+    final storage = sl<SecureStorageService>();
+
+    final refreshToken = await storage.read(key: Constants.keyRefreshToken);
+    log('Refreshing token: $refreshToken');
+
+    if (refreshToken == null) {
+      log('No refresh token found');
+      return;
+    }
+
+    final isAuthenticated =
+        await LocalAuthenticationService.authenticateWithBiometrics();
+
+    if (isAuthenticated) {
+      final user = await sl<RefreshTokenHandler>().tryRefreshToken();
+
+      if (user != null) {
+        emit(LoginSuccess(user: user));
+      }
     }
   }
 }

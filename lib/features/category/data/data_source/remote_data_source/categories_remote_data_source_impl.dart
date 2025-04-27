@@ -6,7 +6,7 @@ import '/features/_features.dart'
         CreateCategoryParams,
         UpdateCategoryParams;
 
-class CategoriesRemoteDataSourceImpl implements ICategoriesRemoteDataSource {
+class CategoriesRemoteDataSource implements ICategoriesRemoteDataSource {
   final ApiClient apiClient = sl<ApiClient>();
 
   @override

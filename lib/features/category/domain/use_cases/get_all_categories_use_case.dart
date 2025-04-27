@@ -4,13 +4,13 @@ import '/core/_core.dart' show BaseUseCase, Failure, NoParams;
 import '/features/_features.dart' show Category, ICategoriesRepository;
 
 class GetAllCategoriesUseCase extends BaseUseCase<List<Category>, NoParams> {
-  final ICategoriesRepository categoriesRepository;
-  GetAllCategoriesUseCase({required this.categoriesRepository});
+  final ICategoriesRepository repository;
+  GetAllCategoriesUseCase({required this.repository});
 
   @override
   Future<Either<Failure, List<Category>>> call(NoParams p) async {
     try {
-      return await categoriesRepository.getAll();
+      return await repository.getAll();
     } catch (e) {
       return Left(Failure(error: e.toString()));
     }

@@ -3,11 +3,13 @@ import 'package:dartz/dartz.dart';
 import '/core/_core.dart' show Failure;
 import '/features/_features.dart'
     show
+        AddProductParams,
+        AddProductReviewParams,
         Product,
         ProductDetails,
-        AddProductParams,
-        UpdateProductParams,
-        AddProductReviewParams;
+        UpdateProductDetailsImagesParams,
+        UpdateProductImageParams,
+        UpdateProductParams;
 
 abstract class IProductRepository {
   Future<Either<Failure<String>, List<Product>>> getProducts();
@@ -17,4 +19,10 @@ abstract class IProductRepository {
   Future<Either<Failure<String>, String>> deleteProduct(String id);
   Future<Either<Failure<String>, ProductDetails>> getProductDetails(String id);
   Future<Either<Failure<String>, String>> addReview(AddProductReviewParams p);
+  Future<Either<Failure<String>, String>> uploadImage(
+    UpdateProductImageParams p,
+  );
+  Future<Either<Failure<String>, List<String>>> uploadImages(
+    UpdateProductDetailsImagesParams p,
+  );
 }

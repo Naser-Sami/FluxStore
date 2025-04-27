@@ -30,15 +30,11 @@ class SplashScreenState extends State<SplashScreen> {
     print("🔑 Token: $token");
 
     if (token != null && refreshToken != null) {
-      final refreshed = await sl<AuthService>().tryRefreshToken(
-        token,
-        refreshToken,
-      );
+      final user = await sl<AuthService>().tryRefreshToken(token, refreshToken);
 
-      if (refreshed) {
-        final user = await sl<UserSessionCubit>().getSavedUser();
+      if (user != null) {
         print("🔑 User: $user");
-        if (user?.role.toLowerCase() == 'admin') {
+        if (user.role.toLowerCase() == 'admin') {
           if (mounted) context.go(AdminCategoryScreen.routeName);
           return;
         }

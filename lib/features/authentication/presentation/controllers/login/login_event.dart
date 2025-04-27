@@ -14,3 +14,10 @@ final class OnLoginEvent extends LoginEvent {
   @override
   List<Object> get props => [params];
 }
+
+final class BiometricLoginEvent extends LoginEvent {
+  const BiometricLoginEvent();
+
+  @override
+  List<Object> get props => [];
+}

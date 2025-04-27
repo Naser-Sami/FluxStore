@@ -1,6 +1,6 @@
 import 'dart:io';
 
-class UpdateProductImagesParams {
+class UpdateProductImageParams {
   final File imageUrl;
-  UpdateProductImagesParams({required this.imageUrl});
+  UpdateProductImageParams({required this.imageUrl});
 }

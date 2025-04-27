@@ -10,9 +10,9 @@ import '/features/_features.dart'
         CreateCategoryParams,
         UpdateCategoryParams;
 
-class CategoriesRepositoryImplementation implements ICategoriesRepository {
+class CategoriesRepository implements ICategoriesRepository {
   final ICategoriesRemoteDataSource remoteDataSource;
-  CategoriesRepositoryImplementation({required this.remoteDataSource});
+  CategoriesRepository({required this.remoteDataSource});
 
   @override
   Future<Either<Failure<String>, String>> create(

@@ -7,19 +7,16 @@ import '/features/_features.dart'
         IForgotPasswordRepository,
         IAuthenticationRemoteDataSource;
 
-class ForgotPasswordRepositoryImplementation
-    implements IForgotPasswordRepository {
-  final IAuthenticationRemoteDataSource authenticationRemoteDataSource;
-  ForgotPasswordRepositoryImplementation({
-    required this.authenticationRemoteDataSource,
-  });
+class ForgotPasswordRepository implements IForgotPasswordRepository {
+  final IAuthenticationRemoteDataSource remoteDataSource;
+  ForgotPasswordRepository({required this.remoteDataSource});
 
   @override
   Future<Either<Failure<String>, String>> forgotPassword(
     ForgotPasswordParams params,
   ) async {
     try {
-      final token = await authenticationRemoteDataSource.forgotPassword(params);
+      final token = await remoteDataSource.forgotPassword(params);
       if (token != null) {
         return Right(token);
       }

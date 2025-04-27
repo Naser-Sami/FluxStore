@@ -11,13 +11,7 @@ import '/config/_config.dart'
         TRadius;
 import '/core/_core.dart';
 import '/features/_features.dart'
-    show
-        CustomDrawer,
-        DrawerCubit,
-        GetProfileEvent,
-        MainAppBar,
-        OnDrawerTapCubit,
-        ProfileBloc;
+    show CustomDrawer, DrawerCubit, MainAppBar, OnDrawerTapCubit;
 
 class AppBottomNavigationBar extends StatefulWidget {
   static const routeName = '/flux-store';

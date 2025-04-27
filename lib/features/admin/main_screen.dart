@@ -3,8 +3,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart' show CustomAppBar, TRadius;
-import '/core/_core.dart' show BuildContextExtensions, sl;
-import '/features/_features.dart' show GetProfileEvent, ProfileBloc;
+import '/core/_core.dart' show BuildContextExtensions;
 import 'category/add_category.dart';
 import 'category/category.dart';
 import 'menu_screen.dart';

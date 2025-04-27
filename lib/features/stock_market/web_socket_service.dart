@@ -10,7 +10,7 @@ class WebSocketService {
     _channel = WebSocketChannel.connect(Uri.parse(_url));
   }
 
-  /// Use cast<String>() since the stream emits String values
+  // Use cast<String>() since the stream emits String values
   Stream<String> get stream => _channel.stream.cast<String>();
 
   void sendMessage(Map<String, dynamic> message) {

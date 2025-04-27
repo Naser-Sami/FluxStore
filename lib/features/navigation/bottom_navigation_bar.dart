@@ -11,7 +11,7 @@ import '/config/_config.dart'
         TRadius;
 import '/core/_core.dart';
 import '/features/_features.dart'
-    show CustomDrawer, MainAppBar, OnDrawerTapCubit;
+    show CustomDrawer, DrawerCubit, MainAppBar, OnDrawerTapCubit;
 
 class AppBottomNavigationBar extends StatefulWidget {
   static const routeName = '/flux-store';
@@ -43,9 +43,14 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
     super.initState();
     _initializeAnimations();
 
-    context.read<BottomNavigationBarCubit>().reset();
+    _reset();
     _scrollController = ScrollController();
     _scrollController.addListener(_handleScroll);
+  }
+
+  void _reset() {
+    context.read<BottomNavigationBarCubit>().reset();
+    context.read<DrawerCubit>().selectItem(0);
   }
 
   void _initializeAnimations() {

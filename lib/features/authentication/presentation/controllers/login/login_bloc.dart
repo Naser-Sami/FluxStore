@@ -46,25 +46,29 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     BiometricLoginEvent event,
     Emitter<LoginState> emit,
   ) async {
-    final storage = sl<SecureStorageService>();
+    try {
+      final storage = sl<SecureStorageService>();
 
-    final refreshToken = await storage.read(key: Constants.keyRefreshToken);
-    log('Refreshing token: $refreshToken');
+      final refreshToken = await storage.read(key: Constants.keyRefreshToken);
+      log('Refreshing token: $refreshToken');
 
-    if (refreshToken == null) {
-      log('No refresh token found');
-      return;
-    }
-
-    final isAuthenticated =
-        await LocalAuthenticationService.authenticateWithBiometrics();
-
-    if (isAuthenticated) {
-      final user = await sl<RefreshTokenHandler>().tryRefreshToken();
-
-      if (user != null) {
-        emit(LoginSuccess(user: user));
+      if (refreshToken == null) {
+        log('No refresh token found');
+        return;
       }
+
+      final isAuthenticated =
+          await LocalAuthenticationService.authenticateWithBiometrics();
+
+      if (isAuthenticated) {
+        final user = await sl<RefreshTokenHandler>().tryRefreshToken();
+
+        if (user != null) {
+          emit(LoginSuccess(user: user));
+        }
+      }
+    } catch (e) {
+      emit(const LoginFailure(error: "Biometric login error."));
     }
   }
 }

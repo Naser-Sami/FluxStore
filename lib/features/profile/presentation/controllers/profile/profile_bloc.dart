@@ -31,12 +31,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   void _getProfile(GetProfileEvent event, Emitter<ProfileState> emit) async {
-    emit(LoadedState(profile: state.profile));
+    emit(ProfileLoadedState(profile: state.profile));
     final result = await getProfileUseCase(const NoParams());
     result.fold(
       (failure) =>
-          emit(ErrorState(profile: state.profile, error: failure.error)),
-      (profile) => emit(LoadedState(profile: profile)),
+          emit(ProfileErrorState(profile: state.profile, error: failure.error)),
+      (profile) => emit(ProfileLoadedState(profile: profile)),
     );
   }
 
@@ -44,13 +44,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     UpdateProfileEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(LoadedState(profile: state.profile));
+    emit(ProfileLoadedState(profile: state.profile));
 
     final updateProfileResult = await updateProfileUseCase(event.params);
     if (updateProfileResult.isLeft()) {
       updateProfileResult.fold(
-        (failure) =>
-            emit(ErrorState(profile: state.profile, error: failure.error)),
+        (failure) => emit(
+          ProfileErrorState(profile: state.profile, error: failure.error),
+        ),
         (_) {},
       );
       return;
@@ -60,8 +61,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     final profileResult = await getProfileUseCase(const NoParams());
     profileResult.fold(
       (failure) =>
-          emit(ErrorState(profile: state.profile, error: failure.error)),
-      (profile) => emit(LoadedState(profile: profile)),
+          emit(ProfileErrorState(profile: state.profile, error: failure.error)),
+      (profile) => emit(ProfileLoadedState(profile: profile)),
     );
   }
 
@@ -69,14 +70,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     UpdateProfileImageEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(LoadingState(profile: state.profile));
+    emit(ProfileLoadingState(profile: state.profile));
 
     final uploadResult = await updateProfileImageUseCase(event.file);
 
     if (uploadResult.isLeft()) {
       uploadResult.fold(
-        (failure) =>
-            emit(ErrorState(profile: state.profile, error: failure.error)),
+        (failure) => emit(
+          ProfileErrorState(profile: state.profile, error: failure.error),
+        ),
         (_) {},
       );
       return;
@@ -86,8 +88,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     final profileResult = await getProfileUseCase(const NoParams());
     profileResult.fold(
       (failure) =>
-          emit(ErrorState(profile: state.profile, error: failure.error)),
-      (profile) => emit(LoadedState(profile: profile)),
+          emit(ProfileErrorState(profile: state.profile, error: failure.error)),
+      (profile) => emit(ProfileLoadedState(profile: profile)),
     );
   }
 }

@@ -8,8 +8,8 @@ import '/config/shared/_shared.dart';
 import '/core/utils/_utils.dart';
 import '/features/_features.dart'
     show
-        LoadedState,
-        LoadingState,
+        ProfileLoadedState,
+        ProfileLoadingState,
         ProfileBloc,
         ProfileState,
         UpdateProfileImageEvent;
@@ -47,11 +47,11 @@ class _AddProfileImageState extends State<AddProfileImage> {
             children: [
               BlocBuilder<ProfileBloc, ProfileState>(
                 builder: (context, state) {
-                  if (state is LoadingState) {
+                  if (state is ProfileLoadingState) {
                     return const CircularProgressIndicator();
                   }
 
-                  if (state is LoadedState) {
+                  if (state is ProfileLoadedState) {
                     final profile = state.profile;
                     final image = '${ApiEndpoints.imageUrl}${profile.imageUrl}';
 

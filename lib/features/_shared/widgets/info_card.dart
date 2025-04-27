@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/config/_config.dart';
 import '/core/_core.dart';
 import '/features/_features.dart'
-    show LoadedState, LoadingState, ProfileBloc, ProfileState;
+    show ProfileLoadedState, ProfileLoadingState, ProfileBloc, ProfileState;
 
 class InfoCard extends StatelessWidget {
   const InfoCard({super.key});
@@ -17,11 +17,11 @@ class InfoCard extends StatelessWidget {
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        if (state is LoadingState) {
+        if (state is ProfileLoadingState) {
           return const SizedBox();
         }
 
-        if (state is LoadedState) {
+        if (state is ProfileLoadedState) {
           final user = state.profile;
           final image = '${ApiEndpoints.imageUrl}${user.imageUrl}';
 

@@ -65,7 +65,10 @@ final router = GoRouter(
     // ADMIN
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return AdminScreen(navigationShell: navigationShell);
+        return BlocProvider<ProfileBloc>(
+          create: (context) => sl<ProfileBloc>()..add(const GetProfileEvent()),
+          child: AdminScreen(navigationShell: navigationShell),
+        );
       },
       branches: [
         StatefulShellBranch(
@@ -218,7 +221,10 @@ final router = GoRouter(
     /// - Flux Store
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return AppBottomNavigationBar(navigationShell: navigationShell);
+        return BlocProvider<ProfileBloc>(
+          create: (context) => sl<ProfileBloc>()..add(const GetProfileEvent()),
+          child: AppBottomNavigationBar(navigationShell: navigationShell),
+        );
       },
       branches: [
         // Home Shell Branch

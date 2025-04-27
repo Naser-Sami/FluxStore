@@ -7,7 +7,7 @@ import '/core/_core.dart';
 import '/features/_features.dart'
     show
         InfoCard,
-        LoadedState,
+        ProfileLoadedState,
         ProfileBloc,
         ProfileSettingsScreen,
         ProfileState,
@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        if (state is LoadedState) {
+        if (state is ProfileLoadedState) {
           return Scaffold(
             appBar: AppBar(toolbarHeight: 20),
             body: SizedBox(

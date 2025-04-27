@@ -12,16 +12,16 @@ class InitialState extends ProfileState {
   const InitialState({required super.profile});
 }
 
-class LoadingState extends ProfileState {
-  const LoadingState({required super.profile});
+class ProfileLoadingState extends ProfileState {
+  const ProfileLoadingState({required super.profile});
 }
 
-class LoadedState extends ProfileState {
-  const LoadedState({required super.profile});
+class ProfileLoadedState extends ProfileState {
+  const ProfileLoadedState({required super.profile});
 }
 
-class ErrorState extends ProfileState {
-  const ErrorState({required super.profile, required this.error});
+class ProfileErrorState extends ProfileState {
+  const ProfileErrorState({required super.profile, required this.error});
   final String error;
 
   @override

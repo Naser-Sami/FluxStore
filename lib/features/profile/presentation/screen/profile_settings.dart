@@ -22,9 +22,9 @@ import '/core/_core.dart'
 import '/features/_features.dart'
     show
         AddProfileImage,
-        ErrorState,
-        LoadedState,
-        LoadingState,
+        ProfileErrorState,
+        ProfileLoadedState,
+        ProfileLoadingState,
         ProfileBloc,
         ProfileState,
         UpdateProfileEvent,
@@ -106,16 +106,16 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
     return BlocListener<ProfileBloc, ProfileState>(
       listener: (context, state) {
-        if (state is LoadingState) {
+        if (state is ProfileLoadingState) {
           showLoadingDialog(context);
           context.pop();
         }
 
-        if (state is ErrorState) {
+        if (state is ProfileErrorState) {
           errorDialog(context, message: state.error);
         }
 
-        if (state is LoadedState) {
+        if (state is ProfileLoadedState) {
           // context.pop();
         }
       },

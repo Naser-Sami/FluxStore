@@ -1,6 +1,7 @@
 import 'dart:io';
 
 class UpdateProductImageParams {
-  final File imageUrl;
-  UpdateProductImageParams({required this.imageUrl});
+  final String productId;
+  final File file;
+  UpdateProductImageParams({required this.productId, required this.file});
 }

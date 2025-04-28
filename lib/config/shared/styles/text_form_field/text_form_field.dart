@@ -30,6 +30,8 @@ class TextFormFieldComponent extends StatelessWidget {
     this.label,
     this.labelText,
     this.readOnly = false,
+    this.minLines,
+    this.maxLines = 1,
   });
 
   // Variables
@@ -44,6 +46,8 @@ class TextFormFieldComponent extends StatelessWidget {
   final String? title;
   final String obscuringCharacter;
   final bool obscureText;
+  final int? minLines;
+  final int? maxLines;
 
   // Controllers
   final TextEditingController? controller;
@@ -89,6 +93,8 @@ class TextFormFieldComponent extends StatelessWidget {
       autofocus: autofocus,
       controller: controller,
       onTap: onTap,
+      minLines: minLines,
+      maxLines: maxLines,
       validator: validator,
       onChanged: onChanged,
       onSaved: onSaved,

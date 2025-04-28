@@ -13,6 +13,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final UpdateProductUseCase updateProductUseCase;
   final DeleteProductUseCase deleteProductUseCase;
   final GetProductByIdUseCase getProductByIdUseCase;
+  final UploadProductImageUseCase uploadProductImageUseCase;
+  final UploadProductImagesUseCase uploadProductImagesUseCase;
 
   ProductsBloc({
     required this.addProductUseCase,
@@ -20,12 +22,16 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     required this.updateProductUseCase,
     required this.deleteProductUseCase,
     required this.getProductByIdUseCase,
+    required this.uploadProductImageUseCase,
+    required this.uploadProductImagesUseCase,
   }) : super(ProductsInitial()) {
     on(_addProduct);
     on(_getProducts);
     on(_updateProduct);
     on(_deleteProduct);
     on(_getProductById);
+    on(_uploadProductImage);
+    on(_uploadProductImages);
   }
 
   void _addProduct(AddProductEvent event, Emitter<ProductsState> emit) async {
@@ -33,15 +39,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     try {
       final addResult = await addProductUseCase(event.params);
 
-      if (addResult.isLeft()) {
-        addResult.fold((failure) => emit(ProductsError(failure.error)), (_) {});
-        return;
-      }
-
-      final result = await getProductsUseCase(const NoParams());
-      result.fold(
+      addResult.fold(
         (failure) => emit(ProductsError(failure.error)),
-        (products) => emit(ProductsLoaded(products)),
+        (product) => emit(ProductLoaded(product)),
       );
     } catch (e) {
       emit(ProductsError(e.toString()));
@@ -92,11 +92,13 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     DeleteProductEvent event,
     Emitter<ProductsState> emit,
   ) async {
-    emit(ProductsLoading());
     try {
+      // ❌ DO NOT emit ProductsLoading()
+
       final deleteResult = await deleteProductUseCase(event.productId);
 
       if (deleteResult.isLeft()) {
+        // Handle failure
         deleteResult.fold(
           (failure) => emit(ProductsError(failure.error)),
           (_) {},
@@ -104,11 +106,14 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         return;
       }
 
-      final result = await getProductsUseCase(const NoParams());
-      result.fold(
-        (failure) => emit(ProductsError(failure.error)),
-        (products) => emit(ProductsLoaded(products)),
-      );
+      // ✅ If delete succeeded, update the list
+      final currentState = state;
+      if (currentState is ProductsLoaded) {
+        final updatedProducts = List<Product>.from(currentState.products)
+          ..removeWhere((p) => p.id == event.productId);
+
+        emit(ProductsLoaded(updatedProducts));
+      }
     } catch (e) {
       emit(ProductsError(e.toString()));
     }
@@ -128,6 +133,36 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       );
     } catch (e) {
       emit(ProductsError(e.toString()));
+    }
+  }
+
+  void _uploadProductImage(
+    UpdateProductImageEvent event,
+    Emitter<ProductsState> emit,
+  ) async {
+    final uploadResult = await uploadProductImageUseCase(event.p);
+
+    if (uploadResult.isLeft()) {
+      uploadResult.fold(
+        (failure) => emit(ProductsError(failure.error)),
+        (_) {},
+      );
+      return;
+    }
+  }
+
+  void _uploadProductImages(
+    UpdateProductImagesEvent event,
+    Emitter<ProductsState> emit,
+  ) async {
+    final uploadResult = await uploadProductImagesUseCase(event.p);
+
+    if (uploadResult.isLeft()) {
+      uploadResult.fold(
+        (failure) => emit(ProductsError(failure.error)),
+        (_) {},
+      );
+      return;
     }
   }
 }

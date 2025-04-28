@@ -35,63 +35,68 @@ class _AdminProductScreenState extends State<AdminProductScreen> {
         },
         child: const Icon(Icons.add),
       ),
-      body: BlocBuilder<ProductsBloc, ProductsState>(
-        builder: (context, state) {
-          if (state is ProductsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state is ProductsError) {
-            return Center(child: Text(state.message));
-          }
-          if (state is ProductsLoaded) {
-            return ReorderableListView.builder(
-              itemCount: state.products.length,
-              onReorder: (oldIndex, newIndex) {
-                setState(() {
-                  if (newIndex > oldIndex) {
-                    newIndex -= 1;
-                  }
-                  final item = state.products.removeAt(oldIndex);
-                  state.products.insert(newIndex, item);
-                });
-              },
-              itemBuilder: (context, index) {
-                final product = state.products[index];
-                return ListTile(
-                  key: ValueKey(product.id),
-                  leading: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CachedNetWorkImageComponent(
-                      imageUrl: ApiEndpoints.imageUrl + product.imageUrl,
-                    ),
-                  ),
-                  title: Text(product.name),
-                  subtitle: Text('\$${product.price}'),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.edit),
-                        onPressed: () {
-                          // Edit product
-                        },
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 700),
+          child: BlocBuilder<ProductsBloc, ProductsState>(
+            builder: (context, state) {
+              if (state is ProductsLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state is ProductsError) {
+                return Center(child: Text(state.message));
+              }
+              if (state is ProductsLoaded) {
+                return ReorderableListView.builder(
+                  itemCount: state.products.length,
+                  onReorder: (oldIndex, newIndex) {
+                    setState(() {
+                      if (newIndex > oldIndex) {
+                        newIndex -= 1;
+                      }
+                      final item = state.products.removeAt(oldIndex);
+                      state.products.insert(newIndex, item);
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    final product = state.products[index];
+                    return ListTile(
+                      key: ValueKey(product.id),
+                      leading: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CachedNetWorkImageComponent(
+                          imageUrl: ApiEndpoints.imageUrl + product.imageUrl,
+                        ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () {
-                          _confirmDelete(product.id);
-                        },
+                      title: Text(product.name),
+                      subtitle: Text('\$${product.price}'),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            onPressed: () {
+                              // Edit product
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                              _confirmDelete(product.id);
+                            },
+                          ),
+                          const Icon(Icons.drag_handle),
+                        ],
                       ),
-                      const Icon(Icons.drag_handle),
-                    ],
-                  ),
+                    );
+                  },
                 );
-              },
-            );
-          }
-          return const SizedBox.shrink();
-        },
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
       ),
     );
   }

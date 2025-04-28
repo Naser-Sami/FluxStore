@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer' show log;
 
 import 'package:flutter/material.dart';
 
+import '/core/_core.dart' show ApiClient, sl;
 import 'web_socket_service.dart';
 import 'websocket.dart';
 
@@ -15,16 +17,21 @@ class RealTimeStockWidget extends StatefulWidget {
 class RealTimeStockWidgetState extends State<RealTimeStockWidget> {
   late WebSocketService _webSocketService;
   final Map<String, PriceUpdateEvent> _latestPrices = {};
+  final apiClient = sl<ApiClient>();
 
   @override
   void initState() {
     super.initState();
+
+    _fetchInitialPrices();
+
     _webSocketService = WebSocketService(
       'wss://ws.twelvedata.com/v1/quotes/price?apikey=44bf8f45a2d047a49a3f1ba098515266',
     );
 
     _webSocketService.sendMessage({
       "action": "subscribe",
+      // stock market closed so data is not available for now !
       "params": {
         "symbols":
             "AAPL,INFY,TRP,QQQ,IXIC,EUR/USD,USD/JPY,BTC/USD,ETH/BTC,RY,RY:TSX",
@@ -37,6 +44,7 @@ class RealTimeStockWidgetState extends State<RealTimeStockWidget> {
 
       if (event == "price") {
         final priceEvent = PriceUpdateEvent.fromJson(decoded);
+        print("🔥 Price event: ${priceEvent.symbol}");
         setState(() {
           _latestPrices[priceEvent.symbol] = priceEvent;
         });
@@ -44,6 +52,32 @@ class RealTimeStockWidgetState extends State<RealTimeStockWidget> {
         final success = decoded['success'];
         print("✅ Subscription confirmed $success");
       }
+    });
+  }
+
+  Future<void> _fetchInitialPrices() async {
+    final response = await apiClient.get(
+      path: 'https://api.twelvedata.com/price',
+      queryParameters: {
+        'symbol':
+            'AAPL,INFY,TRP,QQQ,IXIC,EUR/USD,USD/JPY,BTC/USD,ETH/BTC,RY,RY:TSX',
+        'apikey': '44bf8f45a2d047a49a3f1ba098515266',
+      },
+    );
+
+    final decoded = response;
+
+    // Populate _latestPrices map
+    setState(() {
+      decoded.forEach((symbol, data) {
+        log("🔥 Price event: $data");
+        // _latestPrices[symbol] = PriceUpdateEvent(
+        //   event: decoded['event'] ?? "",
+        //   symbol: symbol ?? "",
+        //   price: double.tryParse(data['price'] ?? '0') ?? 0,
+        //   timestamp: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+        // );
+      });
     });
   }
 

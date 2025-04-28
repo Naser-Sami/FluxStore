@@ -5,9 +5,9 @@ class AddProductParams {
   final String imageUrl;
   final int stock;
   final String categoryId;
-  final List<String> additionalImages;
-  final List<String> availableColors;
-  final List<String> availableSizes;
+  final List<String>? additionalImages;
+  final List<String>? availableColors;
+  final List<String>? availableSizes;
 
   const AddProductParams({
     required this.name,
@@ -29,9 +29,9 @@ class AddProductParams {
       'imageUrl': imageUrl,
       'stock': stock,
       'categoryId': categoryId,
-      'additionalImages': additionalImages,
-      'availableColors': availableColors,
-      'availableSizes': availableSizes,
+      'additionalImages': additionalImages ?? [],
+      'availableColors': availableColors ?? [],
+      'availableSizes': availableSizes ?? [],
     };
   }
 }

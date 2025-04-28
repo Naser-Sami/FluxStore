@@ -13,7 +13,7 @@ abstract class IProductRemoteDataSource {
   Future<ProductModel> getProductById(String id);
   Future<ProductModel> addProduct(AddProductParams params);
   Future<String> updateProduct(UpdateProductParams params);
-  Future<String> deleteProduct(String id);
+  Future<void> deleteProduct(String id);
   Future<ProductDetailsModel> getProductDetails(String id);
   Future<String> addReview(AddProductReviewParams params);
   Future<String?> uploadImage(UpdateProductImageParams params);

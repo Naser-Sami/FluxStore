@@ -21,12 +21,12 @@ final class ProductsLoaded extends ProductsState {
 }
 
 final class ProductLoaded extends ProductsState {
-  final Product products;
+  final Product product;
 
-  const ProductLoaded(this.products);
+  const ProductLoaded(this.product);
 
   @override
-  List<Object> get props => [products];
+  List<Object> get props => [product];
 }
 
 final class ProductsError extends ProductsState {

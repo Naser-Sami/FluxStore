@@ -20,6 +20,7 @@ class ProductModel extends Equatable {
     required this.categoryId,
     required this.createdAt,
   });
+
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
       id: json['id'] as String,

@@ -53,17 +53,9 @@ class ProductRemoteDataSource implements IProductRemoteDataSource {
   }
 
   @override
-  Future<String> deleteProduct(String id) async {
+  Future<void> deleteProduct(String id) async {
     try {
-      final response = await apiClient.delete(
-        path: ApiEndpoints.product,
-        data: {'id': id},
-        parser: (data) => data,
-      );
-      if (response == null) {
-        throw Exception('Failed to delete product');
-      }
-      return response;
+      await apiClient.delete<String>(path: '${ApiEndpoints.product}/$id');
     } catch (e) {
       rethrow;
     }
@@ -141,15 +133,15 @@ class ProductRemoteDataSource implements IProductRemoteDataSource {
   @override
   Future<String?> uploadImage(UpdateProductImageParams params) async {
     try {
-      final formData = FormData.fromMap({
-        'image': await MultipartFile.fromFile(
-          params.imageUrl.path,
-          filename: 'product.jpg',
-        ),
-      });
       final response = await sl<ApiClient>().post<Map<String, dynamic>>(
         path: ApiEndpoints.productUpdateImages,
-        data: formData,
+        data: {
+          'productId': params.productId,
+          'image': await MultipartFile.fromFile(
+            params.file.path,
+            filename: 'product.jpg',
+          ),
+        },
         parser: (data) => data,
       );
 
@@ -164,18 +156,17 @@ class ProductRemoteDataSource implements IProductRemoteDataSource {
     UpdateProductDetailsImagesParams params,
   ) async {
     try {
-      final formData = FormData.fromMap({
-        'images': params.imageUrls.map(
-          (e) async => await MultipartFile.fromFile(
-            e.path,
-            filename: 'product-details.jpg',
-          ),
-        ),
-      });
-
       final response = await sl<ApiClient>().post<Map<String, dynamic>>(
         path: ApiEndpoints.productUpdateDetailsImages,
-        data: formData,
+        data: {
+          'productId': params.productId,
+          'images': params.files.map(
+            (e) async => await MultipartFile.fromFile(
+              e.path,
+              filename: 'product-details.jpg',
+            ),
+          ),
+        },
         parser: (data) => data,
       );
 

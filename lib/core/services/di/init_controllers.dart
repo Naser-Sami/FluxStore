@@ -76,6 +76,8 @@ Future<void> _products() async {
       updateProductUseCase: sl<UpdateProductUseCase>(),
       deleteProductUseCase: sl<DeleteProductUseCase>(),
       getProductByIdUseCase: sl<GetProductByIdUseCase>(),
+      uploadProductImageUseCase: sl<UploadProductImageUseCase>(),
+      uploadProductImagesUseCase: sl<UploadProductImagesUseCase>(),
     ),
   );
   sl.registerFactory<ProductDetailsBloc>(

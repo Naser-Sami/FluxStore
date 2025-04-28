@@ -159,6 +159,25 @@ class TFunctions {
     }
   }
 
+  static Future<List<File>?> pickAndUploadProfileImages(
+    BuildContext context,
+  ) async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      final List<XFile>? images = await picker.pickMultiImage(
+        imageQuality: 85, // compress
+      );
+
+      if (images == null) return null;
+
+      return images.map((e) => File(e.path)).toList();
+    } catch (e) {
+      debugPrint('Image upload error: $e');
+      return null;
+    }
+  }
+
   static Color hexToColor(String hex) {
     // Ensure the string is 6 characters and uppercase
     hex = hex.toUpperCase().replaceAll('#', '');

@@ -57,13 +57,8 @@ class ProductRepository implements IProductRepository {
   @override
   Future<Either<Failure<String>, String>> deleteProduct(String id) async {
     try {
-      final result = await remoteDataSource.deleteProduct(id);
-
-      if (result == 'Product deleted successfully') {
-        return Right(result);
-      } else {
-        return Left(Failure(statusCode: 500, error: result));
-      }
+      await remoteDataSource.deleteProduct(id);
+      return const Right('Product deleted successfully');
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {

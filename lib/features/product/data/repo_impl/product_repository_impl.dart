@@ -11,8 +11,6 @@ import '/features/_features.dart'
         AddProductParams,
         UpdateProductParams,
         AddProductReviewParams,
-        UpdateProductDetailsImagesParams,
-        UpdateProductImageParams,
         IProductRemoteDataSource;
 
 class ProductRepository implements IProductRepository {
@@ -122,44 +120,6 @@ class ProductRepository implements IProductRepository {
       } else {
         return Left(Failure(statusCode: 500, error: result));
       }
-    } on Failure catch (e) {
-      return Left(Failure(statusCode: e.statusCode, error: e.error));
-    } catch (e) {
-      return Left(Failure(statusCode: 500, error: e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure<String>, String>> uploadImage(
-    UpdateProductImageParams p,
-  ) async {
-    try {
-      final result = await remoteDataSource.uploadImage(p);
-      if (result == null) {
-        return const Left(
-          Failure(statusCode: 500, error: 'Failed to upload image'),
-        );
-      }
-      return Right(result);
-    } on Failure catch (e) {
-      return Left(Failure(statusCode: e.statusCode, error: e.error));
-    } catch (e) {
-      return Left(Failure(statusCode: 500, error: e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure<String>, List<String>>> uploadImages(
-    UpdateProductDetailsImagesParams p,
-  ) async {
-    try {
-      final result = await remoteDataSource.uploadImages(p);
-      if (result == null) {
-        return const Left(
-          Failure(statusCode: 500, error: 'Failed to upload images'),
-        );
-      }
-      return Right(result);
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {

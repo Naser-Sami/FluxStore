@@ -1,12 +1,12 @@
-import 'dart:developer' show log;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart' show TPadding, TSize, TextFormFieldComponent;
-import '/core/_core.dart' show BuildContextExtensions, TFunctions;
+import '/core/_core.dart' show BuildContextExtensions, TFunctions, errorDialog;
 import '/features/_features.dart'
     show
         AddProductEvent,
@@ -16,11 +16,9 @@ import '/features/_features.dart'
         ProductLoaded,
         ProductsBloc,
         ProductsError,
-        ProductsState,
-        UpdateProductDetailsImagesParams,
-        UpdateProductImageEvent,
-        UpdateProductImageParams,
-        UpdateProductImagesEvent;
+        ProductsLoaded,
+        ProductsLoading,
+        ProductsState;
 import 'product_colors.dart';
 import 'product_sizes.dart';
 
@@ -47,53 +45,22 @@ class _AdminAddProductScreenState extends State<AdminAddProductScreen> {
   final List<File> _subImages = [];
 
   String? _selectedCategoryId;
-  String _productId = '';
 
   Future<void> _addProduct() async {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() && _mainImage != null) {
       final params = AddProductParams(
         name: _nameController.text,
         description: _descriptionController.text,
         price: double.parse(_priceController.text),
         stock: int.parse(_stockController.text),
-        imageUrl: '',
+        image: _mainImage!, // file
         categoryId: _selectedCategoryId ?? '',
-        additionalImages: [],
+        additionalImages: _subImages, // files
         availableColors: _selectedColors.map((e) => e.toString()).toList(),
         availableSizes: _selectedSizes.map((e) => e.toString()).toList(),
       );
 
       context.read<ProductsBloc>().add(AddProductEvent(params));
-    }
-  }
-
-  Future<void> _updateProductImage() async {
-    if (_mainImage != null) {
-      if (mounted) {
-        context.read<ProductsBloc>().add(
-          UpdateProductImageEvent(
-            p: UpdateProductImageParams(
-              productId: _productId,
-              file: _mainImage!,
-            ),
-          ),
-        );
-      }
-    }
-  }
-
-  Future<void> _updateProductImages() async {
-    if (_subImages.isNotEmpty) {
-      if (mounted) {
-        context.read<ProductsBloc>().add(
-          UpdateProductImagesEvent(
-            p: UpdateProductDetailsImagesParams(
-              files: _subImages,
-              productId: _productId,
-            ),
-          ),
-        );
-      }
     }
   }
 
@@ -109,18 +76,12 @@ class _AdminAddProductScreenState extends State<AdminAddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ProductsBloc, ProductsState>(
-      listener: (context, state) async {
-        if (state is ProductLoaded) {
-          final product = state.product;
-          _productId = product.id; // ✅ NOW you get the ID
-
-          log('Got productId: $_productId');
-
-          await _updateProductImage();
-          await _updateProductImages();
-        } else if (state is ProductsError) {
-          log('Error: ${state.message}');
-          // show some error toast/snackbar maybe
+      listener: (context, state) {
+        if (state is ProductsError) {
+          errorDialog(context, message: state.message);
+        }
+        if (state is ProductsLoaded) {
+          context.pop();
         }
       },
       child: Scaffold(

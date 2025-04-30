@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-
 import '/core/_core.dart' show ApiEndpoints, ApiClient, sl;
 import '/features/_features.dart'
     show
@@ -8,9 +6,7 @@ import '/features/_features.dart'
         UpdateProductParams,
         AddProductReviewParams,
         ProductModel,
-        ProductDetailsModel,
-        UpdateProductImageParams,
-        UpdateProductDetailsImagesParams;
+        ProductDetailsModel;
 
 class ProductRemoteDataSource implements IProductRemoteDataSource {
   final ApiClient apiClient = sl<ApiClient>();
@@ -18,9 +14,11 @@ class ProductRemoteDataSource implements IProductRemoteDataSource {
   @override
   Future<ProductModel> addProduct(AddProductParams params) async {
     try {
+      final formData = await params.toFormData();
+
       final response = await apiClient.post<ProductModel>(
         path: ApiEndpoints.product,
-        data: params.toMap(),
+        data: formData,
         parser: (data) => ProductModel.fromJson(data),
       );
 
@@ -125,55 +123,6 @@ class ProductRemoteDataSource implements IProductRemoteDataSource {
         throw Exception('Failed to get product details by id');
       }
       return response;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<String?> uploadImage(UpdateProductImageParams params) async {
-    try {
-      final response = await sl<ApiClient>().post<Map<String, dynamic>>(
-        path: ApiEndpoints.productUpdateImages,
-        data: {
-          'productId': params.productId,
-          'image': await MultipartFile.fromFile(
-            params.file.path,
-            filename: 'product.jpg',
-          ),
-        },
-        parser: (data) => data,
-      );
-
-      return response?['imageUrl'] ?? '';
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<String>?> uploadImages(
-    UpdateProductDetailsImagesParams params,
-  ) async {
-    try {
-      final response = await sl<ApiClient>().post<Map<String, dynamic>>(
-        path: ApiEndpoints.productUpdateDetailsImages,
-        data: {
-          'productId': params.productId,
-          'images': params.files.map(
-            (e) async => await MultipartFile.fromFile(
-              e.path,
-              filename: 'product-details.jpg',
-            ),
-          ),
-        },
-        parser: (data) => data,
-      );
-
-      if (response == null) {
-        throw Exception('Failed to upload product details images');
-      }
-      return response['additionalImages'] as List<String>;
     } catch (e) {
       rethrow;
     }

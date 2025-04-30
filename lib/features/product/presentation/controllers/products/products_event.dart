@@ -49,21 +49,3 @@ final class GetProductByIdEvent extends ProductsEvent {
   @override
   List<Object> get props => [productId];
 }
-
-class UpdateProductImageEvent extends ProductsEvent {
-  final UpdateProductImageParams p;
-
-  const UpdateProductImageEvent({required this.p});
-
-  @override
-  List<Object> get props => [p];
-}
-
-class UpdateProductImagesEvent extends ProductsEvent {
-  final UpdateProductDetailsImagesParams p;
-
-  const UpdateProductImagesEvent({required this.p});
-
-  @override
-  List<Object> get props => [p];
-}

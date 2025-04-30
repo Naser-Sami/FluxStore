@@ -7,8 +7,6 @@ import '/features/_features.dart'
         AddProductReviewParams,
         Product,
         ProductDetails,
-        UpdateProductDetailsImagesParams,
-        UpdateProductImageParams,
         UpdateProductParams;
 
 abstract class IProductRepository {
@@ -19,10 +17,4 @@ abstract class IProductRepository {
   Future<Either<Failure<String>, String>> deleteProduct(String id);
   Future<Either<Failure<String>, ProductDetails>> getProductDetails(String id);
   Future<Either<Failure<String>, String>> addReview(AddProductReviewParams p);
-  Future<Either<Failure<String>, String>> uploadImage(
-    UpdateProductImageParams p,
-  );
-  Future<Either<Failure<String>, List<String>>> uploadImages(
-    UpdateProductDetailsImagesParams p,
-  );
 }

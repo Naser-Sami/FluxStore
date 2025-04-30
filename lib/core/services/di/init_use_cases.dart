@@ -75,10 +75,4 @@ Future<void> _products() async {
   sl.registerLazySingleton<AddReviewUseCase>(
     () => AddReviewUseCase(repository: sl<IProductRepository>()),
   );
-  sl.registerLazySingleton<UploadProductImageUseCase>(
-    () => UploadProductImageUseCase(repository: sl<IProductRepository>()),
-  );
-  sl.registerLazySingleton<UploadProductImagesUseCase>(
-    () => UploadProductImagesUseCase(repository: sl<IProductRepository>()),
-  );
 }

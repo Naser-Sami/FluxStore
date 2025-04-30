@@ -27,11 +27,12 @@ class ApiClient {
     Map<String, dynamic>? headers,
     CancelToken? token,
     T Function(dynamic data)? parser,
+    Options? options,
   }) async {
     try {
       final response = await dio.request(
         path,
-        options: Options(method: method, headers: headers),
+        options: options ?? Options(method: method, headers: headers),
         queryParameters: queryParameters,
         data: data,
         cancelToken: token ?? cancelToken,
@@ -74,10 +75,12 @@ class ApiClient {
     Map<String, dynamic>? headers,
     CancelToken? token,
     T Function(dynamic data)? parser,
+    Options? options,
   }) async {
     return request(
       path: path,
       method: 'POST',
+      options: options,
       data: data,
       headers: headers,
       token: token,

@@ -1,11 +1,15 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+
 class AddProductParams {
   final String name;
   final String description;
   final double price;
-  final String imageUrl;
   final int stock;
   final String categoryId;
-  final List<String>? additionalImages;
+  final File image; // main image
+  final List<File>? additionalImages; // detail images
   final List<String>? availableColors;
   final List<String>? availableSizes;
 
@@ -13,25 +17,42 @@ class AddProductParams {
     required this.name,
     required this.description,
     required this.price,
-    required this.imageUrl,
+    required this.image,
     required this.stock,
     required this.categoryId,
-    required this.additionalImages,
-    required this.availableColors,
-    required this.availableSizes,
+    this.additionalImages,
+    this.availableColors,
+    this.availableSizes,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
+  Future<FormData> toFormData() async {
+    final formData = FormData.fromMap({
       'name': name,
       'description': description,
-      'price': price,
-      'imageUrl': imageUrl,
-      'stock': stock,
+      'price': price.toString(),
+      'stock': stock.toString(),
       'categoryId': categoryId,
-      'additionalImages': additionalImages ?? [],
       'availableColors': availableColors ?? [],
       'availableSizes': availableSizes ?? [],
-    };
+      'imageUrl': await MultipartFile.fromFile(
+        image.path,
+        filename: 'main.jpg',
+      ),
+    });
+
+    // Append additionalImages as multiple files
+    if (additionalImages != null && additionalImages!.isNotEmpty) {
+      final imageFiles = await Future.wait(
+        additionalImages!.map(
+          (file) => MultipartFile.fromFile(file.path, filename: 'detail.jpg'),
+        ),
+      );
+
+      formData.files.addAll(
+        imageFiles.map((file) => MapEntry('additionalImages', file)),
+      );
+    }
+
+    return formData;
   }
 }

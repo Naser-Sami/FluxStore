@@ -111,17 +111,20 @@ class ProductRemoteDataSource implements IProductRemoteDataSource {
   }
 
   @override
-  Future<String> updateProduct(UpdateProductParams params) async {
+  Future<ProductModel> updateProduct(UpdateProductParams params) async {
     try {
-      final response = await apiClient.put(
+      final formData = await params.toFormData();
+
+      final response = await apiClient.put<ProductModel>(
         path: '${ApiEndpoints.product}/${params.id}',
-        data: params.toMap(),
-        parser: (data) => data,
+        data: formData,
+        parser: (data) => ProductModel.fromJson(data),
       );
 
       if (response == null) {
-        throw Exception('Failed to get product details by id');
+        throw Exception('Failed to update product');
       }
+
       return response;
     } catch (e) {
       rethrow;

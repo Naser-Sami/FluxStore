@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart' show CustomAppBar, TRadius;
 import '/core/_core.dart' show BuildContextExtensions;
+import '/features/_features.dart' show AdminProductsScreen;
 import 'category/add_category.dart';
 import 'category/category.dart';
 import 'menu_screen.dart';
-import 'product/admin_product.dart';
 
 class AdminScreen extends StatefulWidget {
   static const String routeName = '/admin';
@@ -33,7 +33,7 @@ class _AdminScreenState extends State<AdminScreen> {
       case 0:
         return AdminCategoryScreen.name;
       case 1:
-        return AdminProductScreen.name;
+        return AdminProductsScreen.name;
       case 2:
         return 'Orders';
       case 3:
@@ -68,7 +68,7 @@ class _AdminScreenState extends State<AdminScreen> {
     print('location-> $location');
     // Only show AppBar when we are exactly on AdminCategoryScreen or AdminProductScreen
     return location == AdminCategoryScreen.routeName ||
-        location == AdminProductScreen.routeName;
+        location == AdminProductsScreen.routeName;
   }
 
   @override

@@ -100,18 +100,52 @@ final router = GoRouter(
           navigatorKey: adminProductSectionNavigator,
           routes: [
             GoRoute(
-              path: AdminProductScreen.routeName,
-              name: AdminProductScreen.name,
+              path: AdminProductsScreen.routeName,
+              name: AdminProductsScreen.name,
               pageBuilder:
                   (context, state) =>
-                      const CupertinoPage(child: AdminProductScreen()),
+                      const CupertinoPage(child: AdminProductsScreen()),
               routes: [
                 GoRoute(
                   path: AdminAddProductScreen.routeName,
                   name: AdminAddProductScreen.name,
-                  pageBuilder:
-                      (context, state) =>
-                          const CupertinoPage(child: AdminAddProductScreen()),
+                  pageBuilder: (context, state) {
+                    return CupertinoPage(
+                      child: MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) => ProductColorsCubit(),
+                          ),
+                          BlocProvider(
+                            create: (context) => ProductCategoryDropdownCubit(),
+                          ),
+                        ],
+                        child: const AdminAddProductScreen(),
+                      ),
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: UpdateProductScreen.routeName,
+                  name: UpdateProductScreen.name,
+                  pageBuilder: (context, state) {
+                    final extra = state.extra as Map<String, dynamic>;
+                    final productId = extra['productId'] as String;
+
+                    return CupertinoPage(
+                      child: MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) => ProductColorsCubit(),
+                          ),
+                          BlocProvider(
+                            create: (context) => ProductCategoryDropdownCubit(),
+                          ),
+                        ],
+                        child: UpdateProductScreen(productId: productId),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

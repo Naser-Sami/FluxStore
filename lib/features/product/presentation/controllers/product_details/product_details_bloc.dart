@@ -28,12 +28,16 @@ class ProductDetailsBloc
     GetProductDetailsEvent event,
     Emitter<ProductDetailsState> emit,
   ) async {
+    emit(ProductDetailsLoading());
+
     if (state is ProductDetailsLoaded &&
         (state as ProductDetailsLoaded).productDetails.id == event.productId) {
+      final data = (state as ProductDetailsLoaded).productDetails;
+
+      emit(ProductDetailsLoaded(data));
       return;
     }
 
-    emit(ProductDetailsLoading());
     try {
       final result = await getProductDetailsUseCase(event.productId);
 

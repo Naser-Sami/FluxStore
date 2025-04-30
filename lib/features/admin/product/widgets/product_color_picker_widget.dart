@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 import '/config/_config.dart' show ColorPickerComponent;
 
-class ProductColors extends StatefulWidget {
-  const ProductColors({super.key});
+class ProductColorPickerWidget extends StatefulWidget {
+  const ProductColorPickerWidget({super.key});
 
   @override
-  State<ProductColors> createState() => _ProductColorsState();
+  State<ProductColorPickerWidget> createState() =>
+      _ProductColorPickerWidgetState();
 }
 
-class _ProductColorsState extends State<ProductColors> {
+class _ProductColorPickerWidgetState extends State<ProductColorPickerWidget> {
   final _hexInputController = TextEditingController();
   Color _selectedColor = Colors.red;
   String _selectedHex = '';

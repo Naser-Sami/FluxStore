@@ -109,17 +109,14 @@ class ProductRepository implements IProductRepository {
   }
 
   @override
-  Future<Either<Failure<String>, String>> updateProduct(
+  Future<Either<Failure<String>, Product>> updateProduct(
     UpdateProductParams p,
   ) async {
     try {
       final result = await remoteDataSource.updateProduct(p);
+      final resultEntity = ProductMapper.toDomain(result);
 
-      if (result == 'Product updated successfully') {
-        return Right(result);
-      } else {
-        return Left(Failure(statusCode: 500, error: result));
-      }
+      return Right(resultEntity);
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {

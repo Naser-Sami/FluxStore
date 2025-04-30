@@ -1,14 +1,18 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+
 class UpdateProductParams {
   final String id;
   final String name;
   final String description;
   final double price;
-  final String imageUrl;
+  final File imageUrl;
   final int stock;
   final String categoryId;
-  final List<String> additionalImages;
-  final List<String> availableColors;
-  final List<String> availableSizes;
+  final List<File>? additionalImages;
+  final List<String>? availableColors;
+  final List<String>? availableSizes;
 
   const UpdateProductParams({
     required this.id,
@@ -23,18 +27,34 @@ class UpdateProductParams {
     required this.availableSizes,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
+  Future<FormData> toFormData() async {
+    final formData = FormData.fromMap({
       'id': id,
       'name': name,
       'description': description,
       'price': price,
-      'imageUrl': imageUrl,
       'stock': stock,
       'categoryId': categoryId,
-      'additionalImages': additionalImages,
-      'availableColors': availableColors,
-      'availableSizes': availableSizes,
-    };
+      'availableColors': availableColors ?? [],
+      'availableSizes': availableSizes ?? [],
+      'imageUrl': await MultipartFile.fromFile(
+        imageUrl.path,
+        filename: 'main.jpg',
+      ),
+    });
+
+    if (additionalImages != null && additionalImages!.isNotEmpty) {
+      final imageFiles = await Future.wait(
+        additionalImages!.map(
+          (file) => MultipartFile.fromFile(file.path, filename: 'detail.jpg'),
+        ),
+      );
+
+      formData.files.addAll(
+        imageFiles.map((file) => MapEntry('additionalImages', file)),
+      );
+    }
+
+    return formData;
   }
 }

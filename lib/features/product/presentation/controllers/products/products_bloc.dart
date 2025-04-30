@@ -32,8 +32,6 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final addResult = await addProductUseCase(event.params);
 
     addResult.fold((failure) => emit(ProductsError(failure.error)), (products) {
-      // emit(ProductLoaded(products));
-
       final currentState = state;
       if (currentState is ProductsLoaded) {
         final updatedProducts = List<Product>.from(currentState.products)
@@ -65,19 +63,17 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     try {
       final updateResult = await updateProductUseCase(event.params);
 
-      if (updateResult.isLeft()) {
-        updateResult.fold(
-          (failure) => emit(ProductsError(failure.error)),
-          (_) {},
-        );
-        return;
-      }
-
-      final result = await getProductsUseCase(const NoParams());
-      result.fold(
-        (failure) => emit(ProductsError(failure.error)),
-        (products) => emit(ProductsLoaded(products)),
-      );
+      updateResult.fold((failure) => emit(ProductsError(failure.error)), (
+        product,
+      ) {
+        final currentState = state;
+        if (currentState is ProductsLoaded) {
+          final updatedProducts = List<Product>.from(currentState.products);
+          final index = updatedProducts.indexWhere((p) => p.id == product.id);
+          updatedProducts[index] = product;
+          emit(ProductsLoaded(updatedProducts));
+        }
+      });
     } catch (e) {
       emit(ProductsError(e.toString()));
     }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
+import '/core/utils/functions/functions.dart';
+
 class ColorPickerComponent extends StatelessWidget {
   const ColorPickerComponent({
     super.key,
@@ -45,7 +47,8 @@ class ColorPickerComponent extends StatelessWidget {
               child: Icon(Icons.tag),
             ),
             suffix: IconButton(
-              onPressed: () => copyToClipboard(hexInputController?.text),
+              onPressed:
+                  () => TFunctions.copyToClipboard(hexInputController?.text),
               icon: const Icon(Icons.content_paste_rounded),
             ),
             autofocus: true,
@@ -58,11 +61,5 @@ class ColorPickerComponent extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  void copyToClipboard(String? text) {
-    if (text != null) {
-      Clipboard.setData(ClipboardData(text: text));
-    }
   }
 }

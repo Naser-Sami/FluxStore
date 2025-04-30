@@ -12,6 +12,7 @@ class ProductColors extends StatefulWidget {
 class _ProductColorsState extends State<ProductColors> {
   final _hexInputController = TextEditingController();
   Color _selectedColor = Colors.red;
+  String _selectedHex = '';
 
   @override
   void dispose() {
@@ -20,7 +21,7 @@ class _ProductColorsState extends State<ProductColors> {
   }
 
   void _submit() {
-    Navigator.of(context).pop(_selectedColor); // Return the selected color
+    Navigator.of(context).pop(_selectedHex); // Return the selected color
   }
 
   @override
@@ -42,6 +43,7 @@ class _ProductColorsState extends State<ProductColors> {
                 onColorChanged: (Color color) {
                   setState(() {
                     _selectedColor = color;
+                    _selectedHex = _hexInputController.text;
                   });
                 },
                 hexInputController: _hexInputController,

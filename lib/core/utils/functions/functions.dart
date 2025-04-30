@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 // Files
@@ -189,5 +190,11 @@ class TFunctions {
 
     // Parse and return
     return Color(int.parse(hex, radix: 16));
+  }
+
+  static void copyToClipboard(String? text) {
+    if (text != null) {
+      Clipboard.setData(ClipboardData(text: text));
+    }
   }
 }

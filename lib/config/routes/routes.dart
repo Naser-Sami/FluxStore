@@ -221,10 +221,7 @@ final router = GoRouter(
     /// - Flux Store
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return BlocProvider<ProfileBloc>(
-          create: (context) => sl<ProfileBloc>()..add(const GetProfileEvent()),
-          child: AppBottomNavigationBar(navigationShell: navigationShell),
-        );
+        return AppBottomNavigationBar(navigationShell: navigationShell);
       },
       branches: [
         // Home Shell Branch

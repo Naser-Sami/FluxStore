@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart' show TPadding, TSize, TextFormFieldComponent;
-import '/core/_core.dart' show BuildContextExtensions, TFunctions, errorDialog;
+import '/core/_core.dart'
+    show BuildContextExtensions, HexColorExtension, TFunctions, errorDialog;
 import '/features/_features.dart'
     show
         AddProductEvent,
@@ -17,7 +18,6 @@ import '/features/_features.dart'
         ProductsBloc,
         ProductsError,
         ProductsLoaded,
-        ProductsLoading,
         ProductsState;
 import 'product_colors.dart';
 import 'product_sizes.dart';
@@ -38,7 +38,7 @@ class _AdminAddProductScreenState extends State<AdminAddProductScreen> {
   final _priceController = TextEditingController();
   final _stockController = TextEditingController();
 
-  final _selectedColors = <Color>[];
+  final _selectedColors = <String>[];
   List<String> _selectedSizes = [];
 
   File? _mainImage;
@@ -174,7 +174,7 @@ class _AdminAddProductScreenState extends State<AdminAddProductScreen> {
                               IconButton(
                                 onPressed: () async {
                                   final color =
-                                      await showModalBottomSheet<Color>(
+                                      await showModalBottomSheet<String>(
                                         context: context,
                                         builder:
                                             (context) => const ProductColors(),
@@ -199,7 +199,7 @@ class _AdminAddProductScreenState extends State<AdminAddProductScreen> {
                                         width: 24,
                                         height: 24,
                                         decoration: BoxDecoration(
-                                          color: color,
+                                          color: color.toColor(),
                                           shape: BoxShape.circle,
                                           border: Border.all(
                                             color: Colors.black12,

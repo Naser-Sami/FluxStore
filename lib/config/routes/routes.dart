@@ -119,6 +119,15 @@ final router = GoRouter(
                           BlocProvider(
                             create: (context) => ProductCategoryDropdownCubit(),
                           ),
+                          BlocProvider(
+                            create: (context) => ProductSizesCubit(),
+                          ),
+                          BlocProvider(
+                            create: (context) => ProductMainImageCubit(),
+                          ),
+                          BlocProvider(
+                            create: (context) => ProductSubImagesCubit(),
+                          ),
                         ],
                         child: const AdminAddProductScreen(),
                       ),
@@ -140,6 +149,15 @@ final router = GoRouter(
                           ),
                           BlocProvider(
                             create: (context) => ProductCategoryDropdownCubit(),
+                          ),
+                          BlocProvider(
+                            create: (context) => ProductSizesCubit(),
+                          ),
+                          BlocProvider(
+                            create: (context) => ProductMainImageCubit(),
+                          ),
+                          BlocProvider(
+                            create: (context) => ProductSubImagesCubit(),
                           ),
                         ],
                         child: UpdateProductScreen(productId: productId),

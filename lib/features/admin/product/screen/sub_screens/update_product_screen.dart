@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flux_store/features/admin/_admin.dart' show ProductColorsCubit;
 
 import '/config/_config.dart' show TPadding, TSize;
 import '/features/_features.dart'
     show
         GetProductDetailsEvent,
-        ProductCategoryDropdownCubit,
         ProductDetails,
         ProductDetailsBloc,
         ProductDetailsLoaded,
         ProductDetailsState;
+import '/features/admin/_admin.dart'
+    show
+        ProductCategoryDropdownCubit,
+        ProductColorsCubit,
+        ProductMainImageCubit,
+        ProductSizesCubit,
+        ProductSubImagesCubit;
 import '/features/admin/product/widgets/_widgets.dart';
 
 class UpdateProductScreen extends StatefulWidget {
@@ -49,6 +54,9 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   void _setProductData() {
     final dropDownCubit = context.read<ProductCategoryDropdownCubit>();
     final colorsCubit = context.read<ProductColorsCubit>();
+    final sizesCubit = context.read<ProductSizesCubit>();
+    final mainImageCubit = context.read<ProductMainImageCubit>();
+    final subImagesCubit = context.read<ProductSubImagesCubit>();
 
     _nameController.text = product.name;
     _descriptionController.text = product.description;
@@ -56,6 +64,12 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
     _stockController.text = product.stock.toString();
     dropDownCubit.setSelectedCategoryId(product.categoryId);
     colorsCubit.setColors(product.availableColors);
+    sizesCubit.setSizes(product.availableSizes);
+    mainImageCubit.setImageUrl(product.imageUrl);
+    subImagesCubit.clear();
+    for (var url in product.additionalImages) {
+      subImagesCubit.addUrl(url);
+    }
   }
 
   @override
@@ -100,6 +114,15 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
 
                   // Product Colors
                   const AdminProductColorsWidget(),
+
+                  // Product Sizes
+                  const AdminProductSizeWidget(),
+
+                  // Product Main Image
+                  const AdminProductMainImageWidget(),
+
+                  // Product Sub Images
+                  const AdminProductSubImagesWidget(),
                 ],
               ),
             ),

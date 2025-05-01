@@ -19,7 +19,6 @@ import '/features/_features.dart'
         ProductsError,
         ProductsLoaded,
         ProductsState;
-import 'add_update_product_body.dart';
 
 class AdminAddProductScreen extends StatefulWidget {
   static const routeName = '/admin-add-product';
@@ -116,22 +115,6 @@ class _AdminAddProductScreenState extends State<AdminAddProductScreen> {
             await _setProductData(state.productDetails);
           }
         },
-        child: Scaffold(
-          appBar: AppBar(title: const Text('Update Product')),
-          body: AddUpdateProductBody(
-            // formKey: _formKey,
-            // nameController: _nameController,
-            // descriptionController: _descriptionController,
-            // priceController: _priceController,
-            // stockController: _stockController,
-            selectedColors: _selectedColors,
-            selectedSizes: _selectedSizes,
-            subImages: _subImages,
-            mainImage:
-                _mainImage, // main image inside the AddUpdateProductBody is null but _mainImage is not null
-            onPressed: _updateProduct,
-          ),
-        ),
       );
     }
 
@@ -144,21 +127,6 @@ class _AdminAddProductScreenState extends State<AdminAddProductScreen> {
           context.pop();
         }
       },
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Add Product')),
-        body: AddUpdateProductBody(
-          // formKey: _formKey,
-          // nameController: _nameController,
-          // descriptionController: _descriptionController,
-          // priceController: _priceController,
-          // stockController: _stockController,
-          selectedColors: _selectedColors,
-          selectedSizes: _selectedSizes,
-          subImages: _subImages,
-          mainImage: _mainImage,
-          onPressed: _addProduct,
-        ),
-      ),
     );
   }
 }

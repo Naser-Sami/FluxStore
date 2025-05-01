@@ -59,6 +59,15 @@ class _AdminAddProductScreenState extends State<AdminAddProductScreen> {
 
                 // Product Colors
                 const AdminProductColorsWidget(),
+
+                // Product Sizes
+                const AdminProductSizeWidget(),
+
+                // Product Main Image
+                const AdminProductMainImageWidget(),
+
+                // Product Sub Images
+                const AdminProductSubImagesWidget(),
               ],
             ),
           ),

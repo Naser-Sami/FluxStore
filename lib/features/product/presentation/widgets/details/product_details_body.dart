@@ -84,12 +84,6 @@ class _ProductDetailsBodyWidgetState extends State<ProductDetailsBodyWidget> {
           return (count / total) * 100;
         }).toList();
 
-    print('''
-------------------------------------------------------------------------------------
-Page Rebuilds Again
-------------------------------------------------------------------------------------
-''');
-
     return SizedBox(
       height: height,
       width: context.screenWidth,
@@ -276,23 +270,32 @@ Page Rebuilds Again
                                 children: [
                                   const TextWidget('Color'),
                                   const SizedBox(height: TSize.s10),
-                                  Row(
-                                    children:
-                                        product.availableColors
-                                            .map(
-                                              (color) => Container(
-                                                width: 33,
-                                                height: 33, // 25
-                                                margin: const EdgeInsets.all(
-                                                  TPadding.p04,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: color.toColor(),
-                                                  shape: BoxShape.circle,
-                                                ),
-                                              ),
-                                            )
-                                            .toList(),
+                                  Builder(
+                                    builder: (context) {
+                                      try {
+                                        return Row(
+                                          children:
+                                              product.availableColors
+                                                  .map(
+                                                    (color) => Container(
+                                                      width: 33,
+                                                      height: 33, // 25
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                            TPadding.p04,
+                                                          ),
+                                                      decoration: BoxDecoration(
+                                                        color: color.toColor(),
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                    ),
+                                                  )
+                                                  .toList(),
+                                        );
+                                      } catch (e) {
+                                        return const SizedBox.shrink();
+                                      }
+                                    },
                                   ),
                                 ],
                               ),

@@ -94,8 +94,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
 
       final files =
           subImagesCubit.state
-              .where((e) => e.isFile)
-              .map((e) => e.file)
+              .where((e) => e.isFile && e.file != null)
+              .map((e) => e.file!)
               .toList();
 
       final params = UpdateProductParams(
@@ -107,12 +107,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
         categoryId: dropDownCubit.state,
         availableColors: colorsCubit.state.map((e) => e.toString()).toList(),
         availableSizes: sizesCubit.state.map((e) => e.toString()).toList(),
-
-        // ✅ Send either file or the original URL
         imageUrl: mainImage.file,
-
-        // ✅ Send both new files and existing URLs
-        additionalImages: null,
+        additionalImages: files,
       );
 
       context.read<ProductsBloc>().add(UpdateProductEvent(params));

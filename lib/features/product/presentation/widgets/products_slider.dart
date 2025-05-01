@@ -5,13 +5,14 @@ import '/config/_config.dart';
 import '/core/_core.dart';
 import '/features/_features.dart'
     show
-        TitleWithShowAll,
-        ProductsLoading,
-        ProductsLoaded,
-        ProductsError,
         Product,
         ProductsBloc,
-        ProductsState;
+        ProductsError,
+        ProductsLoaded,
+        ProductsLoading,
+        ProductsState,
+        SelectedCategoryCubit,
+        TitleWithShowAll;
 import 'product_item.dart';
 
 class ProductsSlider extends StatelessWidget {
@@ -20,13 +21,21 @@ class ProductsSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categoryId = context.watch<SelectedCategoryCubit>().state;
+
     return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
         switch (state) {
           case ProductsLoading():
             return const Center(child: CircularProgressIndicator());
           case ProductsLoaded():
-            return ProductSliderBody(title: title, products: state.products);
+            final products =
+                state.products
+                    .where((e) => e.categoryId == categoryId)
+                    .toList();
+
+            return ProductSliderBody(title: title, products: products);
+
           case ProductsError():
             return Center(child: TextWidget(state.message));
           default:
@@ -51,53 +60,60 @@ class ProductSliderBody extends StatelessWidget {
       children: [
         if (title != null) TitleWithShowAll(title: title!, onShowAll: () {}),
         if (title != null) const SizedBox(height: TSize.s20),
-        SizedBox(
-          height: 287,
-          child: ListView.separated(
-            controller: controller,
-            scrollDirection: Axis.horizontal,
-            itemCount: products.length,
-            separatorBuilder:
-                (context, index) => const SizedBox(width: TSize.s10),
-            itemBuilder: (context, index) {
-              final bool paddingOnFirst = index == 0;
-              final bool paddingOnLast = index == products.length - 1;
-              final product = products[index];
 
-              return Padding(
-                padding: EdgeInsets.only(
-                  left: paddingOnFirst ? TPadding.p24 : 0,
-                  right: paddingOnLast ? TSize.s24 : 0,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ProductItem(
-                      index: index,
-                      controller: controller,
-                      product: product,
-                    ),
-                    const SizedBox(height: TSize.s14),
-                    TextWidget(
-                      product.name,
-                      style: textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w500,
+        if (products.isEmpty)
+          const SizedBox(
+            height: 100,
+            child: Center(child: TextWidget(LocaleKeys.Common_noResultsFound)),
+          )
+        else
+          SizedBox(
+            height: 287,
+            child: ListView.separated(
+              controller: controller,
+              scrollDirection: Axis.horizontal,
+              itemCount: products.length,
+              separatorBuilder:
+                  (context, index) => const SizedBox(width: TSize.s10),
+              itemBuilder: (context, index) {
+                final bool paddingOnFirst = index == 0;
+                final bool paddingOnLast = index == products.length - 1;
+                final product = products[index];
+
+                return Padding(
+                  padding: EdgeInsets.only(
+                    left: paddingOnFirst ? TPadding.p24 : 0,
+                    right: paddingOnLast ? TSize.s24 : 0,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ProductItem(
+                        index: index,
+                        controller: controller,
+                        product: product,
                       ),
-                    ),
-                    TextWidget(
-                      "\$${product.price.toStringAsFixed(2)}",
-                      style: textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w500,
+                      const SizedBox(height: TSize.s14),
+                      TextWidget(
+                        product.name,
+                        style: textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ).scaleAnimation(scaleBegin: const Offset(1.3, 1.3)),
+                      TextWidget(
+                        "\$${product.price.toStringAsFixed(2)}",
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ).scaleAnimation(scaleBegin: const Offset(1.3, 1.3)),
       ],
     );
   }

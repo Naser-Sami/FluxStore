@@ -31,6 +31,7 @@ class AdminProductItemWidget extends StatelessWidget {
         final product = products[index];
         return ListTile(
           key: ValueKey(product.id),
+          onTap: () => _onEdit(context, product.id),
           leading: SizedBox(
             width: 50,
             height: 50,
@@ -45,13 +46,7 @@ class AdminProductItemWidget extends StatelessWidget {
             children: [
               IconButton(
                 icon: const Icon(Icons.edit),
-                onPressed: () {
-                  context.push(
-                    AdminProductsScreen.routeName +
-                        UpdateProductScreen.routeName,
-                    extra: {'productId': product.id},
-                  );
-                },
+                onPressed: () => _onEdit(context, product.id),
               ),
               IconButton(
                 icon: const Icon(Icons.delete),
@@ -63,6 +58,13 @@ class AdminProductItemWidget extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  void _onEdit(BuildContext context, String productId) {
+    context.push(
+      AdminProductsScreen.routeName + UpdateProductScreen.routeName,
+      extra: {'productId': productId},
     );
   }
 }

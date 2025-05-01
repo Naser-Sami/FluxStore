@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/config/_config.dart' show ColorPickerComponent;
+import '/config/_config.dart' show ColorPickerComponent, TPadding, TSize;
 
 class ProductColorPickerWidget extends StatefulWidget {
   const ProductColorPickerWidget({super.key});
@@ -28,32 +28,32 @@ class _ProductColorPickerWidgetState extends State<ProductColorPickerWidget> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0), // Add padding for better UX
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min, // Important for bottom sheet
-            children: [
-              Wrap(
-                children: [Text('Selected Color: ${_hexInputController.text}')],
-              ),
-              const SizedBox(height: 24),
-              ColorPickerComponent(
-                pickerColor: _selectedColor,
-                onColorChanged: (Color color) {
-                  setState(() {
-                    _selectedColor = color;
-                    _selectedHex = _hexInputController.text;
-                  });
-                },
-                hexInputController: _hexInputController,
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _submit,
-                child: const Text('Add Color'),
-              ),
-            ],
+      child: FractionallySizedBox(
+        heightFactor: 0.7,
+        child: Padding(
+          padding: const EdgeInsets.all(
+            TPadding.p24,
+          ), // Add padding for better UX
+          child: SingleChildScrollView(
+            child: Column(
+              spacing: TSize.s24,
+              children: [
+                ColorPickerComponent(
+                  pickerColor: _selectedColor,
+                  onColorChanged: (Color color) {
+                    setState(() {
+                      _selectedColor = color;
+                      _selectedHex = _hexInputController.text;
+                    });
+                  },
+                  hexInputController: _hexInputController,
+                ),
+                ElevatedButton(
+                  onPressed: _submit,
+                  child: const Text('Add Color'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

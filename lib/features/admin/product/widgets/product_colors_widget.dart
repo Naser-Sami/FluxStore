@@ -16,6 +16,8 @@ class AdminProductColorsWidget extends StatelessWidget {
           onPressed: () async {
             final color = await showModalBottomSheet<String>(
               context: context,
+              isScrollControlled: true,
+              useSafeArea: true,
               builder: (context) => const ProductColorPickerWidget(),
             );
             if (color != null) {
@@ -39,17 +41,58 @@ class AdminProductColorsWidget extends StatelessWidget {
                     Builder(
                       builder: (context) {
                         try {
-                          return Container(
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              color: color.toColor(),
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.black12),
+                          return SizedBox(
+                            width: 34,
+                            height: 34,
+                            child: Stack(
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                Container(
+                                  width: 24,
+                                  height: 24,
+                                  decoration: BoxDecoration(
+                                    color: color.toColor(),
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: Colors.black12),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: GestureDetector(
+                                    onTap:
+                                        () => _onColorRemoved(context, color),
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        color: Colors.black54,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.close,
+                                        color: Colors.white,
+                                        size: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           );
                         } catch (e) {
-                          return const SizedBox.shrink();
+                          return GestureDetector(
+                            onTap: () => _onColorRemoved(context, color),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: Colors.black54,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ),
+                          );
                         }
                       },
                     ),
@@ -60,5 +103,9 @@ class AdminProductColorsWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _onColorRemoved(BuildContext context, String color) {
+    context.read<ProductColorsCubit>().removeColor(color);
   }
 }

@@ -23,8 +23,8 @@ class UpdateProductParams {
     required this.stock,
     required this.categoryId,
     this.additionalImages,
-    required this.availableColors,
-    required this.availableSizes,
+    this.availableColors,
+    this.availableSizes,
   });
 
   Future<FormData> toFormData() async {

@@ -23,7 +23,13 @@ class AdminProductsScreenBodyWidget extends StatelessWidget {
             }
 
             if (state is ProductsLoaded) {
-              return AdminProductItemWidget(products: state.products);
+              return ListView.builder(
+                itemCount: state.products.length,
+                itemBuilder: (context, index) {
+                  final product = state.products[index];
+                  return AdminProductItemWidget(product: product);
+                },
+              );
             }
 
             return const SizedBox.shrink();

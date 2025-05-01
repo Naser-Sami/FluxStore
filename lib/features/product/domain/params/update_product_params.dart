@@ -7,7 +7,7 @@ class UpdateProductParams {
   final String name;
   final String description;
   final double price;
-  final File imageUrl;
+  final File? imageUrl;
   final int stock;
   final String categoryId;
   final List<File>? additionalImages;
@@ -19,10 +19,10 @@ class UpdateProductParams {
     required this.name,
     required this.description,
     required this.price,
-    required this.imageUrl,
+    this.imageUrl,
     required this.stock,
     required this.categoryId,
-    required this.additionalImages,
+    this.additionalImages,
     required this.availableColors,
     required this.availableSizes,
   });
@@ -37,10 +37,13 @@ class UpdateProductParams {
       'categoryId': categoryId,
       'availableColors': availableColors ?? [],
       'availableSizes': availableSizes ?? [],
-      'imageUrl': await MultipartFile.fromFile(
-        imageUrl.path,
-        filename: 'main.jpg',
-      ),
+      'imageUrl':
+          imageUrl == null
+              ? null
+              : await MultipartFile.fromFile(
+                imageUrl!.path,
+                filename: 'main.jpg',
+              ),
     });
 
     if (additionalImages != null && additionalImages!.isNotEmpty) {

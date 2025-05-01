@@ -59,24 +59,19 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     UpdateProductEvent event,
     Emitter<ProductsState> emit,
   ) async {
-    emit(ProductsLoading());
-    try {
-      final updateResult = await updateProductUseCase(event.params);
+    final updateResult = await updateProductUseCase(event.params);
 
-      updateResult.fold((failure) => emit(ProductsError(failure.error)), (
-        product,
-      ) {
-        final currentState = state;
-        if (currentState is ProductsLoaded) {
-          final updatedProducts = List<Product>.from(currentState.products);
-          final index = updatedProducts.indexWhere((p) => p.id == product.id);
-          updatedProducts[index] = product;
-          emit(ProductsLoaded(updatedProducts));
-        }
-      });
-    } catch (e) {
-      emit(ProductsError(e.toString()));
-    }
+    updateResult.fold((failure) => emit(ProductsError(failure.error)), (
+      product,
+    ) {
+      final currentState = state;
+      if (currentState is ProductsLoaded) {
+        final updatedProducts = List<Product>.from(currentState.products);
+        final index = updatedProducts.indexWhere((p) => p.id == product.id);
+        updatedProducts[index] = product;
+        emit(ProductsLoaded(updatedProducts));
+      }
+    });
   }
 
   void _deleteProduct(

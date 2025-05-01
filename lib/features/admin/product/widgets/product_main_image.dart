@@ -62,7 +62,7 @@ class AdminProductMainImageWidget extends StatelessWidget {
     final file = await TFunctions.pickAndUploadProfileImage(context);
     if (file != null) {
       if (context.mounted) {
-        context.read<ProductMainImageCubit>().setImage(file);
+        context.read<ProductMainImageCubit>().setImageFile(file);
       }
     }
   }

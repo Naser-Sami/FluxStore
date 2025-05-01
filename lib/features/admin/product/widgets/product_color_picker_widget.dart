@@ -27,8 +27,7 @@ class _ProductColorPickerWidgetState extends State<ProductColorPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FractionallySizedBox(
-      heightFactor: 1.0,
+    return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16.0), // Add padding for better UX
         child: SingleChildScrollView(

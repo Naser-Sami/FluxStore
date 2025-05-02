@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/config/_config.dart';
 import '/features/_features.dart'
-    show DiscoverCollectionBaseExpansionTile, SearchBarWidget;
+    show
+        DiscoverCollectionBaseExpansionTile,
+        MainAppBar,
+        OnDrawerTapCubit,
+        SearchBarWidget;
+import '/generated/locale_keys.g.dart' show LocaleKeys;
 
 class SearchScreen extends StatelessWidget {
   static const routeName = '/search';
@@ -12,7 +18,11 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const Drawer(),
+      // endDrawer: const Drawer(),
+      appBar: MainAppBar(
+        onMenuPressed: () => _toggleDrawer(context),
+        title: const TextWidget(LocaleKeys.DrawerMenu_discover),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(TPadding.p20),
@@ -57,5 +67,9 @@ class SearchScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _toggleDrawer(BuildContext context) {
+    context.read<OnDrawerTapCubit>().toggleDrawer();
   }
 }

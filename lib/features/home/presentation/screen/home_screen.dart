@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/config/_config.dart';
-import '/core/_core.dart' show LocaleKeys;
+import '/core/_core.dart' show AppConfig, LocaleKeys;
 import '/features/_features.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,6 +15,10 @@ class HomeScreen extends StatelessWidget {
     final scrollController = ScrollControllerProvider.of(context);
 
     return Scaffold(
+      appBar: MainAppBar(
+        onMenuPressed: () => _toggleDrawer(context),
+        title: const TextWidget(AppConfig.appName),
+      ),
       body: SingleChildScrollView(
         controller: scrollController,
         child: const Column(
@@ -31,5 +36,9 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _toggleDrawer(BuildContext context) {
+    context.read<OnDrawerTapCubit>().toggleDrawer();
   }
 }

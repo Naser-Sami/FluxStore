@@ -1,5 +1,6 @@
 class ProductQueryParameters {
   final String? categoryId;
+  final String? search;
   final double? minPrice;
   final double? maxPrice;
   final List<String>? colors;
@@ -13,6 +14,7 @@ class ProductQueryParameters {
 
   ProductQueryParameters({
     this.categoryId,
+    this.search,
     this.minPrice,
     this.maxPrice,
     this.colors,
@@ -29,6 +31,7 @@ class ProductQueryParameters {
     final map = <String, dynamic>{};
 
     if (categoryId != null) map['CategoryId'] = categoryId;
+    if (search != null) map['Search'] = search;
     if (minPrice != null) map['MinPrice'] = minPrice;
     if (maxPrice != null) map['MaxPrice'] = maxPrice;
     if (colors != null && colors!.isNotEmpty) map['Colors'] = colors;

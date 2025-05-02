@@ -10,10 +10,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
     super.key,
     required this.onMenuPressed,
-    required this.index,
+    required this.title,
   });
   final VoidCallback onMenuPressed;
-  final int index;
+  final Widget? title;
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +33,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: onMenuPressed,
           ),
         ),
-        title:
-            index == 1
-                ? const TextWidget(LocaleKeys.DrawerMenu_discover)
-                : const TextWidget(AppConfig.appName),
+        title: title,
         actions: [
           IconButton(
             icon: const Icon(Icons.language),

@@ -31,6 +31,18 @@ class SearchBarWidget extends StatelessWidget {
               viewShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(TRadius.r16),
               ),
+
+              //
+              onChanged: (value) {
+                print('value: $value');
+
+                // context.read<ProductsBloc>().add(
+                //   GetProductsEvent(
+                //     queryParameters: ProductQueryParameters(search: value),
+                //   ),
+                // );
+              },
+
               // viewBackgroundColor: color.surface,
               suggestionsBuilder: (context, searchController) {
                 return [

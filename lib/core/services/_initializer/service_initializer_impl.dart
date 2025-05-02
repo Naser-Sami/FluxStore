@@ -48,6 +48,7 @@ class ServiceInitializer extends IServiceInitializer {
   @override
   Future<void> initLocalization() async {
     await EasyLocalization.ensureInitialized();
+    EasyLocalization.logger.enableBuildModes = [];
   }
 
   @override

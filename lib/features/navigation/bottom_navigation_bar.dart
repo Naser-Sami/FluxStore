@@ -11,7 +11,7 @@ import '/config/_config.dart'
         TRadius;
 import '/core/_core.dart';
 import '/features/_features.dart'
-    show CustomDrawer, DrawerCubit, MainAppBar, OnDrawerTapCubit;
+    show CustomDrawer, DrawerCubit, OnDrawerTapCubit;
 
 class AppBottomNavigationBar extends StatefulWidget {
   static const routeName = '/flux-store';
@@ -69,9 +69,9 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   }
 
   void _toggleDrawer() {
-    context.read<OnDrawerTapCubit>().state
-        ? _controller.forward()
-        : _controller.reverse();
+    // context.read<OnDrawerTapCubit>().state
+    //     ? _controller.forward()
+    //     : _controller.reverse();
     context.read<OnDrawerTapCubit>().toggleDrawer();
   }
 
@@ -139,7 +139,6 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
             ? 0.6 * context.screenWidth
             : -0.4 * context.screenWidth;
 
-    final showAppBar = widget.navigationShell.currentIndex < 3;
     final showNavBar = widget.navigationShell.currentIndex < 4;
 
     return AnimatedPositioned(
@@ -165,13 +164,6 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
             child: Scaffold(
               extendBody: true,
               resizeToAvoidBottomInset: true,
-              appBar:
-                  showAppBar && !_isScrollingDown
-                      ? MainAppBar(
-                        onMenuPressed: _toggleDrawer,
-                        index: widget.navigationShell.currentIndex,
-                      )
-                      : null,
               bottomNavigationBar:
                   showNavBar && !_isScrollingDown
                       ? const BottomNavigationBarComponent()

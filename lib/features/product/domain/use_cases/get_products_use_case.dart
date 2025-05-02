@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '/core/_core.dart' show BaseUseCase, Failure, NoParams, PaginatedList;
+import '/core/_core.dart' show BaseUseCase, Failure, PaginatedList;
 import '/features/_features.dart'
     show IProductRepository, Product, ProductQueryParameters;
 

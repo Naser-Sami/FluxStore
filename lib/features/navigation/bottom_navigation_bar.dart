@@ -69,9 +69,6 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   }
 
   void _toggleDrawer() {
-    context.read<OnDrawerTapCubit>().state
-        ? _controller.forward()
-        : _controller.reverse();
     context.read<OnDrawerTapCubit>().toggleDrawer();
   }
 
@@ -185,36 +182,41 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
       end: isRTL ? Offset.zero : Offset.zero,
     ).animate(_controller);
 
-    return ScrollControllerProvider(
-      scrollController: _scrollController,
-      child: PopScope(
-        canPop: false,
-        child: BlocListener<BottomNavigationBarCubit, int>(
-          listener: (context, index) {
-            widget.navigationShell.goBranch(
-              index,
-              initialLocation: index == widget.navigationShell.currentIndex,
-            );
-          },
-          child: GestureDetector(
-            onHorizontalDragStart: (details) {
-              dragStartX = details.localPosition.dx;
+    return BlocListener<OnDrawerTapCubit, bool>(
+      listener: (context, state) {
+        !state ? _controller.forward() : _controller.reverse();
+      },
+      child: ScrollControllerProvider(
+        scrollController: _scrollController,
+        child: PopScope(
+          canPop: false,
+          child: BlocListener<BottomNavigationBarCubit, int>(
+            listener: (context, index) {
+              widget.navigationShell.goBranch(
+                index,
+                initialLocation: index == widget.navigationShell.currentIndex,
+              );
             },
-            onHorizontalDragUpdate: (details) {
-              final delta = details.localPosition.dx - dragStartX;
-              bool isCollapsed = context.read<OnDrawerTapCubit>().state;
+            child: GestureDetector(
+              onHorizontalDragStart: (details) {
+                dragStartX = details.localPosition.dx;
+              },
+              onHorizontalDragUpdate: (details) {
+                final delta = details.localPosition.dx - dragStartX;
+                bool isCollapsed = context.read<OnDrawerTapCubit>().state;
 
-              if (isCollapsed &&
-                  ((isRTL && delta < -100) || (!isRTL && delta > 100))) {
-                _toggleDrawer(); // open
-              }
+                if (isCollapsed &&
+                    ((isRTL && delta < -100) || (!isRTL && delta > 100))) {
+                  _toggleDrawer(); // open
+                }
 
-              if (!isCollapsed &&
-                  ((isRTL && delta > 100) || (!isRTL && delta < -100))) {
-                _toggleDrawer(); // close
-              }
-            },
-            child: Stack(children: [_buildDrawer(), _buildMainScaffold()]),
+                if (!isCollapsed &&
+                    ((isRTL && delta > 100) || (!isRTL && delta < -100))) {
+                  _toggleDrawer(); // close
+                }
+              },
+              child: Stack(children: [_buildDrawer(), _buildMainScaffold()]),
+            ),
           ),
         ),
       ),

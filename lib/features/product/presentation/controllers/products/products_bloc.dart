@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '/core/use_cases/base_use_case.dart';
 import '/features/_features.dart';
 
 part 'products_event.dart';
@@ -44,11 +43,11 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   void _getProducts(GetProductsEvent event, Emitter<ProductsState> emit) async {
     emit(ProductsLoading());
     try {
-      final result = await getProductsUseCase(const NoParams());
+      final result = await getProductsUseCase(event.queryParameters);
 
       result.fold(
         (failure) => emit(ProductsError(failure.error)),
-        (products) => emit(ProductsLoaded(products)),
+        (products) => emit(ProductsLoaded(products.items)),
       );
     } catch (e) {
       emit(ProductsError(e.toString()));

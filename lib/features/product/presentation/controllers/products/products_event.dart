@@ -4,7 +4,7 @@ sealed class ProductsEvent extends Equatable {
   const ProductsEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 final class AddProductEvent extends ProductsEvent {
@@ -17,10 +17,11 @@ final class AddProductEvent extends ProductsEvent {
 }
 
 final class GetProductsEvent extends ProductsEvent {
-  const GetProductsEvent();
+  final ProductQueryParameters? queryParameters;
+  const GetProductsEvent({this.queryParameters});
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [queryParameters];
 }
 
 final class UpdateProductEvent extends ProductsEvent {

@@ -1,17 +1,18 @@
 import 'package:dartz/dartz.dart';
 
-import '/core/_core.dart' show Failure;
+import '/core/_core.dart' show Failure, PaginatedList;
 import '/features/_features.dart'
     show
+        AddProductParams,
+        AddProductReviewParams,
+        IProductRemoteDataSource,
         IProductRepository,
         Product,
-        ProductMapper,
         ProductDetails,
         ProductDetailsMapper,
-        AddProductParams,
-        UpdateProductParams,
-        AddProductReviewParams,
-        IProductRemoteDataSource;
+        ProductMapper,
+        ProductQueryParameters,
+        UpdateProductParams;
 
 class ProductRepository implements IProductRepository {
   final IProductRemoteDataSource remoteDataSource;
@@ -79,12 +80,18 @@ class ProductRepository implements IProductRepository {
   }
 
   @override
-  Future<Either<Failure<String>, List<Product>>> getProducts() async {
+  Future<Either<Failure<String>, PaginatedList<Product>>> getProducts(
+    ProductQueryParameters? queryParameters,
+  ) async {
     try {
-      final result = await remoteDataSource.getProducts();
-      final resultEntity = result.map(ProductMapper.toDomain).toList();
+      final result = await remoteDataSource.getProducts(queryParameters);
 
-      return Right(resultEntity);
+      final data = PaginatedList<Product>(
+        items: result.items.map(ProductMapper.toDomain).toList(),
+        totalCount: result.totalCount,
+      );
+
+      return Right(data);
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {

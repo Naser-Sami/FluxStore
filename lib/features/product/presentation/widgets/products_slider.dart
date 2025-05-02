@@ -5,6 +5,7 @@ import '/config/_config.dart';
 import '/core/_core.dart';
 import '/features/_features.dart'
     show
+        GetProductsEvent,
         Product,
         ProductsBloc,
         ProductsError,
@@ -21,7 +22,7 @@ class ProductsSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryId = context.watch<SelectedCategoryCubit>().state;
+    // final categoryId = context.watch<SelectedCategoryCubit>().state;
 
     return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
@@ -29,10 +30,9 @@ class ProductsSlider extends StatelessWidget {
           case ProductsLoading():
             return const Center(child: CircularProgressIndicator());
           case ProductsLoaded():
-            final products =
-                state.products
-                    .where((e) => e.categoryId == categoryId)
-                    .toList();
+            final products = state.products;
+            // .where((e) => e.categoryId == categoryId)
+            // .toList();
 
             return ProductSliderBody(title: title, products: products);
 

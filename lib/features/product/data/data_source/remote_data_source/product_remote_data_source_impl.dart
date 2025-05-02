@@ -1,12 +1,13 @@
-import '/core/_core.dart' show ApiEndpoints, ApiClient, sl;
+import '/core/_core.dart' show ApiClient, ApiEndpoints, PaginatedList, sl;
 import '/features/_features.dart'
     show
-        IProductRemoteDataSource,
         AddProductParams,
-        UpdateProductParams,
         AddProductReviewParams,
+        IProductRemoteDataSource,
+        ProductDetailsModel,
         ProductModel,
-        ProductDetailsModel;
+        ProductQueryParameters,
+        UpdateProductParams;
 
 class ProductRemoteDataSource implements IProductRemoteDataSource {
   final ApiClient apiClient = sl<ApiClient>();
@@ -76,13 +77,22 @@ class ProductRemoteDataSource implements IProductRemoteDataSource {
   }
 
   @override
-  Future<List<ProductModel>> getProducts() async {
+  Future<PaginatedList<ProductModel>> getProducts(
+    ProductQueryParameters? queryParameters,
+  ) async {
     try {
-      final response = await apiClient.get(
+      parser(data) => PaginatedList<ProductModel>(
+        items:
+            (data['items'] as List)
+                .map((e) => ProductModel.fromJson(e))
+                .toList(),
+        totalCount: data['totalCount'],
+      );
+
+      final response = await apiClient.get<PaginatedList<ProductModel>>(
         path: ApiEndpoints.product,
-        parser:
-            (data) =>
-                (data as List).map((e) => ProductModel.fromJson(e)).toList(),
+        queryParameters: queryParameters?.toMap(),
+        parser: parser,
       );
 
       if (response == null) {

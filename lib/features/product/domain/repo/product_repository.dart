@@ -1,16 +1,19 @@
 import 'package:dartz/dartz.dart';
 
-import '/core/_core.dart' show Failure;
+import '/core/_core.dart' show Failure, PaginatedList;
 import '/features/_features.dart'
     show
         AddProductParams,
         AddProductReviewParams,
         Product,
         ProductDetails,
+        ProductQueryParameters,
         UpdateProductParams;
 
 abstract class IProductRepository {
-  Future<Either<Failure<String>, List<Product>>> getProducts();
+  Future<Either<Failure<String>, PaginatedList<Product>>> getProducts(
+    ProductQueryParameters? queryParameters,
+  );
   Future<Either<Failure<String>, Product>> getProductById(String id);
   Future<Either<Failure<String>, Product>> addProduct(AddProductParams p);
   Future<Either<Failure<String>, Product>> updateProduct(UpdateProductParams p);

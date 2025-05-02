@@ -4,7 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/config/_config.dart';
 import '/core/_core.dart' show BuildContextExtensions, LocaleKeys;
 import '/features/_features.dart'
-    show CategoryBloc, CategoryState, SelectedCategoryCubit;
+    show
+        CategoryBloc,
+        CategoryState,
+        GetProductsEvent,
+        ProductQueryParameters,
+        ProductsBloc,
+        SelectedCategoryCubit;
 import 'category_item.dart';
 
 class CategoriesList extends StatelessWidget {
@@ -18,6 +24,14 @@ class CategoriesList extends StatelessWidget {
         if (category.isNotEmpty) {
           context.read<SelectedCategoryCubit>().select(category.first.id);
         }
+
+        context.read<ProductsBloc>().add(
+          GetProductsEvent(
+            queryParameters: ProductQueryParameters(
+              categoryId: category.first.id,
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.only(top: TPadding.p28),
@@ -62,9 +76,7 @@ class CategoriesList extends StatelessWidget {
                         final isSelected = selectedId == category.id;
                         return CategoryItem(
                           onCategoryTap:
-                              () => context
-                                  .read<SelectedCategoryCubit>()
-                                  .select(category.id),
+                              () => _onCategoryTap(context, category.id),
                           isSelected: isSelected,
                           name: category.name,
                           icon: category.imageUrl,
@@ -77,6 +89,16 @@ class CategoriesList extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _onCategoryTap(BuildContext context, String categoryId) {
+    context.read<SelectedCategoryCubit>().select(categoryId);
+
+    context.read<ProductsBloc>().add(
+      GetProductsEvent(
+        queryParameters: ProductQueryParameters(categoryId: categoryId),
       ),
     );
   }

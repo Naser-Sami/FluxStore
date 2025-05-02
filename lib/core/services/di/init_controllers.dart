@@ -66,6 +66,7 @@ Future<void> _categories() async {
       deleteCategoryUseCase: sl<DeleteCategoryUseCase>(),
     ),
   );
+  sl.registerFactory<SelectedCategoryCubit>(SelectedCategoryCubit.new);
 }
 
 Future<void> _products() async {

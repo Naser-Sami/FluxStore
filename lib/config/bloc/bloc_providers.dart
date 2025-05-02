@@ -20,10 +20,13 @@ final providers = [
     create: (context) => sl<DrawerCubit>()..loadDrawerItems(),
   ),
   BlocProvider<OnDrawerTapCubit>(create: (context) => sl<OnDrawerTapCubit>()),
-  BlocProvider<CategoryBloc>(create: (context) => sl<CategoryBloc>()),
-  BlocProvider<ProductsBloc>(
-    create: (context) => sl<ProductsBloc>()..add(const GetProductsEvent()),
+  BlocProvider<CategoryBloc>(
+    create: (context) => sl<CategoryBloc>()..add(GetAllCategoryEvent()),
   ),
+  BlocProvider<SelectedCategoryCubit>(
+    create: (context) => sl<SelectedCategoryCubit>(),
+  ),
+  BlocProvider<ProductsBloc>(create: (context) => sl<ProductsBloc>()),
   BlocProvider<ProductDetailsBloc>(
     create: (context) => sl<ProductDetailsBloc>(),
   ),

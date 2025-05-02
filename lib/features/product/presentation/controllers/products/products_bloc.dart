@@ -40,7 +40,10 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     });
   }
 
-  void _getProducts(GetProductsEvent event, Emitter<ProductsState> emit) async {
+  Future<void> _getProducts(
+    GetProductsEvent event,
+    Emitter<ProductsState> emit,
+  ) async {
     emit(ProductsLoading());
     try {
       final result = await getProductsUseCase(event.queryParameters);

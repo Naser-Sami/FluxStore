@@ -19,25 +19,27 @@ class ProductQueryParameters {
     this.sizes,
     this.minRating,
     this.hasDiscount,
-    this.pageNumber,
-    this.pageSize,
+    this.pageNumber = 1,
+    this.pageSize = 10,
     this.sortBy,
     this.sortDescending,
   });
 
   Map<String, dynamic> toMap() {
-    return {
-      'CategoryId': categoryId,
-      'MinPrice': minPrice,
-      'MaxPrice': maxPrice,
-      'Colors': colors,
-      'Sizes': sizes,
-      'MinRating': minRating,
-      'HasDiscount': hasDiscount,
-      'PageNumber': pageNumber,
-      'PageSize': pageSize,
-      'SortBy': sortBy,
-      'SortDescending': sortDescending,
-    };
+    final map = <String, dynamic>{};
+
+    if (categoryId != null) map['CategoryId'] = categoryId;
+    if (minPrice != null) map['MinPrice'] = minPrice;
+    if (maxPrice != null) map['MaxPrice'] = maxPrice;
+    if (colors != null && colors!.isNotEmpty) map['Colors'] = colors;
+    if (sizes != null && sizes!.isNotEmpty) map['Sizes'] = sizes;
+    if (minRating != null) map['MinRating'] = minRating;
+    if (hasDiscount != null) map['HasDiscount'] = hasDiscount;
+    if (pageNumber != null) map['PageNumber'] = pageNumber;
+    if (pageSize != null) map['PageSize'] = pageSize;
+    if (sortBy != null) map['SortBy'] = sortBy;
+    if (sortDescending != null) map['SortDescending'] = sortDescending;
+
+    return map;
   }
 }

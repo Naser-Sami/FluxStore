@@ -23,15 +23,15 @@ class CategoriesList extends StatelessWidget {
         final category = context.read<CategoryBloc>().state.categories;
         if (category.isNotEmpty) {
           context.read<SelectedCategoryCubit>().select(category.first.id);
-        }
 
-        context.read<ProductsBloc>().add(
-          GetProductsEvent(
-            queryParameters: ProductQueryParameters(
-              categoryId: category.first.id,
+          context.read<ProductsBloc>().add(
+            GetProductsEvent(
+              queryParameters: ProductQueryParameters(
+                categoryId: category.first.id,
+              ),
             ),
-          ),
-        );
+          );
+        }
       },
       child: Padding(
         padding: const EdgeInsets.only(top: TPadding.p28),

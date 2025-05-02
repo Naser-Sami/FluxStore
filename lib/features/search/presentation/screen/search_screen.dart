@@ -20,39 +20,37 @@ class SearchScreen extends StatelessWidget {
             children: [
               const SearchBarWidget(),
               const SizedBox(height: TSize.s28),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return DiscoverCollectionBaseExpansionTile(
-                      children: [
-                        ExpansionTileWidget(
-                          key: UniqueKey(),
-                          showTrailingIcon: false,
-                          childrenPadding: const EdgeInsetsDirectional.only(
-                            start: TPadding.p24,
-                          ),
-                          title: const ListTile(
-                            title: TextWidget('Jackets'),
-                            trailing: TextWidget('128 items'),
-                          ),
-                          children: [
-                            ExpansionTileWidget(
-                              key: UniqueKey(),
-                              showTrailingIcon: false,
-                              title: const ListTile(
-                                title: TextWidget('Jeans'),
-                                trailing: TextWidget('14 items'),
-                              ),
-                            ),
-                          ],
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return DiscoverCollectionBaseExpansionTile(
+                    children: [
+                      ExpansionTileWidget(
+                        key: UniqueKey(),
+                        showTrailingIcon: false,
+                        childrenPadding: const EdgeInsetsDirectional.only(
+                          start: TPadding.p24,
                         ),
-                      ],
-                    );
-                  },
-                ),
+                        title: const ListTile(
+                          title: TextWidget('Jackets'),
+                          trailing: TextWidget('128 items'),
+                        ),
+                        children: [
+                          ExpansionTileWidget(
+                            key: UniqueKey(),
+                            showTrailingIcon: false,
+                            title: const ListTile(
+                              title: TextWidget('Jeans'),
+                              trailing: TextWidget('14 items'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
               ),
             ],
           ),

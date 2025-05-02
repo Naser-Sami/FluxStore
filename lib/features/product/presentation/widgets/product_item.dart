@@ -65,11 +65,8 @@ class ProductItem extends StatelessWidget {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(TPadding.p16),
-            child: Hero(
-              tag: "Product-${product.id}",
-              child: CachedNetWorkImageComponent(
-                imageUrl: ApiEndpoints.imageUrl + product.imageUrl,
-              ),
+            child: CachedNetWorkImageComponent(
+              imageUrl: ApiEndpoints.imageUrl + product.imageUrl,
             ),
           ),
         ),

@@ -10,6 +10,7 @@ export 'extensions_on_colors.dart';
 export 'extensions_on_date_time.dart';
 export 'extensions_on_future_and_stream.dart';
 export 'extensions_on_list.dart';
+export 'extensions_on_string.dart';
 export 'extensions_on_widgets.dart';
 export 'hex_color.dart';
 export 'internet_status.dart';

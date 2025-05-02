@@ -113,23 +113,20 @@ class _ProductDetailsBodyWidgetState extends State<ProductDetailsBodyWidget> {
                   bottom: false,
                   child: Stack(
                     children: [
-                      Hero(
-                        tag: "Product-${product.id}",
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children:
-                              product.additionalImages
-                                  .map(
-                                    (image) => SizedBox(
-                                      width: context.screenWidth,
-                                      child: CachedNetWorkImageComponent(
-                                        imageUrl: ApiEndpoints.imageUrl + image,
-                                        fit: BoxFit.contain,
-                                      ),
+                      ListView(
+                        scrollDirection: Axis.horizontal,
+                        children:
+                            product.additionalImages
+                                .map(
+                                  (image) => SizedBox(
+                                    width: context.screenWidth,
+                                    child: CachedNetWorkImageComponent(
+                                      imageUrl: ApiEndpoints.imageUrl + image,
+                                      fit: BoxFit.contain,
                                     ),
-                                  )
-                                  .toList(),
-                        ),
+                                  ),
+                                )
+                                .toList(),
                       ),
                       SizedBox(
                         height: 50,

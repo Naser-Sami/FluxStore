@@ -300,6 +300,17 @@ final router = GoRouter(
                   (context, state) =>
                       const CupertinoPage(child: SearchScreen()),
             ),
+            GoRoute(
+              path: SearchResultScreen.routeName,
+              name: SearchResultScreen.name,
+              pageBuilder: (context, state) {
+                final args = state.extra as Map<String, dynamic>;
+
+                return CupertinoPage(
+                  child: SearchResultScreen(query: args['query']),
+                );
+              },
+            ),
           ],
         ),
 

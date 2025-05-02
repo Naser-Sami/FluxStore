@@ -17,8 +17,6 @@ class ProductsSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final categoryId = context.watch<SelectedCategoryCubit>().state;
-
     return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
         switch (state) {
@@ -26,8 +24,6 @@ class ProductsSlider extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           case ProductsLoaded():
             final products = state.products;
-            // .where((e) => e.categoryId == categoryId)
-            // .toList();
 
             return ProductSliderBody(title: title, products: products);
 

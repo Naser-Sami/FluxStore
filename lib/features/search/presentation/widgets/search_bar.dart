@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
-import '/features/_features.dart' show ProductsSlider;
+import '/features/_features.dart' show ProductsSlider, SearchResultScreen;
 
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({super.key});
@@ -31,19 +32,15 @@ class SearchBarWidget extends StatelessWidget {
               viewShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(TRadius.r16),
               ),
-
-              //
-              onChanged: (value) {
-                print('value: $value');
-
-                // context.read<ProductsBloc>().add(
-                //   GetProductsEvent(
-                //     queryParameters: ProductQueryParameters(search: value),
-                //   ),
-                // );
+              onChanged: (query) {
+                // log('query: $query');
               },
-
-              // viewBackgroundColor: color.surface,
+              onSubmitted: (query) {
+                context.push(
+                  SearchResultScreen.routeName,
+                  extra: {'query': query},
+                );
+              },
               suggestionsBuilder: (context, searchController) {
                 return [
                   const SizedBox(height: TSize.s24),

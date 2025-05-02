@@ -18,6 +18,8 @@ class TRadius {
   static const double r35 = 35.0;
   static const double r40 = 40.0;
   static const double r42 = 42.0;
+  static const double r48 = 48.0;
+  static const double r60 = 60.0;
 }
 
 class TPadding {
@@ -59,6 +61,7 @@ class TSize {
   static const double s14 = 14.0;
   static const double s15 = 15.0;
   static const double s16 = 16.0;
+  static const double s18 = 18.0;
   static const double s20 = 20.0;
   static const double s24 = 24.0;
   static const double s28 = 28.0;

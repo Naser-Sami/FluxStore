@@ -69,9 +69,9 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   }
 
   void _toggleDrawer() {
-    // context.read<OnDrawerTapCubit>().state
-    //     ? _controller.forward()
-    //     : _controller.reverse();
+    context.read<OnDrawerTapCubit>().state
+        ? _controller.forward()
+        : _controller.reverse();
     context.read<OnDrawerTapCubit>().toggleDrawer();
   }
 

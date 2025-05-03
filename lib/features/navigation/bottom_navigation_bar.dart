@@ -161,18 +161,3 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
     }
   }
 }
-
-
-//  Container(
-//                           width: 302,
-//                           height: context.screenHeight,
-//                           decoration: const BoxDecoration(
-//                             color: Colors.red,
-//                             borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(TRadius.r42),
-//                               bottomLeft: Radius.circular(TRadius.r42),
-//                             ),
-//                           ),
-//                           child: const Column(children: [Text('Hello')]),
-//                         ),
-//                       ),

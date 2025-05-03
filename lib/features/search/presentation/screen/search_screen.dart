@@ -18,7 +18,6 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // endDrawer: const Drawer(),
       appBar: MainAppBar(
         onMenuPressed: () => _toggleDrawer(context),
         title: const TextWidget(LocaleKeys.DrawerMenu_discover),

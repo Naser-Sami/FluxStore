@@ -90,7 +90,7 @@ class SearchBarWidget extends StatelessWidget {
           const SizedBox(width: TPadding.p16),
           OnTapScaler(
             onTap: () {
-              Scaffold.of(context).openEndDrawer();
+              scaffoldKey.currentState?.openEndDrawer();
             },
             child: Material(
               elevation: 4,

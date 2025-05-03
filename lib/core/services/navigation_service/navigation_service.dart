@@ -1,6 +1,8 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
 final homeSectionNavigator = GlobalKey<NavigatorState>();
 final searchSectionNavigator = GlobalKey<NavigatorState>();
 final cartSectionNavigator = GlobalKey<NavigatorState>();

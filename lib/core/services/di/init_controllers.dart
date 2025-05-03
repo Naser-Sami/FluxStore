@@ -24,6 +24,7 @@ Future<void> _bottomNavigationBar() async {
 Future<void> _drawer() async {
   sl.registerFactory<DrawerCubit>(DrawerCubit.new);
   sl.registerFactory<OnDrawerTapCubit>(OnDrawerTapCubit.new);
+  sl.registerFactory<DrawerGestureCubit>(DrawerGestureCubit.new);
 }
 
 Future<void> _authentication() async {

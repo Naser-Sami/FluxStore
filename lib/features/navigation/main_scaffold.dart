@@ -4,8 +4,12 @@ import 'package:go_router/go_router.dart' show StatefulNavigationShell;
 
 import '/config/_config.dart' show BottomNavigationBarComponent, TRadius;
 import '/core/_core.dart'
-    show OrientationExtension, TDeviceUtils, BuildContextExtensions;
-import '/features/_features.dart' show OnDrawerTapCubit;
+    show
+        BuildContextExtensions,
+        OrientationExtension,
+        TDeviceUtils,
+        scaffoldKey;
+import '/features/_features.dart' show FilterDrawer, OnDrawerTapCubit;
 
 class MainScaffold extends StatelessWidget {
   const MainScaffold({
@@ -69,7 +73,11 @@ class MainScaffold extends StatelessWidget {
           child: ClipRRect(
             borderRadius: _borderRadius(context, isCollapsed),
             child: Scaffold(
+              key: scaffoldKey,
               extendBody: true,
+              drawerEnableOpenDragGesture: false,
+              endDrawerEnableOpenDragGesture: false,
+              endDrawer: const FilterDrawer(),
               resizeToAvoidBottomInset: true,
               bottomNavigationBar: bottomNavigationBar(),
               body: navigationShell,

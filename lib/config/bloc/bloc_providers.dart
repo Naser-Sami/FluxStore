@@ -16,10 +16,16 @@ final providers = [
     create: (context) => sl<ProfileBloc>()..add(const GetProfileEvent()),
   ),
   BlocProvider<UserSessionCubit>(create: (context) => sl<UserSessionCubit>()),
+
+  // Drawer
   BlocProvider<DrawerCubit>(
     create: (context) => sl<DrawerCubit>()..loadDrawerItems(),
   ),
   BlocProvider<OnDrawerTapCubit>(create: (context) => sl<OnDrawerTapCubit>()),
+  BlocProvider<DrawerGestureCubit>(
+    create: (context) => sl<DrawerGestureCubit>(),
+  ),
+
   BlocProvider<CategoryBloc>(
     create: (context) => sl<CategoryBloc>()..add(GetAllCategoryEvent()),
   ),

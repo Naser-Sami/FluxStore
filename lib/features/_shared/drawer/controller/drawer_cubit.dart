@@ -32,11 +32,3 @@ class DrawerCubit extends Cubit<List<DrawerItem>> {
     // final selectedItem = updatedList[index];
   }
 }
-
-class OnDrawerTapCubit extends Cubit<bool> {
-  OnDrawerTapCubit() : super(true);
-
-  void toggleDrawer() {
-    emit(!state);
-  }
-}

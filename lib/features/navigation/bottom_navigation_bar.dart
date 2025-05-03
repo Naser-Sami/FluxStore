@@ -4,14 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart'
-    show
-        BottomNavigationBarComponent,
-        BottomNavigationBarCubit,
-        ScrollControllerProvider,
-        TRadius;
-import '/core/_core.dart';
-import '/features/_features.dart'
-    show CustomDrawer, DrawerCubit, OnDrawerTapCubit;
+    show BottomNavigationBarCubit, ScrollControllerProvider;
+import '/features/_features.dart' show DrawerCubit, OnDrawerTapCubit;
+import 'custom_drawer.dart';
+import 'main_scaffold.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
   static const routeName = '/flux-store';
@@ -68,9 +64,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
     ).animate(_controller);
   }
 
-  void _toggleDrawer() {
-    context.read<OnDrawerTapCubit>().toggleDrawer();
-  }
+  void _toggleDrawer() => context.read<OnDrawerTapCubit>().toggleDrawer();
 
   void _handleScroll() {
     if (_scrollController.position.userScrollDirection ==
@@ -94,85 +88,6 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
     super.dispose();
   }
 
-  Widget _buildDrawer() {
-    return Scaffold(
-      body: SafeArea(
-        child: SlideTransition(
-          position: _slideAnimation,
-          child: ScaleTransition(
-            scale: _menuScaleAnimation,
-            child: CustomDrawer(
-              navigationShell: widget.navigationShell,
-              onItemSelected: _toggleDrawer,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMainScaffold() {
-    bool isCollapsed = context.watch<OnDrawerTapCubit>().state;
-
-    final isRTL = Directionality.of(context) == TextDirection.rtl;
-
-    final topHeight =
-        context.isLandscape
-            ? 0.0 * context.screenHeight
-            : 0.1 * context.screenHeight;
-    final double top = isCollapsed ? 0 : topHeight;
-
-    final double left =
-        isCollapsed
-            ? 0
-            : isRTL
-            ? -0.4 * context.screenWidth
-            : 0.6 * context.screenWidth;
-
-    final double right =
-        isCollapsed
-            ? 0
-            : isRTL
-            ? 0.6 * context.screenWidth
-            : -0.4 * context.screenWidth;
-
-    final showNavBar = widget.navigationShell.currentIndex < 4;
-
-    return AnimatedPositioned(
-      duration: duration,
-      top: top,
-      bottom: 0,
-      left: left,
-      right: right,
-      child: ScaleTransition(
-        scale: _scaleAnimation,
-        child: Material(
-          animationDuration: duration,
-          borderRadius: BorderRadius.circular(TRadius.r40),
-          elevation: 10,
-          color: context.theme.colorScheme.surface,
-          child: ClipRRect(
-            borderRadius:
-                TDeviceUtils.isIOS() && context.screenHeight > 670
-                    ? BorderRadius.circular(TRadius.r40)
-                    : isCollapsed
-                    ? BorderRadius.zero
-                    : BorderRadius.circular(TRadius.r40),
-            child: Scaffold(
-              extendBody: true,
-              resizeToAvoidBottomInset: true,
-              bottomNavigationBar:
-                  showNavBar && !_isScrollingDown
-                      ? const BottomNavigationBarComponent()
-                      : null,
-              body: widget.navigationShell,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final isRTL = Directionality.of(context) == TextDirection.rtl;
@@ -182,44 +97,82 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
       end: isRTL ? Offset.zero : Offset.zero,
     ).animate(_controller);
 
-    return BlocListener<OnDrawerTapCubit, bool>(
-      listener: (context, state) {
-        !state ? _controller.forward() : _controller.reverse();
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<OnDrawerTapCubit, bool>(
+          listener: (context, state) {
+            !state ? _controller.forward() : _controller.reverse();
+          },
+        ),
+        BlocListener<BottomNavigationBarCubit, int>(
+          listener: (context, index) {
+            widget.navigationShell.goBranch(
+              index,
+              initialLocation: index == widget.navigationShell.currentIndex,
+            );
+          },
+        ),
+      ],
       child: ScrollControllerProvider(
         scrollController: _scrollController,
         child: PopScope(
           canPop: false,
-          child: BlocListener<BottomNavigationBarCubit, int>(
-            listener: (context, index) {
-              widget.navigationShell.goBranch(
-                index,
-                initialLocation: index == widget.navigationShell.currentIndex,
-              );
-            },
-            child: GestureDetector(
-              onHorizontalDragStart: (details) {
-                dragStartX = details.localPosition.dx;
-              },
-              onHorizontalDragUpdate: (details) {
-                final delta = details.localPosition.dx - dragStartX;
-                bool isCollapsed = context.read<OnDrawerTapCubit>().state;
-
-                if (isCollapsed &&
-                    ((isRTL && delta < -100) || (!isRTL && delta > 100))) {
-                  _toggleDrawer(); // open
-                }
-
-                if (!isCollapsed &&
-                    ((isRTL && delta > 100) || (!isRTL && delta < -100))) {
-                  _toggleDrawer(); // close
-                }
-              },
-              child: Stack(children: [_buildDrawer(), _buildMainScaffold()]),
+          child: GestureDetector(
+            onHorizontalDragStart: _onHorizontalDragStart,
+            onHorizontalDragUpdate: _onHorizontalDragUpdate,
+            child: Stack(
+              children: [
+                CustomDrawerWidget(
+                  slideAnimation: _slideAnimation,
+                  menuScaleAnimation: _menuScaleAnimation,
+                  navigationShell: widget.navigationShell,
+                  onItemSelected: _toggleDrawer,
+                ),
+                MainScaffold(
+                  navigationShell: widget.navigationShell,
+                  duration: duration,
+                  scaleAnimation: _scaleAnimation,
+                  isScrollingDown: _isScrollingDown,
+                ),
+              ],
             ),
           ),
         ),
       ),
     );
   }
+
+  void _onHorizontalDragStart(DragStartDetails details) {
+    dragStartX = details.localPosition.dx;
+  }
+
+  void _onHorizontalDragUpdate(DragUpdateDetails details) {
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
+    final delta = details.localPosition.dx - dragStartX;
+
+    bool isCollapsed = context.read<OnDrawerTapCubit>().state;
+
+    if (isCollapsed && ((isRTL && delta < -100) || (!isRTL && delta > 100))) {
+      _toggleDrawer(); // open
+    }
+
+    if (!isCollapsed && ((isRTL && delta > 100) || (!isRTL && delta < -100))) {
+      _toggleDrawer(); // close
+    }
+  }
 }
+
+
+//  Container(
+//                           width: 302,
+//                           height: context.screenHeight,
+//                           decoration: const BoxDecoration(
+//                             color: Colors.red,
+//                             borderRadius: BorderRadius.only(
+//                               topLeft: Radius.circular(TRadius.r42),
+//                               bottomLeft: Radius.circular(TRadius.r42),
+//                             ),
+//                           ),
+//                           child: const Column(children: [Text('Hello')]),
+//                         ),
+//                       ),

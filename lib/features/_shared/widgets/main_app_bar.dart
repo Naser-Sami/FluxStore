@@ -23,15 +23,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: CustomAppBar(
         backgroundColor: Colors.transparent,
         leadingWidth: 100,
-        leading: Padding(
-          padding: const EdgeInsetsDirectional.only(start: TPadding.p16),
-          child: IconButton(
-            icon: IconWidget(
-              name: 'menu',
-              color: context.theme.colorScheme.onSurface,
-            ),
-            onPressed: onMenuPressed,
+        leading: IconButton(
+          icon: IconWidget(
+            name: 'menu',
+            color: context.theme.colorScheme.onSurface,
           ),
+          onPressed: onMenuPressed,
         ),
         title: title,
         actions: [
@@ -58,8 +55,6 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             onPressed: () {},
           ),
-
-          const SizedBox(width: TPadding.p16),
         ],
       ),
     );

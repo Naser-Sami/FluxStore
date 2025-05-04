@@ -21,7 +21,10 @@ class FilterDrawer extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<FilterPriceCubit>(
-          create: (context) => sl<FilterPriceCubit>()..init(100, 340),
+          create: (context) => sl<FilterPriceCubit>()..init(20, 80),
+        ),
+        BlocProvider<FilterColorsController>(
+          create: (context) => sl<FilterColorsController>()..init(),
         ),
       ],
       child: Container(
@@ -35,7 +38,7 @@ class FilterDrawer extends StatelessWidget {
         ),
         child: const SafeArea(
           child: Column(
-            spacing: TSize.s24,
+            spacing: TSize.s40,
             children: [
               FilterDrawerHeader(),
               FilterDrawerBody(),

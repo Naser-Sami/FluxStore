@@ -91,4 +91,5 @@ Future<void> _products() async {
 
 Future<void> _filter() async {
   sl.registerFactory<FilterPriceCubit>(FilterPriceCubit.new);
+  sl.registerFactory<FilterColorsController>(FilterColorsController.new);
 }

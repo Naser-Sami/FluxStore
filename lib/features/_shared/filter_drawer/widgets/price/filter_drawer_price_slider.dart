@@ -61,7 +61,7 @@ class FilterDrawerPriceSlider extends StatelessWidget {
       builder: (context, state) {
         return FlutterSlider(
           min: 0,
-          max: 1000, // TODO: get max from backend
+          max: 250,
           values: [state.min, state.max],
           rangeSlider: true,
           tooltip: tooltip,

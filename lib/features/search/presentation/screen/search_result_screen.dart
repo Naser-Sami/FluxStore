@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '/config/_config.dart'
     show CachedNetWorkImageComponent, OnTapScaler, TPadding, TSize, TextWidget;
 import '/config/theme/_theme.dart';
-import '/core/_core.dart' show ApiEndpoints;
+import '/core/_core.dart' show ApiEndpoints, scaffoldKey;
 import '/core/utils/_utils.dart';
 import '/features/_features.dart'
     show
@@ -67,15 +67,17 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                   Row(
                     children: [
                       Expanded(
+                        flex: 65,
                         child: TextWidget(
                           'Found\n${state.products.length} Results',
                           style: context.textTheme.headlineMedium,
                         ),
                       ),
-                      const Spacer(),
                       Expanded(
+                        flex: 35,
                         child: OnTapScaler(
-                          onTap: () {},
+                          onTap:
+                              () => scaffoldKey.currentState?.openEndDrawer(),
                           child: Container(
                             padding: const EdgeInsets.all(TPadding.p12),
                             decoration: BoxDecoration(
@@ -130,33 +132,62 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           Expanded(
                             child: OnTapScaler(
                               onTap: () {
-                                // controller.animateTo(
-                                //   index * 134,
-                                //   duration: const Duration(milliseconds: 300),
-                                //   curve: Curves.easeInOut,
-                                // );
-
                                 context.push(
                                   ProductDetailsScreen.routeName,
                                   extra: {'productId': product.id},
                                 );
                               },
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                  TRadius.r12,
-                                ),
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: ColoredBox(
-                                    color: color.surfaceContainerHighest,
-                                    child: CachedNetWorkImageComponent(
-                                      imageUrl:
-                                          ApiEndpoints.imageUrl +
-                                          product.imageUrl,
-                                      fit: BoxFit.cover,
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(
+                                      TRadius.r12,
+                                    ),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      child: ColoredBox(
+                                        color: color.surfaceContainerHighest,
+                                        child: CachedNetWorkImageComponent(
+                                          imageUrl:
+                                              ApiEndpoints.imageUrl +
+                                              product.imageUrl,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  PositionedDirectional(
+                                    top: 10,
+                                    end: 10,
+                                    child: Container(
+                                      width: 32,
+                                      height: 32,
+                                      decoration: BoxDecoration(
+                                        color: color.surfaceContainerHighest,
+                                        borderRadius: BorderRadius.circular(
+                                          TRadius.r60,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: color.scrim.withValues(
+                                              alpha: 0.1,
+                                            ),
+                                            blurRadius: 3,
+                                            spreadRadius: 0,
+                                            offset: const Offset(-1, 3),
+                                          ),
+                                        ],
+                                      ),
+                                      child: IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          Icons.favorite,
+                                          size: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),

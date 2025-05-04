@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/config/_config.dart' show TRadius, TSize;
-import '/core/_core.dart' show TFunctions;
+import '/core/_core.dart' show TFunctions, sl;
+import 'controllers/_controllers.dart';
 import 'widgets/_widgets.dart';
 
 class FilterDrawer extends StatelessWidget {
@@ -17,23 +19,30 @@ class FilterDrawer extends StatelessWidget {
             ? colorScheme.scrim.withValues(alpha: 0.8)
             : colorScheme.scrim.withValues(alpha: 0.2);
 
-    return Container(
-      width: 312,
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(TRadius.r60),
-        boxShadow: [
-          BoxShadow(color: shadowColor, blurRadius: 10, spreadRadius: 10),
-        ],
-      ),
-      child: const SafeArea(
-        child: Column(
-          spacing: TSize.s24,
-          children: [
-            FilterDrawerHeader(),
-            FilterDrawerBody(),
-            FilterDrawerFooter(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<FilterPriceCubit>(
+          create: (context) => sl<FilterPriceCubit>(),
+        ),
+      ],
+      child: Container(
+        width: 312,
+        decoration: BoxDecoration(
+          color: colorScheme.surface,
+          borderRadius: BorderRadius.circular(TRadius.r60),
+          boxShadow: [
+            BoxShadow(color: shadowColor, blurRadius: 10, spreadRadius: 10),
           ],
+        ),
+        child: const SafeArea(
+          child: Column(
+            spacing: TSize.s24,
+            children: [
+              FilterDrawerHeader(),
+              FilterDrawerBody(),
+              FilterDrawerFooter(),
+            ],
+          ),
         ),
       ),
     );

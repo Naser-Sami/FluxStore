@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 
 import '/config/_config.dart' show TRadius;
 import '/core/_core.dart' show CurrencyStringExtension;
+import '/features/_shared/_shared.dart' show FilterPriceCubit, FilterPriceState;
 
 class FilterDrawerPriceSlider extends StatelessWidget {
   const FilterDrawerPriceSlider({super.key});
@@ -32,7 +34,7 @@ class FilterDrawerPriceSlider extends StatelessWidget {
       ),
       inactiveTrackBar: BoxDecoration(color: colorScheme.outline),
       inactiveTrackBarHeight: 1,
-      activeTrackBarHeight: 2,
+      activeTrackBarHeight: 3,
     );
 
     final tooltip = FlutterSliderTooltip(
@@ -51,19 +53,23 @@ class FilterDrawerPriceSlider extends StatelessWidget {
       positionOffset: FlutterSliderTooltipPositionOffset(top: 45),
     );
 
-    return FlutterSlider(
-      min: 0,
-      max: 100,
-      values: [0, 100],
-      rangeSlider: true,
-      tooltip: tooltip,
-      handler: handlerDecoration,
-      rightHandler: handlerDecoration,
-      trackBar: trackBar,
-      onDragging: (int handlerIndex, dynamic lowerValue, dynamic upperValue) {
-        print('handlerIndex: $handlerIndex');
-        print('lowerValue: $lowerValue');
-        print('upperValue: $upperValue');
+    void onDragging(int handlerIndex, dynamic lowerValue, dynamic upperValue) {
+      context.read<FilterPriceCubit>().updatePriceRange(lowerValue, upperValue);
+    }
+
+    return BlocBuilder<FilterPriceCubit, FilterPriceState>(
+      builder: (context, state) {
+        return FlutterSlider(
+          min: 0,
+          max: 100,
+          values: [state.min, state.max],
+          rangeSlider: true,
+          tooltip: tooltip,
+          handler: handlerDecoration,
+          rightHandler: handlerDecoration,
+          trackBar: trackBar,
+          onDragging: onDragging,
+        );
       },
     );
   }

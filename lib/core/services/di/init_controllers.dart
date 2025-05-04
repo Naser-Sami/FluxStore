@@ -11,6 +11,7 @@ Future<void> initControllers() async {
   _profile();
   _categories();
   _products();
+  _filter();
 }
 
 Future<void> _theme() async {
@@ -86,4 +87,8 @@ Future<void> _products() async {
       addReviewUseCase: sl<AddReviewUseCase>(),
     ),
   );
+}
+
+Future<void> _filter() async {
+  sl.registerFactory<FilterPriceCubit>(FilterPriceCubit.new);
 }

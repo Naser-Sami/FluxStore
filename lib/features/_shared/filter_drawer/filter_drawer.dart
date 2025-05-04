@@ -22,7 +22,7 @@ class FilterDrawer extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<FilterPriceCubit>(
-          create: (context) => sl<FilterPriceCubit>(),
+          create: (context) => sl<FilterPriceCubit>()..init(0, 200),
         ),
       ],
       child: Container(

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/config/_config.dart' show TRadius, TSize;
 import '/core/_core.dart' show TFunctions, sl;
-import 'controllers/_controllers.dart';
 import 'widgets/_widgets.dart';
 
 class FilterDrawer extends StatelessWidget {
@@ -22,7 +21,7 @@ class FilterDrawer extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<FilterPriceCubit>(
-          create: (context) => sl<FilterPriceCubit>()..init(0, 200),
+          create: (context) => sl<FilterPriceCubit>()..init(100, 340),
         ),
       ],
       child: Container(

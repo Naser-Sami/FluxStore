@@ -11,6 +11,7 @@ class CustomButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final Color? borderColor;
+  final EdgeInsetsGeometry? padding;
   const CustomButton({
     super.key,
     required this.onTap,
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.borderColor,
+    this.padding,
   });
 
   @override
@@ -29,10 +31,12 @@ class CustomButton extends StatelessWidget {
         child: OnTapScaler(
           onTap: onTap,
           child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: TPadding.p53,
-              vertical: TPadding.p15,
-            ),
+            padding:
+                padding ??
+                const EdgeInsets.symmetric(
+                  horizontal: TPadding.p53,
+                  vertical: TPadding.p15,
+                ),
             decoration: BoxDecoration(
               color: backgroundColor ?? Colors.grey.withValues(alpha: 0.80),
               borderRadius: BorderRadius.circular(TRadius.r30),

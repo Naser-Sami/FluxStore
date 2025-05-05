@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart';
 import '/core/_core.dart';
-import '/features/_features.dart' show ProductsSlider, SearchResultScreen;
+import '/features/_features.dart'
+    show ProductQueryParameters, ProductsSlider, SearchResultScreen;
 
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({super.key});
@@ -36,9 +37,12 @@ class SearchBarWidget extends StatelessWidget {
                 // log('query: $query');
               },
               onSubmitted: (query) {
+                ProductQueryParameters? queryParameters =
+                    ProductQueryParameters(search: query);
+
                 context.push(
                   SearchResultScreen.routeName,
-                  extra: {'query': query},
+                  extra: queryParameters,
                 );
               },
               suggestionsBuilder: (context, searchController) {

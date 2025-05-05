@@ -29,6 +29,10 @@ class FilterColorsController extends Cubit<List<FilterColorsModel>> {
 
     emit(newState);
   }
+
+  void reset() {
+    emit(state.map((e) => e.copyWith(isSelected: false)).toList());
+  }
 }
 
 class FilterColorsModel {

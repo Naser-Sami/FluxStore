@@ -10,6 +10,10 @@ class FilterPriceCubit extends Cubit<FilterPriceState> {
   void updatePriceRange(double min, double max) {
     emit(FilterPriceState(min: min, max: max));
   }
+
+  void reset(double min, double max) {
+    emit(FilterPriceState(min: min, max: max));
+  }
 }
 
 class FilterPriceState {

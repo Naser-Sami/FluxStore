@@ -9,6 +9,16 @@ Future<void> main() async {
   IServiceInitializer serviceInitializer = ServiceInitializer();
   await serviceInitializer.init();
 
+  // Get All Products Api is shared with filter in many screens
+
+  // so we need to cache the data
+  // and we need to use the cached data if available
+  // otherwise we need to fetch the data from the api
+
+  // OR
+  // We need to create separate api for filter and other cases
+  // Like: Featured Products, New Arrivals, Best Sellers, etc.
+
   runApp(MultiBlocProvider(providers: providers, child: const MyApp()));
 }
 

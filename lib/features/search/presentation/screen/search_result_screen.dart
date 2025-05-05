@@ -23,7 +23,7 @@ class SearchResultScreen extends StatefulWidget {
   static const String name = 'Search Result';
   const SearchResultScreen({super.key, required this.query});
 
-  final String query;
+  final ProductQueryParameters? query;
 
   @override
   State<SearchResultScreen> createState() => _SearchResultScreenState();
@@ -38,9 +38,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
   Future<void> _getSearchResults() async {
     context.read<ProductsBloc>().add(
-      GetProductsEvent(
-        queryParameters: ProductQueryParameters(search: widget.query),
-      ),
+      GetProductsEvent(queryParameters: widget.query),
     );
   }
 
@@ -49,7 +47,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: TextWidget(widget.query.toTitleCase),
+        title: TextWidget(widget.query?.search?.toTitleCase ?? ''),
       ),
       body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {

@@ -304,11 +304,9 @@ final router = GoRouter(
               path: SearchResultScreen.routeName,
               name: SearchResultScreen.name,
               pageBuilder: (context, state) {
-                final args = state.extra as Map<String, dynamic>;
+                final query = state.extra as ProductQueryParameters?;
 
-                return CupertinoPage(
-                  child: SearchResultScreen(query: args['query']),
-                );
+                return CupertinoPage(child: SearchResultScreen(query: query));
               },
             ),
           ],

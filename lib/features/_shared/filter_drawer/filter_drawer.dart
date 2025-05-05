@@ -42,6 +42,7 @@ class FilterDrawer extends StatelessWidget {
             children: [
               FilterDrawerHeader(),
               FilterDrawerBody(),
+              Spacer(),
               FilterDrawerFooter(),
             ],
           ),

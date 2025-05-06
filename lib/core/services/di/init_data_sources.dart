@@ -6,6 +6,7 @@ Future<void> initDataSources() async {
   _profile();
   _categories();
   _products();
+  _cart();
 }
 
 Future<void> _authentication() async {
@@ -30,4 +31,8 @@ Future<void> _products() async {
   sl.registerLazySingleton<IProductRemoteDataSource>(
     ProductRemoteDataSource.new,
   );
+}
+
+Future<void> _cart() async {
+  sl.registerLazySingleton<ICartRemoteDataSource>(CartRemoteDataSource.new);
 }

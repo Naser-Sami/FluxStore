@@ -6,47 +6,48 @@ Future<void> initRepositories() async {
   _profile();
   _categories();
   _products();
+  _cart();
 }
 
 Future<void> _authentication() async {
   sl.registerLazySingleton<ILoginRepository>(
-    () => LoginRepository(
-      remoteDataSource: sl<IAuthenticationRemoteDataSource>(),
-    ),
+    () => LoginRepository(dataSource: sl<IAuthenticationRemoteDataSource>()),
   );
   sl.registerLazySingleton<ISignUpRepository>(
-    () => SignUpRepository(
-      remoteDataSource: sl<IAuthenticationRemoteDataSource>(),
-    ),
+    () => SignUpRepository(dataSource: sl<IAuthenticationRemoteDataSource>()),
   );
   sl.registerLazySingleton<IForgotPasswordRepository>(
     () => ForgotPasswordRepository(
-      remoteDataSource: sl<IAuthenticationRemoteDataSource>(),
+      dataSource: sl<IAuthenticationRemoteDataSource>(),
     ),
   );
   sl.registerLazySingleton<IResetPasswordRepository>(
     () => ResetPasswordRepository(
-      remoteDataSource: sl<IAuthenticationRemoteDataSource>(),
+      dataSource: sl<IAuthenticationRemoteDataSource>(),
     ),
   );
 }
 
 Future<void> _profile() async {
   sl.registerLazySingleton<IProfileRepository>(
-    () => ProfileRepository(remoteDataSource: sl<IProfileRemoteDataSource>()),
+    () => ProfileRepository(dataSource: sl<IProfileRemoteDataSource>()),
   );
 }
 
 Future<void> _categories() async {
   sl.registerLazySingleton<ICategoriesRepository>(
-    () => CategoriesRepository(
-      remoteDataSource: sl<ICategoriesRemoteDataSource>(),
-    ),
+    () => CategoriesRepository(dataSource: sl<ICategoriesRemoteDataSource>()),
   );
 }
 
 Future<void> _products() async {
   sl.registerLazySingleton<IProductRepository>(
-    () => ProductRepository(remoteDataSource: sl<IProductRemoteDataSource>()),
+    () => ProductRepository(dataSource: sl<IProductRemoteDataSource>()),
+  );
+}
+
+Future<void> _cart() async {
+  sl.registerLazySingleton<ICartRepository>(
+    () => CartRepository(dataSource: sl<ICartRemoteDataSource>()),
   );
 }

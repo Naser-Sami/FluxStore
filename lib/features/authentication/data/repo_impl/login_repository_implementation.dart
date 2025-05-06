@@ -10,15 +10,15 @@ import '/features/_features.dart'
         UserMapper;
 
 class LoginRepository implements ILoginRepository {
-  final IAuthenticationRemoteDataSource remoteDataSource;
-  LoginRepository({required this.remoteDataSource});
+  final IAuthenticationRemoteDataSource dataSource;
+  LoginRepository({required this.dataSource});
 
   @override
   Future<Either<Failure<String>, UserEntity>> login(
     LoginParams loginParams,
   ) async {
     try {
-      final result = await remoteDataSource.login(loginParams);
+      final result = await dataSource.login(loginParams);
 
       // Map the result to the UserEntity
       if (result != null) {

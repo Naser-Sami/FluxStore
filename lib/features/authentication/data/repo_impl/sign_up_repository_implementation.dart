@@ -10,15 +10,15 @@ import '/features/_features.dart'
         UserMapper;
 
 class SignUpRepository implements ISignUpRepository {
-  final IAuthenticationRemoteDataSource remoteDataSource;
-  SignUpRepository({required this.remoteDataSource});
+  final IAuthenticationRemoteDataSource dataSource;
+  SignUpRepository({required this.dataSource});
 
   @override
   Future<Either<Failure<String>, UserEntity>> signUp(
     SignUpParams signUpParams,
   ) async {
     try {
-      final result = await remoteDataSource.signUp(signUpParams);
+      final result = await dataSource.signUp(signUpParams);
 
       // Map the result to the UserEntity
       if (result != null) {

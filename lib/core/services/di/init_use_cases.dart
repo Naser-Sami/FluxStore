@@ -6,6 +6,7 @@ Future<void> initUseCases() async {
   _profile();
   _categories();
   _products();
+  _cart();
 }
 
 Future<void> _authentication() async {
@@ -74,5 +75,20 @@ Future<void> _products() async {
   );
   sl.registerLazySingleton<AddReviewUseCase>(
     () => AddReviewUseCase(repository: sl<IProductRepository>()),
+  );
+}
+
+Future<void> _cart() async {
+  sl.registerLazySingleton<GetCartUseCase>(
+    () => GetCartUseCase(repository: sl<ICartRepository>()),
+  );
+  sl.registerLazySingleton<AddToCartUseCase>(
+    () => AddToCartUseCase(repository: sl<ICartRepository>()),
+  );
+  sl.registerLazySingleton<RemoveFromCartUseCase>(
+    () => RemoveFromCartUseCase(repository: sl<ICartRepository>()),
+  );
+  sl.registerLazySingleton<UpdateCartUseCase>(
+    () => UpdateCartUseCase(repository: sl<ICartRepository>()),
   );
 }

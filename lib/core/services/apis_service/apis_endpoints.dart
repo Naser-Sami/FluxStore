@@ -27,4 +27,10 @@ class ApiEndpoints {
   static const String productUpdateImages = 'Products/update-product-image';
   static const String productUpdateDetailsImages =
       'Products/update-product-details-images';
+
+  // Cart
+  static const String cart = 'Cart';
+  static const String addCart = 'Cart/add';
+  static const String updateCart = 'Cart/update';
+  static const String removeCart = 'Cart/remove';
 }

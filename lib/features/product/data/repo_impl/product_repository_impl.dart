@@ -15,15 +15,15 @@ import '/features/_features.dart'
         UpdateProductParams;
 
 class ProductRepository implements IProductRepository {
-  final IProductRemoteDataSource remoteDataSource;
-  ProductRepository({required this.remoteDataSource});
+  final IProductRemoteDataSource dataSource;
+  ProductRepository({required this.dataSource});
 
   @override
   Future<Either<Failure<String>, Product>> addProduct(
     AddProductParams p,
   ) async {
     try {
-      final result = await remoteDataSource.addProduct(p);
+      final result = await dataSource.addProduct(p);
       final resultEntity = ProductMapper.toDomain(result);
 
       return Right(resultEntity);
@@ -39,7 +39,7 @@ class ProductRepository implements IProductRepository {
     AddProductReviewParams p,
   ) async {
     try {
-      final result = await remoteDataSource.addReview(p);
+      final result = await dataSource.addReview(p);
 
       if (result == 'Success') {
         return Right(result);
@@ -56,7 +56,7 @@ class ProductRepository implements IProductRepository {
   @override
   Future<Either<Failure<String>, String>> deleteProduct(String id) async {
     try {
-      await remoteDataSource.deleteProduct(id);
+      await dataSource.deleteProduct(id);
       return const Right('Product deleted successfully');
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
@@ -68,7 +68,7 @@ class ProductRepository implements IProductRepository {
   @override
   Future<Either<Failure<String>, Product>> getProductById(String id) async {
     try {
-      final result = await remoteDataSource.getProductById(id);
+      final result = await dataSource.getProductById(id);
       final resultEntity = ProductMapper.toDomain(result);
 
       return Right(resultEntity);
@@ -84,7 +84,7 @@ class ProductRepository implements IProductRepository {
     ProductQueryParameters? queryParameters,
   ) async {
     try {
-      final result = await remoteDataSource.getProducts(queryParameters);
+      final result = await dataSource.getProducts(queryParameters);
 
       final data = PaginatedList<Product>(
         items: result.items.map(ProductMapper.toDomain).toList(),
@@ -104,7 +104,7 @@ class ProductRepository implements IProductRepository {
     String id,
   ) async {
     try {
-      final result = await remoteDataSource.getProductDetails(id);
+      final result = await dataSource.getProductDetails(id);
       final resultEntity = ProductDetailsMapper.toDomain(result);
 
       return Right(resultEntity);
@@ -120,7 +120,7 @@ class ProductRepository implements IProductRepository {
     UpdateProductParams p,
   ) async {
     try {
-      final result = await remoteDataSource.updateProduct(p);
+      final result = await dataSource.updateProduct(p);
       final resultEntity = ProductMapper.toDomain(result);
 
       return Right(resultEntity);

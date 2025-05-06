@@ -12,14 +12,14 @@ import '/features/_features.dart'
         ProfileMapper;
 
 class ProfileRepository implements IProfileRepository {
-  final IProfileRemoteDataSource remoteDataSource;
+  final IProfileRemoteDataSource dataSource;
 
-  ProfileRepository({required this.remoteDataSource});
+  ProfileRepository({required this.dataSource});
 
   @override
   Future<Either<Failure, Profile>> get() async {
     try {
-      final result = await remoteDataSource.get();
+      final result = await dataSource.get();
       final resultEntity = ProfileMapper.toEntity(result);
       return Right(resultEntity);
     } on Failure catch (e) {
@@ -32,7 +32,7 @@ class ProfileRepository implements IProfileRepository {
   @override
   Future<Either<Failure, bool>> update(UpdateProfileParams params) async {
     try {
-      await remoteDataSource.update(params);
+      await dataSource.update(params);
 
       return const Right(true);
     } on Failure catch (e) {
@@ -45,7 +45,7 @@ class ProfileRepository implements IProfileRepository {
   @override
   Future<Either<Failure, String?>> uploadProfileImage(File imageFile) async {
     try {
-      await remoteDataSource.uploadProfileImage(imageFile);
+      await dataSource.uploadProfileImage(imageFile);
 
       return Right(imageFile.path);
     } on Failure catch (e) {

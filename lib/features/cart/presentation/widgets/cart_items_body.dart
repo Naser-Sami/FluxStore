@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flux_store/core/utils/extensions/hex_color.dart';
 
 import '/config/_config.dart'
     show
@@ -139,11 +140,15 @@ class CartItemsBody extends StatelessWidget {
                                         children: [
                                           const TextSpan(text: 'Price'),
                                           const TextSpan(text: ': '),
-                                          const TextSpan(text: 'L'),
+                                          TextSpan(text: carts[i].selectedSize),
                                           const TextSpan(text: ' | '),
                                           const TextSpan(text: 'Color'),
                                           const TextSpan(text: ': '),
-                                          const TextSpan(text: 'White'),
+                                          TextSpan(
+                                            text:
+                                                carts[i].selectedColor
+                                                    ?.toColorName(),
+                                          ),
                                         ],
                                       ),
                                     ),

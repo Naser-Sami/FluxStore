@@ -9,6 +9,8 @@ class CartItemMapper {
       unitPrice: cartItemModel.unitPrice,
       quantity: cartItemModel.quantity,
       total: cartItemModel.total,
+      selectedColor: cartItemModel.selectedColor,
+      selectedSize: cartItemModel.selectedSize,
     );
   }
 
@@ -20,6 +22,8 @@ class CartItemMapper {
       unitPrice: cartItem.unitPrice,
       quantity: cartItem.quantity,
       total: cartItem.total,
+      selectedColor: cartItem.selectedColor,
+      selectedSize: cartItem.selectedSize,
     );
   }
 }

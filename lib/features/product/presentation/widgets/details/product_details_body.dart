@@ -1,13 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flux_store/config/_config.dart';
-import 'package:flux_store/features/_features.dart'
-    show AddToCartParams, CartCubit, RemoveFromCartParams, UserSessionCubit;
-import 'package:flux_store/features/product/_product.dart';
 import 'package:go_router/go_router.dart';
 
+import '/config/_config.dart';
 import '/core/_core.dart';
+import '/features/product/_product.dart';
 
 class ProductDetailsBodyWidget extends StatefulWidget {
   const ProductDetailsBodyWidget({super.key, required this.details});
@@ -248,71 +245,8 @@ class _ProductDetailsBodyWidgetState extends State<ProductDetailsBodyWidget> {
                         const SizedBox(height: TSize.s16),
                         Row(
                           children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const TextWidget('Color'),
-                                  const SizedBox(height: TSize.s10),
-                                  Builder(
-                                    builder: (context) {
-                                      try {
-                                        return Row(
-                                          children:
-                                              product.availableColors
-                                                  .map(
-                                                    (color) => Container(
-                                                      width: 33,
-                                                      height: 33, // 25
-                                                      margin:
-                                                          const EdgeInsets.all(
-                                                            TPadding.p04,
-                                                          ),
-                                                      decoration: BoxDecoration(
-                                                        color: color.toColor(),
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                        );
-                                      } catch (e) {
-                                        return const SizedBox.shrink();
-                                      }
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const TextWidget('Size'),
-                                  const SizedBox(height: TSize.s10),
-                                  Row(
-                                    children:
-                                        product.availableSizes
-                                            .map(
-                                              (size) => Container(
-                                                width: 33,
-                                                height: 33,
-                                                margin: const EdgeInsets.all(
-                                                  TPadding.p04,
-                                                ),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  color: color.primaryContainer,
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Text(size),
-                                              ),
-                                            )
-                                            .toList(),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            ProductDetailsColors(product: product),
+                            ProductDetailsSizes(product: product),
                           ],
                         ),
                         const SizedBox(height: TSize.s34),
@@ -602,75 +536,6 @@ class _ProductDetailsBodyWidgetState extends State<ProductDetailsBodyWidget> {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class FavoriteIcon extends StatefulWidget {
-  const FavoriteIcon({super.key, required this.product});
-
-  final ProductDetails product;
-
-  @override
-  State<FavoriteIcon> createState() => _FavoriteIconState();
-}
-
-class _FavoriteIconState extends State<FavoriteIcon> {
-  String userId = '';
-  bool isFavorite = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _getUser();
-  }
-
-  void _toggleFavorite() {
-    setState(() {
-      isFavorite = !isFavorite;
-    });
-  }
-
-  Future<void> _getUser() async {
-    final user = await context.read<UserSessionCubit>().getUser();
-    userId = user?.id ?? "";
-    print('USERID: $userId');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return OnTapScaler(
-      onTap: () {
-        _toggleFavorite();
-
-        if (isFavorite) {
-          context.read<CartCubit>().addToCart(
-            AddToCartParams(
-              userId: userId,
-              productId: widget.product.id,
-              quantity: 1,
-            ),
-          );
-        } else {
-          context.read<CartCubit>().removeFromCart(
-            RemoveFromCartParams(userId: userId, productId: widget.product.id),
-          );
-        }
-      },
-      child: Container(
-        width: 36,
-        height: 36,
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-        ),
-        child: Icon(
-          Icons.favorite,
-          size: 16,
-          color: isFavorite ? Colors.red : Colors.grey,
-        ),
       ),
     );
   }

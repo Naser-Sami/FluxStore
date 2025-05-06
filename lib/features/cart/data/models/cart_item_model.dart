@@ -5,6 +5,8 @@ class CartItemModel {
   final double unitPrice;
   final int quantity;
   final double total;
+  final String? selectedColor;
+  final String? selectedSize;
 
   CartItemModel({
     required this.productId,
@@ -13,6 +15,8 @@ class CartItemModel {
     required this.unitPrice,
     required this.quantity,
     required this.total,
+    this.selectedColor,
+    this.selectedSize,
   });
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +34,8 @@ class CartItemModel {
       unitPrice: parseDouble(json['unitPrice']),
       quantity: json['quantity'],
       total: parseDouble(json['total']),
+      selectedColor: json['selectedColor'],
+      selectedSize: json['selectedSize'],
     );
   }
 
@@ -41,6 +47,8 @@ class CartItemModel {
       'unitPrice': unitPrice,
       'quantity': quantity,
       'total': total,
+      'selectedColor': selectedColor,
+      'selectedSize': selectedSize,
     };
   }
 }

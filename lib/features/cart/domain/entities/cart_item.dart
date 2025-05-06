@@ -7,6 +7,8 @@ class CartItem extends Equatable {
   final double unitPrice;
   final int quantity;
   final double total;
+  final String? selectedColor;
+  final String? selectedSize;
 
   const CartItem({
     required this.productId,
@@ -15,6 +17,8 @@ class CartItem extends Equatable {
     required this.unitPrice,
     required this.quantity,
     required this.total,
+    this.selectedColor,
+    this.selectedSize,
   });
 
   static CartItem empty() => const CartItem(
@@ -24,6 +28,8 @@ class CartItem extends Equatable {
     unitPrice: 0,
     quantity: 0,
     total: 0,
+    selectedColor: '',
+    selectedSize: '',
   );
 
   CartItem copyWith({
@@ -33,6 +39,8 @@ class CartItem extends Equatable {
     double? unitPrice,
     int? quantity,
     double? total,
+    String? selectedColor,
+    String? selectedSize,
   }) => CartItem(
     productId: productId ?? this.productId,
     productName: productName ?? this.productName,
@@ -40,11 +48,13 @@ class CartItem extends Equatable {
     unitPrice: unitPrice ?? this.unitPrice,
     quantity: quantity ?? this.quantity,
     total: total ?? this.total,
+    selectedColor: selectedColor ?? this.selectedColor,
+    selectedSize: selectedSize ?? this.selectedSize,
   );
 
   @override
   String toString() {
-    return 'CartItem(productId: $productId, productName: $productName, imageUrl: $imageUrl, unitPrice: $unitPrice, quantity: $quantity, total: $total)';
+    return 'CartItem(productId: $productId, productName: $productName, imageUrl: $imageUrl, unitPrice: $unitPrice, quantity: $quantity, total: $total, selectedColor: $selectedColor, selectedSize: $selectedSize)';
   }
 
   @override
@@ -55,5 +65,7 @@ class CartItem extends Equatable {
     unitPrice,
     quantity,
     total,
+    selectedColor,
+    selectedSize,
   ];
 }

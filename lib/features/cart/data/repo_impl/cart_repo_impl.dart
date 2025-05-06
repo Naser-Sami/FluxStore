@@ -29,7 +29,7 @@ class CartRepository extends ICartRepository {
   }
 
   @override
-  Future<Either<Failure<String>, Cart>> getCart(int userId) async {
+  Future<Either<Failure<String>, Cart>> getCart(String userId) async {
     try {
       final response = await dataSource.getCart(userId);
       return right(CartMapper.toDomain(response));

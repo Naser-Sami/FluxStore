@@ -12,6 +12,7 @@ Future<void> initControllers() async {
   _categories();
   _products();
   _filter();
+  _cart();
 }
 
 Future<void> _theme() async {
@@ -92,4 +93,15 @@ Future<void> _products() async {
 Future<void> _filter() async {
   sl.registerFactory<FilterPriceCubit>(FilterPriceCubit.new);
   sl.registerFactory<FilterColorsController>(FilterColorsController.new);
+}
+
+Future<void> _cart() async {
+  sl.registerFactory<CartCubit>(
+    () => CartCubit(
+      addToCartUseCase: sl<AddToCartUseCase>(),
+      getCartUseCase: sl<GetCartUseCase>(),
+      removeFromCartUseCase: sl<RemoveFromCartUseCase>(),
+      updateCartUseCase: sl<UpdateCartUseCase>(),
+    ),
+  );
 }

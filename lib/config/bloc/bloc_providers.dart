@@ -36,4 +36,5 @@ final providers = [
   BlocProvider<ProductDetailsBloc>(
     create: (context) => sl<ProductDetailsBloc>(),
   ),
+  BlocProvider<CartCubit>(create: (context) => sl<CartCubit>()),
 ];

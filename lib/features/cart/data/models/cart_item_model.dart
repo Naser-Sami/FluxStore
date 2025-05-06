@@ -16,13 +16,20 @@ class CartItemModel {
   });
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
+    double parseDouble(dynamic value) {
+      if (value is double) return value;
+      if (value is int) return value.toDouble();
+      if (value is String) return double.tryParse(value) ?? 0.0;
+      return 0.0;
+    }
+
     return CartItemModel(
       productId: json['productId'],
       productName: json['productName'],
       imageUrl: json['imageUrl'],
-      unitPrice: json['unitPrice'],
+      unitPrice: parseDouble(json['unitPrice']),
       quantity: json['quantity'],
-      total: json['total'],
+      total: parseDouble(json['total']),
     );
   }
 

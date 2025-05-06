@@ -6,7 +6,7 @@ abstract class ICartRemoteDataSource {
   Future<void> addToCart(AddToCartParams params);
   Future<void> removeFromCart(RemoveFromCartParams params);
   Future<void> updateCart(UpdateCartParams params);
-  Future<CartModel> getCart(int userId);
+  Future<CartModel> getCart(String userId);
 }
 
 class CartRemoteDataSource extends ICartRemoteDataSource {
@@ -43,11 +43,13 @@ class CartRemoteDataSource extends ICartRemoteDataSource {
   }
 
   @override
-  Future<CartModel> getCart(int userId) async {
+  Future<CartModel> getCart(String userId) async {
     try {
+      parser(data) => CartModel.fromJson(data);
+
       final response = await apiClient.get<CartModel>(
-        path: ApiEndpoints.cart + userId.toString(),
-        parser: (data) => CartModel.fromJson(data),
+        path: '${ApiEndpoints.cart}/$userId',
+        parser: parser,
       );
 
       if (response == null) {

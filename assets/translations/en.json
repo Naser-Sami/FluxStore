@@ -80,6 +80,7 @@
     "topCollection": "Top Collection"
   },
   "Cart": {
+    "cart": "Cart",
     "title": "Shopping Cart",
     "empty": "Your cart is empty",
     "total": "Total",

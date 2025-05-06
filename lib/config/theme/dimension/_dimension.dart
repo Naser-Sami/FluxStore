@@ -48,6 +48,7 @@ class TPadding {
   static const double p80 = 80.0;
   static const double p88 = 88.0;
   static const double p100 = 100.0;
+  static const double p120 = 120.0;
 }
 
 class TSize {

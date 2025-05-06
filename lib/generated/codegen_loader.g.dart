@@ -96,6 +96,7 @@ class CodegenLoader extends AssetLoader{
     "topCollection": "Top Collection"
   },
   "Cart": {
+    "cart": "Cart",
     "title": "Shopping Cart",
     "empty": "Your cart is empty",
     "total": "Total",
@@ -285,6 +286,7 @@ static const Map<String,dynamic> _ar = {
     "topCollection": "أفضل المجموعات"
   },
   "Cart": {
+    "cart": "سلة",
     "title": "سلة المشتريات",
     "empty": "سلة المشتريات فارغة",
     "total": "الإجمالي",

@@ -10,7 +10,6 @@ class UserSessionCubit extends Cubit<UserEntity?> {
   final _storage = sl<SecureStorageService>();
   UserSessionCubit() : super(null);
 
-  Future<void> setUser(UserEntity user) async => emit(user);
   void _clear() => emit(null);
 
   Future<void> saveUser(UserEntity user) async {
@@ -23,11 +22,9 @@ class UserSessionCubit extends Cubit<UserEntity?> {
       setRefreshToken(user.refreshToken),
       _storage.write(key: Constants.keyUserSession, value: jsonData),
     ]);
-
-    await setUser(user);
   }
 
-  Future<UserEntity?> getSavedUser() async {
+  Future<UserEntity?> getUser() async {
     final data = await _storage.read(key: Constants.keyUserSession);
     if (data == null) return null;
 
@@ -42,7 +39,6 @@ class UserSessionCubit extends Cubit<UserEntity?> {
       final user = UserMapper.toEntity(userModel);
 
       await Future.wait([getAccessToken(), getRefreshToken()]);
-
       return user;
     } catch (e) {
       return null;

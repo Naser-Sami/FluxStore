@@ -9,7 +9,8 @@ import '/core/_core.dart'
         CurrencyStringExtension,
         LocaleKeys,
         TFunctions;
-import '/features/_features.dart' show MainAppBar, OnDrawerTapCubit;
+import '/features/_features.dart'
+    show MainAppBar, OnDrawerTapCubit, UserSessionCubit;
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -34,8 +35,24 @@ class CartScreen extends StatelessWidget {
   }
 }
 
-class CartItemsBody extends StatelessWidget {
+class CartItemsBody extends StatefulWidget {
   const CartItemsBody({super.key});
+
+  @override
+  State<CartItemsBody> createState() => _CartItemsBodyState();
+}
+
+class _CartItemsBodyState extends State<CartItemsBody> {
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
+  }
+
+  Future<void> _getUser() async {
+    final user = await context.read<UserSessionCubit>().getUser();
+    print('user id = ${user?.id}');
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,7 @@ class UserModel {
   final String email;
   final String username;
   final String role;
+  final String id;
 
   const UserModel({
     required this.token,
@@ -11,6 +12,7 @@ class UserModel {
     required this.email,
     required this.username,
     required this.role,
+    required this.id,
   });
 
   // fromJson
@@ -21,6 +23,7 @@ class UserModel {
       email: json['email'] ?? "",
       username: json['username'] ?? "",
       role: json['role'] ?? "Customer",
+      id: json['userId'] ?? "",
     );
   }
 
@@ -32,6 +35,7 @@ class UserModel {
       'email': email,
       'username': username,
       'role': role,
+      'userId': id,
     };
   }
 }

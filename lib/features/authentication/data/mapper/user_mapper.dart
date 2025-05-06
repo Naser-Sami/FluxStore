@@ -9,6 +9,7 @@ class UserMapper {
       role: userModel.role,
       token: userModel.token,
       refreshToken: userModel.refreshToken,
+      id: userModel.id,
     );
   }
 
@@ -20,6 +21,7 @@ class UserMapper {
       role: userEntity.role,
       token: userEntity.token,
       refreshToken: userEntity.refreshToken,
+      id: userEntity.id,
     );
   }
 }

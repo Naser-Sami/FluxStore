@@ -20,10 +20,7 @@ class AuthenticationRemoteDataSource
       final response = await apiClient.post<UserModel>(
         path: ApiEndpoints.login,
         data: params.toMap(),
-        parser: (data) {
-          log('data : $data');
-          return UserModel.fromJson(data);
-        },
+        parser: (data) => UserModel.fromJson(data),
       );
 
       log("response : $response");

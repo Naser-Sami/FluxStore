@@ -1,5 +1,11 @@
+export 'add_to_cart_button.dart';
 export 'product_details_body.dart';
 export 'product_details_colors.dart';
+export 'product_details_description.dart';
 export 'product_details_favorite_icon.dart';
 export 'product_details_sizes.dart';
+export 'product_details_title_price.dart';
 export 'rating_widget.dart';
+export 'similar_products.dart';
+export 'product_details_reviews.dart';
+export 'product_details_reviews_body.dart';

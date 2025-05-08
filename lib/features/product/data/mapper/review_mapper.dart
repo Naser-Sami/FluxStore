@@ -4,20 +4,24 @@ class ReviewMapper {
   static Review toDomain(ReviewModel model) {
     return Review(
       reviewerName: model.reviewerName,
-      text: model.text,
-      date: model.date,
+      reviewerImage: model.reviewerImage,
+      productId: model.productId,
       rating: model.rating,
-      imageUrl: model.imageUrl,
+      description: model.description,
+      images: model.images,
+      date: model.date,
     );
   }
 
   static ReviewModel toModel(Review review) {
     return ReviewModel(
       reviewerName: review.reviewerName,
-      text: review.text,
-      date: review.date,
+      reviewerImage: review.reviewerImage,
+      productId: review.productId,
       rating: review.rating,
-      imageUrl: review.imageUrl,
+      description: review.description,
+      images: review.images,
+      date: review.date,
     );
   }
 }

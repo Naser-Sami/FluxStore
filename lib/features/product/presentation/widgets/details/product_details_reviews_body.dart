@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 import '/config/_config.dart' show CachedNetWorkImageComponent, TSize;
 import '/core/_core.dart'
-    show BuildContextExtensions, HumanReadableDateTime, StringTransform;
+    show
+        ApiEndpoints,
+        BuildContextExtensions,
+        HumanReadableDateTime,
+        StringTransform;
 import '/features/product/_product.dart' show Review;
 
 class ProductDetailsReviewsBody extends StatelessWidget {
@@ -27,7 +31,9 @@ class ProductDetailsReviewsBody extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               leading: CircleAvatar(
                 radius: 30,
-                child: CachedNetWorkImageComponent(imageUrl: review.imageUrl),
+                child: CachedNetWorkImageComponent(
+                  imageUrl: ApiEndpoints.imageUrl + review.reviewerImage,
+                ),
               ),
               title: Text(review.reviewerName),
               subtitle: Stack(
@@ -50,7 +56,7 @@ class ProductDetailsReviewsBody extends StatelessWidget {
               ),
             ),
             const SizedBox(height: TSize.s20),
-            Text(review.text),
+            Text(review.description),
           ],
         );
       },

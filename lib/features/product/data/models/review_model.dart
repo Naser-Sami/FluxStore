@@ -2,39 +2,55 @@ import 'package:equatable/equatable.dart';
 
 class ReviewModel extends Equatable {
   final String reviewerName;
-  final String text;
-  final String date;
+  final String reviewerImage;
+  final String productId;
   final double rating;
-  final String imageUrl;
+  final String description;
+  final List<String> images;
+  final String date;
 
   const ReviewModel({
     required this.reviewerName,
-    required this.text,
-    required this.date,
+    required this.reviewerImage,
+    required this.productId,
     required this.rating,
-    required this.imageUrl,
+    required this.description,
+    required this.images,
+    required this.date,
   });
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
     return ReviewModel(
       reviewerName: json['reviewerName'] as String,
-      text: json['text'] as String,
-      date: json['date'] as String,
+      reviewerImage: json['reviewerImage'] as String,
+      productId: json['productId'] as String,
       rating: (json['rating'] as num).toDouble(),
-      imageUrl: json['imageUrl'] as String,
+      description: json['description'] as String,
+      images: List<String>.from(json['images'] as List<dynamic>),
+      date: json['date'] as String,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'reviewerName': reviewerName,
-      'text': text,
-      'date': date,
+      'reviewerImage': reviewerImage,
+      'productId': productId,
       'rating': rating,
-      'imageUrl': imageUrl,
+      'description': description,
+      'images': images,
+      'date': date,
     };
   }
 
   @override
-  List<Object?> get props => [reviewerName, text, date, rating, imageUrl];
+  List<Object?> get props => [
+    reviewerName,
+    reviewerImage,
+    productId,
+    rating,
+    description,
+    images,
+    date,
+  ];
 }

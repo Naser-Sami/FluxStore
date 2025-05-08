@@ -139,14 +139,13 @@ class TFunctions {
     ).join();
   }
 
-  static Future<File?> pickAndUploadProfileImage(BuildContext context) async {
+  static Future<File?> captureImage(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
 
     try {
-      // Pick image from gallery or camera
       final XFile? image = await picker.pickImage(
-        source: ImageSource.gallery, // or ImageSource.camera
-        imageQuality: 85, // compress
+        source: ImageSource.camera,
+        imageQuality: 85,
       );
 
       if (image == null) return null;
@@ -160,18 +159,31 @@ class TFunctions {
     }
   }
 
-  static Future<List<File>?> pickAndUploadProfileImages(
-    BuildContext context,
-  ) async {
+  static Future<File?> pickImage(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
 
     try {
-      final List<XFile>? images = await picker.pickMultiImage(
-        imageQuality: 85, // compress
+      final XFile? image = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 85,
       );
 
-      if (images == null) return null;
+      if (image == null) return null;
 
+      final File file = File(image.path);
+
+      return file;
+    } catch (e) {
+      debugPrint('Image upload error: $e');
+      return null;
+    }
+  }
+
+  static Future<List<File>?> pickImages(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      final List<XFile> images = await picker.pickMultiImage(imageQuality: 85);
       return images.map((e) => File(e.path)).toList();
     } catch (e) {
       debugPrint('Image upload error: $e');

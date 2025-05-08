@@ -23,7 +23,7 @@ class AddProfileImage extends StatefulWidget {
 
 class _AddProfileImageState extends State<AddProfileImage> {
   Future<void> _updateProfileImage() async {
-    File? file = await TFunctions.pickAndUploadProfileImage(context);
+    File? file = await TFunctions.pickImage(context);
 
     if (file != null) {
       if (mounted) {

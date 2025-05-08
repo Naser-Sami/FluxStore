@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '/config/_config.dart'
     show ExpansionTileWidget, OnTapScaler, TSize, TextWidget;
 import '/core/_core.dart' show BuildContextExtensions, LocaleKeys;
-import '/features/product/_product.dart' show ProductDetails, Review;
+import '/features/product/_product.dart'
+    show ProductDetails, RateProductScreen, Review;
 import 'product_details_reviews_body.dart';
 
 class ProductDetailsReviews extends StatefulWidget {
@@ -171,7 +173,11 @@ class _ProductDetailsReviewsState extends State<ProductDetailsReviews> {
               ),
             ),
             OnTapScaler(
-              onTap: () {},
+              onTap:
+                  () => context.push(
+                    RateProductScreen.routeName,
+                    extra: {'productId': product.id},
+                  ),
               child: Row(
                 children: [
                   Text('Write a review'.toUpperCase()),

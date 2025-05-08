@@ -78,7 +78,7 @@ class AdminProductSubImagesWidget extends StatelessWidget {
   }
 
   void _onImageTapped(BuildContext context) async {
-    final file = await TFunctions.pickAndUploadProfileImage(context);
+    final file = await TFunctions.pickImage(context);
     if (file != null && context.mounted) {
       context.read<ProductSubImagesCubit>().addFile(file);
     }

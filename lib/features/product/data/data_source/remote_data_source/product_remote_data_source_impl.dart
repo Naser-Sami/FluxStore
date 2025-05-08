@@ -35,12 +35,15 @@ class ProductRemoteDataSource implements IProductRemoteDataSource {
   @override
   Future<String> addReview(AddProductReviewParams params) async {
     try {
+      final formData = await params.toFormData();
+
       final response = await apiClient.post(
         path: ApiEndpoints.productAddReview,
-        data: params.toMap(),
+        data: formData,
         parser: (data) => data,
       );
 
+      // check the response
       if (response != 'Success' || response == null) {
         throw Exception('Failed to add product review');
       }

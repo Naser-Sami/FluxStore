@@ -404,7 +404,18 @@ final router = GoRouter(
       pageBuilder: (context, state) {
         final extra = state.extra as Map<String, dynamic>;
         final productId = extra['productId'];
+
         return CupertinoPage(child: ProductDetailsScreen(productId: productId));
+      },
+    ),
+    GoRoute(
+      path: RateProductScreen.routeName,
+      name: RateProductScreen.name,
+      pageBuilder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        final productId = extra['productId'];
+
+        return CupertinoPage(child: RateProductScreen(productId: productId));
       },
     ),
 

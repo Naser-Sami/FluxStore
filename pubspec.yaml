@@ -133,6 +133,12 @@ dependencies:
   # For Range Slider
   flutter_xlider: ^3.5.0
 
+  # For Rating Bar
+  flutter_rating_bar: ^4.0.1
+
+  # For Dotted Border
+  dotted_border: ^2.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

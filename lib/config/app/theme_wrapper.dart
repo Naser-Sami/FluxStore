@@ -6,36 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/config/_config.dart';
 import '/core/_core.dart' show AppConfig;
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const LocalizationWrapper();
-  }
-}
-
-class LocalizationWrapper extends StatelessWidget {
-  const LocalizationWrapper({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return EasyLocalization(
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-      ], // add other languages here
-      path: 'assets/translations',
-      startLocale: const Locale('en'),
-      fallbackLocale: const Locale('en'),
-      child: BlocProvider(
-        create: (_) => LanguageCubit(const Locale('en')),
-        child: const ThemeWrapper(),
-      ),
-    );
-  }
-}
-
 class ThemeWrapper extends StatelessWidget {
   const ThemeWrapper({super.key});
 

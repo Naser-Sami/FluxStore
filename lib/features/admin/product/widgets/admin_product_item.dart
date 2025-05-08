@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '/config/_config.dart' show CachedNetWorkImageComponent;
+import '/config/_config.dart' show CachedNetWorkImageComponent, TRadius;
 import '/core/_core.dart' show ApiEndpoints;
 import '/features/_features.dart' show AdminProductsScreen;
 import '/features/admin/product/screen/sub_screens/_sub_screens.dart'
@@ -19,11 +19,14 @@ class AdminProductItemWidget extends StatelessWidget {
     return ListTile(
       key: ValueKey(product.id),
       onTap: () => _onEdit(context, product.id),
-      leading: SizedBox(
-        width: 50,
-        height: 50,
-        child: CachedNetWorkImageComponent(
-          imageUrl: ApiEndpoints.imageUrl + product.imageUrl,
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(TRadius.r08),
+        child: SizedBox(
+          width: 50,
+          height: 50,
+          child: CachedNetWorkImageComponent(
+            imageUrl: ApiEndpoints.imageUrl + product.imageUrl,
+          ),
         ),
       ),
       title: Text(product.name),
@@ -39,7 +42,6 @@ class AdminProductItemWidget extends StatelessWidget {
             icon: const Icon(Icons.delete),
             onPressed: () => confirmDeleteProductDelete(context, product.id),
           ),
-          const Icon(Icons.drag_handle),
         ],
       ),
     );

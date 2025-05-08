@@ -32,7 +32,9 @@ final providers = [
   BlocProvider<SelectedCategoryCubit>(
     create: (context) => sl<SelectedCategoryCubit>(),
   ),
-  BlocProvider<ProductsBloc>(create: (context) => sl<ProductsBloc>()),
+  BlocProvider<ProductsBloc>(
+    create: (context) => sl<ProductsBloc>()..add(const GetProductsEvent()),
+  ),
   BlocProvider<ProductDetailsBloc>(
     create: (context) => sl<ProductDetailsBloc>(),
   ),

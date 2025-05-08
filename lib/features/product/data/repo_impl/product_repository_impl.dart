@@ -12,6 +12,8 @@ import '/features/_features.dart'
         ProductDetailsMapper,
         ProductMapper,
         ProductQueryParameters,
+        Review,
+        ReviewMapper,
         UpdateProductParams;
 
 class ProductRepository implements IProductRepository {
@@ -35,17 +37,12 @@ class ProductRepository implements IProductRepository {
   }
 
   @override
-  Future<Either<Failure<String>, String>> addReview(
+  Future<Either<Failure<String>, Review>> addReview(
     AddProductReviewParams p,
   ) async {
     try {
       final result = await dataSource.addReview(p);
-
-      if (result == 'Success') {
-        return Right(result);
-      } else {
-        return Left(Failure(statusCode: 500, error: result));
-      }
+      return Right(ReviewMapper.toDomain(result));
     } on Failure catch (e) {
       return Left(Failure(statusCode: e.statusCode, error: e.error));
     } catch (e) {

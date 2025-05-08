@@ -8,6 +8,7 @@ import '/features/_features.dart'
         Product,
         ProductDetails,
         ProductQueryParameters,
+        Review,
         UpdateProductParams;
 
 abstract class IProductRepository {
@@ -19,5 +20,5 @@ abstract class IProductRepository {
   Future<Either<Failure<String>, Product>> updateProduct(UpdateProductParams p);
   Future<Either<Failure<String>, String>> deleteProduct(String id);
   Future<Either<Failure<String>, ProductDetails>> getProductDetails(String id);
-  Future<Either<Failure<String>, String>> addReview(AddProductReviewParams p);
+  Future<Either<Failure<String>, Review>> addReview(AddProductReviewParams p);
 }

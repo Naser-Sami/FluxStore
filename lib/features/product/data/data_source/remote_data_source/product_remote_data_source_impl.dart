@@ -7,6 +7,7 @@ import '/features/_features.dart'
         ProductDetailsModel,
         ProductModel,
         ProductQueryParameters,
+        ReviewModel,
         UpdateProductParams;
 
 class ProductRemoteDataSource implements IProductRemoteDataSource {
@@ -33,19 +34,18 @@ class ProductRemoteDataSource implements IProductRemoteDataSource {
   }
 
   @override
-  Future<String> addReview(AddProductReviewParams params) async {
+  Future<ReviewModel> addReview(AddProductReviewParams params) async {
     try {
       final formData = await params.toFormData();
 
-      final response = await apiClient.post(
+      final response = await apiClient.post<ReviewModel>(
         path: ApiEndpoints.productAddReview,
         data: formData,
-        parser: (data) => data,
+        parser: (data) => ReviewModel.fromJson(data),
       );
 
-      // check the response
-      if (response != 'Success' || response == null) {
-        throw Exception('Failed to add product review');
+      if (response == null) {
+        throw Exception('Failed to add review');
       }
 
       return response;

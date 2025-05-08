@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/config/_config.dart' show CachedNetWorkImageComponent, TSize;
+import '/config/_config.dart' show CachedNetWorkImageComponent, TRadius, TSize;
 import '/core/_core.dart'
     show
         ApiEndpoints,
@@ -56,7 +56,29 @@ class ProductDetailsReviewsBody extends StatelessWidget {
               ),
             ),
             const SizedBox(height: TSize.s20),
-            Text(review.description),
+            SizedBox(
+              width: context.screenWidth,
+              child: Text(review.description, textAlign: TextAlign.start),
+            ),
+            const SizedBox(height: TSize.s16),
+            Wrap(
+              children: [
+                for (var image in review.images)
+                  Padding(
+                    padding: const EdgeInsets.only(right: TSize.s08),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(TRadius.r16),
+                      child: SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: CachedNetWorkImageComponent(
+                          imageUrl: ApiEndpoints.imageUrl + image,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ],
         );
       },

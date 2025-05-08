@@ -6,6 +6,7 @@ import '/features/_features.dart'
         ProductDetailsModel,
         ProductModel,
         ProductQueryParameters,
+        ReviewModel,
         UpdateProductParams;
 
 abstract class IProductRemoteDataSource {
@@ -17,5 +18,5 @@ abstract class IProductRemoteDataSource {
   Future<ProductModel> updateProduct(UpdateProductParams params);
   Future<void> deleteProduct(String id);
   Future<ProductDetailsModel> getProductDetails(String id);
-  Future<String> addReview(AddProductReviewParams params);
+  Future<ReviewModel> addReview(AddProductReviewParams params);
 }

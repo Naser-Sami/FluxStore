@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart' show EasyLocalization;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv;
 import 'package:flutter_native_splash/flutter_native_splash.dart'
@@ -9,7 +10,13 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart' show getTemporaryDirectory;
 import 'package:url_strategy/url_strategy.dart' show setPathUrlStrategy;
 
-import '/core/_core.dart' show DI, ISendEmailOtpService, sl;
+import '/core/_core.dart'
+    show
+        DI,
+        FirebaseMessagingConfiguration,
+        ISendEmailOtpService,
+        LocalNotificationsConfiguration,
+        sl;
 import '/firebase_options.dart';
 import 'service_initializer.dart';
 
@@ -81,8 +88,12 @@ class ServiceInitializer extends IServiceInitializer {
 
   @override
   Future<void> initFirebaseMessaging() async {
-    // MessagingConfig.initFirebaseMessaging();
-    // FirebaseMessaging.onBackgroundMessage(MessagingConfig.messageHandler);
+    await LocalNotificationsConfiguration.init();
+    await FirebaseMessagingConfiguration.init();
+
+    FirebaseMessaging.onBackgroundMessage(
+      LocalNotificationsConfiguration.showNotification,
+    );
   }
 
   @override

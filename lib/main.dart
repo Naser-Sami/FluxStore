@@ -8,6 +8,7 @@ import 'config/bloc/bloc_providers.dart' show providers;
 Future<void> main() async {
   IServiceInitializer serviceInitializer = ServiceInitializer();
   await serviceInitializer.init();
+
   runApp(MultiBlocProvider(providers: providers, child: const MyApp()));
 }
 

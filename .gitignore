@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-assets/notifications_key/fluxstore-55f10-02d77547870c.json
+assets/notifications_key/*.json

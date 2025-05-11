@@ -55,6 +55,21 @@ class WelcomeScreen extends StatelessWidget {
                     const SizedBox(height: TSize.s40),
                     CustomButton(
                       onTap: () => context.go(OnboardingScreen.routeName),
+                      // onTap: () {
+                      //   // save the fcm token on login or create an account
+                      //   final fcmToken =
+                      //       FirebaseMessagingConfiguration.fcmToken;
+
+                      //   sl<INotificationsService>().sendNotification(
+                      //     fcmToken: fcmToken ?? "",
+                      //     title: "FluxStore",
+                      //     body: "Welcome back!",
+                      //     data: {
+                      //       'route': CreateAccountScreen.routeName, //ex
+                      //       // 'id': "123", //ex
+                      //     },
+                      //   );
+                      // },
                       text: LocaleKeys.Welcome_getStarted,
                       textColor: Colors.white,
                       borderColor: Colors.white,

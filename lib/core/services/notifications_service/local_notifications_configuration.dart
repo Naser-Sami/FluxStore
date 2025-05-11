@@ -1,11 +1,10 @@
-import 'dart:convert' show jsonEncode;
+import 'dart:convert' show jsonDecode, jsonEncode;
 import 'dart:developer' show log;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import '/config/routes/_routes.dart' show router;
-import '/features/_features.dart' show CreateAccountScreen, LoginScreen;
+import 'handel_notification.dart';
 
 class LocalNotificationsConfiguration {
   static final FlutterLocalNotificationsPlugin
@@ -81,16 +80,30 @@ class LocalNotificationsConfiguration {
 // When click on the local notification ( inside the app )
 @pragma('vm:entry-point')
 void onDidReceiveNotificationResponse(NotificationResponse details) {
-  log('onDidReceiveNotificationResponse');
-  // Handle navigation or logic here
-  log('details: $details');
-  router.go(LoginScreen.routeName);
+  // TODO: Handle navigation or logic here
+
+  log('''
+onDidReceiveNotificationResponse
+----------------------------------------
+details id: ${details.id}
+details data: ${details.payload}
+''');
+
+  final Map<String, dynamic> data = jsonDecode(details.payload!);
+  handleNotification(data: data);
 }
 
 @pragma('vm:entry-point')
 void onDidReceiveBackgroundNotificationResponse(NotificationResponse details) {
-  log('onDidReceiveBackgroundNotificationResponse (top-level)');
-  // Handle navigation or logic here
-  log('details: $details');
-  router.go(CreateAccountScreen.routeName);
+  // TODO: Handle navigation or logic here
+
+  log('''
+onDidReceiveBackgroundNotificationResponse
+----------------------------------------
+details id: ${details.id}
+details data: ${details.data}
+''');
+
+  final Map<String, dynamic> data = jsonDecode(details.payload!);
+  handleNotification(data: data);
 }

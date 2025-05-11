@@ -138,8 +138,11 @@ dependencies:
 
   # For Dotted Border
   dotted_border: ^2.1.0
+
+  #  Notifications
   firebase_messaging: ^15.2.5
   flutter_local_notifications: ^19.1.0
+  googleapis_auth: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -167,6 +170,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/translations/
+    - assets/notifications_key/
     - assets/.env
 
   # An image asset can refer to one or more resolution-specific "variants", see

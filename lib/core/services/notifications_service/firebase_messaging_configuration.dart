@@ -2,13 +2,15 @@ import 'dart:developer' show log;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-import '/config/routes/_routes.dart' show router;
-import '/features/_features.dart' show LoginScreen;
-import 'local_notifications_configuration.dart';
+import 'handel_notification.dart';
+import 'local_notifications_configuration.dart'
+    show LocalNotificationsConfiguration;
 
 class FirebaseMessagingConfiguration {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;
   static late NotificationSettings settings;
+
+  // TODO: FCM token needs to be stored in the server db for each user device
   static late String? fcmToken;
 
   static Future<void> init() async {
@@ -25,8 +27,8 @@ class FirebaseMessagingConfiguration {
 
       // When click on notification ( when app is in background - out of the app )
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        // Navigate to specific screen based on message data if needed
-        router.go(LoginScreen.routeName);
+        // TODO: Navigate to specific screen based on message data if needed
+        handleNotification(data: message.data);
       });
     } else {
       fcmToken = null;

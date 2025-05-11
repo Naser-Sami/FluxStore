@@ -12,6 +12,7 @@ Future<void> main() async {
   runApp(MultiBlocProvider(providers: providers, child: const MyApp()));
 }
 
+//
 // Easy Localization Generated Commands
 // dart run easy_localization:generate --source-dir ./assets/translations
 // dart run easy_localization:generate --source-dir ./assets/translations -f keys -o locale_keys.g.dart

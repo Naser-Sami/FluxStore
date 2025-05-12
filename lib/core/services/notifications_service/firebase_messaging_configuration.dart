@@ -25,10 +25,17 @@ class FirebaseMessagingConfiguration {
         await LocalNotificationsConfiguration.showNotification(message);
       });
 
-      // When click on notification ( when app is in background - out of the app )
+      // When app is in background
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        // TODO: Navigate to specific screen based on message data if needed
         handleNotification(data: message.data);
+      });
+
+      // When app is terminated
+      messaging.getInitialMessage().then((RemoteMessage? messaging) {
+        if (messaging != null) {
+          // messaging.data['route'] = CreateAccountScreen.routeName;
+          handleNotification(data: messaging.data);
+        }
       });
     } else {
       fcmToken = null;

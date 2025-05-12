@@ -1,5 +1,4 @@
 import 'dart:convert' show jsonDecode, jsonEncode;
-import 'dart:developer' show log;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -80,30 +79,12 @@ class LocalNotificationsConfiguration {
 // When click on the local notification ( inside the app )
 @pragma('vm:entry-point')
 void onDidReceiveNotificationResponse(NotificationResponse details) {
-  // TODO: Handle navigation or logic here
-
-  log('''
-onDidReceiveNotificationResponse
-----------------------------------------
-details id: ${details.id}
-details data: ${details.payload}
-''');
-
   final Map<String, dynamic> data = jsonDecode(details.payload!);
   handleNotification(data: data);
 }
 
 @pragma('vm:entry-point')
 void onDidReceiveBackgroundNotificationResponse(NotificationResponse details) {
-  // TODO: Handle navigation or logic here
-
-  log('''
-onDidReceiveBackgroundNotificationResponse
-----------------------------------------
-details id: ${details.id}
-details data: ${details.data}
-''');
-
   final Map<String, dynamic> data = jsonDecode(details.payload!);
   handleNotification(data: data);
 }

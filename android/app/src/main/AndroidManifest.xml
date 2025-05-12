@@ -26,12 +26,6 @@
                 <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
             </intent-filter>
         </receiver>
-
-        <!-- <service
-        android:name="com.dexterous.flutterlocalnotifications.ForegroundService"
-        android:exported="false"
-        android:stopWithTask="false"
-        android:foregroundServiceType="<foreground service types>"> -->
         <!-- End Local Notifications -->
 
         <activity

@@ -49,6 +49,7 @@ class NotificationsServiceImpl implements INotificationsService {
         'Authorization': 'Bearer $accessToken',
       };
 
+      // This will be returned from the server (backend)
       Map<String, dynamic> notificationPayload = {
         'message': {
           'token': fcmToken, // Replace with the recipient's FCM token
@@ -84,3 +85,46 @@ class NotificationsServiceImpl implements INotificationsService {
     }
   }
 }
+
+/**
+ 
+ - return the notification payload from the server (backend)
+
+ {
+  "message": {
+    "token": "FCM_DEVICE_TOKEN",
+    "notification": {
+      "title": "🛍 New Offer!",
+      "body": "Get 20% off your next purchase!"
+    },
+    "data": {
+      "type": "promotion",
+      "route": "/offers"
+    },
+    "android": {
+      "priority": "high",
+      "notification": {
+        "sound": "custom_sound",
+        "channel_id": "high_importance_channel",
+        "click_action": "FLUTTER_NOTIFICATION_CLICK"
+      }
+    },
+    "apns": {
+      "headers": {
+        "apns-priority": "10"
+      },
+      "payload": {
+        "aps": {
+          "alert": {
+            "title": "🛍 New Offer!",
+            "body": "Get 20% off your next purchase!"
+          },
+          "sound": "custom_sound.caf",
+          "content-available": 1
+        }
+      }
+    }
+  }
+}
+ 
+ */

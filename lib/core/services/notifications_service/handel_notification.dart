@@ -4,6 +4,7 @@ import '/config/routes/_routes.dart';
 
 void handleNotification({required Map<String, dynamic> data}) {
   try {
+    // TODO: Handle notification data
     // Data contains what we sent in the notification
     String? route = data['route'];
     if (route != null) {

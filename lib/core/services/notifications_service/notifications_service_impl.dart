@@ -52,7 +52,7 @@ class NotificationsServiceImpl implements INotificationsService {
       // This will be returned from the server (backend)
       Map<String, dynamic> notificationPayload = {
         'message': {
-          'token': fcmToken, // Replace with the recipient's FCM token
+          'token': fcmToken,
           'notification': {'title': title, 'body': body},
           'data': data,
           'android': {

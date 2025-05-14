@@ -6,54 +6,48 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'handel_notification.dart';
 
 class LocalNotificationsConfiguration {
-  static final FlutterLocalNotificationsPlugin
-  _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  static final _flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   static InitializationSettings _initializationSettings() {
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettingsAndroid = AndroidInitializationSettings(
+      '@mipmap/ic_launcher',
+    );
 
-    const DarwinInitializationSettings initializationSettingsIOS =
-        DarwinInitializationSettings(
-          requestAlertPermission: true,
-          requestBadgePermission: true,
-          requestSoundPermission: true,
-        );
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-          android: initializationSettingsAndroid,
-          iOS: initializationSettingsIOS,
-          macOS: initializationSettingsIOS,
-        );
+    const initializationSettingsIOS = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
 
-    return initializationSettings;
+    return const InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+      macOS: initializationSettingsIOS,
+    );
   }
 
   static NotificationDetails _notificationDetails() {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-          'default_channel', // id
-          'Default', // title
-          channelDescription: 'Default channel for notifications',
-          importance: Importance.max,
-          priority: Priority.high,
-          showWhen: true,
-        );
+    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'default_channel', // id
+      'Default', // title
+      channelDescription: 'Default channel for notifications',
+      importance: Importance.max,
+      priority: Priority.high,
+      showWhen: true,
+    );
 
-    const DarwinNotificationDetails iosPlatformChannelSpecifics =
-        DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-          sound: 'custom_sound.caf',
-        );
+    const iosPlatformChannelSpecifics = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+      sound: 'custom_sound.caf',
+    );
 
-    const NotificationDetails platformChannelSpecifics = NotificationDetails(
+    return const NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iosPlatformChannelSpecifics,
     );
-
-    return platformChannelSpecifics;
   }
 
   static Future<void> init() async {

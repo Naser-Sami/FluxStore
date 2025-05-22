@@ -1,4 +1,5 @@
 import 'dart:developer' show log;
+import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -17,26 +18,35 @@ class FirebaseMessagingConfiguration {
     settings = await messaging.requestPermission();
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      fcmToken = await messaging.getToken();
-      log('FCM token: $fcmToken');
-
-      // When app is in foreground ( User Local Notifications )
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-        await LocalNotificationsConfiguration.showNotification(message);
-      });
-
-      // When app is in background
-      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        handleNotification(data: message.data);
-      });
-
-      // When app is terminated
-      messaging.getInitialMessage().then((RemoteMessage? messaging) {
-        if (messaging != null) {
-          // messaging.data['route'] = CreateAccountScreen.routeName;
-          handleNotification(data: messaging.data);
+      try {
+        if (Platform.isIOS) {
+          fcmToken = await messaging.getAPNSToken();
+        } else {
+          fcmToken = await messaging.getToken();
         }
-      });
+
+        log('FCM token: $fcmToken');
+
+        // When app is in foreground ( User Local Notifications )
+        FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+          await LocalNotificationsConfiguration.showNotification(message);
+        });
+
+        // When app is in background
+        FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+          handleNotification(data: message.data);
+        });
+
+        // When app is terminated
+        messaging.getInitialMessage().then((RemoteMessage? messaging) {
+          if (messaging != null) {
+            // messaging.data['route'] = CreateAccountScreen.routeName;
+            handleNotification(data: messaging.data);
+          }
+        });
+      } catch (e) {
+        log('Error getting FCM token: $e');
+      }
     } else {
       fcmToken = null;
     }

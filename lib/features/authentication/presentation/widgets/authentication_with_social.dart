@@ -35,6 +35,11 @@ class _AuthenticationWithSocialWidgetState
       listener: (context, state) async {
         if (state is SignUpLoading) {
           showLoadingDialog(context);
+          await Future.delayed(const Duration(seconds: 1)).then((v) {
+            if (context.mounted) {
+              context.pop();
+            }
+          });
         }
 
         if (state is SignUpSuccess) {
@@ -56,8 +61,6 @@ class _AuthenticationWithSocialWidgetState
                     : state.error,
           );
         }
-
-        context.pop();
       },
       child: Center(
         child: Row(
